@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>vertexshader.vert</file>
+        <file>fragmentshader.frag</file>
+        <file alias="texture.png">texture.png</file>
+        <file alias="obrazek">obrazek.png</file>
+        <file>lightningvertexshader.vert</file>
+        <file>lightingfragmentshader.fsh</file>
+        <file>coloringvertexshader.vert</file>
+        <file>coloringfragmentshader.frag</file>
+        <file alias="nico">Nico.png</file>
+        <file alias="rys">ryś.png</file>
+        <file alias="cat">cat.png</file>
+    </qresource>
+</RCC>
