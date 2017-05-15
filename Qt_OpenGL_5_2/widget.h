@@ -28,6 +28,7 @@ private:
     QVector<QVector3D> spotlightVertices;
     QVector<QVector3D> spotlightColors;
     double lightAngle;
+    double droneRotate;
 
     int i;
     bool changed;

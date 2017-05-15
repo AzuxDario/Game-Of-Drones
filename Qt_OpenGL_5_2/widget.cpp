@@ -3,6 +3,7 @@
 Widget::Widget(QWidget *parent)
     : QOpenGLWidget(parent), cubeTexture(0)
 {
+    droneRotate = 0;
     cubeTexture = nullptr;
     alpha = 25;
     beta = -25;
@@ -146,10 +147,11 @@ void Widget::paintGL()
     vMatrix.lookAt(cameraPosition, QVector3D(0, 0, 0), cameraUpDirection);
 
     //! [5]
-        mMatrix.setToIdentity();
+    mMatrix.setToIdentity();
 
     QMatrix4x4 mvMatrix;
     mvMatrix = vMatrix * mMatrix;
+    mvMatrix.rotate(droneRotate,0,1,0);
 
     QMatrix3x3 normalMatrix;
     normalMatrix = mvMatrix.normalMatrix();
@@ -327,6 +329,18 @@ void Widget::keyPressEvent(QKeyEvent *event)
             {
                 i = 4;
                 changed = true;
+            }
+        break;
+        case Qt::Key_A:
+            droneRotate += 0.5;
+            while (droneRotate >= 360) {
+                droneRotate -= 360;
+            }
+        break;
+        case Qt::Key_D:
+            droneRotate -= 0.5;
+            while (droneRotate < 0) {
+                droneRotate += 360;
             }
         break;
     }
