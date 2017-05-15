@@ -35,9 +35,9 @@ void Widget::initializeGL()
     glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
     glClearColor(0,0,0,0); //Ustawienie koloru tła
     //Ładowanie shaderów
-    lightingShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/lightningvertexshader.vert");
-    lightingShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/lightingfragmentshader.fsh");
-    lightingShaderProgram.link();
+    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/lightningvertexshader.vert");
+    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/lightingfragmentshader.fsh");
+    cubeShaderProgram.link();
     //vertices << QVector3D(1, 0, -2) << QVector3D(0, 1, -2) << QVector3D(-1, 0, -2);
     cubeVertices << QVector3D(-0.5, -0.5,  0.5) << QVector3D( 0.5, -0.5,  0.5) << QVector3D( 0.5,  0.5,  0.5) // Front
                  << QVector3D( 0.5,  0.5,  0.5) << QVector3D(-0.5,  0.5,  0.5) << QVector3D(-0.5, -0.5,  0.5)
@@ -86,9 +86,9 @@ void Widget::initializeGL()
     cubeTexture->setMagnificationFilter(QOpenGLTexture::Linear);
 
 
-    coloringShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/coloringvertexshader.vert");
-    coloringShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/coloringfragmentshader.frag");
-    coloringShaderProgram.link();
+    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/coloringvertexshader.vert");
+    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/coloringfragmentshader.frag");
+    lightSourceShaderProgram.link();
 
     spotlightVertices << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0,  0.5) << QVector3D( 0.5,    0,  0.5) // Front
                       << QVector3D(   0,    1,    0) << QVector3D( 0.5,    0, -0.5) << QVector3D(-0.5,    0, -0.5) // Back
@@ -159,38 +159,38 @@ void Widget::paintGL()
 
     QVector3D lightPosition = lightTransformation * QVector3D(0, 1, 1);
 
-    lightingShaderProgram.bind();
+    cubeShaderProgram.bind();
     cubeTexture->bind();
 
-    lightingShaderProgram.setUniformValue("mvpMatrix", pMatrix * mvMatrix);
-    lightingShaderProgram.setUniformValue("mvMatrix", mvMatrix);
-    lightingShaderProgram.setUniformValue("normalMatrix", normalMatrix);
-    lightingShaderProgram.setUniformValue("lightPosition", vMatrix * lightPosition);
+    cubeShaderProgram.setUniformValue("mvpMatrix", pMatrix * mvMatrix);
+    cubeShaderProgram.setUniformValue("mvMatrix", mvMatrix);
+    cubeShaderProgram.setUniformValue("normalMatrix", normalMatrix);
+    cubeShaderProgram.setUniformValue("lightPosition", vMatrix * lightPosition);
 
-    lightingShaderProgram.setUniformValue("ambientColor", QColor(32, 32, 32));
-    lightingShaderProgram.setUniformValue("diffuseColor", QColor(128, 128, 128));
-    lightingShaderProgram.setUniformValue("specularColor", QColor(255, 255, 255));
-    lightingShaderProgram.setUniformValue("ambientReflection", (GLfloat) 4.0);
-    lightingShaderProgram.setUniformValue("diffuseReflection", (GLfloat) 4.0);
-    lightingShaderProgram.setUniformValue("specularReflection", (GLfloat) 1.0);
-    lightingShaderProgram.setUniformValue("shininess", (GLfloat) 100.0);
-    lightingShaderProgram.setUniformValue("texture", 0);
+    cubeShaderProgram.setUniformValue("ambientColor", QColor(32, 32, 32));
+    cubeShaderProgram.setUniformValue("diffuseColor", QColor(128, 128, 128));
+    cubeShaderProgram.setUniformValue("specularColor", QColor(255, 255, 255));
+    cubeShaderProgram.setUniformValue("ambientReflection", (GLfloat) 4.0);
+    cubeShaderProgram.setUniformValue("diffuseReflection", (GLfloat) 4.0);
+    cubeShaderProgram.setUniformValue("specularReflection", (GLfloat) 1.0);
+    cubeShaderProgram.setUniformValue("shininess", (GLfloat) 100.0);
+    cubeShaderProgram.setUniformValue("texture", 0);
 
 
-    lightingShaderProgram.setAttributeArray("vertex", cubeVertices.constData());
-    lightingShaderProgram.enableAttributeArray("vertex");
-    lightingShaderProgram.setAttributeArray("normal", cubeNormals.constData());
-    lightingShaderProgram.enableAttributeArray("normal");
-    lightingShaderProgram.setAttributeArray("textureCoordinate", cubeTextureCoordinates.constData());
-    lightingShaderProgram.enableAttributeArray("textureCoordinate");
+    cubeShaderProgram.setAttributeArray("vertex", cubeVertices.constData());
+    cubeShaderProgram.enableAttributeArray("vertex");
+    cubeShaderProgram.setAttributeArray("normal", cubeNormals.constData());
+    cubeShaderProgram.enableAttributeArray("normal");
+    cubeShaderProgram.setAttributeArray("textureCoordinate", cubeTextureCoordinates.constData());
+    cubeShaderProgram.enableAttributeArray("textureCoordinate");
 
     glDrawArrays(GL_TRIANGLES, 0, cubeVertices.size());
 
-    lightingShaderProgram.disableAttributeArray("vertex");
-    lightingShaderProgram.disableAttributeArray("normal");
-    lightingShaderProgram.disableAttributeArray("textureCoordinate");
+    cubeShaderProgram.disableAttributeArray("vertex");
+    cubeShaderProgram.disableAttributeArray("normal");
+    cubeShaderProgram.disableAttributeArray("textureCoordinate");
 
-    lightingShaderProgram.release();
+    cubeShaderProgram.release();
     cubeTexture->release();
 
     mMatrix.setToIdentity();
@@ -199,23 +199,23 @@ void Widget::paintGL()
     mMatrix.rotate(45, 1, 0, 0);
     mMatrix.scale(0.1);
 
-    coloringShaderProgram.bind();
+    lightSourceShaderProgram.bind();
 
-    coloringShaderProgram.setUniformValue("mvpMatrix", pMatrix * vMatrix * mMatrix);
+    lightSourceShaderProgram.setUniformValue("mvpMatrix", pMatrix * vMatrix * mMatrix);
 
-    coloringShaderProgram.setAttributeArray("vertex", spotlightVertices.constData());
-    coloringShaderProgram.enableAttributeArray("vertex");
+    lightSourceShaderProgram.setAttributeArray("vertex", spotlightVertices.constData());
+    lightSourceShaderProgram.enableAttributeArray("vertex");
 
-    coloringShaderProgram.setAttributeArray("color", spotlightColors.constData());
-    coloringShaderProgram.enableAttributeArray("color");
+    lightSourceShaderProgram.setAttributeArray("color", spotlightColors.constData());
+    lightSourceShaderProgram.enableAttributeArray("color");
 
     glDrawArrays(GL_TRIANGLES, 0, spotlightVertices.size());
 
-    coloringShaderProgram.disableAttributeArray("vertex");
+    lightSourceShaderProgram.disableAttributeArray("vertex");
 
-    coloringShaderProgram.disableAttributeArray("color");
+    lightSourceShaderProgram.disableAttributeArray("color");
 
-    coloringShaderProgram.release();
+    lightSourceShaderProgram.release();
     //! [5]
 }
 

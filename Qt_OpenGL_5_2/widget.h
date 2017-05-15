@@ -19,12 +19,12 @@ private:
 
     QMatrix4x4 pMatrix;
 
-    QOpenGLShaderProgram lightingShaderProgram;
+    QOpenGLShaderProgram cubeShaderProgram;
     QVector<QVector3D> cubeVertices;
     QVector<QVector3D> cubeNormals;
     QVector<QVector2D> cubeTextureCoordinates;
     QOpenGLTexture *cubeTexture;
-    QOpenGLShaderProgram coloringShaderProgram;
+    QOpenGLShaderProgram lightSourceShaderProgram;
     QVector<QVector3D> spotlightVertices;
     QVector<QVector3D> spotlightColors;
     double lightAngle;
