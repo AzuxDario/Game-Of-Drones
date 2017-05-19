@@ -10,32 +10,28 @@
 #include <QOpenGLTexture>
 #include <QTimer>
 
+#include "camera.h"
+#include "light.h"
+#include "drawableobject.h"
+
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
 
 private:
-    QVector<QString> textures;
-
     QMatrix4x4 pMatrix;
 
     QOpenGLShaderProgram cubeShaderProgram;
-    QVector<QVector3D> cubeVertices;
-    QVector<QVector3D> cubeNormals;
-    QVector<QVector2D> cubeTextureCoordinates;
-    QOpenGLTexture *cubeTexture;
     QOpenGLShaderProgram lightSourceShaderProgram;
     QVector<QVector3D> spotlightVertices;
     QVector<QVector3D> spotlightColors;
-    double lightAngle;
     double droneRotate;
 
-    int i;
-    bool changed;
-    double alpha;
-    double beta;
-    double distance;
     QPoint lastMousePosition;
+
+    Camera camera;
+    Light light;
+    DrawableObject object, object2, object3;
 
 public:
     Widget(QWidget *parent = 0);

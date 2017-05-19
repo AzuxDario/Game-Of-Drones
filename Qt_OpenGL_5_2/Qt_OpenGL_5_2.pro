@@ -13,9 +13,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        widget.cpp
+        widget.cpp \
+    camera.cpp \
+    light.cpp \
+    drawableobject.cpp
 
-HEADERS  += widget.h
+HEADERS  += widget.h \
+    camera.h \
+    light.h \
+    drawableobject.h
 
 RESOURCES += \
     shaders.qrc
