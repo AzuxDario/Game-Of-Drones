@@ -106,7 +106,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
     int deltaY = event->y() - lastMousePosition.y();
     if (event->buttons() & Qt::LeftButton)
     {
-        float cameraRotY = camera.Rotation.x();
+        float cameraRotY = camera.Rotation.y();
         cameraRotY -= deltaX;
 
         while (cameraRotY < 0)
@@ -117,9 +117,9 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
         {
             cameraRotY -= 360;
         }
-        camera.Rotation.setX(cameraRotY);
+        camera.Rotation.setY(cameraRotY);
 
-        float cameraRotX = camera.Rotation.y();
+        float cameraRotX = camera.Rotation.x();
         cameraRotX -= deltaY;
 
         while (cameraRotX < 0)
@@ -130,7 +130,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
         {
             cameraRotX -= 360;
         }
-        camera.Rotation.setY(cameraRotX);
+        camera.Rotation.setX(cameraRotX);
 
         update();
     }

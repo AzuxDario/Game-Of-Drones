@@ -14,7 +14,7 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, QString objFile, QString
 
     cubeShaderProgram = shader;
 
-    for(int i=0; i<objLoader.FacesData.size(); i++)
+    for(unsigned int i=0; i<objLoader.FacesData.size(); i++)
     {
         FaceData face = objLoader.FacesData.at(i);
 
