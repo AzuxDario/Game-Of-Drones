@@ -72,15 +72,13 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     QMatrix3x3 normalMatrix;
     normalMatrix = mvMatrix.normalMatrix();
 
-    QVector3D lightPosition = light.GetMatrix();
-
     cubeShaderProgram->bind();
     cubeTexture->bind();
 
     cubeShaderProgram->setUniformValue("mvpMatrix", pMatrix * mvMatrix);
     cubeShaderProgram->setUniformValue("mvMatrix", mvMatrix);
     cubeShaderProgram->setUniformValue("normalMatrix", normalMatrix);
-    cubeShaderProgram->setUniformValue("lightPosition", vMatrix * lightPosition);
+    cubeShaderProgram->setUniformValue("lightPosition", vMatrix * light.Position);
 
     cubeShaderProgram->setUniformValue("ambientColor", QColor(32, 32, 32));
     cubeShaderProgram->setUniformValue("diffuseColor", QColor(128, 128, 128));

@@ -12,6 +12,7 @@
 
 #include "camera.h"
 #include "light.h"
+#include "OBJLoader/OBJLoader.h"
 
 class DrawableObject : protected QOpenGLFunctions
 {

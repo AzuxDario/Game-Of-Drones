@@ -7,10 +7,10 @@ class Light
 {
 public:
     Light();
-    QVector3D GetMatrix();
+    QMatrix4x4 GetMatrix();
 
-    double Alpha;
-    double Beta;
+    QVector3D Position;
+    QVector3D Rotation;
 };
 
 #endif // LIGHT_H

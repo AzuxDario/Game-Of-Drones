@@ -54,6 +54,8 @@ void Widget::initializeGL()
 
     object2.Position.setX(3);
     object3.Position.setZ(3);
+
+    light.Position.setX(20);
 }
 
 void Widget::resizeGL(int width, int height)
@@ -76,12 +78,7 @@ void Widget::paintGL()
     object2.Draw(camera, light, pMatrix);
     object3.Draw(camera, light, pMatrix);
 
-    QMatrix4x4 mMatrix;
-    mMatrix.setToIdentity();
-    mMatrix.translate(light.GetMatrix());
-    mMatrix.rotate(light.Alpha, 0, 1, 0);
-    mMatrix.rotate(45, 1, 0, 0);
-    mMatrix.scale(0.1);
+    QMatrix4x4 mMatrix = light.GetMatrix();
 
     lightSourceShaderProgram.bind();
     lightSourceShaderProgram.setUniformValue("mvpMatrix", pMatrix * camera.GetMatrix() * mMatrix);
@@ -160,10 +157,16 @@ void Widget::wheelEvent(QWheelEvent *event)
 
 void Widget::timeout()
 {
-    light.Alpha += 1;
-    while (light.Alpha >= 360) {
-        light.Alpha -= 360;
+    int rotX = light.Rotation.x();
+    rotX += 20;
+
+    while (rotX >= 360) {
+        rotX -= 360;
     }
+    light.Rotation.setX(rotX);
+    light.Rotation.setY(rotX);
+    light.Rotation.setZ(rotX);
+
     update();
     QTimer::singleShot(100, this,SLOT(timeout()));
 }

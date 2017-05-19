@@ -16,12 +16,15 @@ SOURCES += main.cpp\
         widget.cpp \
     camera.cpp \
     light.cpp \
-    drawableobject.cpp
+    drawableobject.cpp \
+    OBJLoader/OBJLoader.cpp
 
 HEADERS  += widget.h \
     camera.h \
     light.h \
-    drawableobject.h
+    drawableobject.h \
+    OBJLoader/FaceData.h \
+    OBJLoader/OBJLoader.h
 
 RESOURCES += \
     shaders.qrc
