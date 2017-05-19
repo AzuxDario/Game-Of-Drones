@@ -48,14 +48,14 @@ void Widget::initializeGL()
                     << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1);
 
 
-    object.Init(&cubeShaderProgram, ":/texture.png");
-    object2.Init(&cubeShaderProgram, ":/texture.png");
-    object3.Init(&cubeShaderProgram, ":/texture.png");
+    object.Init(&cubeShaderProgram, ":/test.obj", ":/texture.png");
+    object2.Init(&cubeShaderProgram, ":/test.obj", ":/texture.png");
+    object3.Init(&cubeShaderProgram, ":/test.obj", ":/texture.png");
 
     object2.Position.setX(3);
     object3.Position.setZ(3);
 
-    light.Position.setX(20);
+    light.Position.setZ(2);
 }
 
 void Widget::resizeGL(int width, int height)
@@ -146,27 +146,20 @@ void Widget::wheelEvent(QWheelEvent *event)
         if (delta < 0)
         {
             camera.Distance *= 1.1;
-        } else if (delta > 0)
+        }
+        else if (delta > 0)
         {
             camera.Distance *= 0.9;
         }
+
         update();
     }
+
     event->accept();
 }
 
 void Widget::timeout()
 {
-    int rotX = light.Rotation.x();
-    rotX += 20;
-
-    while (rotX >= 360) {
-        rotX -= 360;
-    }
-    light.Rotation.setX(rotX);
-    light.Rotation.setY(rotX);
-    light.Rotation.setZ(rotX);
-
     update();
     QTimer::singleShot(100, this,SLOT(timeout()));
 }

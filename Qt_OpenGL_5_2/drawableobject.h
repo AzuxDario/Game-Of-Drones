@@ -18,7 +18,7 @@ class DrawableObject : protected QOpenGLFunctions
 {
 public:
     DrawableObject();
-    void Init(QOpenGLShaderProgram* shader, QString texture);
+    void Init(QOpenGLShaderProgram* shader, QString objFile, QString texture);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
     QVector3D Position;
@@ -29,7 +29,9 @@ private:
     QOpenGLTexture *cubeTexture;
     QVector<QVector3D> cubeVertices;
     QVector<QVector3D> cubeNormals;
-    QVector<QVector2D> cubeTextureCoordinates;
+    QVector<QVector2D> textureCoords;
+
+    OBJLoader objLoader;
 };
 
 #endif // DRAWABLEOBJECT_H

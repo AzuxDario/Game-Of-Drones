@@ -12,7 +12,7 @@ OBJLoader::~OBJLoader()
 
 bool OBJLoader::LoadFromFile(QString fileName)
 {
-    QFile file(":/test.obj");
+    QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly))
 		return false;
 
@@ -47,10 +47,10 @@ bool OBJLoader::parse(QString content)
 
             if (!result)
             {
-                verticesData.clear();
-                normalsData.clear();
-                texturesData.clear();
-                facesData.clear();
+                VerticesData.clear();
+                NormalsData.clear();
+                TexturesData.clear();
+                FacesData.clear();
 
                 return false;
             }

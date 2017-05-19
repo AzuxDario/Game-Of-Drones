@@ -5,49 +5,31 @@ DrawableObject::DrawableObject() : cubeTexture(0)
     cubeTexture = nullptr;
 }
 
-void DrawableObject::Init(QOpenGLShaderProgram* shader, QString texture)
+void DrawableObject::Init(QOpenGLShaderProgram* shader, QString objFile, QString texture)
 {
     initializeOpenGLFunctions();
+
+    if(!objLoader.LoadFromFile(objFile))
+        return;
+
     cubeShaderProgram = shader;
 
-    cubeVertices << QVector3D(-0.5, -0.5,  0.5) << QVector3D( 0.5, -0.5,  0.5) << QVector3D( 0.5,  0.5,  0.5) // Front
-                 << QVector3D( 0.5,  0.5,  0.5) << QVector3D(-0.5,  0.5,  0.5) << QVector3D(-0.5, -0.5,  0.5)
-                 << QVector3D( 0.5, -0.5, -0.5) << QVector3D(-0.5, -0.5, -0.5) << QVector3D(-0.5,  0.5, -0.5) // Back
-                 << QVector3D(-0.5,  0.5, -0.5) << QVector3D( 0.5,  0.5, -0.5) << QVector3D( 0.5, -0.5, -0.5)
-                 << QVector3D(-0.5, -0.5, -0.5) << QVector3D(-0.5, -0.5,  0.5) << QVector3D(-0.5,  0.5,  0.5) // Left
-                 << QVector3D(-0.5,  0.5,  0.5) << QVector3D(-0.5,  0.5, -0.5) << QVector3D(-0.5, -0.5, -0.5)
-                 << QVector3D( 0.5, -0.5,  0.5) << QVector3D( 0.5, -0.5, -0.5) << QVector3D( 0.5,  0.5, -0.5) // Right
-                 << QVector3D( 0.5,  0.5, -0.5) << QVector3D( 0.5,  0.5,  0.5) << QVector3D( 0.5, -0.5,  0.5)
-                 << QVector3D(-0.5,  0.5,  0.5) << QVector3D( 0.5,  0.5,  0.5) << QVector3D( 0.5,  0.5, -0.5) // Top
-                 << QVector3D( 0.5,  0.5, -0.5) << QVector3D(-0.5,  0.5, -0.5) << QVector3D(-0.5,  0.5,  0.5)
-                 << QVector3D(-0.5, -0.5, -0.5) << QVector3D( 0.5, -0.5, -0.5) << QVector3D( 0.5, -0.5,  0.5) // Bottom
-                 << QVector3D( 0.5, -0.5,  0.5) << QVector3D(-0.5, -0.5,  0.5) << QVector3D(-0.5, -0.5, -0.5);
+    for(int i=0; i<objLoader.FacesData.size(); i++)
+    {
+        FaceData face = objLoader.FacesData.at(i);
 
-    cubeNormals << QVector3D( 0,  0,  1) << QVector3D( 0,  0,  1) << QVector3D( 0,  0,  1) // Front
-                << QVector3D( 0,  0,  1) << QVector3D( 0,  0,  1) << QVector3D( 0,  0,  1)
-                << QVector3D( 0,  0, -1) << QVector3D( 0,  0, -1) << QVector3D( 0,  0, -1) // Back
-                << QVector3D( 0,  0, -1) << QVector3D( 0,  0, -1) << QVector3D( 0,  0, -1)
-                << QVector3D(-1,  0,  0) << QVector3D(-1,  0,  0) << QVector3D(-1,  0,  0) // Left
-                << QVector3D(-1,  0,  0) << QVector3D(-1,  0,  0) << QVector3D(-1,  0,  0)
-                << QVector3D( 1,  0,  0) << QVector3D( 1,  0,  0) << QVector3D( 1,  0,  0) // Right
-                << QVector3D( 1,  0,  0) << QVector3D( 1,  0,  0) << QVector3D( 1,  0,  0)
-                << QVector3D( 0,  1,  0) << QVector3D( 0,  1,  0) << QVector3D( 0,  1,  0) // Top
-                << QVector3D( 0,  1,  0) << QVector3D( 0,  1,  0) << QVector3D( 0,  1,  0)
-                << QVector3D( 0, -1,  0) << QVector3D( 0, -1,  0) << QVector3D( 0, -1,  0) // Bottom
-                << QVector3D( 0, -1,  0) << QVector3D( 0, -1,  0) << QVector3D( 0, -1,  0);
+        cubeVertices << objLoader.VerticesData.at(face.Vertices.x() - 1)
+                     << objLoader.VerticesData.at(face.Vertices.y() - 1)
+                     << objLoader.VerticesData.at(face.Vertices.z() - 1);
 
-    cubeTextureCoordinates << QVector2D(0, 0) << QVector2D(1, 0) << QVector2D(1, 1) // Front
-                           << QVector2D(1, 1) << QVector2D(0, 1) << QVector2D(0, 0)
-                           << QVector2D(0, 0) << QVector2D(1, 0) << QVector2D(1, 1) // Back
-                           << QVector2D(1, 1) << QVector2D(0, 1) << QVector2D(0, 0)
-                           << QVector2D(0, 0) << QVector2D(1, 0) << QVector2D(1, 1) // Left
-                           << QVector2D(1, 1) << QVector2D(0, 1) << QVector2D(0, 0)
-                           << QVector2D(0, 0) << QVector2D(1, 0) << QVector2D(1, 1) // Right
-                           << QVector2D(1, 1) << QVector2D(0, 1) << QVector2D(0, 0)
-                           << QVector2D(0, 0) << QVector2D(1, 0) << QVector2D(1, 1) // Top
-                           << QVector2D(1, 1) << QVector2D(0, 1) << QVector2D(0, 0)
-                           << QVector2D(0, 0) << QVector2D(1, 0) << QVector2D(1, 1) // Bottom
-                           << QVector2D(1, 1) << QVector2D(0, 1) << QVector2D(0, 0);
+        cubeNormals << objLoader.NormalsData.at(face.Normals.x() - 1)
+                    << objLoader.NormalsData.at(face.Normals.y() - 1)
+                    << objLoader.NormalsData.at(face.Normals.z() - 1);
+
+        textureCoords << objLoader.TexturesData.at(face.Textures.x() - 1)
+                       << objLoader.TexturesData.at(face.Textures.y() - 1)
+                       << objLoader.TexturesData.at(face.Textures.z() - 1);
+    }
 
     cubeTexture = new QOpenGLTexture(QImage(texture).mirrored());
     cubeTexture->setMinificationFilter(QOpenGLTexture::Nearest);
@@ -56,13 +38,8 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, QString texture)
 
 void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 {
-    QMatrix4x4 mMatrix;
-    mMatrix.setToIdentity();
-
     QMatrix4x4 vMatrix = camera.GetMatrix();
-
-    QMatrix4x4 mvMatrix;
-    mvMatrix = vMatrix * mMatrix;
+    QMatrix4x4 mvMatrix = vMatrix;
 
     mvMatrix.translate(Position.x(), Position.y(), Position.z());
     mvMatrix.rotate(Rotation.x(), 1, 0, 0);
@@ -93,7 +70,7 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->enableAttributeArray("vertex");
     cubeShaderProgram->setAttributeArray("normal", cubeNormals.constData());
     cubeShaderProgram->enableAttributeArray("normal");
-    cubeShaderProgram->setAttributeArray("textureCoordinate", cubeTextureCoordinates.constData());
+    cubeShaderProgram->setAttributeArray("textureCoordinate", textureCoords.constData());
     cubeShaderProgram->enableAttributeArray("textureCoordinate");
 
     glDrawArrays(GL_TRIANGLES, 0, cubeVertices.size());
