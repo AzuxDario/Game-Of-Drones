@@ -31,7 +31,7 @@ private:
 
     Camera camera;
     Light light;
-    DrawableObject object, object2, object3;
+    DrawableObject skybox;
 
 public:
     Widget(QWidget *parent = 0);

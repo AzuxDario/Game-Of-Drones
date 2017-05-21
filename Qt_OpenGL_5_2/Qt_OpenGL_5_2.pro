@@ -27,6 +27,6 @@ HEADERS  += widget.h \
     OBJLoader/OBJLoader.h
 
 RESOURCES += \
-    shaders.qrc
+    resources.qrc
 
 DISTFILES +=

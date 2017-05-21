@@ -3,6 +3,7 @@
 DrawableObject::DrawableObject() : cubeTexture(0)
 {
     cubeTexture = nullptr;
+    SpecularReflection = 1;
 }
 
 void DrawableObject::Init(QOpenGLShaderProgram* shader, QString objFile, QString texture)
@@ -62,7 +63,7 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->setUniformValue("specularColor", QColor(255, 255, 255));
     cubeShaderProgram->setUniformValue("ambientReflection", (GLfloat) 4.0);
     cubeShaderProgram->setUniformValue("diffuseReflection", (GLfloat) 4.0);
-    cubeShaderProgram->setUniformValue("specularReflection", (GLfloat) 1.0);
+    cubeShaderProgram->setUniformValue("specularReflection", (GLfloat) SpecularReflection);
     cubeShaderProgram->setUniformValue("shininess", (GLfloat) 100.0);
     cubeShaderProgram->setUniformValue("texture", 0);
 

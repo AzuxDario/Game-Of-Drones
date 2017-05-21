@@ -1,7 +1,6 @@
 #include "widget.h"
 
-Widget::Widget(QWidget *parent)
-    : QOpenGLWidget(parent)
+Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
     droneRotate = 0;
     QTimer::singleShot(100,this,SLOT(timeout()));
@@ -25,12 +24,12 @@ void Widget::initializeGL()
     glClearColor(0,0,0,0); //Ustawienie koloru tła
 
     //Ładowanie shaderów
-    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/lightningvertexshader.vert");
-    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/lightingfragmentshader.fsh");
+    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/lightningvertexshader.vert");
+    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/lightingfragmentshader.fsh");
     cubeShaderProgram.link();
 
-    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/coloringvertexshader.vert");
-    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/coloringfragmentshader.frag");
+    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/coloringvertexshader.vert");
+    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/coloringfragmentshader.frag");
     lightSourceShaderProgram.link();
 
     spotlightVertices << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0,  0.5) << QVector3D( 0.5,    0,  0.5) // Front
@@ -48,12 +47,8 @@ void Widget::initializeGL()
                     << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1);
 
 
-    object.Init(&cubeShaderProgram, ":/test.obj", ":/texture.png");
-    object2.Init(&cubeShaderProgram, ":/test.obj", ":/texture.png");
-    object3.Init(&cubeShaderProgram, ":/test.obj", ":/texture.png");
-
-    object2.Position.setX(3);
-    object3.Position.setZ(3);
+    skybox.Init(&cubeShaderProgram, ":/Content/skybox.obj", ":/Content/skybox.png");
+    skybox.SpecularReflection = 0;
 
     light.Position.setZ(2);
 }
@@ -74,9 +69,10 @@ void Widget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    object.Draw(camera, light, pMatrix);
-    object2.Draw(camera, light, pMatrix);
-    object3.Draw(camera, light, pMatrix);
+
+    glDisable(GL_CULL_FACE);
+    skybox.Draw(camera, light, pMatrix);
+    glEnable(GL_CULL_FACE);
 
     QMatrix4x4 mMatrix = light.GetMatrix();
 

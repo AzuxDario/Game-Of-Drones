@@ -23,6 +23,7 @@ public:
 
     QVector3D Position;
     QVector3D Rotation;
+    float SpecularReflection;
 private:
     QMatrix4x4 pMatrix;
     QOpenGLShaderProgram* cubeShaderProgram;
