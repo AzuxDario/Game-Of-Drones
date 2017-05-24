@@ -46,12 +46,12 @@ void Widget::initializeGL()
                     << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1);
 
 
-    skybox.Init(&cubeShaderProgram, ":/Content/skybox.obj", ":/Content/skybox.png");
+    skybox.Init(&cubeShaderProgram, ":/Objects/skybox", ":/Textures/skybox");
     skybox.SpecularReflection = 0;
 
     light.Position.setZ(2);
 
-    //Game.Current = Game();
+    //Game::Current = Game(); //Skoro w klasie Game jest obiekt statyczny to odwołujemy się do niego przez operator zasięgu ::
 }
 
 void Widget::resizeGL(int width, int height)

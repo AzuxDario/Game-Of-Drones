@@ -7,8 +7,10 @@
         <file alias="LightningVertexShader">Shaders/lightningvertexshader.vert</file>
         <file alias="VertexShader">Shaders/vertexshader.vert</file>
     </qresource>
-    <qresource prefix="/Content">
-        <file alias="skybox.obj">Content/skybox.obj</file>
-        <file alias="skybox.png">Content/skybox.png</file>
+    <qresource prefix="/Objects">
+        <file alias="skybox">Content/skybox.obj</file>
+    </qresource>
+    <qresource prefix="/Textures">
+        <file alias="skybox">Content/skybox.png</file>
     </qresource>
 </RCC>

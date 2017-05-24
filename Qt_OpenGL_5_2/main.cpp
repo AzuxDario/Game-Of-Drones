@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Widget w;
-    w.setWindowTitle("Moja piąta aplikacja w Qt z OpenGL'em");
+    w.setWindowTitle("Game of Drones");
     w.show();
 
     return a.exec();
