@@ -5,6 +5,7 @@
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions>
+#include <QOpenGLBuffer>
 #include <QMatrix4x4>
 #include <QMouseEvent>
 #include <QOpenGLTexture>
@@ -26,6 +27,9 @@ private:
     QOpenGLShaderProgram lightSourceShaderProgram;
     QVector<QVector3D> spotlightVertices;
     QVector<QVector3D> spotlightColors;
+
+    int numSpotlightVertices;
+    QOpenGLBuffer spotlightBuffer;
 
     QPoint lastMousePosition;
 

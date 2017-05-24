@@ -46,6 +46,20 @@ void Widget::initializeGL()
                     << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1);
 
 
+    //Przekazwyanie źródła światła do karty graficznej
+    numSpotlightVertices = 18;
+
+    spotlightBuffer.create();
+    spotlightBuffer.bind();
+    spotlightBuffer.allocate(numSpotlightVertices * (3 + 3) * sizeof(GLfloat));
+
+    int offset = 0;
+    spotlightBuffer.write(offset, spotlightVertices.constData(), numSpotlightVertices * 3 * sizeof(GLfloat));
+    offset += numSpotlightVertices * 3 * sizeof(GLfloat);
+    spotlightBuffer.write(offset, spotlightColors.constData(), numSpotlightVertices * 3 * sizeof(GLfloat));
+
+    spotlightBuffer.release();
+
     skybox.Init(&cubeShaderProgram, ":/Objects/skybox", ":/Textures/skybox");
     skybox.SpecularReflection = 0;
 
@@ -79,10 +93,16 @@ void Widget::paintGL()
 
     lightSourceShaderProgram.bind();
     lightSourceShaderProgram.setUniformValue("mvpMatrix", projectionMatrix * camera.GetMatrix() * modelMatrix); //mvpMatrix = projection * view * model
-    lightSourceShaderProgram.setAttributeArray("vertex", spotlightVertices.constData());
+
+    spotlightBuffer.bind();
+    int offset = 0;
+
+    lightSourceShaderProgram.setAttributeBuffer("vertex", GL_FLOAT, offset, 3, 0);
     lightSourceShaderProgram.enableAttributeArray("vertex");
-    lightSourceShaderProgram.setAttributeArray("color", spotlightColors.constData());
+    offset += numSpotlightVertices * 3 * sizeof(GLfloat);
+    lightSourceShaderProgram.setAttributeBuffer("color", GL_FLOAT, offset, 3, 0);
     lightSourceShaderProgram.enableAttributeArray("color");
+    spotlightBuffer.release();
 
     glDrawArrays(GL_TRIANGLES, 0, spotlightVertices.size());
 
