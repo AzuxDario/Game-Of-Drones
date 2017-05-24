@@ -1,6 +1,6 @@
-#version 130
+//Obsługuje teksturowanie, światło
+//Partner: lightningvertexshader
 
-//! [0]
 uniform vec4 ambientColor;
 uniform vec4 diffuseColor;
 uniform vec4 specularColor;
@@ -27,4 +27,4 @@ void main(void)
     vec4 specularIllumination = specularReflection * pow(max(0.0, dot(-reflect(lightDirection, normal), viewerDirection)), shininess) * specularColor;
     fragColor = texture2D(texture, varyingTextureCoordinate) * (ambientIllumination + diffuseIllumination) + specularIllumination;
 }
-//! [0]
+

@@ -23,12 +23,12 @@ void Widget::initializeGL()
     glClearColor(0,0,0,0); //Ustawienie koloru tła
 
     //Ładowanie shaderów
-    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/lightningvertexshader.vert");
-    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/lightingfragmentshader.fsh");
+    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/LightningVertexShader");
+    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/LightningFragmentShader");
     cubeShaderProgram.link();
 
-    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/coloringvertexshader.vert");
-    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/coloringfragmentshader.frag");
+    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/ColoringVertexShader");
+    lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/ColoringFragmentShader");
     lightSourceShaderProgram.link();
 
     spotlightVertices << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0,  0.5) << QVector3D( 0.5,    0,  0.5) // Front

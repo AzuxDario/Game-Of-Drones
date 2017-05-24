@@ -1,3 +1,5 @@
+//Shader do pozycjonowania obiektów, obsługujący tekstury poprzez fragmentshader
+//Partner: fragmentshader
 uniform mat4 mvpMatrix;
 
 in vec4 vertex;

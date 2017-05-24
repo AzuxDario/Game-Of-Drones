@@ -1,12 +1,14 @@
 <RCC>
-    <qresource prefix="/">
-        <file>Content/skybox.obj</file>
-        <file>Content/skybox.png</file>
-        <file>Shaders/coloringfragmentshader.frag</file>
-        <file>Shaders/coloringvertexshader.vert</file>
-        <file>Shaders/fragmentshader.frag</file>
-        <file>Shaders/lightingfragmentshader.fsh</file>
-        <file>Shaders/lightningvertexshader.vert</file>
-        <file>Shaders/vertexshader.vert</file>
+    <qresource prefix="/Shaders">
+        <file alias="ColoringFragmentShader">Shaders/coloringfragmentshader.frag</file>
+        <file alias="ColoringVertexShader">Shaders/coloringvertexshader.vert</file>
+        <file alias="FragmentShader">Shaders/fragmentshader.frag</file>
+        <file alias="LightningFragmentShader">Shaders/lightingfragmentshader.frag</file>
+        <file alias="LightningVertexShader">Shaders/lightningvertexshader.vert</file>
+        <file alias="VertexShader">Shaders/vertexshader.vert</file>
+    </qresource>
+    <qresource prefix="/Content">
+        <file alias="skybox.obj">Content/skybox.obj</file>
+        <file alias="skybox.png">Content/skybox.png</file>
     </qresource>
 </RCC>
