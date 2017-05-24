@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Qt_OpenGL_5_2
 TEMPLATE = app
 
+win32:RC_ICONS += Ikona.ico
 
 SOURCES += main.cpp\
         widget.cpp \
