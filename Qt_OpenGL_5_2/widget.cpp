@@ -2,8 +2,7 @@
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
-    droneRotate = 0;
-    QTimer::singleShot(100,this,SLOT(timeout()));
+
 }
 
 Widget::~Widget()
@@ -52,7 +51,7 @@ void Widget::initializeGL()
 
     light.Position.setZ(2);
 
-    Game.Current = Game();
+    //Game.Current = Game();
 }
 
 void Widget::resizeGL(int width, int height)
@@ -62,8 +61,8 @@ void Widget::resizeGL(int width, int height)
         height = 1; //Aby nie dzielić przez zero
     }
 
-    pMatrix.setToIdentity();
-    pMatrix.perspective(60.0, (float) width / (float) height, 0.001, 1000);
+    projectionMatrix.setToIdentity();
+    projectionMatrix.perspective(60.0, (float) width / (float) height, 0.001, 1000);
     glViewport(0, 0, width, height);
 }
 
@@ -73,13 +72,13 @@ void Widget::paintGL()
 
 
     glDisable(GL_CULL_FACE);
-    skybox.Draw(camera, light, pMatrix);
+    skybox.Draw(camera, light, projectionMatrix);
     glEnable(GL_CULL_FACE);
 
-    QMatrix4x4 mMatrix = light.GetMatrix();
+    QMatrix4x4 modelMatrix = light.GetMatrix();
 
     lightSourceShaderProgram.bind();
-    lightSourceShaderProgram.setUniformValue("mvpMatrix", pMatrix * camera.GetMatrix() * mMatrix);
+    lightSourceShaderProgram.setUniformValue("mvpMatrix", projectionMatrix * camera.GetMatrix() * modelMatrix); //mvpMatrix = projection * view * model
     lightSourceShaderProgram.setAttributeArray("vertex", spotlightVertices.constData());
     lightSourceShaderProgram.enableAttributeArray("vertex");
     lightSourceShaderProgram.setAttributeArray("color", spotlightColors.constData());
@@ -156,26 +155,7 @@ void Widget::wheelEvent(QWheelEvent *event)
     event->accept();
 }
 
-void Widget::timeout()
-{
-    update();
-    QTimer::singleShot(100, this,SLOT(timeout()));
-}
-
 void Widget::keyPressEvent(QKeyEvent *event)
 {
-    switch (event->key()) {
-        case Qt::Key_A:
-            droneRotate += 0.5;
-            while (droneRotate >= 360) {
-                droneRotate -= 360;
-            }
-        break;
-        case Qt::Key_D:
-            droneRotate -= 0.5;
-            while (droneRotate < 0) {
-                droneRotate += 360;
-            }
-        break;
-    }
+
 }

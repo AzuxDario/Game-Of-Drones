@@ -5,7 +5,7 @@ Game::Game()
 
 }
 
-Game::Draw(QOpenGLShaderProgram &shader)
+void Game::Draw(QOpenGLShaderProgram &shader)
 {
     for (int i = 0; i < ImmovableObjects.size();i++)
     {
@@ -17,12 +17,12 @@ Game::Draw(QOpenGLShaderProgram &shader)
     }
 }
 
-Game::Step()
+void Game::Step()
 {
 
 }
 
-Game::Move()
+void Game::Move()
 {
     for (int i = 0; i < MovableObjects.size();i++)
     {

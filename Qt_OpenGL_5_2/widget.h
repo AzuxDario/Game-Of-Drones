@@ -20,13 +20,12 @@ class Widget : public QOpenGLWidget, protected QOpenGLFunctions
     Q_OBJECT
 
 private:
-    QMatrix4x4 pMatrix;
+    QMatrix4x4 projectionMatrix;
 
     QOpenGLShaderProgram cubeShaderProgram;
     QOpenGLShaderProgram lightSourceShaderProgram;
     QVector<QVector3D> spotlightVertices;
     QVector<QVector3D> spotlightColors;
-    double droneRotate;
 
     QPoint lastMousePosition;
 
@@ -48,7 +47,6 @@ protected:
     void wheelEvent(QWheelEvent *event);
 
 public slots:
-    void timeout();
     void keyPressEvent(QKeyEvent *event);
 };
 
