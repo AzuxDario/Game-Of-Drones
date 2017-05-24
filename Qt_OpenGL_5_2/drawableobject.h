@@ -5,6 +5,7 @@
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions>
+#include <QOpenGLBuffer>
 #include <QMatrix4x4>
 #include <QMouseEvent>
 #include <QOpenGLTexture>
@@ -32,8 +33,11 @@ private:
     QVector<QVector3D> cubeVertices;
     QVector<QVector3D> cubeNormals;
     QVector<QVector2D> textureCoords;
+    QOpenGLBuffer graphicCardBuffer;
 
     OBJLoader objLoader;
+
+    int numberOfVerticles;
 };
 
 #endif // DRAWABLEOBJECT_H

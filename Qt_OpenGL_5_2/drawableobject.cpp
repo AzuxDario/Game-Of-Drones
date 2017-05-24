@@ -4,6 +4,7 @@ DrawableObject::DrawableObject() : cubeTexture(0)
 {
     cubeTexture = nullptr;
     SpecularReflection = 1;
+    numberOfVerticles = 0;
 }
 
 void DrawableObject::Init(QOpenGLShaderProgram* shader, QString objFile, QString texture)
@@ -31,6 +32,20 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, QString objFile, QString
                        << objLoader.TexturesData.at(face.Textures.y() - 1)
                        << objLoader.TexturesData.at(face.Textures.z() - 1);
     }
+    numberOfVerticles = cubeVertices.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
+
+    graphicCardBuffer.create();
+    graphicCardBuffer.bind();
+    graphicCardBuffer.allocate(numberOfVerticles * (3 + 3 + 2) * sizeof(GLfloat));
+
+    int offset = 0;
+    graphicCardBuffer.write(offset, cubeVertices.constData(), numberOfVerticles * 3 * sizeof(GLfloat));
+    offset += numberOfVerticles * 3 * sizeof(GLfloat);
+    graphicCardBuffer.write(offset, cubeNormals.constData(), numberOfVerticles * 3 * sizeof(GLfloat));
+    offset += numberOfVerticles * 3 * sizeof(GLfloat);
+    graphicCardBuffer.write(offset, textureCoords.constData(), numberOfVerticles * 2 * sizeof(GLfloat));
+
+    graphicCardBuffer.release();
 
     cubeTexture = new QOpenGLTexture(QImage(texture).mirrored());
     cubeTexture->setMinificationFilter(QOpenGLTexture::Nearest);
@@ -67,14 +82,19 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->setUniformValue("shininess", (GLfloat) 100.0);
     cubeShaderProgram->setUniformValue("texture", 0);
 
-    cubeShaderProgram->setAttributeArray("vertex", cubeVertices.constData());
+    graphicCardBuffer.bind();
+    int offset = 0;
+    cubeShaderProgram->setAttributeBuffer("vertex", GL_FLOAT, offset, 3, 0);
     cubeShaderProgram->enableAttributeArray("vertex");
-    cubeShaderProgram->setAttributeArray("normal", cubeNormals.constData());
+    offset += numberOfVerticles * 3 * sizeof(GLfloat);
+    cubeShaderProgram->setAttributeBuffer("normal", GL_FLOAT, offset, 3, 0);
     cubeShaderProgram->enableAttributeArray("normal");
-    cubeShaderProgram->setAttributeArray("textureCoordinate", textureCoords.constData());
+    offset += numberOfVerticles * 3 * sizeof(GLfloat);
+    cubeShaderProgram->setAttributeBuffer("textureCoordinate", GL_FLOAT, offset, 2, 0);
     cubeShaderProgram->enableAttributeArray("textureCoordinate");
+    graphicCardBuffer.release();
 
-    glDrawArrays(GL_TRIANGLES, 0, cubeVertices.size());
+    glDrawArrays(GL_TRIANGLES, 0, numberOfVerticles);
 
     cubeShaderProgram->disableAttributeArray("vertex");
     cubeShaderProgram->disableAttributeArray("normal");
