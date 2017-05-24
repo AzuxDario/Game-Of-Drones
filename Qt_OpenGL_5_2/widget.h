@@ -13,6 +13,7 @@
 #include "camera.h"
 #include "light.h"
 #include "drawableobject.h"
+#include "game.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {

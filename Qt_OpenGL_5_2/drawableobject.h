@@ -20,6 +20,7 @@ public:
     DrawableObject();
     void Init(QOpenGLShaderProgram* shader, QString objFile, QString texture);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
+    void Draw(QOpenGLShaderProgram & shader);
 
     QVector3D Position;
     QVector3D Rotation;

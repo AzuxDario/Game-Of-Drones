@@ -83,3 +83,8 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->release();
     cubeTexture->release();
 }
+
+void DrawableObject::Draw(QOpenGLShaderProgram &shader)
+{
+
+}

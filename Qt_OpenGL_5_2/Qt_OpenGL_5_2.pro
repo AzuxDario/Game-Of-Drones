@@ -17,14 +17,18 @@ SOURCES += main.cpp\
     camera.cpp \
     light.cpp \
     drawableobject.cpp \
-    OBJLoader/OBJLoader.cpp
+    OBJLoader/OBJLoader.cpp \
+    movableobject.cpp \
+    game.cpp
 
 HEADERS  += widget.h \
     camera.h \
     light.h \
     drawableobject.h \
     OBJLoader/FaceData.h \
-    OBJLoader/OBJLoader.h
+    OBJLoader/OBJLoader.h \
+    movableobject.h \
+    game.h
 
 RESOURCES += \
     resources.qrc

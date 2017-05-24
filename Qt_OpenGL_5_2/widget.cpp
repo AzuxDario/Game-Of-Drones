@@ -51,6 +51,8 @@ void Widget::initializeGL()
     skybox.SpecularReflection = 0;
 
     light.Position.setZ(2);
+
+    Game.Current = Game();
 }
 
 void Widget::resizeGL(int width, int height)
