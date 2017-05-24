@@ -14,6 +14,7 @@
 #include "camera.h"
 #include "light.h"
 #include "OBJLoader/OBJLoader.h"
+#include "lightproperties.h"
 
 class DrawableObject : protected QOpenGLFunctions
 {
@@ -22,10 +23,10 @@ public:
     void Init(QOpenGLShaderProgram* shader, QString objFile, QString texture);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
     void Draw(QOpenGLShaderProgram & shader);
+    LightProperties& getLightProperties();
 
     QVector3D Position;
     QVector3D Rotation;
-    float SpecularReflection;
 private:
     QMatrix4x4 pMatrix;
     QOpenGLShaderProgram* cubeShaderProgram;
@@ -36,6 +37,7 @@ private:
     QOpenGLBuffer graphicCardBuffer;
 
     OBJLoader objLoader;
+    LightProperties lightProperties;
 
     int numberOfVerticles;
 };

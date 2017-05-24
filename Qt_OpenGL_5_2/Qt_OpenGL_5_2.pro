@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     drawableobject.cpp \
     OBJLoader/OBJLoader.cpp \
     movableobject.cpp \
-    game.cpp
+    game.cpp \
+    lightproperties.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -28,7 +29,8 @@ HEADERS  += widget.h \
     OBJLoader/FaceData.h \
     OBJLoader/OBJLoader.h \
     movableobject.h \
-    game.h
+    game.h \
+    lightproperties.h
 
 RESOURCES += \
     resources.qrc

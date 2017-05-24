@@ -3,8 +3,15 @@
 DrawableObject::DrawableObject() : cubeTexture(0)
 {
     cubeTexture = nullptr;
-    SpecularReflection = 1;
     numberOfVerticles = 0;
+
+    lightProperties.setAmbientColor(QColor(32, 32, 32));
+    lightProperties.setDiffuseColor(QColor(128, 128, 128));
+    lightProperties.setSpecularColor(QColor(255, 255, 255));
+    lightProperties.setAmbientReflection(1);
+    lightProperties.setDiffuseReflection(1);
+    lightProperties.setSpecularReflection(1);
+    lightProperties.setShininess(100);
 }
 
 void DrawableObject::Init(QOpenGLShaderProgram* shader, QString objFile, QString texture)
@@ -73,13 +80,13 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->setUniformValue("normalMatrix", normalMatrix);
     cubeShaderProgram->setUniformValue("lightPosition", vMatrix * light.Position);
 
-    cubeShaderProgram->setUniformValue("ambientColor", QColor(32, 32, 32));
-    cubeShaderProgram->setUniformValue("diffuseColor", QColor(128, 128, 128));
-    cubeShaderProgram->setUniformValue("specularColor", QColor(255, 255, 255));
-    cubeShaderProgram->setUniformValue("ambientReflection", (GLfloat) 4.0);
-    cubeShaderProgram->setUniformValue("diffuseReflection", (GLfloat) 4.0);
-    cubeShaderProgram->setUniformValue("specularReflection", (GLfloat) SpecularReflection);
-    cubeShaderProgram->setUniformValue("shininess", (GLfloat) 100.0);
+    cubeShaderProgram->setUniformValue("ambientColor", lightProperties.getAmbientColor());
+    cubeShaderProgram->setUniformValue("diffuseColor", lightProperties.getDiffuseColor());
+    cubeShaderProgram->setUniformValue("specularColor", lightProperties.getSpecularColor());
+    cubeShaderProgram->setUniformValue("ambientReflection", lightProperties.getAmbientReflection());
+    cubeShaderProgram->setUniformValue("diffuseReflection", lightProperties.getDiffuseReflection());
+    cubeShaderProgram->setUniformValue("specularReflection", lightProperties.getSpecularReflection());
+    cubeShaderProgram->setUniformValue("shininess", lightProperties.getShininess());
     cubeShaderProgram->setUniformValue("texture", 0);
 
     graphicCardBuffer.bind();
@@ -107,4 +114,9 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 void DrawableObject::Draw(QOpenGLShaderProgram &shader)
 {
 
+}
+
+LightProperties& DrawableObject::getLightProperties()
+{
+    return lightProperties;
 }

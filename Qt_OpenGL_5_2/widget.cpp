@@ -61,7 +61,7 @@ void Widget::initializeGL()
     spotlightBuffer.release();
 
     skybox.Init(&cubeShaderProgram, ":/Objects/skybox", ":/Textures/skybox");
-    skybox.SpecularReflection = 0;
+    skybox.getLightProperties().setSpecularReflection(0);
 
     light.Position.setZ(2);
 
