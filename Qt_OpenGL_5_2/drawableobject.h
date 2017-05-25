@@ -24,7 +24,7 @@ public:
     ~DrawableObject();
 
     void Init(QOpenGLShaderProgram* shader, OBJModel* model, QString texture);
-    void Logic();
+    void Logic(int deltaTime);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
     void Draw(QOpenGLShaderProgram & shader);
     LightProperties& getLightProperties();

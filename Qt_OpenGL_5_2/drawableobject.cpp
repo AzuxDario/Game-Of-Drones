@@ -61,10 +61,10 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString
     cubeTexture->setMagnificationFilter(QOpenGLTexture::Linear);
 }
 
-void DrawableObject::Logic()
+void DrawableObject::Logic(int deltaTime)
 {
-    position += moveSpeed;
-    rotation += rotationSpeed;
+    position += (moveSpeed * deltaTime);
+    rotation += (rotationSpeed * deltaTime);
 }
 
 void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)

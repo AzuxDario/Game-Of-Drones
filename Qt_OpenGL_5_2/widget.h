@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QOpenGLTexture>
 #include <QTimer>
+#include <QDateTime>
 
 #include "camera.h"
 #include "light.h"
@@ -41,6 +42,8 @@ private:
     OBJManager objManager;
     DrawableObject skybox;
     EnvGenerator envGenerator;
+
+    long int lastFrameTime;
 
 public:
     Widget(QWidget *parent = 0);

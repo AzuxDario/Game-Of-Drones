@@ -2,7 +2,7 @@
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
-
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 }
 
 Widget::~Widget()
@@ -93,7 +93,10 @@ void Widget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    envGenerator.Logic(camera.Position);
+    int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+
+    envGenerator.Logic(camera.Position, deltaTime);
 
     glDisable(GL_CULL_FACE);
     skybox.Draw(camera, light, projectionMatrix);

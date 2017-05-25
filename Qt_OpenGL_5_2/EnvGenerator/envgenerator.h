@@ -14,7 +14,7 @@ public:
     ~EnvGenerator();
 
     void Init(OBJManager* objManager, QOpenGLShaderProgram* shader);
-    void Logic(QVector3D playerPosition);
+    void Logic(QVector3D playerPosition, int deltaTime);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
 private:
