@@ -1,8 +1,8 @@
 #include "drawableobject.h"
 
-DrawableObject::DrawableObject() : cubeTexture(0)
+DrawableObject::DrawableObject() : texture(0)
 {
-    cubeTexture = nullptr;
+    texture = nullptr;
     numberOfVerticles = 0;
 
     lightProperties.setAmbientColor(QColor(32, 32, 32));
@@ -16,10 +16,10 @@ DrawableObject::DrawableObject() : cubeTexture(0)
 
 DrawableObject::~DrawableObject()
 {
-    delete cubeTexture;
+    //delete texture;
 }
 
-void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString texture)
+void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture)
 {
     initializeOpenGLFunctions();
     cubeShaderProgram = shader;
@@ -58,9 +58,9 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString
 
     graphicCardBuffer.release();
 
-    cubeTexture = new QOpenGLTexture(QImage(texture).mirrored());
-    cubeTexture->setMinificationFilter(QOpenGLTexture::Nearest);
-    cubeTexture->setMagnificationFilter(QOpenGLTexture::Linear);
+    this->texture = texture;
+    this->texture->setMinificationFilter(QOpenGLTexture::Nearest);
+    this->texture->setMagnificationFilter(QOpenGLTexture::Linear);
 }
 
 void DrawableObject::Logic(int deltaTime)
@@ -83,7 +83,7 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     normalMatrix = mvMatrix.normalMatrix();
 
     cubeShaderProgram->bind();
-    cubeTexture->bind();
+    texture->bind();
 
     cubeShaderProgram->setUniformValue("mvpMatrix", pMatrix * mvMatrix);
     cubeShaderProgram->setUniformValue("mvMatrix", mvMatrix);
@@ -118,7 +118,7 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->disableAttributeArray("textureCoordinate");
 
     cubeShaderProgram->release();
-    cubeTexture->release();
+    texture->release();
 }
 
 void DrawableObject::Draw(QOpenGLShaderProgram &shader)

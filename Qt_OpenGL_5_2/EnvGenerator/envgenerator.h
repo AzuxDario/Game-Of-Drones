@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "light.h"
 #include "DrawableObject.h"
+#include "TexturesManager/texturesmanager.h"
 
 class EnvGenerator
 {
@@ -13,7 +14,7 @@ public:
     EnvGenerator();
     ~EnvGenerator();
 
-    void Init(OBJManager* objManager, QOpenGLShaderProgram* shader);
+    void Init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
     void Logic(QVector3D playerPosition, int deltaTime);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
@@ -21,6 +22,7 @@ private:
     float GetRandomNumberWithNegatives(float to);
 
     OBJManager* objManager;
+    TexturesManager* texturesManager;
     QOpenGLShaderProgram* shader;
     QVector<DrawableObject*> objects;
 

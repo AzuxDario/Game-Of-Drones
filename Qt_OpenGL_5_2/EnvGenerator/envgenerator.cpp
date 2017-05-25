@@ -3,7 +3,7 @@
 EnvGenerator::EnvGenerator()
 {
     generatorDistance = 50;
-    maxPlanetoidsCount = 50;
+    maxPlanetoidsCount = 400;
     maxPlanetoidsRotationSpeed = 0.05f;
     maxPlanetoidsMoveSpeed = 0.005f;
 }
@@ -18,9 +18,11 @@ EnvGenerator::~EnvGenerator()
     objects.clear();
 }
 
-void EnvGenerator::Init(OBJManager* objManager, QOpenGLShaderProgram* shader)
+void EnvGenerator::Init(OBJManager* objManager, TexturesManager* texturesManager,
+                        QOpenGLShaderProgram* shader)
 {
     this->objManager = objManager;
+    this->texturesManager = texturesManager;
     this->shader = shader;
 }
 
@@ -43,7 +45,7 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
     while(objects.size() < maxPlanetoidsCount)
     {
         DrawableObject* planetoid = new DrawableObject();
-        planetoid->Init(shader, objManager->GetModel(":/Objects/planetoid"), ":/Textures/planetoid-texture");
+        planetoid->Init(shader, objManager->GetModel(":/Objects/planetoid"), texturesManager->GetTexture(":/Textures/planetoid"));
 
         planetoid->GetRotationSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
         planetoid->GetRotationSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));

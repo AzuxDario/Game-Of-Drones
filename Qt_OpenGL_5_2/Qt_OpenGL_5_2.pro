@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     EnvGenerator/envgenerator.cpp \
     OBJManager/objmanager.cpp \
     OBJManager/objmodel.cpp \
-    OBJLoader/objloader.cpp
+    OBJLoader/objloader.cpp \
+    TexturesManager/texturedata.cpp \
+    TexturesManager/texturesmanager.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -37,7 +39,9 @@ HEADERS  += widget.h \
     OBJManager/objmanager.h \
     OBJManager/objmodel.h \
     OBJLoader/facedata.h \
-    OBJLoader/objloader.h
+    OBJLoader/objloader.h \
+    TexturesManager/texturedata.h \
+    TexturesManager/texturesmanager.h
 
 RESOURCES += \
     resources.qrc

@@ -22,10 +22,15 @@ void Widget::initializeGL()
     glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
     glClearColor(0,0,0,0); //Ustawienie koloru tła
 
-    QVector<QString> objectsToLoad;
-    objectsToLoad.push_back(":/Objects/skybox");
-    objectsToLoad.push_back(":/Objects/planetoid");
-    objManager.LoadAll(objectsToLoad);
+    QVector<QString> modelsToLoad;
+    modelsToLoad.push_back(":/Objects/skybox");
+    modelsToLoad.push_back(":/Objects/planetoid");
+    objManager.LoadAll(modelsToLoad);
+
+    QVector<QString> texturesToLoad;
+    texturesToLoad.push_back(":/Textures/skybox");
+    texturesToLoad.push_back(":/Textures/planetoid");
+    texturesManager.LoadAll(texturesToLoad);
 
     //Ładowanie shaderów
     cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/LightningVertexShader");
@@ -36,7 +41,7 @@ void Widget::initializeGL()
     lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/ColoringFragmentShader");
     lightSourceShaderProgram.link();
 
-    envGenerator.Init(&objManager, &cubeShaderProgram);
+    envGenerator.Init(&objManager, &texturesManager, &cubeShaderProgram);
 
     spotlightVertices << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0,  0.5) << QVector3D( 0.5,    0,  0.5) // Front
                       << QVector3D(   0,    1,    0) << QVector3D( 0.5,    0, -0.5) << QVector3D(-0.5,    0, -0.5) // Back
@@ -67,7 +72,8 @@ void Widget::initializeGL()
 
     spotlightBuffer.release();
 
-    skybox.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/skybox"), ":/Textures/skybox");
+    skybox.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/skybox"),
+                                    texturesManager.GetTexture(":/Textures/skybox"));
     skybox.getLightProperties().setSpecularReflection(0);
 
     light.Position.setZ(2);

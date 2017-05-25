@@ -18,6 +18,7 @@
 #include "drawableobject.h"
 #include "game.h"
 #include "EnvGenerator/EnvGenerator.h"
+#include "TexturesManager/texturesmanager.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -40,6 +41,7 @@ private:
     Camera camera;
     Light light;
     OBJManager objManager;
+    TexturesManager texturesManager;
     DrawableObject skybox;
     EnvGenerator envGenerator;
 
