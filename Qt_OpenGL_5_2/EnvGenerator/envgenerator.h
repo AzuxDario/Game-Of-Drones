@@ -18,7 +18,7 @@ public:
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
 private:
-    float GetRandomWithNegatives(float to);
+    float GetRandomNumberWithNegatives(float to);
 
     OBJManager* objManager;
     QOpenGLShaderProgram* shader;

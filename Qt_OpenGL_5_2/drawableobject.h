@@ -13,7 +13,7 @@
 
 #include "camera.h"
 #include "light.h"
-#include "OBJLoader/OBJLoader.h"
+#include "OBJLoader/objloader.h"
 #include "lightproperties.h"
 #include "OBJManager/objmodel.h"
 

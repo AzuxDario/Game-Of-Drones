@@ -1,4 +1,4 @@
-#include "OBJLoader.h"
+#include "objloader.h"
 
 OBJLoader::OBJLoader()
 {
@@ -47,10 +47,10 @@ bool OBJLoader::parse(QString content)
 
             if (!result)
             {
-                VerticesData.clear();
-                NormalsData.clear();
-                TexturesData.clear();
-                FacesData.clear();
+                verticesData.clear();
+                normalsData.clear();
+                textureCoordsData.clear();
+                facesData.clear();
 
                 return false;
             }
@@ -77,7 +77,7 @@ bool OBJLoader::parseVertices(QString line)
     vData.setY(strtod(tokens[2].toUtf8().constData(), &e));
     vData.setZ(strtod(tokens[3].toUtf8().constData(), &e));
 
-    VerticesData.push_back(vData);
+    verticesData.push_back(vData);
 	return true;
 }
 
@@ -93,7 +93,7 @@ bool OBJLoader::parseTextureCoordinates(QString line)
     vData.setX(strtod(tokens[1].toUtf8().constData(), &e));
     vData.setY(strtod(tokens[2].toUtf8().constData(), &e));
 
-    TexturesData.push_back(vData);
+    textureCoordsData.push_back(vData);
 	return true;
 }
 
@@ -110,7 +110,7 @@ bool OBJLoader::parseNormals(QString line)
     vData.setY(strtod(tokens[2].toUtf8().constData(), &e));
     vData.setZ(strtod(tokens[3].toUtf8().constData(), &e));
 
-    NormalsData.push_back(vData);
+    normalsData.push_back(vData);
 	return true;
 }
 
@@ -138,28 +138,45 @@ bool OBJLoader::parseFaces(QString line)
     fData.Textures.setZ(strtod(subTokens[1].toUtf8().constData(), &e));
     fData.Normals.setZ(strtod(subTokens[2].toUtf8().constData(), &e));
 
-    FacesData.push_back(fData);
+    facesData.push_back(fData);
 	return true;
 }
 
 QVector<QString> OBJLoader::splitByChar(QString line, QChar separator)
 {
-    QString tmp = "";
     QVector<QString> result;
 
-	for (int i = 0; i <= line.size(); i++)
-	{
-		if (line[i] == separator || i == line.size())
-		{
-			if (tmp != "")
-			{
-				result.push_back(tmp);
-				tmp = "";
-			}
-		}
-		else
-			tmp += line[i];
-	}
+    QString expression = "(";
+    expression += separator;
+    expression += ")";
+
+    QRegExp regexExpression(expression);
+    QStringList lines = line.split(regexExpression);
+
+    for(int i=0; i<lines.size(); i++)
+    {
+        result.push_back(lines[i]);
+    }
 
 	return result;
+}
+
+QVector<QVector3D> OBJLoader::GetVerticesData()
+{
+    return verticesData;
+}
+
+QVector<QVector3D> OBJLoader::GetNormalsData()
+{
+    return normalsData;
+}
+
+QVector<QVector2D> OBJLoader::GetTextureCoordsData()
+{
+    return textureCoordsData;
+}
+
+QVector<FaceData> OBJLoader::GetFacesData()
+{
+    return facesData;
 }

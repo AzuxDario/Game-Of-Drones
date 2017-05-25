@@ -1,7 +1,7 @@
 #ifndef OBJMODEL_H
 #define OBJMODEL_H
 
-#include "OBJLoader/OBJLoader.h"
+#include "OBJLoader/objloader.h"
 
 class OBJModel
 {

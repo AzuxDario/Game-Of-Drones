@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QTextStream>
 
-#include "FaceData.h"
+#include "facedata.h"
 
 using namespace std;
 
@@ -20,10 +20,10 @@ public:
 
     bool LoadFromFile(QString fileName);
 
-    QVector<QVector3D> VerticesData;
-    QVector<QVector3D> NormalsData;
-    QVector<QVector2D> TexturesData;
-    vector<FaceData> FacesData;
+    QVector<QVector3D> GetVerticesData();
+    QVector<QVector3D> GetNormalsData();
+    QVector<QVector2D> GetTextureCoordsData();
+    QVector<FaceData> GetFacesData();
 private:
     QVector<QString> splitByChar(QString line, QChar separator);
 
@@ -32,4 +32,9 @@ private:
     bool parseTextureCoordinates(QString line);
     bool parseNormals(QString line);
     bool parseFaces(QString line);
+
+    QVector<QVector3D> verticesData;
+    QVector<QVector3D> normalsData;
+    QVector<QVector2D> textureCoordsData;
+    QVector<FaceData> facesData;
 };

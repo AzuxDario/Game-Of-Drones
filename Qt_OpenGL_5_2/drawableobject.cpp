@@ -25,21 +25,23 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString
     cubeShaderProgram = shader;
 
     OBJLoader data = model->GetData();
-    for(unsigned int i=0; i<data.FacesData.size(); i++)
+    int facesCount = data.GetFacesData().size();
+
+    for(unsigned int i=0; i<facesCount; i++)
     {
-        FaceData face = data.FacesData.at(i);
+        FaceData face = data.GetFacesData().at(i);
 
-        verticesData << data.VerticesData.at(face.Vertices.x() - 1)
-                     << data.VerticesData.at(face.Vertices.y() - 1)
-                     << data.VerticesData.at(face.Vertices.z() - 1);
+        verticesData << data.GetVerticesData().at(face.Vertices.x() - 1)
+                     << data.GetVerticesData().at(face.Vertices.y() - 1)
+                     << data.GetVerticesData().at(face.Vertices.z() - 1);
 
-        normalsData << data.NormalsData.at(face.Normals.x() - 1)
-                    << data.NormalsData.at(face.Normals.y() - 1)
-                    << data.NormalsData.at(face.Normals.z() - 1);
+        normalsData << data.GetNormalsData().at(face.Normals.x() - 1)
+                    << data.GetNormalsData().at(face.Normals.y() - 1)
+                    << data.GetNormalsData().at(face.Normals.z() - 1);
 
-        textureCoordsData << data.TexturesData.at(face.Textures.x() - 1)
-                          << data.TexturesData.at(face.Textures.y() - 1)
-                          << data.TexturesData.at(face.Textures.z() - 1);
+        textureCoordsData << data.GetTextureCoordsData().at(face.Textures.x() - 1)
+                          << data.GetTextureCoordsData().at(face.Textures.y() - 1)
+                          << data.GetTextureCoordsData().at(face.Textures.z() - 1);
     }
     numberOfVerticles = verticesData.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
 
