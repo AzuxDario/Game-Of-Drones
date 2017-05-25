@@ -58,7 +58,7 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
 
         while(planetoid->GetPosition().distanceToPoint(playerPosition) < generatorDistance)
         {
-            planetoid->GetPosition() *= 2;
+            planetoid->GetPosition() *= 1.1f;
         }
 
         objects.push_back(planetoid);
