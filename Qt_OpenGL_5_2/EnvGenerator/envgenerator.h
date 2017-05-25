@@ -5,6 +5,7 @@
 #include "OBJManager/objmanager.h"
 #include "camera.h"
 #include "light.h"
+#include "DrawableObject.h"
 
 class EnvGenerator
 {
@@ -18,6 +19,8 @@ public:
 private:
     OBJManager* objManager;
     QOpenGLShaderProgram* shader;
+
+    QVector<DrawableObject> objects;
 };
 
 #endif // ENVGENERATOR_H

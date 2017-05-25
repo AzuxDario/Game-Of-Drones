@@ -14,43 +14,40 @@ DrawableObject::DrawableObject() : cubeTexture(0)
     lightProperties.setShininess(100);
 }
 
-void DrawableObject::Init(QOpenGLShaderProgram* shader, QString objFile, QString texture)
+void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString texture)
 {
     initializeOpenGLFunctions();
-
-    if(!objLoader.LoadFromFile(objFile))
-        return;
-
     cubeShaderProgram = shader;
 
-    for(unsigned int i=0; i<objLoader.FacesData.size(); i++)
+    OBJLoader data = model->GetData();
+    for(unsigned int i=0; i<data.FacesData.size(); i++)
     {
-        FaceData face = objLoader.FacesData.at(i);
+        FaceData face = data.FacesData.at(i);
 
-        cubeVertices << objLoader.VerticesData.at(face.Vertices.x() - 1)
-                     << objLoader.VerticesData.at(face.Vertices.y() - 1)
-                     << objLoader.VerticesData.at(face.Vertices.z() - 1);
+        verticesData << data.VerticesData.at(face.Vertices.x() - 1)
+                     << data.VerticesData.at(face.Vertices.y() - 1)
+                     << data.VerticesData.at(face.Vertices.z() - 1);
 
-        cubeNormals << objLoader.NormalsData.at(face.Normals.x() - 1)
-                    << objLoader.NormalsData.at(face.Normals.y() - 1)
-                    << objLoader.NormalsData.at(face.Normals.z() - 1);
+        normalsData << data.NormalsData.at(face.Normals.x() - 1)
+                    << data.NormalsData.at(face.Normals.y() - 1)
+                    << data.NormalsData.at(face.Normals.z() - 1);
 
-        textureCoords << objLoader.TexturesData.at(face.Textures.x() - 1)
-                       << objLoader.TexturesData.at(face.Textures.y() - 1)
-                       << objLoader.TexturesData.at(face.Textures.z() - 1);
+        textureCoordsData << data.TexturesData.at(face.Textures.x() - 1)
+                          << data.TexturesData.at(face.Textures.y() - 1)
+                          << data.TexturesData.at(face.Textures.z() - 1);
     }
-    numberOfVerticles = cubeVertices.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
+    numberOfVerticles = verticesData.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
 
     graphicCardBuffer.create();
     graphicCardBuffer.bind();
     graphicCardBuffer.allocate(numberOfVerticles * (3 + 3 + 2) * sizeof(GLfloat));
 
     int offset = 0;
-    graphicCardBuffer.write(offset, cubeVertices.constData(), numberOfVerticles * 3 * sizeof(GLfloat));
+    graphicCardBuffer.write(offset, verticesData.constData(), numberOfVerticles * 3 * sizeof(GLfloat));
     offset += numberOfVerticles * 3 * sizeof(GLfloat);
-    graphicCardBuffer.write(offset, cubeNormals.constData(), numberOfVerticles * 3 * sizeof(GLfloat));
+    graphicCardBuffer.write(offset, normalsData.constData(), numberOfVerticles * 3 * sizeof(GLfloat));
     offset += numberOfVerticles * 3 * sizeof(GLfloat);
-    graphicCardBuffer.write(offset, textureCoords.constData(), numberOfVerticles * 2 * sizeof(GLfloat));
+    graphicCardBuffer.write(offset, textureCoordsData.constData(), numberOfVerticles * 2 * sizeof(GLfloat));
 
     graphicCardBuffer.release();
 

@@ -65,7 +65,7 @@ void Widget::initializeGL()
 
     spotlightBuffer.release();
 
-    skybox.Init(&cubeShaderProgram, ":/Objects/skybox", ":/Textures/skybox");
+    skybox.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/skybox"), ":/Textures/skybox");
     skybox.getLightProperties().setSpecularReflection(0);
 
     light.Position.setZ(2);
@@ -88,7 +88,6 @@ void Widget::resizeGL(int width, int height)
 void Widget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
     glDisable(GL_CULL_FACE);
     skybox.Draw(camera, light, projectionMatrix);
