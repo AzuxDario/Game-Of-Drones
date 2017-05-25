@@ -22,6 +22,11 @@ void Widget::initializeGL()
     glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
     glClearColor(0,0,0,0); //Ustawienie koloru tła
 
+    QVector<QString> objectsToLoad;
+    objectsToLoad.push_back(":/Objects/skybox");
+    objectsToLoad.push_back(":/Objects/planetoid");
+    objManager.LoadAll(objectsToLoad);
+
     //Ładowanie shaderów
     cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/LightningVertexShader");
     cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/LightningFragmentShader");

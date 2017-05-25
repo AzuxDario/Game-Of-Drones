@@ -13,6 +13,7 @@
 
 #include "camera.h"
 #include "light.h"
+#include "OBJManager/objmanager.h"
 #include "drawableobject.h"
 #include "game.h"
 
@@ -35,6 +36,7 @@ private:
 
     Camera camera;
     Light light;
+    OBJManager objManager;
     DrawableObject skybox;
 
 public:

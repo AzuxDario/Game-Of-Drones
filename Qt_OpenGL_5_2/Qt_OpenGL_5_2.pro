@@ -21,7 +21,10 @@ SOURCES += main.cpp\
     OBJLoader/OBJLoader.cpp \
     movableobject.cpp \
     game.cpp \
-    lightproperties.cpp
+    lightproperties.cpp \
+    EnvGenerator/envgenerator.cpp \
+    OBJManager/objmanager.cpp \
+    OBJManager/objmodel.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -31,7 +34,10 @@ HEADERS  += widget.h \
     OBJLoader/OBJLoader.h \
     movableobject.h \
     game.h \
-    lightproperties.h
+    lightproperties.h \
+    EnvGenerator/envgenerator.h \
+    OBJManager/objmanager.h \
+    OBJManager/objmodel.h
 
 RESOURCES += \
     resources.qrc

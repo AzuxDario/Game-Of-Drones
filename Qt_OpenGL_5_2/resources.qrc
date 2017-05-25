@@ -9,8 +9,10 @@
     </qresource>
     <qresource prefix="/Objects">
         <file alias="skybox">Content/skybox.obj</file>
+        <file alias="planetoid">Content/planetoid.obj</file>
     </qresource>
     <qresource prefix="/Textures">
         <file alias="skybox">Content/skybox.png</file>
+        <file alias="planetoid-texture">Content/planetoid-texture.png</file>
     </qresource>
 </RCC>
