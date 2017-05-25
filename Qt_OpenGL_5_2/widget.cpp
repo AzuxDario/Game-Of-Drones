@@ -72,6 +72,9 @@ void Widget::initializeGL()
 
     light.Position.setZ(2);
 
+    paintTimer.setInterval(20);
+    connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
+    paintTimer.start(10);
     //Game::Current = Game(); //Skoro w klasie Game jest obiekt statyczny to odwołujemy się do niego przez operator zasięgu ::
 }
 
@@ -159,7 +162,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
         }
         camera.Rotation.setX(cameraRotX);
 
-        update();
+        //update();
     }
     lastMousePosition = event->pos();
     event->accept();
@@ -179,7 +182,7 @@ void Widget::wheelEvent(QWheelEvent *event)
             camera.Distance *= 0.9;
         }
 
-        update();
+        //update();
     }
 
     event->accept();

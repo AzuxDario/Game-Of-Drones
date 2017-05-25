@@ -34,6 +34,7 @@ private:
     QOpenGLBuffer spotlightBuffer;
 
     QPoint lastMousePosition;
+    QTimer paintTimer;
 
     Camera camera;
     Light light;

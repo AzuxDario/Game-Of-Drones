@@ -56,15 +56,21 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString
     cubeTexture->setMagnificationFilter(QOpenGLTexture::Linear);
 }
 
+void DrawableObject::Logic()
+{
+    position += positionSpeed;
+    rotation += rotationSpeed;
+}
+
 void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 {
     QMatrix4x4 vMatrix = camera.GetMatrix();
     QMatrix4x4 mvMatrix = vMatrix;
 
-    mvMatrix.translate(Position.x(), Position.y(), Position.z());
-    mvMatrix.rotate(Rotation.x(), 1, 0, 0);
-    mvMatrix.rotate(Rotation.y(), 0, 1, 0);
-    mvMatrix.rotate(Rotation.z(), 0, 0, 1);
+    mvMatrix.translate(position.x(), position.y(), position.z());
+    mvMatrix.rotate(rotation.x(), 1, 0, 0);
+    mvMatrix.rotate(rotation.y(), 0, 1, 0);
+    mvMatrix.rotate(rotation.z(), 0, 0, 1);
 
     QMatrix3x3 normalMatrix;
     normalMatrix = mvMatrix.normalMatrix();
@@ -116,4 +122,24 @@ void DrawableObject::Draw(QOpenGLShaderProgram &shader)
 LightProperties& DrawableObject::getLightProperties()
 {
     return lightProperties;
+}
+
+QVector3D& DrawableObject::GetPosition()
+{
+    return position;
+}
+
+QVector3D& DrawableObject::GetRotation()
+{
+    return rotation;
+}
+
+QVector3D& DrawableObject::GetPositionSpeed()
+{
+    return positionSpeed;
+}
+
+QVector3D& DrawableObject::GetRotationSpeed()
+{
+    return rotationSpeed;
 }

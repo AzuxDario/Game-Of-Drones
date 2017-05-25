@@ -22,12 +22,18 @@ void EnvGenerator::Init(OBJManager* objManager, QOpenGLShaderProgram* shader)
 
     DrawableObject* test = new DrawableObject();
     test->Init(shader, objManager->GetModel(":/Objects/planetoid"), ":/Textures/planetoid-texture");
+    test->GetRotationSpeed().setX(1);
+    test->GetRotationSpeed().setY(3);
+    test->GetRotationSpeed().setZ(2);
     objects.push_back(test);
 }
 
 void EnvGenerator::Logic()
 {
-
+    for(int i=0; i<objects.size(); i++)
+    {
+        objects[i]->Logic();
+    }
 }
 
 void EnvGenerator::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)

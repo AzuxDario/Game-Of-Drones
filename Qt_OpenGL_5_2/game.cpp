@@ -26,6 +26,6 @@ void Game::Move()
 {
     for (int i = 0; i < MovableObjects.size();i++)
     {
-        MovableObjects[i].Position += MovableObjects[i].Motion;
+        //MovableObjects[i].Position += MovableObjects[i].Motion;
     }
 }
