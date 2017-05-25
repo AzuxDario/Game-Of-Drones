@@ -14,14 +14,20 @@ public:
     ~EnvGenerator();
 
     void Init(OBJManager* objManager, QOpenGLShaderProgram* shader);
-    void Logic();
+    void Logic(QVector3D playerPosition);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
 private:
+    float GetRandomWithNegatives(float to);
+
     OBJManager* objManager;
     QOpenGLShaderProgram* shader;
-
     QVector<DrawableObject*> objects;
+
+    int generatorDistance;
+    int maxPlanetoidsCount;
+    float maxPlanetoidsRotationSpeed;
+    float maxPlanetoidsMoveSpeed;
 };
 
 #endif // ENVGENERATOR_H

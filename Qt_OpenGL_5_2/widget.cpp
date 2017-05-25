@@ -72,9 +72,8 @@ void Widget::initializeGL()
 
     light.Position.setZ(2);
 
-    paintTimer.setInterval(20);
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
-    paintTimer.start(10);
+    paintTimer.start(15);
     //Game::Current = Game(); //Skoro w klasie Game jest obiekt statyczny to odwołujemy się do niego przez operator zasięgu ::
 }
 
@@ -94,7 +93,7 @@ void Widget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    envGenerator.Logic();
+    envGenerator.Logic(camera.Position);
 
     glDisable(GL_CULL_FACE);
     skybox.Draw(camera, light, projectionMatrix);

@@ -21,6 +21,8 @@ class DrawableObject : protected QOpenGLFunctions
 {
 public:
     DrawableObject();
+    ~DrawableObject();
+
     void Init(QOpenGLShaderProgram* shader, OBJModel* model, QString texture);
     void Logic();
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
@@ -30,13 +32,13 @@ public:
     QVector3D& GetPosition();
     QVector3D& GetRotation();
 
-    QVector3D& GetPositionSpeed();
+    QVector3D& GetMoveSpeed();
     QVector3D& GetRotationSpeed();
 private:
     QVector3D position;
     QVector3D rotation;
 
-    QVector3D positionSpeed;
+    QVector3D moveSpeed;
     QVector3D rotationSpeed;
 
     QMatrix4x4 pMatrix;

@@ -14,6 +14,11 @@ DrawableObject::DrawableObject() : cubeTexture(0)
     lightProperties.setShininess(100);
 }
 
+DrawableObject::~DrawableObject()
+{
+    delete cubeTexture;
+}
+
 void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString texture)
 {
     initializeOpenGLFunctions();
@@ -58,7 +63,7 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QString
 
 void DrawableObject::Logic()
 {
-    position += positionSpeed;
+    position += moveSpeed;
     rotation += rotationSpeed;
 }
 
@@ -134,9 +139,9 @@ QVector3D& DrawableObject::GetRotation()
     return rotation;
 }
 
-QVector3D& DrawableObject::GetPositionSpeed()
+QVector3D& DrawableObject::GetMoveSpeed()
 {
-    return positionSpeed;
+    return moveSpeed;
 }
 
 QVector3D& DrawableObject::GetRotationSpeed()
