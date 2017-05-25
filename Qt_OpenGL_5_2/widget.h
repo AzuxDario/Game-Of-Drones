@@ -16,6 +16,7 @@
 #include "OBJManager/objmanager.h"
 #include "drawableobject.h"
 #include "game.h"
+#include "EnvGenerator/EnvGenerator.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -38,6 +39,7 @@ private:
     Light light;
     OBJManager objManager;
     DrawableObject skybox;
+    EnvGenerator envGenerator;
 
 public:
     Widget(QWidget *parent = 0);

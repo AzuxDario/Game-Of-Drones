@@ -36,6 +36,8 @@ void Widget::initializeGL()
     lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/ColoringFragmentShader");
     lightSourceShaderProgram.link();
 
+    envGenerator.Init(&objManager, &cubeShaderProgram);
+
     spotlightVertices << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0,  0.5) << QVector3D( 0.5,    0,  0.5) // Front
                       << QVector3D(   0,    1,    0) << QVector3D( 0.5,    0, -0.5) << QVector3D(-0.5,    0, -0.5) // Back
                       << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0, -0.5) << QVector3D(-0.5,    0,  0.5) // Left
@@ -89,9 +91,13 @@ void Widget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    envGenerator.Logic();
+
     glDisable(GL_CULL_FACE);
     skybox.Draw(camera, light, projectionMatrix);
     glEnable(GL_CULL_FACE);
+
+    envGenerator.Draw(camera, light, projectionMatrix);
 
     QMatrix4x4 modelMatrix = light.GetMatrix();
 

@@ -11,6 +11,7 @@ class EnvGenerator
 {
 public:
     EnvGenerator();
+    ~EnvGenerator();
 
     void Init(OBJManager* objManager, QOpenGLShaderProgram* shader);
     void Logic();
@@ -20,7 +21,7 @@ private:
     OBJManager* objManager;
     QOpenGLShaderProgram* shader;
 
-    QVector<DrawableObject> objects;
+    QVector<DrawableObject*> objects;
 };
 
 #endif // ENVGENERATOR_H
