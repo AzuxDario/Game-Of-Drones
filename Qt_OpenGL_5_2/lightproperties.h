@@ -3,7 +3,7 @@
 
 #include <QColor>
 
-using GLFloat = float; //Nie wiem w jakim pliku nagłówkowym to jest więc sam stoworzyłem
+using GLFloat = float; //Nie wiem w jakim pliku nagłówkowym to jest więc sam stworzyłem
 
 class LightProperties
 {

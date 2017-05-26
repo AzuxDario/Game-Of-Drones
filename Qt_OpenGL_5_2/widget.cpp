@@ -60,7 +60,7 @@ void Widget::initializeGL()
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.GetRotationSpeed().setY(0.007f);
 
-    light.Position.setZ(2);
+    light.getPosition().setZ(2);
 
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     paintTimer.setTimerType(Qt::PreciseTimer);

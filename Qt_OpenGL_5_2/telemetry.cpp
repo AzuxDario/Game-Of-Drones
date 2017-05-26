@@ -20,7 +20,3 @@ void Telemetry::Logic()
     currentFPS++;
 }
 
-int Telemetry::GetFPS()
-{
-    return lastFPS;
-}

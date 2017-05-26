@@ -100,7 +100,7 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->setUniformValue("mvpMatrix", pMatrix * mvMatrix);
     cubeShaderProgram->setUniformValue("mvMatrix", mvMatrix);
     cubeShaderProgram->setUniformValue("normalMatrix", normalMatrix);
-    cubeShaderProgram->setUniformValue("lightPosition", vMatrix * light.Position);
+    cubeShaderProgram->setUniformValue("lightPosition", vMatrix * light.getPosition());
 
     cubeShaderProgram->setUniformValue("ambientColor", lightProperties.getAmbientColor());
     cubeShaderProgram->setUniformValue("diffuseColor", lightProperties.getDiffuseColor());

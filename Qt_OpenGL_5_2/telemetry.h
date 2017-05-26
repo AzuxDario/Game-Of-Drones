@@ -5,15 +5,16 @@
 
 class Telemetry
 {
-public:
-    Telemetry();
-
-    void Logic();
-    int GetFPS();
 private:
     int currentFPS;
     int lastFPS;
     int lastUpdate;
+
+public:
+    Telemetry();
+
+    void Logic();
+    int GetFPS() noexcept {return lastFPS;}
 };
 
 #endif // TELEMETRY_H
