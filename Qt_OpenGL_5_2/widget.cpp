@@ -3,6 +3,9 @@
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+    fpsCounterLabel = new QLabel("FPS: infinity",this);
+    fpsCounterLabel->setStyleSheet("color:white;margin:10px;");
+
 }
 
 Widget::~Widget()
