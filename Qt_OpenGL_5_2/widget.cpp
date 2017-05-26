@@ -63,6 +63,7 @@ void Widget::initializeGL()
     light.Position.setZ(2);
 
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
+    paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(15);
 }
 
