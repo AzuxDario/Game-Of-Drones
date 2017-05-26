@@ -47,6 +47,7 @@ void Widget::initializeGL()
 
     skybox.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/skybox"),
                                     texturesManager.GetTexture(":/Textures/skybox"));
+    skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
 
     star.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/star"),
