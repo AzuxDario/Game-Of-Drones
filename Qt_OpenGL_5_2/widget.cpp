@@ -75,21 +75,25 @@ void Widget::resizeGL(int width, int height)
 
 void Widget::paintGL()
 {
+    logic();
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
-    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
-
-    envGenerator.Logic(camera.Position, deltaTime);
 
     glDisable(GL_CULL_FACE);
     skybox.Draw(camera, light, projectionMatrix);
     glEnable(GL_CULL_FACE);
 
     envGenerator.Draw(camera, light, projectionMatrix);
-
-    star.Logic(deltaTime);
     star.Draw(camera, light, projectionMatrix);
+}
+
+void Widget::logic()
+{
+    int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+
+    envGenerator.Logic(camera.Position, deltaTime);
+    star.Logic(deltaTime);
 }
 
 void Widget::mousePressEvent(QMouseEvent *event)
