@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QLabel>
+#include <QGridLayout>
 #include <QApplication>
 
 #include "camera.h"
@@ -41,7 +42,10 @@ private:
     Light light;
     Telemetry telemetry;
     Game game;
+    QGridLayout* gridLayout;
     QLabel *fpsCounterLabel;
+    QLabel *timer;
+    QLabel *dummy;
 
 public:
     Widget(QWidget *parent = 0);

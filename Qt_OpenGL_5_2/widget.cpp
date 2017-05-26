@@ -2,10 +2,24 @@
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
-    fpsCounterLabel = new QLabel("FPS: 00",this);
+    fpsCounterLabel = new QLabel("FPS: 00");
     fpsCounterLabel->setStyleSheet("color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;");
     fpsCounterLabel->setMinimumWidth(100);
+    fpsCounterLabel->setMaximumSize(100,50);
     fpsCounterLabel->setAlignment(Qt::AlignLeft);
+    timer = new QLabel("00:00:00");
+    timer->setStyleSheet("color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;");
+    timer->setMinimumWidth(100);
+    timer->setMaximumSize(100,50);
+    timer->setAlignment(Qt::AlignRight);
+    dummy = new QLabel();
+    gridLayout = new QGridLayout(this);
+    gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop);
+    gridLayout->addWidget(timer,0,2,Qt::AlignTop);
+    gridLayout->addWidget(dummy,2,1,Qt::AlignBottom);
+    gridLayout->setColumnStretch(0,0.1);
+    gridLayout->setColumnStretch(1,1.8);
+    gridLayout->setColumnStretch(2,0.1);
 
 }
 
