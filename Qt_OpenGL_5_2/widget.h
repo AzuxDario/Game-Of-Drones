@@ -11,6 +11,7 @@
 #include <QOpenGLTexture>
 #include <QTimer>
 #include <QDateTime>
+#include <QLabel>
 
 #include "camera.h"
 #include "light.h"
@@ -45,6 +46,7 @@ private:
 
     DrawableObject skybox;
     DrawableObject star;
+    QLabel *fpsCounterLabel;
 
     long int lastFrameTime;
 
