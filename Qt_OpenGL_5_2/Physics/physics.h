@@ -3,10 +3,14 @@
 
 #include <QVector>
 
+#include "DrawableObject.h"
+
 class Physics
 {
 public:
     Physics();
+
+    QVector<DrawableObject*> CheckCollisions(DrawableObject* base, QVector<DrawableObject*> objects);
 
 private:
 };

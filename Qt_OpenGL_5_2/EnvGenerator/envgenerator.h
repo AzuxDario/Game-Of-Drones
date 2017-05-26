@@ -18,6 +18,9 @@ public:
     void Logic(QVector3D playerPosition, int deltaTime);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
+    QVector<DrawableObject*> GetObjects();
+    void RemoveObject(DrawableObject* object);
+    void RemoveObjects(QVector<DrawableObject*> objectsToRemove);
 private:
     float GetRandomNumberWithNegatives(float to);
 

@@ -92,6 +92,8 @@ void Widget::logic()
     int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 
+    envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
+
     envGenerator.Logic(camera.Position, deltaTime);
     star.Logic(deltaTime);
 }

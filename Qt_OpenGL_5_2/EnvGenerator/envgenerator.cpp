@@ -81,3 +81,39 @@ float EnvGenerator::GetRandomNumberWithNegatives(float to)
     int sign = 2 * (rand() % 2) - 1;
     return sign * (float)rand() / (float)(RAND_MAX / to);
 }
+
+QVector<DrawableObject*> EnvGenerator::GetObjects()
+{
+    return objects;
+}
+
+void EnvGenerator::RemoveObject(DrawableObject* object)
+{
+    for(int i=0; i<objects.size(); i++)
+    {
+        if(objects[i] == object)
+        {
+            delete objects[i];
+            objects.remove(i);
+
+            break;
+        }
+    }
+}
+
+void EnvGenerator::RemoveObjects(QVector<DrawableObject*> objectsToRemove)
+{
+    for(int i=0; i<objects.size(); i++)
+    {
+        for(int q=0; q<objectsToRemove.size(); q++)
+        {
+            if(objects[i] == objectsToRemove[q])
+            {
+                delete objects[i];
+                objects.remove(i);
+
+                break;
+            }
+        }
+    }
+}
