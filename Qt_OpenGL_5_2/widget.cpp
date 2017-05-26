@@ -45,35 +45,6 @@ void Widget::initializeGL()
 
     envGenerator.Init(&objManager, &texturesManager, &cubeShaderProgram);
 
-    spotlightVertices << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0,  0.5) << QVector3D( 0.5,    0,  0.5) // Front
-                      << QVector3D(   0,    1,    0) << QVector3D( 0.5,    0, -0.5) << QVector3D(-0.5,    0, -0.5) // Back
-                      << QVector3D(   0,    1,    0) << QVector3D(-0.5,    0, -0.5) << QVector3D(-0.5,    0,  0.5) // Left
-                      << QVector3D(   0,    1,    0) << QVector3D( 0.5,    0,  0.5) << QVector3D( 0.5,    0, -0.5) // Right
-                      << QVector3D(-0.5,    0, -0.5) << QVector3D( 0.5,    0, -0.5) << QVector3D( 0.5,    0,  0.5) // Bottom
-                      << QVector3D( 0.5,    0,  0.5) << QVector3D(-0.5,    0,  0.5) << QVector3D(-0.5,    0, -0.5);
-
-    spotlightColors << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) // Front
-                    << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) // Back
-                    << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) // Left
-                    << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) << QVector3D(0.2, 0.2, 0.2) // Right
-                    << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1) // Bottom
-                    << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1) << QVector3D(  1,   1,   1);
-
-
-    //Przekazwyanie źródła światła do karty graficznej
-    numSpotlightVertices = 18;
-
-    spotlightBuffer.create();
-    spotlightBuffer.bind();
-    spotlightBuffer.allocate(numSpotlightVertices * (3 + 3) * sizeof(GLfloat));
-
-    int offset = 0;
-    spotlightBuffer.write(offset, spotlightVertices.constData(), numSpotlightVertices * 3 * sizeof(GLfloat));
-    offset += numSpotlightVertices * 3 * sizeof(GLfloat);
-    spotlightBuffer.write(offset, spotlightColors.constData(), numSpotlightVertices * 3 * sizeof(GLfloat));
-
-    spotlightBuffer.release();
-
     skybox.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/skybox"),
                                     texturesManager.GetTexture(":/Textures/skybox"));
     skybox.getLightProperties().setSpecularReflection(0);
@@ -119,27 +90,6 @@ void Widget::paintGL()
 
     star.Logic(deltaTime);
     star.Draw(camera, light, projectionMatrix);
-
-    QMatrix4x4 modelMatrix = light.GetMatrix();
-
-    lightSourceShaderProgram.bind();
-    lightSourceShaderProgram.setUniformValue("mvpMatrix", projectionMatrix * camera.GetMatrix() * modelMatrix); //mvpMatrix = projection * view * model
-
-    spotlightBuffer.bind();
-    int offset = 0;
-
-    lightSourceShaderProgram.setAttributeBuffer("vertex", GL_FLOAT, offset, 3, 0);
-    lightSourceShaderProgram.enableAttributeArray("vertex");
-    offset += numSpotlightVertices * 3 * sizeof(GLfloat);
-    lightSourceShaderProgram.setAttributeBuffer("color", GL_FLOAT, offset, 3, 0);
-    lightSourceShaderProgram.enableAttributeArray("color");
-    spotlightBuffer.release();
-
-    glDrawArrays(GL_TRIANGLES, 0, spotlightVertices.size());
-
-    lightSourceShaderProgram.disableAttributeArray("vertex");
-    lightSourceShaderProgram.disableAttributeArray("color");
-    lightSourceShaderProgram.release();
 }
 
 void Widget::mousePressEvent(QMouseEvent *event)

@@ -29,11 +29,6 @@ private:
 
     QOpenGLShaderProgram cubeShaderProgram;
     QOpenGLShaderProgram lightSourceShaderProgram;
-    QVector<QVector3D> spotlightVertices;
-    QVector<QVector3D> spotlightColors;
-
-    int numSpotlightVertices;
-    QOpenGLBuffer spotlightBuffer;
 
     QPoint lastMousePosition;
     QTimer paintTimer;
