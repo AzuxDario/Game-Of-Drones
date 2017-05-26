@@ -14,7 +14,8 @@
     </qresource>
     <qresource prefix="/Textures">
         <file alias="skybox">Content/skybox.png</file>
-        <file alias="planetoid">Content/planetoid-texture.png</file>
+        <file alias="planetoids">Content/planetoid-texture.png</file>
         <file alias="star">Content/star-texture.png</file>
+        <file alias="planetoid">Content/Crater_ridge.png</file>
     </qresource>
 </RCC>
