@@ -3,6 +3,8 @@
 Telemetry::Telemetry()
 {
     lastUpdate = QDateTime::currentMSecsSinceEpoch();
+    currentFPS = 0;
+    lastFPS = 0;
 }
 
 void Telemetry::Logic()
