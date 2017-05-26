@@ -32,7 +32,7 @@ private:
     QMatrix4x4 projectionMatrix;
 
     QOpenGLShaderProgram cubeShaderProgram;
-    QOpenGLShaderProgram lightSourceShaderProgram;
+    //QOpenGLShaderProgram lightSourceShaderProgram;
 
     QPoint lastMousePosition;
     QTimer paintTimer;
