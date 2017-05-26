@@ -24,7 +24,7 @@ bool OBJLoader::LoadFromFile(QString fileName)
 
 bool OBJLoader::parse(QString content)
 {
-    QVector<QString> tokens = splitByChar(content, '\n');
+    QVector<QString> tokens = std::move(content.split('\n').toVector());
     for (int i = 0; i < tokens.length(); i++)
 	{
         QString line = tokens.at(i);
@@ -59,14 +59,14 @@ bool OBJLoader::parse(QString content)
         {
             parseFaces(line);
         }
-	}
+    }
 
 	return true;
 }
 
 bool OBJLoader::parseVertices(QString line)
 {
-    QVector<QString> tokens = splitByChar(line, ' ');
+    QVector<QString> tokens = std::move(line.split(' ').toVector());
 	if (tokens.size() < 4)
 		return false;
 
@@ -81,7 +81,7 @@ bool OBJLoader::parseVertices(QString line)
 
 bool OBJLoader::parseTextureCoordinates(QString line)
 {
-    QVector<QString> tokens = splitByChar(line, ' ');
+    QVector<QString> tokens = std::move(line.split(' ').toVector());
 	if (tokens.size() < 3)
 		return false;
 
@@ -95,16 +95,14 @@ bool OBJLoader::parseTextureCoordinates(QString line)
 
 bool OBJLoader::parseNormals(QString line)
 {
-    QVector<QString> tokens = splitByChar(line, ' ');
+    QVector<QString> tokens = std::move(line.split(' ').toVector());
 	if (tokens.size() < 4)
 		return false;
 
-	char *e;
-
     QVector3D vData;
-    vData.setX(strtod(tokens[1].toUtf8().constData(), &e));
-    vData.setY(strtod(tokens[2].toUtf8().constData(), &e));
-    vData.setZ(strtod(tokens[3].toUtf8().constData(), &e));
+    vData.setX(tokens[1].toFloat());
+    vData.setY(tokens[2].toFloat());
+    vData.setZ(tokens[3].toFloat());
 
     normalsData.push_back(vData);
 	return true;
@@ -112,48 +110,29 @@ bool OBJLoader::parseNormals(QString line)
 
 bool OBJLoader::parseFaces(QString line)
 {
-    QVector<QString> tokens = splitByChar(line, ' ');
+    QVector<QString> tokens = std::move(line.split(' ').toVector());
 	if (tokens.size() < 4)
 		return false;
 
 	FaceData fData;
 
-    QVector<QString> subTokens = splitByChar(tokens[1], '/');
+    QVector<QString> subTokens = std::move(tokens[1].split('/').toVector());
     fData.Vertices.setX(subTokens[0].toFloat());
     fData.Textures.setX(subTokens[1].toFloat());
     fData.Normals.setX(subTokens[2].toFloat());
 
-	subTokens = splitByChar(tokens[2], '/');
+    subTokens = std::move(tokens[2].split('/').toVector());
     fData.Vertices.setY(subTokens[0].toFloat());
     fData.Textures.setY(subTokens[1].toFloat());
     fData.Normals.setY(subTokens[2].toFloat());
 
-	subTokens = splitByChar(tokens[3], '/');
+    subTokens = std::move(tokens[3].split('/').toVector());
     fData.Vertices.setZ(subTokens[0].toFloat());
     fData.Textures.setZ(subTokens[1].toFloat());
     fData.Normals.setZ(subTokens[2].toFloat());
 
     facesData.push_back(fData);
 	return true;
-}
-
-QVector<QString> OBJLoader::splitByChar(QString line, QChar separator)
-{
-    QVector<QString> result;
-
-    QString expression = "(";
-    expression += separator;
-    expression += ")";
-
-    QRegExp regexExpression(expression);
-    QStringList lines = line.split(regexExpression);
-
-    for(int i=0; i<lines.size(); i++)
-    {
-        result.push_back(lines[i]);
-    }
-
-	return result;
 }
 
 QVector<QVector3D> OBJLoader::GetVerticesData()

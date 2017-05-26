@@ -25,7 +25,6 @@ public:
     QVector<QVector2D> GetTextureCoordsData();
     QVector<FaceData> GetFacesData();
 private:
-    QVector<QString> splitByChar(QString line, QChar separator);
 
     bool parse(QString content);
     bool parseVertices(QString line);
