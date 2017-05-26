@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     OBJManager/objmodel.cpp \
     OBJLoader/objloader.cpp \
     TexturesManager/texturedata.cpp \
-    TexturesManager/texturesmanager.cpp
+    TexturesManager/texturesmanager.cpp \
+    Physics/physics.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -41,7 +42,8 @@ HEADERS  += widget.h \
     OBJLoader/facedata.h \
     OBJLoader/objloader.h \
     TexturesManager/texturedata.h \
-    TexturesManager/texturesmanager.h
+    TexturesManager/texturesmanager.h \
+    Physics/physics.h
 
 RESOURCES += \
     resources.qrc

@@ -19,6 +19,7 @@
 #include "game.h"
 #include "EnvGenerator/EnvGenerator.h"
 #include "TexturesManager/texturesmanager.h"
+#include "Physics/physics.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -38,6 +39,7 @@ private:
     OBJManager objManager;
     TexturesManager texturesManager;
     EnvGenerator envGenerator;
+    Physics physics;
 
     DrawableObject skybox;
     DrawableObject star;
