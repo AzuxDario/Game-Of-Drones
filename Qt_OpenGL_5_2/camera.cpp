@@ -2,7 +2,7 @@
 
 Camera::Camera()
 {
-    Distance = 2.5;
+    Distance = 25.5;
 }
 
 QMatrix4x4 Camera::GetMatrix()

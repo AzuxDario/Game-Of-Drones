@@ -42,8 +42,10 @@ private:
     Light light;
     OBJManager objManager;
     TexturesManager texturesManager;
-    DrawableObject skybox;
     EnvGenerator envGenerator;
+
+    DrawableObject skybox;
+    DrawableObject star;
 
     long int lastFrameTime;
 

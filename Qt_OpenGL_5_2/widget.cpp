@@ -25,11 +25,13 @@ void Widget::initializeGL()
     QVector<QString> modelsToLoad;
     modelsToLoad.push_back(":/Objects/skybox");
     modelsToLoad.push_back(":/Objects/planetoid");
+    modelsToLoad.push_back(":/Objects/star");
     objManager.LoadAll(modelsToLoad);
 
     QVector<QString> texturesToLoad;
     texturesToLoad.push_back(":/Textures/skybox");
     texturesToLoad.push_back(":/Textures/planetoid");
+    texturesToLoad.push_back(":/Textures/star");
     texturesManager.LoadAll(texturesToLoad);
 
     //Ładowanie shaderów
@@ -76,6 +78,11 @@ void Widget::initializeGL()
                                     texturesManager.GetTexture(":/Textures/skybox"));
     skybox.getLightProperties().setSpecularReflection(0);
 
+    star.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/star"),
+                                  texturesManager.GetTexture(":/Textures/star"));
+    star.getLightProperties().setAmbientColor(255,255,255,0);
+    star.GetRotationSpeed().setY(0.007f);
+
     light.Position.setZ(2);
 
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
@@ -109,6 +116,9 @@ void Widget::paintGL()
     glEnable(GL_CULL_FACE);
 
     envGenerator.Draw(camera, light, projectionMatrix);
+
+    star.Logic(deltaTime);
+    star.Draw(camera, light, projectionMatrix);
 
     QMatrix4x4 modelMatrix = light.GetMatrix();
 
