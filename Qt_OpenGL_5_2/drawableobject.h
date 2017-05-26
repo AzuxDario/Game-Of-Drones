@@ -34,6 +34,9 @@ public:
 
     QVector3D& GetMoveSpeed();
     QVector3D& GetRotationSpeed();
+
+    float GetRadius();
+    void SetRadius(float r);
 private:
     QVector3D position;
     QVector3D rotation;
@@ -52,6 +55,7 @@ private:
     LightProperties lightProperties;
 
     int numberOfVerticles;
+    float radius;
 };
 
 #endif // DRAWABLEOBJECT_H

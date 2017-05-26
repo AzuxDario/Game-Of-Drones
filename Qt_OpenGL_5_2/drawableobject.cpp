@@ -16,7 +16,7 @@ DrawableObject::DrawableObject() : texture(0)
 
 DrawableObject::~DrawableObject()
 {
-    //delete texture;
+
 }
 
 void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture)
@@ -43,6 +43,18 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGL
                           << data.GetTextureCoordsData().at(face.Textures.y() - 1)
                           << data.GetTextureCoordsData().at(face.Textures.z() - 1);
     }
+
+    float max = 0;
+    float min = 0;
+
+    for(int i=0; i<verticesData.size(); i++)
+    {
+        max = qMax(max, qMax(qMax(verticesData[i].x(), verticesData[i].y()), verticesData[i].z()));
+        min = qMin(min, qMin(qMin(verticesData[i].x(), verticesData[i].y()), verticesData[i].z()));
+    }
+
+    radius = qMax(abs(max), abs(min));
+
     numberOfVerticles = verticesData.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
 
     graphicCardBuffer.create();
@@ -149,4 +161,14 @@ QVector3D& DrawableObject::GetMoveSpeed()
 QVector3D& DrawableObject::GetRotationSpeed()
 {
     return rotationSpeed;
+}
+
+float DrawableObject::GetRadius()
+{
+    return radius;
+}
+
+void DrawableObject::SetRadius(float r)
+{
+    radius = r;
 }
