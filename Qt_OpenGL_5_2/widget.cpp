@@ -20,26 +20,26 @@ QSize Widget::sizeHint() const
     return QSize(640, 480);
 }
 
-void Widget::initializeGL()
+void Widget::loadModels()
 {
-    initializeOpenGLFunctions(); //Odpala funkcję OpenGL'a. Bez tego wywala aplikację zanim ją ujrzysz.
-    glEnable(GL_DEPTH_TEST); //Sprawi, że będą wyświetlane tylko te obiekty, które sa bliżej kamery
-    glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
-    glClearColor(0,0,0,0); //Ustawienie koloru tła
-
     QVector<QString> modelsToLoad;
     modelsToLoad.push_back(":/Objects/skybox");
     modelsToLoad.push_back(":/Objects/planetoid");
     modelsToLoad.push_back(":/Objects/star");
     objManager.LoadAll(modelsToLoad);
+}
 
+void Widget::loadTextures()
+{
     QVector<QString> texturesToLoad;
     texturesToLoad.push_back(":/Textures/skybox");
     texturesToLoad.push_back(":/Textures/planetoid");
     texturesToLoad.push_back(":/Textures/star");
     texturesManager.LoadAll(texturesToLoad);
+}
 
-    //Ładowanie shaderów
+void Widget::loadShaders()
+{
     cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/LightningVertexShader");
     cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/LightningFragmentShader");
     cubeShaderProgram.link();
@@ -47,6 +47,18 @@ void Widget::initializeGL()
     lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/ColoringVertexShader");
     lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/ColoringFragmentShader");
     lightSourceShaderProgram.link();
+}
+
+void Widget::initializeGL()
+{
+    initializeOpenGLFunctions(); //Odpala funkcję OpenGL'a. Bez tego wywala aplikację zanim ją ujrzysz.
+    glEnable(GL_DEPTH_TEST); //Sprawi, że będą wyświetlane tylko te obiekty, które sa bliżej kamery
+    glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
+    glClearColor(0,0,0,0); //Ustawienie koloru tła
+
+    loadModels();
+    loadTextures();
+    loadShaders(); //Ładowanie shaderów
 
     envGenerator.Init(&objManager, &texturesManager, &cubeShaderProgram);
 

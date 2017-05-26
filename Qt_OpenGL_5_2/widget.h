@@ -55,7 +55,13 @@ public:
     Widget(QWidget *parent = 0);
     ~Widget();
     QSize sizeHint() const;
+
+public slots:
+
+    void keyPressEvent(QKeyEvent *event);
+
 protected:
+
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
@@ -65,8 +71,12 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
 
-public slots:
-    void keyPressEvent(QKeyEvent *event);
+
+private:
+
+    void loadModels();
+    void loadTextures();
+    void loadShaders();
 };
 
 #endif // WIDGET_H
