@@ -58,7 +58,6 @@ void Widget::initializeGL()
 
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     paintTimer.start(15);
-    //Game::Current = Game(); //Skoro w klasie Game jest obiekt statyczny to odwołujemy się do niego przez operator zasięgu ::
 }
 
 void Widget::resizeGL(int width, int height)

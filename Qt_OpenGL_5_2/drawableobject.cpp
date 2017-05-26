@@ -27,7 +27,7 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGL
     OBJLoader data = model->GetData();
     int facesCount = data.GetFacesData().size();
 
-    for(unsigned int i=0; i<facesCount; i++)
+    for(int i=0; i<facesCount; i++)
     {
         FaceData face = data.GetFacesData().at(i);
 

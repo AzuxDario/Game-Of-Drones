@@ -12,7 +12,6 @@ public:
     QVector<DrawableObject> ImmovableObjects;
     QVector<MovableObject> MovableObjects;
 
-    static Game Current;
     void Draw(QOpenGLShaderProgram & shader);
     //Zmiana pozycji
     void Move();
