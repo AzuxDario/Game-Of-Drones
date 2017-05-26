@@ -70,12 +70,10 @@ bool OBJLoader::parseVertices(QString line)
 	if (tokens.size() < 4)
 		return false;
 
-	char *e;
-
     QVector3D vData;
-    vData.setX(strtod(tokens[1].toUtf8().constData(), &e));
-    vData.setY(strtod(tokens[2].toUtf8().constData(), &e));
-    vData.setZ(strtod(tokens[3].toUtf8().constData(), &e));
+    vData.setX(tokens[1].toFloat());
+    vData.setY(tokens[2].toFloat());
+    vData.setZ(tokens[3].toFloat());
 
     verticesData.push_back(vData);
 	return true;
@@ -87,11 +85,9 @@ bool OBJLoader::parseTextureCoordinates(QString line)
 	if (tokens.size() < 3)
 		return false;
 
-	char *e;
-
     QVector2D vData;
-    vData.setX(strtod(tokens[1].toUtf8().constData(), &e));
-    vData.setY(strtod(tokens[2].toUtf8().constData(), &e));
+    vData.setX(tokens[1].toFloat());
+    vData.setY(tokens[2].toFloat());
 
     textureCoordsData.push_back(vData);
 	return true;
@@ -121,22 +117,21 @@ bool OBJLoader::parseFaces(QString line)
 		return false;
 
 	FaceData fData;
-	char *e;
 
     QVector<QString> subTokens = splitByChar(tokens[1], '/');
-    fData.Vertices.setX(strtod(subTokens[0].toUtf8().constData(), &e));
-    fData.Textures.setX(strtod(subTokens[1].toUtf8().constData(), &e));
-    fData.Normals.setX(strtod(subTokens[2].toUtf8().constData(), &e));
+    fData.Vertices.setX(subTokens[0].toFloat());
+    fData.Textures.setX(subTokens[1].toFloat());
+    fData.Normals.setX(subTokens[2].toFloat());
 
 	subTokens = splitByChar(tokens[2], '/');
-    fData.Vertices.setY(strtod(subTokens[0].toUtf8().constData(), &e));
-    fData.Textures.setY(strtod(subTokens[1].toUtf8().constData(), &e));
-    fData.Normals.setY(strtod(subTokens[2].toUtf8().constData(), &e));
+    fData.Vertices.setY(subTokens[0].toFloat());
+    fData.Textures.setY(subTokens[1].toFloat());
+    fData.Normals.setY(subTokens[2].toFloat());
 
 	subTokens = splitByChar(tokens[3], '/');
-    fData.Vertices.setZ(strtod(subTokens[0].toUtf8().constData(), &e));
-    fData.Textures.setZ(strtod(subTokens[1].toUtf8().constData(), &e));
-    fData.Normals.setZ(strtod(subTokens[2].toUtf8().constData(), &e));
+    fData.Vertices.setZ(subTokens[0].toFloat());
+    fData.Textures.setZ(subTokens[1].toFloat());
+    fData.Normals.setZ(subTokens[2].toFloat());
 
     facesData.push_back(fData);
 	return true;
