@@ -11,12 +11,8 @@ DrawableObject::~DrawableObject()
 
 }
 
-void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture)
+void DrawableObject::getVerticlesData(OBJLoader data)
 {
-    initializeOpenGLFunctions();
-    cubeShaderProgram = shader;
-
-    OBJLoader data = model->GetData();
     int facesCount = data.GetFacesData().size();
 
     for(int i=0; i<facesCount; i++)
@@ -35,7 +31,10 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGL
                           << data.GetTextureCoordsData().at(face.Textures.y() - 1)
                           << data.GetTextureCoordsData().at(face.Textures.z() - 1);
     }
+}
 
+void DrawableObject::calculateRadius()
+{
     float max = 0;
     float min = 0;
 
@@ -46,9 +45,10 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGL
     }
 
     radius = qMax(abs(max), abs(min));
+}
 
-    numberOfVerticles = verticesData.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
-
+void DrawableObject::initializeGraphicBuffer()
+{
     graphicCardBuffer.create();
     graphicCardBuffer.bind();
     graphicCardBuffer.allocate(numberOfVerticles * (3 + 3 + 2) * sizeof(GLfloat));
@@ -61,10 +61,26 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGL
     graphicCardBuffer.write(offset, textureCoordsData.constData(), numberOfVerticles * 2 * sizeof(GLfloat));
 
     graphicCardBuffer.release();
+}
 
+void DrawableObject::assignTexture(QOpenGLTexture* texture)
+{
     this->texture = texture;
     this->texture->setMinificationFilter(QOpenGLTexture::Nearest);
     this->texture->setMagnificationFilter(QOpenGLTexture::Linear);
+}
+
+void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture)
+{
+    initializeOpenGLFunctions();
+
+    cubeShaderProgram = shader;
+    OBJLoader data = model->GetData();
+    getVerticlesData(data);
+    calculateRadius();
+    numberOfVerticles = verticesData.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
+    initializeGraphicBuffer();
+    assignTexture(texture);
 }
 
 void DrawableObject::Logic(int deltaTime)

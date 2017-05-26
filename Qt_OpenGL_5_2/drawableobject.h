@@ -56,6 +56,12 @@ public:
     float getRadius() noexcept {return radius;}
 
     void setRadius(float value) noexcept {radius = value;}
+
+private:
+    void getVerticlesData(OBJLoader data);
+    void calculateRadius();
+    void initializeGraphicBuffer();
+    void assignTexture(QOpenGLTexture* texture);
 };
 
 #endif // DRAWABLEOBJECT_H
