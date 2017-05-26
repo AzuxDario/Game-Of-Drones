@@ -20,6 +20,7 @@
 #include "EnvGenerator/EnvGenerator.h"
 #include "TexturesManager/texturesmanager.h"
 #include "Physics/physics.h"
+#include "telemetry.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -40,6 +41,7 @@ private:
     TexturesManager texturesManager;
     EnvGenerator envGenerator;
     Physics physics;
+    Telemetry telemetry;
 
     DrawableObject skybox;
     DrawableObject star;

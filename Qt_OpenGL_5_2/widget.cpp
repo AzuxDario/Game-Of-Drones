@@ -96,6 +96,8 @@ void Widget::logic()
 
     envGenerator.Logic(camera.Position, deltaTime);
     star.Logic(deltaTime);
+
+    telemetry.Logic();
 }
 
 void Widget::mousePressEvent(QMouseEvent *event)
