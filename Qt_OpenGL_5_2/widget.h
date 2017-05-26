@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QLabel>
+#include <QApplication>
 
 #include "camera.h"
 #include "light.h"

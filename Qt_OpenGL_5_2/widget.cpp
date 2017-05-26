@@ -172,5 +172,8 @@ void Widget::wheelEvent(QWheelEvent *event)
 
 void Widget::keyPressEvent(QKeyEvent *event)
 {
-
+    if(event->key() == Qt::Key_Escape)
+    {
+        QApplication::quit();
+    }
 }
