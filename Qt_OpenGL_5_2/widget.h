@@ -44,7 +44,7 @@ private:
     EnvGenerator envGenerator;
     Physics physics;
     Telemetry telemetry;
-
+    Game game;
     DrawableObject skybox;
     DrawableObject star;
     QLabel *fpsCounterLabel;
@@ -77,6 +77,7 @@ private:
     void loadModels();
     void loadTextures();
     void loadShaders();
+    void createEnviroment();
 };
 
 #endif // WIDGET_H

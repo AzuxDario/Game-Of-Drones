@@ -49,17 +49,8 @@ void Widget::loadShaders()
     lightSourceShaderProgram.link();
 }
 
-void Widget::initializeGL()
+void Widget::createEnviroment()
 {
-    initializeOpenGLFunctions(); //Odpala funkcję OpenGL'a. Bez tego wywala aplikację zanim ją ujrzysz.
-    glEnable(GL_DEPTH_TEST); //Sprawi, że będą wyświetlane tylko te obiekty, które sa bliżej kamery
-    glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
-    glClearColor(0,0,0,0); //Ustawienie koloru tła
-
-    loadModels();
-    loadTextures();
-    loadShaders(); //Ładowanie shaderów
-
     envGenerator.Init(&objManager, &texturesManager, &cubeShaderProgram);
 
     skybox.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/skybox"),
@@ -71,6 +62,20 @@ void Widget::initializeGL()
                                   texturesManager.GetTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getRotationSpeed().setY(0.007f);
+}
+
+void Widget::initializeGL()
+{
+    initializeOpenGLFunctions(); //Odpala funkcję OpenGL'a. Bez tego wywala aplikację zanim ją ujrzysz.
+    glEnable(GL_DEPTH_TEST); //Sprawi, że będą wyświetlane tylko te obiekty, które sa bliżej kamery
+    glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
+    glClearColor(0,0,0,0); //Ustawienie koloru tła
+
+    //loadModels();
+    //loadTextures();
+    loadShaders(); //Ładowanie shaderów
+    //createEnviroment();
+    game.initializeGame(&cubeShaderProgram);
 
     light.getPosition().setZ(2);
 
@@ -97,23 +102,25 @@ void Widget::paintGL()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glDisable(GL_CULL_FACE);
-    skybox.Draw(camera, light, projectionMatrix);
-    glEnable(GL_CULL_FACE);
+    game.render(camera, light, projectionMatrix);
+//    glDisable(GL_CULL_FACE);
+//    skybox.Draw(camera, light, projectionMatrix);
+//    glEnable(GL_CULL_FACE);
 
-    envGenerator.Draw(camera, light, projectionMatrix);
-    star.Draw(camera, light, projectionMatrix);
+//    envGenerator.Draw(camera, light, projectionMatrix);
+//    star.Draw(camera, light, projectionMatrix);
 }
 
 void Widget::logic()
 {
-    int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
-    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+    game.logic(camera);
+//    int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
+//    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 
-    envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
+//    envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
 
-    envGenerator.Logic(camera.Position, deltaTime);
-    star.Logic(deltaTime);
+//    envGenerator.Logic(camera.Position, deltaTime);
+//    star.Logic(deltaTime);
 
     fpsCounterLabel->setText("FPS: " + QString::number(telemetry.GetFPS()));
     telemetry.Logic();
