@@ -2,7 +2,6 @@
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
-    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
     fpsCounterLabel = new QLabel("FPS: 00",this);
     fpsCounterLabel->setStyleSheet("color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;");
     fpsCounterLabel->setMinimumWidth(100);
@@ -20,24 +19,6 @@ QSize Widget::sizeHint() const
     return QSize(640, 480);
 }
 
-void Widget::loadModels()
-{
-    QVector<QString> modelsToLoad;
-    modelsToLoad.push_back(":/Objects/skybox");
-    modelsToLoad.push_back(":/Objects/planetoid");
-    modelsToLoad.push_back(":/Objects/star");
-    objManager.LoadAll(modelsToLoad);
-}
-
-void Widget::loadTextures()
-{
-    QVector<QString> texturesToLoad;
-    texturesToLoad.push_back(":/Textures/skybox");
-    texturesToLoad.push_back(":/Textures/planetoid");
-    texturesToLoad.push_back(":/Textures/star");
-    texturesManager.LoadAll(texturesToLoad);
-}
-
 void Widget::loadShaders()
 {
     cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/LightningVertexShader");
@@ -49,21 +30,6 @@ void Widget::loadShaders()
     lightSourceShaderProgram.link();
 }
 
-void Widget::createEnviroment()
-{
-    envGenerator.Init(&objManager, &texturesManager, &cubeShaderProgram);
-
-    skybox.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/skybox"),
-                                    texturesManager.GetTexture(":/Textures/skybox"));
-    skybox.getLightProperties().setAmbientColor(255,255,255,0);
-    skybox.getLightProperties().setSpecularReflection(0);
-
-    star.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/star"),
-                                  texturesManager.GetTexture(":/Textures/star"));
-    star.getLightProperties().setAmbientColor(255,255,255,0);
-    star.getRotationSpeed().setY(0.007f);
-}
-
 void Widget::initializeGL()
 {
     initializeOpenGLFunctions(); //Odpala funkcję OpenGL'a. Bez tego wywala aplikację zanim ją ujrzysz.
@@ -71,10 +37,7 @@ void Widget::initializeGL()
     glEnable(GL_CULL_FACE); //Obiekty będą renderowane tylko na przedniej stronie
     glClearColor(0,0,0,0); //Ustawienie koloru tła
 
-    //loadModels();
-    //loadTextures();
     loadShaders(); //Ładowanie shaderów
-    //createEnviroment();
     game.initializeGame(&cubeShaderProgram);
 
     light.getPosition().setZ(2);
@@ -103,24 +66,11 @@ void Widget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     game.render(camera, light, projectionMatrix);
-//    glDisable(GL_CULL_FACE);
-//    skybox.Draw(camera, light, projectionMatrix);
-//    glEnable(GL_CULL_FACE);
-
-//    envGenerator.Draw(camera, light, projectionMatrix);
-//    star.Draw(camera, light, projectionMatrix);
 }
 
 void Widget::logic()
 {
     game.logic(camera);
-//    int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
-//    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
-
-//    envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
-
-//    envGenerator.Logic(camera.Position, deltaTime);
-//    star.Logic(deltaTime);
 
     fpsCounterLabel->setText("FPS: " + QString::number(telemetry.GetFPS()));
     telemetry.Logic();

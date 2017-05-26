@@ -39,17 +39,9 @@ private:
 
     Camera camera;
     Light light;
-    OBJManager objManager;
-    TexturesManager texturesManager;
-    EnvGenerator envGenerator;
-    Physics physics;
     Telemetry telemetry;
     Game game;
-    DrawableObject skybox;
-    DrawableObject star;
     QLabel *fpsCounterLabel;
-
-    long int lastFrameTime;
 
 public:
     Widget(QWidget *parent = 0);
@@ -71,13 +63,9 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
 
-
 private:
 
-    void loadModels();
-    void loadTextures();
     void loadShaders();
-    void createEnviroment();
 };
 
 #endif // WIDGET_H
