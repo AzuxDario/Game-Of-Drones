@@ -102,6 +102,7 @@ void Widget::logic()
     envGenerator.Logic(camera.Position, deltaTime);
     star.Logic(deltaTime);
 
+    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.GetFPS()));
     telemetry.Logic();
 }
 
