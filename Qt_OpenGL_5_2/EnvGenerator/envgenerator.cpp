@@ -46,6 +46,7 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
     {
         DrawableObject* planetoid = new DrawableObject();
         planetoid->Init(shader, objManager->GetModel(":/Objects/planetoid"), texturesManager->GetTexture(":/Textures/planetoid"));
+        planetoid->getLightProperties().setSpecularReflection(0);
 
         planetoid->GetRotationSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
         planetoid->GetRotationSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
