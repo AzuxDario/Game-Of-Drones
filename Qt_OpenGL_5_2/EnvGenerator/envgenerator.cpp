@@ -30,7 +30,7 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
 {
     for(int i=objects.size() - 1; i >= 0; i--)
     {
-        float distance = objects[i]->GetPosition().distanceToPoint(playerPosition);
+        float distance = objects[i]->getPosition().distanceToPoint(playerPosition);
         if(distance > generatorDistance * 1.5f)
         {
             delete objects[i];
@@ -52,21 +52,21 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
         planetoid->getLightProperties().setDiffuseReflection(0.8);
         planetoid->getLightProperties().setDiffuseColor(192,192,192);
 
-        planetoid->GetRotationSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
-        planetoid->GetRotationSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
-        planetoid->GetRotationSpeed().setZ(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
+        planetoid->getRotationSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
+        planetoid->getRotationSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
+        planetoid->getRotationSpeed().setZ(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
 
-        planetoid->GetMoveSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
-        planetoid->GetMoveSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
-        planetoid->GetMoveSpeed().setZ(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
+        planetoid->getMoveSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
+        planetoid->getMoveSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
+        planetoid->getMoveSpeed().setZ(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
 
-        planetoid->GetPosition().setX(GetRandomNumberWithNegatives(generatorDistance));
-        planetoid->GetPosition().setY(GetRandomNumberWithNegatives(generatorDistance));
-        planetoid->GetPosition().setZ(GetRandomNumberWithNegatives(generatorDistance));
+        planetoid->getPosition().setX(GetRandomNumberWithNegatives(generatorDistance));
+        planetoid->getPosition().setY(GetRandomNumberWithNegatives(generatorDistance));
+        planetoid->getPosition().setZ(GetRandomNumberWithNegatives(generatorDistance));
 
-        while(planetoid->GetPosition().distanceToPoint(playerPosition) <= generatorDistance)
+        while(planetoid->getPosition().distanceToPoint(playerPosition) <= generatorDistance)
         {
-            planetoid->GetPosition() *= 1.1f;
+            planetoid->getPosition() *= 1.1f;
         }
 
         objects.push_back(planetoid);

@@ -8,12 +8,12 @@ Physics::Physics()
 QVector<DrawableObject*> Physics::CheckCollisions(DrawableObject* base, QVector<DrawableObject*> objects)
 {
     QVector<DrawableObject*> detectedCollisions;
-    float baseRadius = base->GetRadius();
+    float baseRadius = base->getRadius();
 
     for(int i=0; i<objects.size(); i++)
     {
-        float objectRadius = objects[i]->GetRadius();
-        float distance = base->GetPosition().distanceToPoint(objects[i]->GetPosition());
+        float objectRadius = objects[i]->getRadius();
+        float distance = base->getPosition().distanceToPoint(objects[i]->getPosition());
 
         if(distance <= baseRadius + objectRadius)
             detectedCollisions.push_back(objects[i]);

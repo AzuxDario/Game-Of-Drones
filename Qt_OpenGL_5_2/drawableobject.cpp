@@ -4,14 +4,6 @@ DrawableObject::DrawableObject() : texture(0)
 {
     texture = nullptr;
     numberOfVerticles = 0;
-
-    lightProperties.setAmbientColor(QColor(32, 32, 32));
-    lightProperties.setDiffuseColor(QColor(128, 128, 128));
-    lightProperties.setSpecularColor(QColor(255, 255, 255));
-    lightProperties.setAmbientReflection(1);
-    lightProperties.setDiffuseReflection(1);
-    lightProperties.setSpecularReflection(1);
-    lightProperties.setShininess(100);
 }
 
 DrawableObject::~DrawableObject()
@@ -138,37 +130,3 @@ void DrawableObject::Draw(QOpenGLShaderProgram &shader)
 
 }
 
-LightProperties& DrawableObject::getLightProperties()
-{
-    return lightProperties;
-}
-
-QVector3D& DrawableObject::GetPosition()
-{
-    return position;
-}
-
-QVector3D& DrawableObject::GetRotation()
-{
-    return rotation;
-}
-
-QVector3D& DrawableObject::GetMoveSpeed()
-{
-    return moveSpeed;
-}
-
-QVector3D& DrawableObject::GetRotationSpeed()
-{
-    return rotationSpeed;
-}
-
-float DrawableObject::GetRadius()
-{
-    return radius;
-}
-
-void DrawableObject::SetRadius(float r)
-{
-    radius = r;
-}

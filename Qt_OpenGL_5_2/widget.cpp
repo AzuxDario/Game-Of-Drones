@@ -58,7 +58,7 @@ void Widget::initializeGL()
     star.Init(&cubeShaderProgram, objManager.GetModel(":/Objects/star"),
                                   texturesManager.GetTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
-    star.GetRotationSpeed().setY(0.007f);
+    star.getRotationSpeed().setY(0.007f);
 
     light.getPosition().setZ(2);
 
