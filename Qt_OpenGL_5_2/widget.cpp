@@ -4,7 +4,7 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
     timer.start();
 
-    cssFpsAndTimer = "font-size:40px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
+    cssFpsAndTimer = "font-size:30px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
 
     fpsCounterLabel = new QLabel("FPS: 00");
     fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
