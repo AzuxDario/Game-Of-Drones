@@ -16,6 +16,7 @@
 #include "movableobject.h"
 #include "camera.h"
 #include "light.h"
+#include "Player/player.h"
 
 class Game
 {
@@ -25,6 +26,7 @@ private:
     TexturesManager texturesManager;
     EnvGenerator envGenerator;
     Physics physics;
+    Player player;
 
     DrawableObject skybox;
     DrawableObject star;

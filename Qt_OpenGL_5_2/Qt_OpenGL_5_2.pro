@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     TexturesManager/texturedata.cpp \
     TexturesManager/texturesmanager.cpp \
     Physics/physics.cpp \
-    telemetry.cpp
+    telemetry.cpp \
+    Player/player.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -45,7 +46,8 @@ HEADERS  += widget.h \
     TexturesManager/texturedata.h \
     TexturesManager/texturesmanager.h \
     Physics/physics.h \
-    telemetry.h
+    telemetry.h \
+    Player/player.h
 
 RESOURCES += \
     resources.qrc

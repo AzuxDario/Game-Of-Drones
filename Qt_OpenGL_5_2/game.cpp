@@ -83,12 +83,12 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     envGenerator.Init(&objManager, &texturesManager, shader);
 
     skybox.Init(shader, objManager.GetModel(":/Objects/skybox"),
-                                    texturesManager.GetTexture(":/Textures/skybox"));
+                        texturesManager.GetTexture(":/Textures/skybox"));
     skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
 
     star.Init(shader, objManager.GetModel(":/Objects/star"),
-                                  texturesManager.GetTexture(":/Textures/star"));
+                      texturesManager.GetTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getRotationSpeed().setY(0.007f);
 }
