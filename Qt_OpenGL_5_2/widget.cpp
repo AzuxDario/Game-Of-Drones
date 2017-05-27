@@ -57,7 +57,7 @@ void Widget::initializeGL()
 
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     paintTimer.setTimerType(Qt::PreciseTimer);
-    paintTimer.start(15);
+    paintTimer.start(14);
 }
 
 void Widget::resizeGL(int width, int height)
