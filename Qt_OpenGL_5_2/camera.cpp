@@ -17,6 +17,6 @@ QMatrix4x4 Camera::GetMatrix()
     QVector3D cameraPosition = cameraTransformation * QVector3D(0, 0, distance);
     QVector3D cameraUpDirection = cameraTransformation * QVector3D(0, 1, 0);
 
-    vMatrix.lookAt(cameraPosition, QVector3D(0, 0, 0), cameraUpDirection);
+    vMatrix.lookAt(cameraPosition, position, cameraUpDirection);
     return vMatrix;
 }

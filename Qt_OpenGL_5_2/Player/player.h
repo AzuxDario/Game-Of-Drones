@@ -15,6 +15,8 @@ public:
     void Logic(int deltaTime);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
     void Input(Qt::Key key);
+
+    QVector3D& getPosition() noexcept { return drone.getPosition(); }
 private:
     DrawableObject drone;
 };
