@@ -35,6 +35,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader)
     loadModels();
     loadTextures();
     createEnviroment(shader);
+    createPlayer(shader);
 }
 
 void Game::render(Camera camera, Light light, QMatrix4x4 pMatrix)
@@ -46,6 +47,7 @@ void Game::render(Camera camera, Light light, QMatrix4x4 pMatrix)
 
     envGenerator.Draw(camera, light, pMatrix);
     star.Draw(camera, light, pMatrix);
+    player.Draw(camera, light, pMatrix);
 }
 
 void Game::logic(Camera camera)
@@ -57,7 +59,7 @@ void Game::logic(Camera camera)
 
     envGenerator.Logic(camera.getPosition(), deltaTime);
     star.Logic(deltaTime);
-
+    player.Logic(deltaTime);
 }
 
 void Game::loadModels()
@@ -66,6 +68,7 @@ void Game::loadModels()
     modelsToLoad.push_back(":/Objects/skybox");
     modelsToLoad.push_back(":/Objects/planetoid");
     modelsToLoad.push_back(":/Objects/star");
+    modelsToLoad.push_back(":/Objects/drone");
     objManager.LoadAll(modelsToLoad);
 }
 
@@ -75,6 +78,7 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/skybox");
     texturesToLoad.push_back(":/Textures/planetoid");
     texturesToLoad.push_back(":/Textures/star");
+    texturesToLoad.push_back(":/Textures/drone");
     texturesManager.LoadAll(texturesToLoad);
 }
 
@@ -91,4 +95,14 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
                       texturesManager.GetTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getRotationSpeed().setY(0.007f);
+}
+
+void Game::createPlayer(QOpenGLShaderProgram* shader)
+{
+    player.Init(&objManager, &texturesManager, shader);
+}
+
+void Game::Input(Qt::Key key)
+{
+    player.Input(key);
 }

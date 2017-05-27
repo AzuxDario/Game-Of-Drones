@@ -160,4 +160,8 @@ void Widget::keyPressEvent(QKeyEvent *event)
     {
         QApplication::quit();
     }
+    else
+    {
+        game.Input((Qt::Key)event->key());
+    }
 }
