@@ -1,4 +1,4 @@
-#version 130
+#version 330
 
 //Obsługuje pozycjonowanie, oraz oblicza odległości wierzchołków od źródła światła
 //Partner: lightingfragmetshader

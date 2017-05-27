@@ -1,4 +1,4 @@
-#version 130
+#version 330
 //Shader do kolorowania figur przy użyciu koloru
 //Bez tekstury bez światła
 //Partner: coloringvertexshader

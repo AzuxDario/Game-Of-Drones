@@ -1,4 +1,4 @@
-#version 130
+#version 330
 
 //Shader do pozycjonowania obiektów, obsługujący tekstury poprzez fragmentshader
 //Partner: fragmentshader
