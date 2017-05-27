@@ -24,10 +24,14 @@ void Player::Input(Qt::Key key)
 {
     switch(key)
     {
-        case(Qt::Key::Key_W):
-        {
-            drone.getPosition() += QVector3D(1, 0, 0);
-            break;
-        }
+    case(Qt::Key::Key_W):
+    {
+        drone.getPosition() += QVector3D(1, 0, 0);
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
 }
