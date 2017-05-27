@@ -2,11 +2,12 @@
 #define KEYBOARDMANAGER_H
 
 #include <QVector>
+#include <QMap>
 
 class KeyboardManager
 {
 private:
-    int state[256];
+    QMap<Qt::Key, bool> keyMap;
 
 public:
     KeyboardManager();

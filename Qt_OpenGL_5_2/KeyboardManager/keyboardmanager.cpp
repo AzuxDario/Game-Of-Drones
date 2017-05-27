@@ -2,25 +2,31 @@
 
 KeyboardManager::KeyboardManager()
 {
-    for(int i=0; i<256; i++)
-        state[i] = false;
+    keyMap.insert(Qt::Key_W, false);
+    keyMap.insert(Qt::Key_A, false);
+    keyMap.insert(Qt::Key_S, false);
+    keyMap.insert(Qt::Key_D, false);
+    keyMap.insert(Qt::Key_Q, false);
+    keyMap.insert(Qt::Key_E, false);
 }
 
 void KeyboardManager::KeyPressed(Qt::Key key)
 {
-    int keyCode = (int)key;
-    if(keyCode < 256)
-        state[keyCode] = true;
+    if(keyMap.find(key) != keyMap.end())
+    {
+        keyMap.insert(key,true);
+    }
 }
 
 void KeyboardManager::KeyReleased(Qt::Key key)
 {
-    int keyCode = (int)key;
-    if(keyCode < 256)
-        state[keyCode] = false;
+    if(keyMap.find(key) != keyMap.end())
+    {
+        keyMap.insert(key,false);
+    }
 }
 
 bool KeyboardManager::IsKeyPressed(Qt::Key key)
 {
-    return state[(int)key];
+    return keyMap.value(key);
 }
