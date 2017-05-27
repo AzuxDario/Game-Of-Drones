@@ -49,6 +49,7 @@ private:
     QLabel *dummy;
 
     QTime timer;
+    QString cssFpsAndTimer;
 
 public:
     Widget(QWidget *parent = 0);
