@@ -2,20 +2,22 @@
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
+    timer.start();
+
     fpsCounterLabel = new QLabel("FPS: 00");
     fpsCounterLabel->setStyleSheet("color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;");
     fpsCounterLabel->setMinimumWidth(100);
     fpsCounterLabel->setMaximumSize(100,50);
     fpsCounterLabel->setAlignment(Qt::AlignLeft);
-    timer = new QLabel("00:00:00");
-    timer->setStyleSheet("color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;");
-    timer->setMinimumWidth(100);
-    timer->setMaximumSize(100,50);
-    timer->setAlignment(Qt::AlignRight);
+    timerLabel = new QLabel("00:00:00");
+    timerLabel->setStyleSheet("color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;");
+    timerLabel->setMinimumWidth(100);
+    timerLabel->setMaximumSize(100,50);
+    timerLabel->setAlignment(Qt::AlignRight);
     dummy = new QLabel();
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop);
-    gridLayout->addWidget(timer,0,2,Qt::AlignTop);
+    gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop);
     gridLayout->addWidget(dummy,2,1,Qt::AlignBottom);
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
@@ -80,6 +82,9 @@ void Widget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     game.render(camera, light, projectionMatrix);
+
+    updateTime();
+
 }
 
 void Widget::logic()
@@ -164,4 +169,44 @@ void Widget::keyPressEvent(QKeyEvent *event)
     {
         game.Input((Qt::Key)event->key());
     }
+}
+
+void Widget::updateTime()
+{
+    QString min, sec, mSec;
+    int timeElapsed = timer.elapsed();
+    int minutes = timeElapsed / 60000;
+    timeElapsed -= minutes * 60000;
+    int seconds = timeElapsed / 1000;
+    timeElapsed -=seconds * 1000;
+    if(minutes<10)
+    {
+        min = "0" + QString::number(minutes);
+    }
+    else
+    {
+        min = QString::number(minutes);
+    }
+    if(seconds<10)
+    {
+        sec = "0" + QString::number(seconds);
+    }
+    else
+    {
+        sec = QString::number(seconds);
+    }
+    if(timeElapsed<10)
+    {
+        mSec = "00" + QString::number(timeElapsed);
+    }
+    else if(timeElapsed<100)
+    {
+        mSec = "0" + QString::number(timeElapsed);
+    }
+    else
+    {
+        mSec = QString::number(timeElapsed);
+    }
+
+    timerLabel->setText(min+":"+sec+":"+mSec);
 }

@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QOpenGLTexture>
 #include <QTimer>
+#include <QTime>
 #include <QDateTime>
 #include <QLabel>
 #include <QGridLayout>
@@ -44,8 +45,10 @@ private:
     Game game;
     QGridLayout* gridLayout;
     QLabel *fpsCounterLabel;
-    QLabel *timer;
+    QLabel *timerLabel;
     QLabel *dummy;
+
+    QTime timer;
 
 public:
     Widget(QWidget *parent = 0);
@@ -70,6 +73,7 @@ protected:
 private:
 
     void loadShaders();
+    void updateTime();
 };
 
 #endif // WIDGET_H
