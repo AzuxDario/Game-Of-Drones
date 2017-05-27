@@ -63,6 +63,7 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
         planetoid->getPosition().setX(getRandomNumberWithNegatives(generatorDistance));
         planetoid->getPosition().setY(getRandomNumberWithNegatives(generatorDistance));
         planetoid->getPosition().setZ(getRandomNumberWithNegatives(generatorDistance));
+        planetoid->getPosition() += QVector3D(playerPosition);
 
         while(planetoid->getPosition().distanceToPoint(playerPosition) <= generatorDistance)
         {

@@ -64,7 +64,7 @@ void Game::logic(Camera& camera)
 
     envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
 
-    envGenerator.Logic(camera.getPosition(), deltaTime);
+    envGenerator.Logic(player.GetPosition(), deltaTime);
     star.Logic(deltaTime);
     player.Logic(deltaTime);
     updateCamera(camera);
