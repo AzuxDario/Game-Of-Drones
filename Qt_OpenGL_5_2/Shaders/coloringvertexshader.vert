@@ -1,5 +1,7 @@
+#version 130
 //Shader do pozycjonowania obiektów, używa colorfragmentshader do kolorowania
 //Partner: coloringfragmentshader
+
 uniform mat4 mvpMatrix;
 
 in vec4 vertex;

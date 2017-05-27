@@ -1,5 +1,8 @@
+#version 130
+
 //Obsługuje teksturowanie, światło
 //Partner: lightningvertexshader
+
 
 uniform vec4 ambientColor;
 uniform vec4 diffuseColor;

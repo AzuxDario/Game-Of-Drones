@@ -1,6 +1,9 @@
+#version 130
+
 //Obsługuje teksturowanie
 //Bez światła
 //Partner: vertexshader
+
 uniform sampler2D texture;
 
 varying vec2 varyingTextureCoordinate;

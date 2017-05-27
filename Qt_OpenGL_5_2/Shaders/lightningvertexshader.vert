@@ -1,5 +1,8 @@
+#version 130
+
 //Obsługuje pozycjonowanie, oraz oblicza odległości wierzchołków od źródła światła
 //Partner: lightingfragmetshader
+
 uniform mat4 mvpMatrix;
 uniform mat4 mvMatrix;
 uniform mat3 normalMatrix;
