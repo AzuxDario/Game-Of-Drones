@@ -14,11 +14,11 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     timerLabel->setStyleSheet(cssFpsAndTimer);
     //timerLabel->setMinimumWidth(300);
     timerLabel->setAlignment(Qt::AlignRight);
-    shipInfo = new QLabel("Ship Information<br/>Speed<br/>and other shits");
+    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: スーパー宇宙船<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssFpsAndTimer);
-    shipInfo->setMinimumSize(800,350);
-    shipInfo->setMaximumSize(800,350);
+    shipInfo->setMinimumSize(800,300);
+    shipInfo->setMaximumSize(800,300);
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
     gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
