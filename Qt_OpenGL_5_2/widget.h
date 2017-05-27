@@ -46,7 +46,7 @@ private:
     QGridLayout* gridLayout;
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
-    QLabel *dummy;
+    QLabel *shipInfo;
 
     QTime timer;
     QString cssFpsAndTimer;

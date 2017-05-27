@@ -10,15 +10,19 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
     //fpsCounterLabel->setMinimumWidth(200);
     fpsCounterLabel->setAlignment(Qt::AlignLeft);
-    timerLabel = new QLabel("Czas: 00:00:00");
+    timerLabel = new QLabel("Czas: 00:00.00");
     timerLabel->setStyleSheet(cssFpsAndTimer);
     //timerLabel->setMinimumWidth(300);
     timerLabel->setAlignment(Qt::AlignRight);
-    dummy = new QLabel();
+    shipInfo = new QLabel("Ship Information<br/>Speed<br/>and other shits");
+    shipInfo->setAlignment(Qt::AlignCenter);;
+    shipInfo->setStyleSheet(cssFpsAndTimer);
+    shipInfo->setMinimumSize(800,350);
+    shipInfo->setMaximumSize(800,350);
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
-    gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignLeft);
-    gridLayout->addWidget(dummy,2,1,Qt::AlignBottom);
+    gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
+    gridLayout->addWidget(shipInfo,2,1,Qt::AlignBottom);
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
@@ -208,5 +212,5 @@ void Widget::updateTime()
         mSec = QString::number(timeElapsed);
     }
 
-    timerLabel->setText("Czas: "+min+":"+sec+":"+mSec);
+    timerLabel->setText("Czas: "+min+":"+sec+"."+mSec);
 }
