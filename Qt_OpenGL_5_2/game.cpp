@@ -97,6 +97,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     star.Init(shader, objManager.GetModel(":/Objects/star"),
                       texturesManager.GetTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
+    star.getLightProperties().setAmbientReflection(2);
     star.getRotationSpeed().setY(0.007f);
 }
 
