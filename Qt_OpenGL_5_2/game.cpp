@@ -61,8 +61,8 @@ void Game::logic(Camera& camera)
     star.Logic(deltaTime);
     player.Logic(deltaTime);
 
-    player.getPosition().setX(10);
-    camera.setPosition(player.getPosition());
+    player.getPosition().setX(20);
+    updateCamera(camera);
 }
 
 void Game::loadModels()
@@ -108,4 +108,9 @@ void Game::createPlayer(QOpenGLShaderProgram* shader)
 void Game::Input(Qt::Key key)
 {
     player.Input(key);
+}
+
+void Game::updateCamera(Camera camera)
+{
+    camera.setPosition(player.getPosition());
 }
