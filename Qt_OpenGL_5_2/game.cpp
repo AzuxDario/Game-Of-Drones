@@ -38,7 +38,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader)
     createPlayer(shader);
 }
 
-void Game::render(Camera camera, Light light, QMatrix4x4 pMatrix)
+void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
 {
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
     f->glDisable(GL_CULL_FACE);
@@ -50,7 +50,7 @@ void Game::render(Camera camera, Light light, QMatrix4x4 pMatrix)
     player.Draw(camera, light, pMatrix);
 }
 
-void Game::logic(Camera camera)
+void Game::logic(Camera& camera)
 {
     int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
@@ -60,6 +60,9 @@ void Game::logic(Camera camera)
     envGenerator.Logic(camera.getPosition(), deltaTime);
     star.Logic(deltaTime);
     player.Logic(deltaTime);
+
+    player.getPosition().setX(10);
+    camera.setPosition(player.getPosition());
 }
 
 void Game::loadModels()

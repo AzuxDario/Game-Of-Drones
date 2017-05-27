@@ -39,8 +39,8 @@ public:
     QVector<DrawableObject> ImmovableObjects;
     QVector<MovableObject> MovableObjects;
     void initializeGame(QOpenGLShaderProgram* shader);
-    void render(Camera camera, Light light, QMatrix4x4 pMatrix);
-    void logic(Camera camera);
+    void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
+    void logic(Camera& camera);
     void Input(Qt::Key key);
     void Draw(QOpenGLShaderProgram & shader);
     //Zmiana pozycji
