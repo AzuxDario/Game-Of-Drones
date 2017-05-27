@@ -121,13 +121,26 @@ void Game::KeyReleased(Qt::Key key)
 
 }
 
-void Game::updateCamera(Camera camera)
+void Game::updateCamera(Camera& camera)
 {
     camera.setPosition(player.getPosition());
+    camera.setRotation(player.getRotation());
 }
 
 void Game::input()
 {
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_W))
+        player.getPosition() += QVector3D(0, 0, -0.1);
+    if(keyboardManager->IsKeyPressed(Qt::Key::Key_S))
+        player.getPosition() += QVector3D(0, 0, 0.1);
+
+    if(keyboardManager->IsKeyPressed(Qt::Key::Key_A))
+        player.getPosition() += QVector3D(-0.1, 0, 0);
+    if(keyboardManager->IsKeyPressed(Qt::Key::Key_D))
         player.getPosition() += QVector3D(0.1, 0, 0);
+
+    if(keyboardManager->IsKeyPressed(Qt::Key::Key_Q))
+        player.getRotation() += QVector3D(-0.4, 0, 0);
+    if(keyboardManager->IsKeyPressed(Qt::Key::Key_E))
+        player.getRotation() += QVector3D(0.4, 0, 0);
 }

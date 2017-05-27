@@ -17,6 +17,7 @@ public:
     void Input(Qt::Key key);
 
     QVector3D& getPosition() noexcept { return drone.getPosition(); }
+    QVector3D& getRotation() noexcept { return drone.getRotation(); }
 private:
     DrawableObject drone;
 };

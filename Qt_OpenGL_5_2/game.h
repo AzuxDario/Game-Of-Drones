@@ -57,7 +57,7 @@ private:
     void loadTextures();
     void createEnviroment(QOpenGLShaderProgram* shader);
     void createPlayer(QOpenGLShaderProgram* shader);
-    void updateCamera(Camera camera);
+    void updateCamera(Camera& camera);
     void input();
 };
 
