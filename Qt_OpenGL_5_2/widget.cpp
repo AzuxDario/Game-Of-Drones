@@ -26,7 +26,6 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
-
 }
 
 Widget::~Widget()
@@ -58,9 +57,7 @@ void Widget::initializeGL()
     glClearColor(0,0,0,0); //Ustawienie koloru tła
 
     loadShaders(); //Ładowanie shaderów
-    game.initializeGame(&cubeShaderProgram);
-
-    light.getPosition().setZ(2);
+    game.initializeGame(&cubeShaderProgram, &keyboardManager);
 
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     paintTimer.setTimerType(Qt::PreciseTimer);
@@ -165,14 +162,23 @@ void Widget::wheelEvent(QWheelEvent *event)
 
 void Widget::keyPressEvent(QKeyEvent *event)
 {
+    Qt::Key key = (Qt::Key)event->key();
+
+    keyboardManager.KeyPressed(key);
+    game.KeyPressed(key);
+
     if(event->key() == Qt::Key_Escape)
     {
         QApplication::quit();
-    }
-    else
-    {
-        game.Input((Qt::Key)event->key());
-    }
+    } 
+}
+
+void Widget::keyReleaseEvent(QKeyEvent *event)
+{
+    Qt::Key key = (Qt::Key)event->key();
+
+    keyboardManager.KeyReleased(key);
+    game.KeyReleased(key);
 }
 
 void Widget::updateTime()

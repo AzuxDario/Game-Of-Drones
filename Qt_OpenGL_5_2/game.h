@@ -17,6 +17,7 @@
 #include "camera.h"
 #include "light.h"
 #include "Player/player.h"
+#include "KeyboardManager/keyboardmanager.h"
 
 class Game
 {
@@ -27,6 +28,7 @@ private:
     EnvGenerator envGenerator;
     Physics physics;
     Player player;
+    KeyboardManager* keyboardManager;
 
     DrawableObject skybox;
     DrawableObject star;
@@ -38,10 +40,11 @@ public:
 
     QVector<DrawableObject> ImmovableObjects;
     QVector<MovableObject> MovableObjects;
-    void initializeGame(QOpenGLShaderProgram* shader);
+    void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
     void logic(Camera& camera);
-    void Input(Qt::Key key);
+    void KeyPressed(Qt::Key key);
+    void KeyReleased(Qt::Key key);
     void Draw(QOpenGLShaderProgram & shader);
     //Zmiana pozycji
     void Move();
@@ -55,6 +58,7 @@ private:
     void createEnviroment(QOpenGLShaderProgram* shader);
     void createPlayer(QOpenGLShaderProgram* shader);
     void updateCamera(Camera camera);
+    void input();
 };
 
 #endif // GAME_H

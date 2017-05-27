@@ -30,12 +30,17 @@ void Game::Move()
     }
 }
 
-void Game::initializeGame(QOpenGLShaderProgram* shader)
+void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager)
 {
+    this->keyboardManager = keyboardManager;
+
     loadModels();
     loadTextures();
     createEnviroment(shader);
     createPlayer(shader);
+
+    //TEST
+    player.getPosition().setX(20);
 }
 
 void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
@@ -52,6 +57,8 @@ void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
 
 void Game::logic(Camera& camera)
 {
+    input();
+
     int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 
@@ -60,8 +67,6 @@ void Game::logic(Camera& camera)
     envGenerator.Logic(camera.getPosition(), deltaTime);
     star.Logic(deltaTime);
     player.Logic(deltaTime);
-
-    player.getPosition().setX(20);
     updateCamera(camera);
 }
 
@@ -106,12 +111,23 @@ void Game::createPlayer(QOpenGLShaderProgram* shader)
     player.Init(&objManager, &texturesManager, shader);
 }
 
-void Game::Input(Qt::Key key)
+void Game::KeyPressed(Qt::Key key)
 {
-    player.Input(key);
+
+}
+
+void Game::KeyReleased(Qt::Key key)
+{
+
 }
 
 void Game::updateCamera(Camera camera)
 {
     camera.setPosition(player.getPosition());
+}
+
+void Game::input()
+{
+    if(keyboardManager->IsKeyPressed(Qt::Key::Key_W))
+        player.getPosition() += QVector3D(0.1, 0, 0);
 }

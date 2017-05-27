@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     TexturesManager/texturesmanager.cpp \
     Physics/physics.cpp \
     telemetry.cpp \
-    Player/player.cpp
+    Player/player.cpp \
+    KeyboardManager/keyboardmanager.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -47,7 +48,8 @@ HEADERS  += widget.h \
     TexturesManager/texturesmanager.h \
     Physics/physics.h \
     telemetry.h \
-    Player/player.h
+    Player/player.h \
+    KeyboardManager/keyboardmanager.h
 
 RESOURCES += \
     resources.qrc

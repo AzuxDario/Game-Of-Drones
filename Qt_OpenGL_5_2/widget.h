@@ -25,6 +25,7 @@
 #include "TexturesManager/texturesmanager.h"
 #include "Physics/physics.h"
 #include "telemetry.h"
+#include "KeyboardManager/keyboardmanager.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -43,6 +44,8 @@ private:
     Light light;
     Telemetry telemetry;
     Game game;
+    KeyboardManager keyboardManager;
+
     QGridLayout* gridLayout;
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
@@ -59,6 +62,7 @@ public:
 public slots:
 
     void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
 protected:
 
