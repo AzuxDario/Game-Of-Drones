@@ -26,6 +26,9 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
+
+    //musicPlayer.setSong("qrc:/Music/song");
+    //musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
 }
 
 Widget::~Widget()

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     Physics/physics.cpp \
     telemetry.cpp \
     Player/player.cpp \
-    KeyboardManager/keyboardmanager.cpp
+    KeyboardManager/keyboardmanager.cpp \
+    musicplayer.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -49,7 +50,8 @@ HEADERS  += widget.h \
     Physics/physics.h \
     telemetry.h \
     Player/player.h \
-    KeyboardManager/keyboardmanager.h
+    KeyboardManager/keyboardmanager.h \
+    musicplayer.h
 
 RESOURCES += \
     resources.qrc
