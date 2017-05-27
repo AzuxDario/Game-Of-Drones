@@ -52,17 +52,17 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
         planetoid->getLightProperties().setDiffuseReflection(0.8);
         planetoid->getLightProperties().setDiffuseColor(192,192,192);
 
-        planetoid->getRotationSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
-        planetoid->getRotationSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
-        planetoid->getRotationSpeed().setZ(GetRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
+        planetoid->getRotationSpeed().setX(getRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
+        planetoid->getRotationSpeed().setY(getRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
+        planetoid->getRotationSpeed().setZ(getRandomNumberWithNegatives(maxPlanetoidsRotationSpeed));
 
-        planetoid->getMoveSpeed().setX(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
-        planetoid->getMoveSpeed().setY(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
-        planetoid->getMoveSpeed().setZ(GetRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
+        planetoid->getMoveSpeed().setX(getRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
+        planetoid->getMoveSpeed().setY(getRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
+        planetoid->getMoveSpeed().setZ(getRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
 
-        planetoid->getPosition().setX(GetRandomNumberWithNegatives(generatorDistance));
-        planetoid->getPosition().setY(GetRandomNumberWithNegatives(generatorDistance));
-        planetoid->getPosition().setZ(GetRandomNumberWithNegatives(generatorDistance));
+        planetoid->getPosition().setX(getRandomNumberWithNegatives(generatorDistance));
+        planetoid->getPosition().setY(getRandomNumberWithNegatives(generatorDistance));
+        planetoid->getPosition().setZ(getRandomNumberWithNegatives(generatorDistance));
 
         while(planetoid->getPosition().distanceToPoint(playerPosition) <= generatorDistance)
         {
@@ -81,7 +81,7 @@ void EnvGenerator::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     }
 }
 
-float EnvGenerator::GetRandomNumberWithNegatives(float to)
+float EnvGenerator::getRandomNumberWithNegatives(float to)
 {
     int sign = 2 * (rand() % 2) - 1;
     return sign * (float)rand() / (float)(RAND_MAX / to);

@@ -5,6 +5,9 @@
 
 class KeyboardManager
 {
+private:
+    int state[256];
+
 public:
     KeyboardManager();
 
@@ -12,8 +15,6 @@ public:
     void KeyReleased(Qt::Key key);
 
     bool IsKeyPressed(Qt::Key key);
-private:
-    int state[256];
 };
 
 #endif

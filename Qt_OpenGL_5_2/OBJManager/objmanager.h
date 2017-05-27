@@ -6,14 +6,14 @@
 
 class OBJManager
 {
+private:
+    QVector<OBJModel*> models;
+
 public:
     OBJManager();
 
     void LoadAll(QVector<QString> files);
     OBJModel* GetModel(QString name);
-
-private:
-    QVector<OBJModel*> models;
 };
 
 #endif // OBJMANAGER_H

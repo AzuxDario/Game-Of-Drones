@@ -11,7 +11,6 @@
 class EnvGenerator
 {
 private:
-
     OBJManager* objManager;
     TexturesManager* texturesManager;
     QOpenGLShaderProgram* shader;
@@ -23,7 +22,6 @@ private:
     float maxPlanetoidsMoveSpeed;
 
 public:
-
     EnvGenerator();
     ~EnvGenerator();
 
@@ -36,8 +34,7 @@ public:
     void RemoveObjects(QVector<DrawableObject*> objectsToRemove);
 
 private:
-    float GetRandomNumberWithNegatives(float to);
-
+    float getRandomNumberWithNegatives(float to);
 };
 
 #endif // ENVGENERATOR_H

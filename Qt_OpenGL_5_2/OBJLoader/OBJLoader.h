@@ -14,9 +14,15 @@ using namespace std;
 
 class OBJLoader
 {
+private:
+    QVector<QVector3D> verticesData;
+    QVector<QVector3D> normalsData;
+    QVector<QVector2D> textureCoordsData;
+    QVector<FaceData> facesData;
+
 public:
-	OBJLoader();
-	~OBJLoader();
+    OBJLoader();
+    ~OBJLoader();
 
     bool LoadFromFile(QString fileName);
 
@@ -25,15 +31,9 @@ public:
     QVector<QVector2D> GetTextureCoordsData();
     QVector<FaceData> GetFacesData();
 private:
-
     bool parse(QString content);
     bool parseVertices(QString line);
     bool parseTextureCoordinates(QString line);
     bool parseNormals(QString line);
     bool parseFaces(QString line);
-
-    QVector<QVector3D> verticesData;
-    QVector<QVector3D> normalsData;
-    QVector<QVector2D> textureCoordsData;
-    QVector<FaceData> facesData;
 };

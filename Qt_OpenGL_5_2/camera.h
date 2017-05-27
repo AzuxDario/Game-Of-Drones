@@ -6,13 +6,11 @@
 class Camera
 {
 private:
-
     QVector3D position;
     QVector3D rotation;
     float distance;
 
 public:
-
     Camera();
     QMatrix4x4 GetMatrix();
 
@@ -34,7 +32,6 @@ public:
     void setRotationY(float value) noexcept {rotation.setY(value);}
     void setRotationZ(float value) noexcept {rotation.setZ(value);}
     void setDistance(float value) noexcept {distance = value;}
-
 };
 
 #endif // CAMERA_H

@@ -40,13 +40,9 @@ QSize Widget::sizeHint() const
 
 void Widget::loadShaders()
 {
-    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/LightningVertexShader");
-    cubeShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/LightningFragmentShader");
-    cubeShaderProgram.link();
-
-    //lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/ColoringVertexShader");
-    //lightSourceShaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/ColoringFragmentShader");
-    //lightSourceShaderProgram.link();
+    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/LightningVertexShader");
+    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shaders/LightningFragmentShader");
+    shaderProgram.link();
 }
 
 void Widget::initializeGL()
@@ -57,7 +53,7 @@ void Widget::initializeGL()
     glClearColor(0,0,0,0); //Ustawienie koloru tła
 
     loadShaders(); //Ładowanie shaderów
-    game.initializeGame(&cubeShaderProgram, &keyboardManager);
+    game.initializeGame(&shaderProgram, &keyboardManager);
 
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     paintTimer.setTimerType(Qt::PreciseTimer);
@@ -81,11 +77,9 @@ void Widget::paintGL()
     logic();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     game.render(camera, light, projectionMatrix);
 
     updateTime();
-
 }
 
 void Widget::logic()
@@ -98,65 +92,16 @@ void Widget::logic()
 
 void Widget::mousePressEvent(QMouseEvent *event)
 {
-    lastMousePosition = event->pos();
     event->accept();
 }
 
 void Widget::mouseMoveEvent(QMouseEvent *event)
 {
-    int deltaX = event->x() - lastMousePosition.x();
-    int deltaY = event->y() - lastMousePosition.y();
-    if (event->buttons() & Qt::LeftButton)
-    {
-        float cameraRotY = camera.getRotationY();
-        cameraRotY -= deltaX;
-
-        while (cameraRotY < 0)
-        {
-            cameraRotY += 360;
-        }
-        while (cameraRotY >= 360)
-        {
-            cameraRotY -= 360;
-        }
-        camera.setRotationY(cameraRotY);
-
-        float cameraRotX = camera.getRotationX();
-        cameraRotX -= deltaY;
-
-        while (cameraRotX < 0)
-        {
-            cameraRotX += 360;
-        }
-        while (cameraRotX >= 360)
-        {
-            cameraRotX -= 360;
-        }
-        camera.setRotationX(cameraRotX);
-
-        //update();
-    }
-    lastMousePosition = event->pos();
     event->accept();
 }
 
 void Widget::wheelEvent(QWheelEvent *event)
 {
-    int delta = event->delta();
-    if (event->orientation() == Qt::Vertical)
-    {
-        if (delta < 0)
-        {
-            camera.setDistance(camera.getDistance() * 1.1);
-        }
-        else if (delta > 0)
-        {
-            camera.setDistance(camera.getDistance() * 0.9);
-        }
-
-        //update();
-    }
-
     event->accept();
 }
 
@@ -171,6 +116,8 @@ void Widget::keyPressEvent(QKeyEvent *event)
     {
         QApplication::quit();
     } 
+
+    event->accept();
 }
 
 void Widget::keyReleaseEvent(QKeyEvent *event)
@@ -179,6 +126,8 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 
     keyboardManager.KeyReleased(key);
     game.KeyReleased(key);
+
+    event->accept();
 }
 
 void Widget::updateTime()

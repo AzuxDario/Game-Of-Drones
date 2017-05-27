@@ -40,7 +40,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createPlayer(shader);
 
     //TEST
-    player.getPosition().setX(20);
+    player.GetPosition().setX(20);
 }
 
 void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
@@ -123,24 +123,24 @@ void Game::KeyReleased(Qt::Key key)
 
 void Game::updateCamera(Camera& camera)
 {
-    camera.setPosition(player.getPosition());
-    camera.setRotation(player.getRotation());
+    camera.setPosition(player.GetPosition());
+    camera.setRotation(player.GetRotation());
 }
 
 void Game::input()
 {
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_W))
-        player.getPosition() += QVector3D(0, 0, -0.1);
+        player.GetPosition() += QVector3D(0, 0, -0.1);
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_S))
-        player.getPosition() += QVector3D(0, 0, 0.1);
+        player.GetPosition() += QVector3D(0, 0, 0.1);
 
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_A))
-        player.getPosition() += QVector3D(-0.1, 0, 0);
+        player.GetPosition() += QVector3D(-0.1, 0, 0);
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_D))
-        player.getPosition() += QVector3D(0.1, 0, 0);
+        player.GetPosition() += QVector3D(0.1, 0, 0);
 
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_Q))
-        player.getRotation() += QVector3D(0, -0.4, 0);
+        player.GetRotation() += QVector3D(0, -0.4, 0);
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_E))
-        player.getRotation() += QVector3D(0, 0.4, 0);
+        player.GetRotation() += QVector3D(0, 0.4, 0);
 }

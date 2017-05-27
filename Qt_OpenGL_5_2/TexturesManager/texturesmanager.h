@@ -8,14 +8,14 @@
 
 class TexturesManager
 {
+private:
+    QVector<TextureData*> textures;
+
 public:
     TexturesManager();
 
     void LoadAll(QVector<QString> files);
     QOpenGLTexture* GetTexture(QString name);
-
-private:
-    QVector<TextureData*> textures;
 };
 
 #endif // TEXTURESMANAGER_H

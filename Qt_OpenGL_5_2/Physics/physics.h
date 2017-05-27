@@ -11,8 +11,6 @@ public:
     Physics();
 
     QVector<DrawableObject*> CheckCollisions(DrawableObject* base, QVector<DrawableObject*> objects);
-
-private:
 };
 
 #endif

@@ -34,10 +34,7 @@ class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 private:
     QMatrix4x4 projectionMatrix;
 
-    QOpenGLShaderProgram cubeShaderProgram;
-    //QOpenGLShaderProgram lightSourceShaderProgram;
-
-    QPoint lastMousePosition;
+    QOpenGLShaderProgram shaderProgram;
     QTimer paintTimer;
 
     Camera camera;

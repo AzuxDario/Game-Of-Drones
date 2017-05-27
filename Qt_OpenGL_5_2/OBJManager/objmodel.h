@@ -5,15 +5,15 @@
 
 class OBJModel
 {
+private:
+    QString name;
+    OBJLoader data;
+
 public:
     OBJModel(QString name, OBJLoader data);
 
     QString GetName();
     OBJLoader GetData();
-
-private:
-    QString name;
-    OBJLoader data;
 };
 
 #endif // OBJMODEL_H
