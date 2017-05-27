@@ -140,7 +140,7 @@ void Game::input()
         player.getPosition() += QVector3D(0.1, 0, 0);
 
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_Q))
-        player.getRotation() += QVector3D(-0.4, 0, 0);
+        player.getRotation() += QVector3D(0, -0.4, 0);
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_E))
-        player.getRotation() += QVector3D(0.4, 0, 0);
+        player.getRotation() += QVector3D(0, 0.4, 0);
 }
