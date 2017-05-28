@@ -10,6 +10,8 @@ class Player
 {
 private:
     DrawableObject drone;
+    GLfloat speed = 0;
+    QVector2D direction = QVector2D(0,0);
 
 public:
     Player();

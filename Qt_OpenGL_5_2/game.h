@@ -38,8 +38,7 @@ private:
 public:
     Game();
 
-    QVector<DrawableObject> ImmovableObjects;
-    QVector<MovableObject> MovableObjects;
+    QVector<DrawableObject> DrawableObjects;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
     void logic(Camera& camera);

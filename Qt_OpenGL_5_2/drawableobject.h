@@ -20,11 +20,8 @@
 class DrawableObject : protected QOpenGLFunctions
 {
 private:
-    QVector3D position;
-    QVector3D rotation;
-
-    QVector3D moveSpeed;
-    QVector3D rotationSpeed;
+    QVector3D position = QVector3D(0.0,0.0,0.0);
+    QVector3D rotation = QVector3D(0.0,0.0,0.0);
 
     QMatrix4x4 pMatrix;
     QOpenGLShaderProgram* cubeShaderProgram;
@@ -42,6 +39,9 @@ private:
 public:
     DrawableObject();
     ~DrawableObject();
+
+    QVector3D moveSpeed = QVector3D(0.0,0.0,0.0);
+    QVector3D rotationSpeed = QVector3D(0.0,0.0,0.0);
 
     void Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture);
     void Logic(int deltaTime);
