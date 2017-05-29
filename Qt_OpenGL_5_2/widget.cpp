@@ -161,7 +161,7 @@ void Widget::closeGame()
 void Widget::updateTime()
 {
     QString min, sec, mSec;
-    int timeElapsed = timer.elapsed();
+    int timeElapsed = timer.elapsed(); //timeElapsed is milisecond
     int minutes = timeElapsed / 60000;
     timeElapsed -= minutes * 60000;
     int seconds = timeElapsed / 1000;
