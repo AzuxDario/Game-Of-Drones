@@ -85,8 +85,8 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGL
 
 void DrawableObject::Logic(int deltaTime)
 {
-    position += (moveSpeed * deltaTime);
-    rotation += (rotationSpeed * deltaTime);
+    position += (moveSpeed * ((float)deltaTime / 16.0));
+    rotation += (rotationSpeed * ((float)deltaTime / 16.0));
 }
 
 void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)

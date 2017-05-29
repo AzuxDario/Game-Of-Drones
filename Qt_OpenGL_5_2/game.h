@@ -7,6 +7,7 @@
 #include <QOpenGLBuffer>
 #include <QMatrix4x4>
 #include <QDateTime>
+#include <cmath>
 
 #include "OBJManager/objmanager.h"
 #include "TexturesManager/texturesmanager.h"

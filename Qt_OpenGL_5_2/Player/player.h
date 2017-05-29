@@ -5,13 +5,13 @@
 #include "DrawableObject.h"
 #include "OBJManager/objmanager.h"
 #include "TexturesManager/texturesmanager.h"
+#include <cmath>
 
 class Player
 {
 private:
     DrawableObject drone;
-    GLfloat speed = 0;
-    QVector2D direction = QVector2D(0,0);
+
 
 public:
     Player();
@@ -23,6 +23,11 @@ public:
 
     QVector3D& GetPosition() noexcept { return drone.getPosition(); }
     QVector3D& GetRotation() noexcept { return drone.getRotation(); }
+
+    GLfloat speed = 0;
+    float maxspeed = 0.4;
+    QVector2D direction = QVector2D(M_PI/2,0);
+    QVector2D rotation = QVector2D(0,0);
 };
 
 #endif

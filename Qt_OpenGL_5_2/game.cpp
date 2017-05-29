@@ -126,17 +126,52 @@ void Game::updateCamera(Camera& camera)
 void Game::input()
 {
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_W))
-        player.GetPosition() += QVector3D(0, 0, -0.1);
+    {
+        float dir = player.direction.y() + 0.02;
+        if (dir >M_PI * 2) dir -= M_PI * 2;
+        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        player.direction.setY(dir);
+    }
+
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_S))
-        player.GetPosition() += QVector3D(0, 0, 0.1);
+    {
+        float dir = player.direction.y() - 0.02;
+        if (dir > M_PI * 2) dir -= M_PI * 2;
+        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        player.direction.setY(dir);
+    }
+
 
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_A))
-        player.GetPosition() += QVector3D(-0.1, 0, 0);
-    if(keyboardManager->IsKeyPressed(Qt::Key::Key_D))
-        player.GetPosition() += QVector3D(0.1, 0, 0);
+    {
+        float dir = player.direction.x() + 0.05;
+        if (dir >M_PI * 2) dir -= M_PI * 2;
+        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        player.direction.setX(dir);
+    }
+
+    if (keyboardManager->IsKeyPressed(Qt::Key::Key_D))
+    {
+        float dir = player.direction.x() - 0.05;
+        if (dir > M_PI * 2) dir -= M_PI * 2;
+        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        player.direction.setX(dir);
+    }
+
 
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_Q))
-        player.GetRotation() += QVector3D(0, 0.4, 0);
+    {
+
+    }
+
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_E))
-        player.GetRotation() += QVector3D(0, -0.4, 0);
+    {
+
+    }
+
+    if(keyboardManager->IsKeyPressed(Qt::Key::Key_Space))
+    {
+        player.speed = player.maxspeed;
+    }
+
 }

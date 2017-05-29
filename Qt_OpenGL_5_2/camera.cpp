@@ -14,8 +14,8 @@ QMatrix4x4 Camera::GetMatrix()
     cameraTransformation.rotate(rotation.y(), 0, 1, 0);
     cameraTransformation.rotate(rotation.z(), 0, 0, 1);
 
-    QVector3D cameraPosition = cameraTransformation * QVector3D(0, 3, 4);
-    QVector3D cameraUpDirection = QVector3D(0, 1, 0);
+    QVector3D cameraPosition = cameraTransformation * QVector3D(3, 0, 4);
+    QVector3D cameraUpDirection = QVector3D(1, 0, 0);
 
     vMatrix.lookAt(cameraPosition, position, cameraUpDirection);
     return vMatrix;

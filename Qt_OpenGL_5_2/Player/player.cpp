@@ -16,9 +16,13 @@ void Player::Logic(int deltaTime)
 {
     speed = max(speed / 1.01 - 0.01, 0.0);
 
-    drone.moveSpeed.setX(speed * cos(direction.x() * cos(direction.y())));
-    drone.moveSpeed.setY(speed * sin(direction.x() * cos(direction.y())));
-    drone.moveSpeed.setZ(speed * sin(direction.y()));
+
+    drone.moveSpeed.setZ(-speed * cos(direction.x()));//lewo-prawo
+    drone.moveSpeed.setY(speed * sin(direction.x()));//przód-tył
+    drone.moveSpeed.setX(-speed * sin(direction.y()));
+
+    drone.getRotation().setX(direction.x() * 180 / M_PI);
+    drone.getRotation().setY(direction.y() * 180 / M_PI);
 
     drone.Logic(deltaTime);
 
@@ -31,16 +35,5 @@ void Player::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 
 void Player::Input(Qt::Key key)
 {
-    switch(key)
-    {
-        case(Qt::Key::Key_W):
-        {
-            speed = 0.1;
-            break;
-        }
-        default:
-        {
-            break;
-        }
-    }
+
 }

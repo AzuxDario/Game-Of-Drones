@@ -8,6 +8,7 @@ KeyboardManager::KeyboardManager()
     keyMap.insert(Qt::Key_D, false);
     keyMap.insert(Qt::Key_Q, false);
     keyMap.insert(Qt::Key_E, false);
+    keyMap.insert(Qt::Key_Space, false);
 }
 
 void KeyboardManager::KeyPressed(Qt::Key key)
