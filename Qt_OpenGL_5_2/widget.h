@@ -50,7 +50,7 @@ private:
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
     QLabel *shipInfo;
-    QPushButton * startGame;
+    QPushButton *startGameButton;
 
     QTime timer;
     QString cssFpsAndTimer;
@@ -64,6 +64,7 @@ public slots:
 
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    void startGame();
 
 protected:
 
