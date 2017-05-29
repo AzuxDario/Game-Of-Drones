@@ -3,6 +3,7 @@
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
     menuIsActive = true;
+    isGamePaused = false;
 
     cssFpsAndTimer = "font-size:30px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
 
@@ -120,7 +121,10 @@ void Widget::startGame()
 
     startGameButton->setVisible(false);
     closeGameButton->setVisible(false);
+    if(isGamePaused == false)
+    {
     timer.start();
+    }
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(14);
@@ -134,10 +138,11 @@ void Widget::startGame()
 void Widget::pauseGame()
 {
     game.pause();
+    isGamePaused = true;
 
     startGameButton->setVisible(true);
+    startGameButton->setText("Wznów");
     closeGameButton->setVisible(true);
-    timer.start();
 
     paintTimer.stop();
 

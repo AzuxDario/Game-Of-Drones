@@ -57,6 +57,7 @@ private:
     QTime timer;
     QString cssFpsAndTimer;
     bool menuIsActive;
+    bool isGamePaused;
 
 public:
     Widget(QWidget *parent = 0);
