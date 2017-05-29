@@ -59,6 +59,7 @@ void Game::logic(Camera& camera)
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 
     envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
+    skybox.setPosition(player.GetPosition());
 
     envGenerator.Logic(player.GetPosition(), deltaTime);
     star.Logic(deltaTime);

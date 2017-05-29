@@ -56,6 +56,7 @@ public:
     float getRadius() noexcept {return radius;}
 
     void setRadius(float value) noexcept {radius = value;}
+    void setPosition(QVector3D value) noexcept {position = value;}
 
 private:
     void getVerticlesData(OBJLoader data);
