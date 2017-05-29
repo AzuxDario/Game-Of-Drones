@@ -107,16 +107,6 @@ void Game::createPlayer(QOpenGLShaderProgram* shader)
     player.Init(&objManager, &texturesManager, shader);
 }
 
-void Game::KeyPressed(Qt::Key key)
-{
-
-}
-
-void Game::KeyReleased(Qt::Key key)
-{
-
-}
-
 void Game::updateCamera(Camera& camera)
 {
     camera.setPosition(player.GetPosition());
