@@ -151,6 +151,7 @@ void Widget::startGame()
     fpsCounterLabel->setVisible(true);
     timerLabel->setVisible(true);
     shipInfo->setVisible(true);
+    setFocus();
 
 }
 
