@@ -56,6 +56,7 @@ private:
 
     QTime timer;
     QString cssFpsAndTimer;
+    bool menuIsActive;
 
 public:
     Widget(QWidget *parent = 0);
@@ -67,6 +68,7 @@ public slots:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
     void startGame();
+    void pauseGame();
     void closeGame();
 
 protected:

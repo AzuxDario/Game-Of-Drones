@@ -2,7 +2,7 @@
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
-
+    menuIsActive = true;
 
     cssFpsAndTimer = "font-size:30px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
 
@@ -126,7 +126,10 @@ void Widget::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Escape)
     {
-        closeGame();
+        if(menuIsActive == true)
+        {
+            pauseGame();
+        }
     }
 
     Qt::Key key = (Qt::Key)event->key();
@@ -159,6 +162,19 @@ void Widget::startGame()
     shipInfo->setVisible(true);
     setFocus();
 
+}
+void Widget::pauseGame()
+{
+    startGameButton->setVisible(true);
+    closeGameButton->setVisible(true);
+    timer.start();
+
+    paintTimer.stop();
+
+    fpsCounterLabel->setVisible(false);
+    timerLabel->setVisible(false);
+    shipInfo->setVisible(false);
+    setFocus();
 }
 
 void Widget::closeGame()
