@@ -1,9 +1,10 @@
 #include "player.h"
-#include <math.h>
+
 
 Player::Player()
 {
-
+    direction = QVector2D(0,0);
+    speed = 0;
 }
 
 void Player::Init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)

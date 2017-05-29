@@ -2,6 +2,10 @@
 
 DrawableObject::DrawableObject() : texture(0)
 {
+    position = QVector3D(0.0,0.0,0.0);
+    rotation = QVector3D(0.0,0.0,0.0);
+    moveSpeed = QVector3D(0.0,0.0,0.0);
+    rotationSpeed = QVector3D(0.0,0.0,0.0);
     texture = nullptr;
     numberOfVerticles = 0;
 }
