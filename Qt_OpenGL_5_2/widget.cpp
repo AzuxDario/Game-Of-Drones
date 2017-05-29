@@ -20,11 +20,13 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     shipInfo->setMinimumSize(800,300);
     shipInfo->setMaximumSize(800,300);
     startGame = new QPushButton("Start!",this);
-    startGame->setStyleSheet(cssFpsAndTimer);
+    startGame->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    startGame->setMaximumWidth(400);
+    startGame->setMinimumWidth(400);
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
     gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
-    gridLayout->addWidget(startGame,1,1);
+    gridLayout->addWidget(startGame,1,1, Qt::AlignCenter);
     gridLayout->addWidget(shipInfo,2,1,Qt::AlignBottom);
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
