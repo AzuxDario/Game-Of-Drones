@@ -113,7 +113,6 @@ void Widget::keyPressEvent(QKeyEvent *event)
     Qt::Key key = (Qt::Key)event->key();
 
     keyboardManager.KeyPressed(key);
-    game.KeyPressed(key);
 
     if(event->key() == Qt::Key_Escape)
     {
@@ -128,7 +127,6 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
     Qt::Key key = (Qt::Key)event->key();
 
     keyboardManager.KeyReleased(key);
-    game.KeyReleased(key);
 
     event->accept();
 }
