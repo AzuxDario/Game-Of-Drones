@@ -7,10 +7,9 @@
 #include "TexturesManager/texturesmanager.h"
 #include <cmath>
 
-class Player
+class Player : public DrawableObject
 {
 private:
-    DrawableObject drone;
     GLfloat speed;
     QVector2D direction;
 
@@ -21,9 +20,6 @@ public:
     void Logic(int deltaTime);
     void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
     void Input(Qt::Key key);
-
-    QVector3D& GetPosition() noexcept { return drone.getPosition(); }
-    QVector3D& GetRotation() noexcept { return drone.getRotation(); }
 };
 
 #endif

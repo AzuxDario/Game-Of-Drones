@@ -36,7 +36,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createPlayer(shader);
 
     //TEST
-    player.GetPosition().setX(20);
+    player.getPosition().setX(20);
 }
 
 void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
@@ -59,9 +59,9 @@ void Game::logic(Camera& camera)
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 
     envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
-    skybox.setPosition(player.GetPosition());
+    skybox.setPosition(player.getPosition());
 
-    envGenerator.Logic(player.GetPosition(), deltaTime);
+    envGenerator.Logic(player.getPosition(), deltaTime);
     star.Logic(deltaTime);
     player.Logic(deltaTime);
     updateCamera(camera);
@@ -110,24 +110,24 @@ void Game::createPlayer(QOpenGLShaderProgram* shader)
 
 void Game::updateCamera(Camera& camera)
 {
-    camera.setPosition(player.GetPosition());
-    camera.setRotation(player.GetRotation());
+    camera.setPosition(player.getPosition());
+    camera.setRotation(player.getRotation());
 }
 
 void Game::input()
 {
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_W))
-        player.GetPosition() += QVector3D(0, 0, -0.1);
+        player.getPosition() += QVector3D(0, 0, -0.1);
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_S))
-        player.GetPosition() += QVector3D(0, 0, 0.1);
+        player.getPosition() += QVector3D(0, 0, 0.1);
 
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_A))
-        player.GetPosition() += QVector3D(-0.1, 0, 0);
+        player.getPosition() += QVector3D(-0.1, 0, 0);
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_D))
-        player.GetPosition() += QVector3D(0.1, 0, 0);
+        player.getPosition() += QVector3D(0.1, 0, 0);
 
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_Q))
-        player.GetRotation() += QVector3D(0, 0.4, 0);
+        player.getRotation() += QVector3D(0, 0.4, 0);
     if(keyboardManager->IsKeyPressed(Qt::Key::Key_E))
-        player.GetRotation() += QVector3D(0, -0.4, 0);
+        player.getRotation() += QVector3D(0, -0.4, 0);
 }
