@@ -134,23 +134,3 @@ bool OBJLoader::parseFaces(QString line)
     facesData.push_back(fData);
 	return true;
 }
-
-QVector<QVector3D> OBJLoader::GetVerticesData()
-{
-    return verticesData;
-}
-
-QVector<QVector3D> OBJLoader::GetNormalsData()
-{
-    return normalsData;
-}
-
-QVector<QVector2D> OBJLoader::GetTextureCoordsData()
-{
-    return textureCoordsData;
-}
-
-QVector<FaceData> OBJLoader::GetFacesData()
-{
-    return facesData;
-}
