@@ -42,8 +42,6 @@ public:
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
     void logic(Camera& camera);
-    void KeyPressed(Qt::Key key);
-    void KeyReleased(Qt::Key key);
     void Draw(QOpenGLShaderProgram & shader);
     //Zmiana pozycji
     void Move();
