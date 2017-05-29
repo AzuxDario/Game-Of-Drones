@@ -13,6 +13,7 @@
 #include <QTime>
 #include <QDateTime>
 #include <QLabel>
+#include <QPushButton>
 #include <QGridLayout>
 #include <QApplication>
 
@@ -49,6 +50,7 @@ private:
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
     QLabel *shipInfo;
+    QPushButton * startGame;
 
     QTime timer;
     QString cssFpsAndTimer;
