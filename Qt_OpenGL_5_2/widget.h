@@ -87,6 +87,7 @@ private:
     void loadShaders();
     void updateTime();
     void makeConnection();
+    void createLayout();
 };
 
 #endif // WIDGET_H
