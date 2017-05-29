@@ -26,17 +26,23 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     startGameButton->setMaximumWidth(400);
     startGameButton->setMinimumWidth(400);
+    closeGameButton = new QPushButton("Wyjście",this);
+    closeGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    closeGameButton->setMaximumWidth(400);
+    closeGameButton->setMinimumWidth(400);
+    gridMenuLayout = new QGridLayout();
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
     gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
-    gridLayout->addWidget(startGameButton,1,1, Qt::AlignCenter);
-    gridLayout->addWidget(shipInfo,2,1,Qt::AlignBottom);
+    gridLayout->addLayout(gridMenuLayout,1,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(startGameButton,1,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(closeGameButton,2,1, Qt::AlignCenter);
+    gridLayout->addWidget(shipInfo,3,1,Qt::AlignBottom);
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
 
-    connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
-    connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
+    makeConnection();
 
     //musicPlayer.setSong("qrc:/Music/song");
     //musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
@@ -120,8 +126,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Escape)
     {
-        qApp->quit();
-        //QApplication::quit();
+        closeGame();
     }
 
     Qt::Key key = (Qt::Key)event->key();
@@ -143,6 +148,7 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 void Widget::startGame()
 {
     startGameButton->setVisible(false);
+    closeGameButton->setVisible(false);
     timer.start();
 
     paintTimer.setTimerType(Qt::PreciseTimer);
@@ -154,6 +160,12 @@ void Widget::startGame()
     setFocus();
 
 }
+
+void Widget::closeGame()
+{
+    qApp->quit();
+}
+
 
 void Widget::updateTime()
 {
@@ -193,4 +205,11 @@ void Widget::updateTime()
     }
 
     timerLabel->setText("Czas: "+min+":"+sec+"."+mSec);
+}
+
+void Widget::makeConnection()
+{
+    connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
+    connect(closeGameButton,SIGNAL(pressed()),this,SLOT(closeGame()));
 }

@@ -47,10 +47,12 @@ private:
     MusicPlayer musicPlayer;
 
     QGridLayout* gridLayout;
+    QGridLayout* gridMenuLayout;
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
     QLabel *shipInfo;
     QPushButton *startGameButton;
+    QPushButton *closeGameButton;
 
     QTime timer;
     QString cssFpsAndTimer;
@@ -65,6 +67,7 @@ public slots:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
     void startGame();
+    void closeGame();
 
 protected:
 
@@ -81,6 +84,7 @@ private:
 
     void loadShaders();
     void updateTime();
+    void makeConnection();
 };
 
 #endif // WIDGET_H
