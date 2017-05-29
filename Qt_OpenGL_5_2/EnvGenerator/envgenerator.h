@@ -16,7 +16,10 @@ private:
     QOpenGLShaderProgram* shader;
     QVector<DrawableObject*> objects;
 
-    int generatorDistance;
+    float generatorDistance;
+    float destroyDistance;
+    float fixPositionMultiplier;
+
     int maxPlanetoidsCount;
     float maxPlanetoidsRotationSpeed;
     float maxPlanetoidsMoveSpeed;

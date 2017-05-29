@@ -3,6 +3,9 @@
 EnvGenerator::EnvGenerator()
 {
     generatorDistance = 50;
+    destroyDistance = 100;
+    fixPositionMultiplier = 1.2f;
+
     maxPlanetoidsCount = 400;
     maxPlanetoidsRotationSpeed = 0.05f;
     maxPlanetoidsMoveSpeed = 0.005f;
@@ -31,7 +34,7 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
     for(int i=objects.size() - 1; i >= 0; i--)
     {
         float distance = objects[i]->getPosition().distanceToPoint(playerPosition);
-        if(distance > generatorDistance * 1.5f)
+        if(distance >= destroyDistance)
         {
             delete objects[i];
             objects.remove(i);
@@ -63,12 +66,11 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
         planetoid->getPosition().setX(getRandomNumberWithNegatives(generatorDistance));
         planetoid->getPosition().setY(getRandomNumberWithNegatives(generatorDistance));
         planetoid->getPosition().setZ(getRandomNumberWithNegatives(generatorDistance));
-        planetoid->getPosition() += QVector3D(playerPosition);
 
-        while(planetoid->getPosition().distanceToPoint(playerPosition) <= generatorDistance)
-        {
-            planetoid->getPosition() *= 1.1f;
-        }
+        while(planetoid->getPosition().distanceToPoint(QVector3D(0, 0, 0)) <= generatorDistance)
+            planetoid->getPosition() *= fixPositionMultiplier;
+
+        planetoid->getPosition() += QVector3D(playerPosition);
 
         objects.push_back(planetoid);
     }
