@@ -12,8 +12,8 @@ private:
 public:
     OBJModel(QString name, OBJLoader data);
 
-    QString GetName();
-    OBJLoader GetData();
+    QString getName();
+    OBJLoader getData();
 };
 
 #endif // OBJMODEL_H

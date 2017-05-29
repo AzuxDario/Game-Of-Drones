@@ -5,7 +5,7 @@ TexturesManager::TexturesManager()
 
 }
 
-void TexturesManager::LoadAll(QVector<QString> files)
+void TexturesManager::loadAll(QVector<QString> files)
 {
     for(int i=0; i<files.size(); i++)
     {
@@ -14,12 +14,12 @@ void TexturesManager::LoadAll(QVector<QString> files)
     }
 }
 
-QOpenGLTexture* TexturesManager::GetTexture(QString name)
+QOpenGLTexture* TexturesManager::getTexture(QString name)
 {
     for(int i=0; i<textures.size(); i++)
     {
-        if(textures[i]->GetName() == name)
-            return textures[i]->GetTexture();
+        if(textures[i]->getName() == name)
+            return textures[i]->getTexture();
     }
 
     return NULL;

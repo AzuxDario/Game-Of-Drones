@@ -10,7 +10,7 @@ KeyboardManager::KeyboardManager()
     keyMap.insert(Qt::Key_E, false);
 }
 
-void KeyboardManager::KeyPressed(Qt::Key key)
+void KeyboardManager::keyPressed(Qt::Key key)
 {
     if(keyMap.find(key) != keyMap.end())
     {
@@ -18,7 +18,7 @@ void KeyboardManager::KeyPressed(Qt::Key key)
     }
 }
 
-void KeyboardManager::KeyReleased(Qt::Key key)
+void KeyboardManager::keyReleased(Qt::Key key)
 {
     if(keyMap.find(key) != keyMap.end())
     {
@@ -26,7 +26,7 @@ void KeyboardManager::KeyReleased(Qt::Key key)
     }
 }
 
-bool KeyboardManager::IsKeyPressed(Qt::Key key)
+bool KeyboardManager::isKeyPressed(Qt::Key key)
 {
     return keyMap.value(key);
 }

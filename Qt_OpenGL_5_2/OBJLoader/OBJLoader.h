@@ -26,10 +26,11 @@ public:
 
     bool LoadFromFile(QString fileName);
 
-    QVector<QVector3D> GetVerticesData() noexcept {return verticesData;}
-    QVector<QVector3D> GetNormalsData() noexcept {return normalsData;}
-    QVector<QVector2D> GetTextureCoordsData() noexcept {return textureCoordsData;}
-    QVector<FaceData> GetFacesData() noexcept {return facesData;}
+    QVector<QVector3D> getVerticesData() noexcept {return verticesData;}
+    QVector<QVector3D> getNormalsData() noexcept {return normalsData;}
+    QVector<QVector2D> getTextureCoordsData() noexcept {return textureCoordsData;}
+    QVector<FaceData> getFacesData() noexcept {return facesData;}
+
 private:
     bool parse(QString content);
     bool parseVertices(QString line);

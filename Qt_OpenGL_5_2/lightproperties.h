@@ -8,7 +8,6 @@ using GLFloat = float; //Nie wiem w jakim pliku nagłówkowym to jest więc sam 
 class LightProperties
 {
 private:
-
     QColor ambientColor;
     QColor diffuseColor;
     QColor specularColor;
@@ -18,8 +17,8 @@ private:
     GLFloat shininess;
 
 public:
-
     LightProperties();
+
     QColor getAmbientColor() noexcept {return ambientColor;}
     QColor getDiffuseColor() noexcept {return diffuseColor;}
     QColor getSpecularColor() noexcept {return specularColor;}

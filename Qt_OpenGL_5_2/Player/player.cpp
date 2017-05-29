@@ -7,12 +7,12 @@ Player::Player()
     speed = 0;
 }
 
-void Player::Init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
+void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
 {
-    DrawableObject::Init(shader, objManager->GetModel(":/Objects/drone"), texturesManager->GetTexture(":/Textures/drone"));
+    DrawableObject::init(shader, objManager->getModel(":/Objects/drone"), texturesManager->getTexture(":/Textures/drone"));
 }
 
-void Player::Logic(int deltaTime)
+void Player::logic(int deltaTime)
 {
     speed = max(speed / 1.01 - 0.01, 0.0);
 
@@ -20,15 +20,15 @@ void Player::Logic(int deltaTime)
     moveSpeed.setY(speed * sin(direction.x() * cos(direction.y())));
     moveSpeed.setZ(speed * sin(direction.y()));
 
-    DrawableObject::Logic(deltaTime);
+    DrawableObject::logic(deltaTime);
 }
 
-void Player::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
+void Player::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 {
-    DrawableObject::Draw(camera, light, pMatrix);
+    DrawableObject::draw(camera, light, pMatrix);
 }
 
-void Player::Input(Qt::Key key)
+void Player::input(Qt::Key key)
 {
     switch(key)
     {

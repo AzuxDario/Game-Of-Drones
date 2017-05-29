@@ -16,10 +16,10 @@ private:
 public:
     Player();
 
-    void Init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
-    void Logic(int deltaTime);
-    void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
-    void Input(Qt::Key key);
+    void init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
+    void logic(int deltaTime);
+    void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
+    void input(Qt::Key key);
 };
 
 #endif

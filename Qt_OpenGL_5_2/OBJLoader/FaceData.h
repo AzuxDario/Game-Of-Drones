@@ -4,7 +4,7 @@
 class FaceData
 {
 public:
-    QVector3D Vertices;
-    QVector3D Normals;
-    QVector3D Textures;
+    QVector3D vertices;
+    QVector3D normals;
+    QVector3D textures;
 };

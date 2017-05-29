@@ -14,8 +14,8 @@ private:
 public:
     TexturesManager();
 
-    void LoadAll(QVector<QString> files);
-    QOpenGLTexture* GetTexture(QString name);
+    void loadAll(QVector<QString> files);
+    QOpenGLTexture* getTexture(QString name);
 };
 
 #endif // TEXTURESMANAGER_H

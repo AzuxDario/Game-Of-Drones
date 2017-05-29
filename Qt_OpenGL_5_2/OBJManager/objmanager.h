@@ -12,8 +12,8 @@ private:
 public:
     OBJManager();
 
-    void LoadAll(QVector<QString> files);
-    OBJModel* GetModel(QString name);
+    void loadAll(QVector<QString> files);
+    OBJModel* getModel(QString name);
 };
 
 #endif // OBJMANAGER_H

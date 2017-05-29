@@ -7,7 +7,7 @@ Telemetry::Telemetry()
     lastFPS = 0;
 }
 
-void Telemetry::Logic()
+void Telemetry::logic()
 {
     int now = QDateTime::currentMSecsSinceEpoch();
     if(now - lastUpdate >= 1000)

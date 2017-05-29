@@ -5,7 +5,7 @@ OBJManager::OBJManager()
 
 }
 
-void OBJManager::LoadAll(QVector<QString> files)
+void OBJManager::loadAll(QVector<QString> files)
 {
     for(int i=0; i<files.size(); i++)
     {
@@ -17,11 +17,11 @@ void OBJManager::LoadAll(QVector<QString> files)
     }
 }
 
-OBJModel* OBJManager::GetModel(QString name)
+OBJModel* OBJManager::getModel(QString name)
 {
     for(int i=0; i<models.size(); i++)
     {
-        if(models[i]->GetName() == name)
+        if(models[i]->getName() == name)
             return models[i];
     }
 

@@ -5,7 +5,7 @@ Physics::Physics()
 
 }
 
-QVector<DrawableObject*> Physics::CheckCollisions(DrawableObject* base, QVector<DrawableObject*> objects)
+QVector<DrawableObject*> Physics::checkCollisions(DrawableObject* base, QVector<DrawableObject*> objects)
 {
     QVector<DrawableObject*> detectedCollisions;
     float baseRadius = base->getRadius();

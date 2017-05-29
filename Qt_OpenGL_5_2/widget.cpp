@@ -89,8 +89,8 @@ void Widget::logic()
 {
     game.logic(camera);
 
-    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.GetFPS()));
-    telemetry.Logic();
+    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
+    telemetry.logic();
 }
 
 void Widget::mousePressEvent(QMouseEvent *event)
@@ -112,7 +112,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
 {
     Qt::Key key = (Qt::Key)event->key();
 
-    keyboardManager.KeyPressed(key);
+    keyboardManager.keyPressed(key);
 
     if(event->key() == Qt::Key_Escape)
     {
@@ -126,7 +126,7 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 {
     Qt::Key key = (Qt::Key)event->key();
 
-    keyboardManager.KeyReleased(key);
+    keyboardManager.keyReleased(key);
 
     event->accept();
 }
