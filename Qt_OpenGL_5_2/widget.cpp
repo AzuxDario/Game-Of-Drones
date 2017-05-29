@@ -94,7 +94,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Escape)
     {
-        if(menuIsActive == true)
+        if(menuIsActive == false)
         {
             pauseGame();
         }
@@ -118,6 +118,7 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 
 void Widget::startGame()
 {
+    menuIsActive = false;
     game.resume();
 
     startGameButton->setVisible(false);
@@ -139,6 +140,7 @@ void Widget::startGame()
 void Widget::pauseGame()
 {
     game.pause();
+    menuIsActive = true;
     isGamePaused = true;
 
     startGameButton->setVisible(true);
