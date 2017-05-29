@@ -55,6 +55,7 @@ private:
     QPushButton *closeGameButton;
 
     QTime timer;
+    int miliSeconds;
     QString cssFpsAndTimer;
     bool menuIsActive;
     bool isGamePaused;

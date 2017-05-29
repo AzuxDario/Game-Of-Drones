@@ -4,6 +4,7 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
     menuIsActive = true;
     isGamePaused = false;
+    miliSeconds = 0;
 
     cssFpsAndTimer = "font-size:30px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
 
@@ -121,7 +122,7 @@ void Widget::startGame()
 
     startGameButton->setVisible(false);
     closeGameButton->setVisible(false);
-    if(isGamePaused == false)
+    //if(isGamePaused == false)
     {
     timer.start();
     }
@@ -145,6 +146,7 @@ void Widget::pauseGame()
     closeGameButton->setVisible(true);
 
     paintTimer.stop();
+    miliSeconds += timer.elapsed();
 
     fpsCounterLabel->setVisible(false);
     timerLabel->setVisible(false);
@@ -161,7 +163,7 @@ void Widget::closeGame()
 void Widget::updateTime()
 {
     QString min, sec, mSec;
-    int timeElapsed = timer.elapsed(); //timeElapsed is milisecond
+    int timeElapsed = timer.elapsed() + miliSeconds;//timeElapsed is milisecond
     int minutes = timeElapsed / 60000;
     timeElapsed -= minutes * 60000;
     int seconds = timeElapsed / 1000;
