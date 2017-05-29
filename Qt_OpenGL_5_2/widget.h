@@ -26,7 +26,6 @@
 #include "Physics/physics.h"
 #include "telemetry.h"
 #include "KeyboardManager/keyboardmanager.h"
-#include "musicplayer.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -43,7 +42,6 @@ private:
     Telemetry telemetry;
     Game game;
     KeyboardManager keyboardManager;
-    MusicPlayer musicPlayer;
 
     QGridLayout* gridLayout;
     QLabel *fpsCounterLabel;

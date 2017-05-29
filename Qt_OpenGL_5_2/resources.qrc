@@ -19,5 +19,4 @@
         <file alias="planetoid">Content/planetoid.png</file>
         <file alias="star">Content/star.png</file>
     </qresource>
-    <qresource prefix="/Music"/>
 </RCC>
