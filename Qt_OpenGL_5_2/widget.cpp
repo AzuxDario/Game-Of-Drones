@@ -116,6 +116,8 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 
 void Widget::startGame()
 {
+    game.resume();
+
     startGameButton->setVisible(false);
     closeGameButton->setVisible(false);
     timer.start();
@@ -131,6 +133,8 @@ void Widget::startGame()
 }
 void Widget::pauseGame()
 {
+    game.pause();
+
     startGameButton->setVisible(true);
     closeGameButton->setVisible(true);
     timer.start();

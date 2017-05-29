@@ -48,6 +48,9 @@ public:
     //AI, sterowanie itp.
     void step();
 
+    void pause();
+    void resume();
+
 private:
 
     void loadModels();

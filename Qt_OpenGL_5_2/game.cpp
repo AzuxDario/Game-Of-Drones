@@ -131,3 +131,13 @@ void Game::input()
     if(keyboardManager->isKeyPressed(Qt::Key::Key_E))
         player.getRotation() += QVector3D(0, -0.4, 0);
 }
+
+void Game::pause()
+{
+
+}
+
+void Game::resume()
+{
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+}
