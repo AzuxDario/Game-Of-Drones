@@ -105,7 +105,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
 {
-    player.init(&objManager, &texturesManager, shader);
+    player.init(shader, &objManager, &texturesManager);
 }
 
 void Game::updateCamera(Camera& camera)
@@ -116,7 +116,7 @@ void Game::updateCamera(Camera& camera)
 
 void Game::input()
 {
-    if(keyboardManager->IsKeyPressed(Qt::Key::Key_W))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_W))
     {
         float dir = player.direction.y() + 0.02;
         if (dir >M_PI * 2) dir -= M_PI * 2;
@@ -124,7 +124,7 @@ void Game::input()
         player.direction.setY(dir);
     }
 
-    if(keyboardManager->IsKeyPressed(Qt::Key::Key_S))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_S))
     {
         float dir = player.direction.y() - 0.02;
         if (dir > M_PI * 2) dir -= M_PI * 2;
@@ -133,7 +133,7 @@ void Game::input()
     }
 
 
-    if(keyboardManager->IsKeyPressed(Qt::Key::Key_A))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_A))
     {
         float dir = player.direction.x() + 0.05;
         if (dir >M_PI * 2) dir -= M_PI * 2;
@@ -141,7 +141,7 @@ void Game::input()
         player.direction.setX(dir);
     }
 
-    if (keyboardManager->IsKeyPressed(Qt::Key::Key_D))
+    if (keyboardManager->isKeyPressed(Qt::Key::Key_D))
     {
         float dir = player.direction.x() - 0.05;
         if (dir > M_PI * 2) dir -= M_PI * 2;
@@ -150,17 +150,17 @@ void Game::input()
     }
 
 
-    if(keyboardManager->IsKeyPressed(Qt::Key::Key_Q))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_Q))
     {
 
     }
 
-    if(keyboardManager->IsKeyPressed(Qt::Key::Key_E))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_E))
     {
 
     }
 
-    if(keyboardManager->IsKeyPressed(Qt::Key::Key_Space))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_Space))
     {
         player.speed = player.maxspeed;
     }
