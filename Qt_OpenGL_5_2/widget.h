@@ -55,8 +55,10 @@ private:
     QPushButton *closeGameButton;
 
     QTime timer;
+    int miliSeconds;
     QString cssFpsAndTimer;
     bool menuIsActive;
+    bool isGamePaused;
 
 public:
     Widget(QWidget *parent = 0);

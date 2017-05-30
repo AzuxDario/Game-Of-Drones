@@ -165,3 +165,13 @@ void Game::input()
         player.speed = player.maxspeed;
     }
 }
+
+void Game::pause()
+{
+
+}
+
+void Game::resume()
+{
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+}
