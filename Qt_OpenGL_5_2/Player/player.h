@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#define _USE_MATH_DEFINES
+
 #include <QVector>
 #include "DrawableObject.h"
 #include "OBJManager/objmanager.h"
@@ -10,24 +12,19 @@
 class Player : public DrawableObject
 {
 private:
-    DrawableObject drone;
-
 
 public:
     Player();
 
-    void Init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
-    void Logic(int deltaTime);
-    void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
-    void Input(Qt::Key key);
+    void init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
+    void logic(int deltaTime);
+    void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
+    void input(Qt::Key key);
 
-    QVector3D& GetPosition() noexcept { return drone.getPosition(); }
-    QVector3D& GetRotation() noexcept { return drone.getRotation(); }
-
-    GLfloat speed = 0;
-    float maxspeed = 0.4;
-    QVector2D direction = QVector2D(M_PI/2,0);
-    QVector2D rotation = QVector2D(0,0);
+    GLfloat speed;
+    float maxspeed;
+    QVector2D direction;
+    QVector2D rotation;
 
 };
 

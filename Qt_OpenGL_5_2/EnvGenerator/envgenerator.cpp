@@ -2,13 +2,13 @@
 
 EnvGenerator::EnvGenerator()
 {
-    generatorDistance = 50;
+    generatorDistance = 100;
     destroyDistance = 100;
-    fixPositionMultiplier = 1.2f;
+    fixPositionMultiplier = 2.0f;
 
-    maxPlanetoidsCount = 400;
-    maxPlanetoidsRotationSpeed = 0.05f;
-    maxPlanetoidsMoveSpeed = 0.005f;
+    maxPlanetoidsCount = 200;
+    maxPlanetoidsRotationSpeed = 0.15f;
+    maxPlanetoidsMoveSpeed = 0.025f;
 }
 
 EnvGenerator::~EnvGenerator()
@@ -63,15 +63,17 @@ void EnvGenerator::logic(QVector3D playerPosition, int deltaTime)
         planetoid->getMoveSpeed().setY(getRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
         planetoid->getMoveSpeed().setZ(getRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
 
-        planetoid->getPosition().setX(getRandomNumberWithNegatives(generatorDistance));
-        planetoid->getPosition().setY(getRandomNumberWithNegatives(generatorDistance));
-        planetoid->getPosition().setZ(getRandomNumberWithNegatives(generatorDistance));
+        bool posSet = false;
+        while(!posSet || planetoid->getPosition().distanceToPoint(QVector3D(0, 0, 0)) >= generatorDistance)
+        {
+            planetoid->getPosition().setX(getRandomNumberWithNegatives(destroyDistance));
+            planetoid->getPosition().setY(getRandomNumberWithNegatives(destroyDistance));
+            planetoid->getPosition().setZ(getRandomNumberWithNegatives(destroyDistance));
 
-        while(planetoid->getPosition().distanceToPoint(QVector3D(0, 0, 0)) <= generatorDistance)
-            planetoid->getPosition() *= fixPositionMultiplier;
+            posSet = true;
+        }
 
         planetoid->getPosition() += QVector3D(playerPosition);
-
         objects.push_back(planetoid);
     }
 }

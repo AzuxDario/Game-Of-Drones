@@ -3,8 +3,10 @@
 
 Player::Player()
 {
-    direction = QVector2D(0,0);
     speed = 0;
+    maxspeed = 0.4;
+    direction = QVector2D(M_PI/2,0);
+    rotation = QVector2D(0,0);
 }
 
 void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
@@ -16,15 +18,12 @@ void Player::logic(int deltaTime)
 {
     speed = max(speed / 1.01 - 0.01, 0.0);
 
-    drone.moveSpeed.setZ(-speed * cos(direction.x()));//lewo-prawo
-    drone.moveSpeed.setY(speed * sin(direction.x()));//przód-tył
-    drone.moveSpeed.setX(-speed * sin(direction.y()));
+    moveSpeed.setZ(-speed * cos(direction.x()));//lewo-prawo
+    moveSpeed.setY(speed * sin(direction.x()));//przód-tył
+    moveSpeed.setX(-speed * sin(direction.y()));
 
-    drone.getRotation().setX(direction.x() * 180 / M_PI);
-    drone.getRotation().setY(direction.y() * 180 / M_PI);
-
-    drone.Logic(deltaTime);
-
+    getRotation().setX(direction.x() * 180 / M_PI);
+    getRotation().setY(direction.y() * 180 / M_PI);
 
     DrawableObject::logic(deltaTime);
 }

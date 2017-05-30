@@ -1,5 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
+
+#define _USE_MATH_DEFINES
+
 #include <QWidget>
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>

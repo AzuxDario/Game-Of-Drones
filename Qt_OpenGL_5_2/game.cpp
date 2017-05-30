@@ -105,7 +105,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
 {
-    player.init(shader, &objManager, &texturesManager);
+    player.init(&objManager, &texturesManager, shader);
 }
 
 void Game::updateCamera(Camera& camera)
