@@ -20,8 +20,8 @@
 class DrawableObject : protected QOpenGLFunctions
 {
 private:
-    QVector3D position = QVector3D(0.0,0.0,0.0);
-    QVector3D rotation = QVector3D(0.0,0.0,0.0);
+    QVector3D position;
+    QVector3D rotation;
 
     QMatrix4x4 pMatrix;
     QOpenGLShaderProgram* cubeShaderProgram;
@@ -40,13 +40,9 @@ public:
     DrawableObject();
     ~DrawableObject();
 
-    QVector3D moveSpeed = QVector3D(0.0,0.0,0.0);
-    QVector3D rotationSpeed = QVector3D(0.0,0.0,0.0);
-
-    void Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture);
-    void Logic(int deltaTime);
-    void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
-    void Draw(QOpenGLShaderProgram & shader);
+    void init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture);
+    void logic(int deltaTime);
+    void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
     LightProperties& getLightProperties() noexcept {return lightProperties;}
     QVector3D& getPosition() noexcept {return position;}
@@ -56,6 +52,10 @@ public:
     float getRadius() noexcept {return radius;}
 
     void setRadius(float value) noexcept {radius = value;}
+    void setPosition(QVector3D value) noexcept {position = value;}
+
+    QVector3D moveSpeed;
+    QVector3D rotationSpeed;
 
 private:
     void getVerticlesData(OBJLoader data);

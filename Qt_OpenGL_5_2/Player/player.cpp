@@ -1,21 +1,20 @@
 #include "player.h"
-#include <math.h>
+
 
 Player::Player()
 {
-
+    direction = QVector2D(0,0);
+    speed = 0;
 }
 
-void Player::Init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
+void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
 {
-    drone.Init(shader, objManager->GetModel(":/Objects/drone"), texturesManager->GetTexture(":/Textures/drone"));
-
+    DrawableObject::init(shader, objManager->getModel(":/Objects/drone"), texturesManager->getTexture(":/Textures/drone"));
 }
 
-void Player::Logic(int deltaTime)
+void Player::logic(int deltaTime)
 {
     speed = max(speed / 1.01 - 0.01, 0.0);
-
 
     drone.moveSpeed.setZ(-speed * cos(direction.x()));//lewo-prawo
     drone.moveSpeed.setY(speed * sin(direction.x()));//przód-tył
@@ -26,14 +25,16 @@ void Player::Logic(int deltaTime)
 
     drone.Logic(deltaTime);
 
+
+    DrawableObject::logic(deltaTime);
 }
 
-void Player::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
+void Player::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 {
-    drone.Draw(camera, light, pMatrix);
+    DrawableObject::draw(camera, light, pMatrix);
 }
 
-void Player::Input(Qt::Key key)
+void Player::input(Qt::Key key)
 {
 
 }

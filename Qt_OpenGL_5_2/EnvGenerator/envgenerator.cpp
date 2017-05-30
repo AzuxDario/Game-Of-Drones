@@ -3,6 +3,9 @@
 EnvGenerator::EnvGenerator()
 {
     generatorDistance = 50;
+    destroyDistance = 100;
+    fixPositionMultiplier = 1.2f;
+
     maxPlanetoidsCount = 400;
     maxPlanetoidsRotationSpeed = 0.05f;
     maxPlanetoidsMoveSpeed = 0.005f;
@@ -18,7 +21,7 @@ EnvGenerator::~EnvGenerator()
     objects.clear();
 }
 
-void EnvGenerator::Init(OBJManager* objManager, TexturesManager* texturesManager,
+void EnvGenerator::init(OBJManager* objManager, TexturesManager* texturesManager,
                         QOpenGLShaderProgram* shader)
 {
     this->objManager = objManager;
@@ -26,12 +29,12 @@ void EnvGenerator::Init(OBJManager* objManager, TexturesManager* texturesManager
     this->shader = shader;
 }
 
-void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
+void EnvGenerator::logic(QVector3D playerPosition, int deltaTime)
 {
     for(int i=objects.size() - 1; i >= 0; i--)
     {
         float distance = objects[i]->getPosition().distanceToPoint(playerPosition);
-        if(distance > generatorDistance * 1.5f)
+        if(distance >= destroyDistance)
         {
             delete objects[i];
             objects.remove(i);
@@ -39,13 +42,13 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
             continue;
         }
 
-        objects[i]->Logic(deltaTime);
+        objects[i]->logic(deltaTime);
     }
 
     while(objects.size() < maxPlanetoidsCount)
     {
         DrawableObject* planetoid = new DrawableObject();
-        planetoid->Init(shader, objManager->GetModel(":/Objects/planetoid"), texturesManager->GetTexture(":/Textures/planetoid"));
+        planetoid->init(shader, objManager->getModel(":/Objects/planetoid"), texturesManager->getTexture(":/Textures/planetoid"));
         planetoid->getLightProperties().setSpecularReflection(0);
         planetoid->getLightProperties().setAmbientReflection(0.5);
         planetoid->getLightProperties().setAmbientColor(64,64,64);
@@ -63,22 +66,21 @@ void EnvGenerator::Logic(QVector3D playerPosition, int deltaTime)
         planetoid->getPosition().setX(getRandomNumberWithNegatives(generatorDistance));
         planetoid->getPosition().setY(getRandomNumberWithNegatives(generatorDistance));
         planetoid->getPosition().setZ(getRandomNumberWithNegatives(generatorDistance));
-        planetoid->getPosition() += QVector3D(playerPosition);
 
-        while(planetoid->getPosition().distanceToPoint(playerPosition) <= generatorDistance)
-        {
-            planetoid->getPosition() *= 1.1f;
-        }
+        while(planetoid->getPosition().distanceToPoint(QVector3D(0, 0, 0)) <= generatorDistance)
+            planetoid->getPosition() *= fixPositionMultiplier;
+
+        planetoid->getPosition() += QVector3D(playerPosition);
 
         objects.push_back(planetoid);
     }
 }
 
-void EnvGenerator::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
+void EnvGenerator::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 {
     for(int i=0; i<objects.size(); i++)
     {
-        objects[i]->Draw(camera, light, pMatrix);
+        objects[i]->draw(camera, light, pMatrix);
     }
 }
 
@@ -93,7 +95,7 @@ QVector<DrawableObject*> EnvGenerator::GetObjects()
     return objects;
 }
 
-void EnvGenerator::RemoveObject(DrawableObject* object)
+void EnvGenerator::removeObject(DrawableObject* object)
 {
     for(int i=0; i<objects.size(); i++)
     {
@@ -107,7 +109,7 @@ void EnvGenerator::RemoveObject(DrawableObject* object)
     }
 }
 
-void EnvGenerator::RemoveObjects(QVector<DrawableObject*> objectsToRemove)
+void EnvGenerator::removeObjects(QVector<DrawableObject*> objectsToRemove)
 {
     for(int i=0; i<objects.size(); i++)
     {

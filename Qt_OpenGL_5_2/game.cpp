@@ -5,7 +5,7 @@ Game::Game()
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 }
 
-void Game::Draw(QOpenGLShaderProgram &shader)
+void Game::draw(QOpenGLShaderProgram &shader)
 {
     for (int i = 0; i < DrawableObjects.size();i++)
     {
@@ -13,12 +13,12 @@ void Game::Draw(QOpenGLShaderProgram &shader)
     }
 }
 
-void Game::Step()
+void Game::step()
 {
 
 }
 
-void Game::Move()
+void Game::move()
 {
     for (int i = 0; i < DrawableObjects.size();i++)
     {
@@ -36,19 +36,19 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createPlayer(shader);
 
     //TEST
-    player.GetPosition().setX(20);
+    player.getPosition().setX(20);
 }
 
 void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
 {
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
     f->glDisable(GL_CULL_FACE);
-    skybox.Draw(camera, light, pMatrix);
+    skybox.draw(camera, light, pMatrix);
     f->glEnable(GL_CULL_FACE);
 
-    envGenerator.Draw(camera, light, pMatrix);
-    star.Draw(camera, light, pMatrix);
-    player.Draw(camera, light, pMatrix);
+    envGenerator.draw(camera, light, pMatrix);
+    star.draw(camera, light, pMatrix);
+    player.draw(camera, light, pMatrix);
 }
 
 void Game::logic(Camera& camera)
@@ -58,11 +58,12 @@ void Game::logic(Camera& camera)
     int deltaTime = QDateTime::currentMSecsSinceEpoch() - lastFrameTime;
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 
-    envGenerator.RemoveObjects(physics.CheckCollisions(&star, envGenerator.GetObjects()));
+    envGenerator.removeObjects(physics.checkCollisions(&star, envGenerator.GetObjects()));
+    skybox.setPosition(player.getPosition());
 
-    envGenerator.Logic(player.GetPosition(), deltaTime);
-    star.Logic(deltaTime);
-    player.Logic(deltaTime);
+    envGenerator.logic(player.getPosition(), deltaTime);
+    star.logic(deltaTime);
+    player.logic(deltaTime);
     updateCamera(camera);
 }
 
@@ -73,7 +74,7 @@ void Game::loadModels()
     modelsToLoad.push_back(":/Objects/planetoid");
     modelsToLoad.push_back(":/Objects/star");
     modelsToLoad.push_back(":/Objects/drone");
-    objManager.LoadAll(modelsToLoad);
+    objManager.loadAll(modelsToLoad);
 }
 
 void Game::loadTextures()
@@ -83,20 +84,20 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/planetoid");
     texturesToLoad.push_back(":/Textures/star");
     texturesToLoad.push_back(":/Textures/drone");
-    texturesManager.LoadAll(texturesToLoad);
+    texturesManager.loadAll(texturesToLoad);
 }
 
 void Game::createEnviroment(QOpenGLShaderProgram* shader)
 {
-    envGenerator.Init(&objManager, &texturesManager, shader);
+    envGenerator.init(&objManager, &texturesManager, shader);
 
-    skybox.Init(shader, objManager.GetModel(":/Objects/skybox"),
-                        texturesManager.GetTexture(":/Textures/skybox"));
+    skybox.init(shader, objManager.getModel(":/Objects/skybox"),
+                        texturesManager.getTexture(":/Textures/skybox"));
     skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
 
-    star.Init(shader, objManager.GetModel(":/Objects/star"),
-                      texturesManager.GetTexture(":/Textures/star"));
+    star.init(shader, objManager.getModel(":/Objects/star"),
+                      texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
     star.getRotationSpeed().setY(0.007f);
@@ -104,23 +105,13 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
 {
-    player.Init(&objManager, &texturesManager, shader);
-}
-
-void Game::KeyPressed(Qt::Key key)
-{
-
-}
-
-void Game::KeyReleased(Qt::Key key)
-{
-
+    player.init(&objManager, &texturesManager, shader);
 }
 
 void Game::updateCamera(Camera& camera)
 {
-    camera.setPosition(player.GetPosition());
-    camera.setRotation(player.GetRotation());
+    camera.setPosition(player.getPosition());
+    camera.setRotation(player.getRotation());
 }
 
 void Game::input()
@@ -173,5 +164,4 @@ void Game::input()
     {
         player.speed = player.maxspeed;
     }
-
 }

@@ -16,7 +16,10 @@ private:
     QOpenGLShaderProgram* shader;
     QVector<DrawableObject*> objects;
 
-    int generatorDistance;
+    float generatorDistance;
+    float destroyDistance;
+    float fixPositionMultiplier;
+
     int maxPlanetoidsCount;
     float maxPlanetoidsRotationSpeed;
     float maxPlanetoidsMoveSpeed;
@@ -25,13 +28,13 @@ public:
     EnvGenerator();
     ~EnvGenerator();
 
-    void Init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
-    void Logic(QVector3D playerPosition, int deltaTime);
-    void Draw(Camera camera, Light light, QMatrix4x4 pMatrix);
+    void init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
+    void logic(QVector3D playerPosition, int deltaTime);
+    void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
 
     QVector<DrawableObject*> GetObjects();
-    void RemoveObject(DrawableObject* object);
-    void RemoveObjects(QVector<DrawableObject*> objectsToRemove);
+    void removeObject(DrawableObject* object);
+    void removeObjects(QVector<DrawableObject*> objectsToRemove);
 
 private:
     float getRandomNumberWithNegatives(float to);

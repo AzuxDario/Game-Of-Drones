@@ -13,6 +13,7 @@
 #include <QTime>
 #include <QDateTime>
 #include <QLabel>
+#include <QPushButton>
 #include <QGridLayout>
 #include <QApplication>
 
@@ -46,12 +47,16 @@ private:
     MusicPlayer musicPlayer;
 
     QGridLayout* gridLayout;
+    QGridLayout* gridMenuLayout;
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
     QLabel *shipInfo;
+    QPushButton *startGameButton;
+    QPushButton *closeGameButton;
 
     QTime timer;
     QString cssFpsAndTimer;
+    bool menuIsActive;
 
 public:
     Widget(QWidget *parent = 0);
@@ -62,6 +67,9 @@ public slots:
 
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    void startGame();
+    void pauseGame();
+    void closeGame();
 
 protected:
 
@@ -78,6 +86,8 @@ private:
 
     void loadShaders();
     void updateTime();
+    void makeConnection();
+    void createLayout();
 };
 
 #endif // WIDGET_H

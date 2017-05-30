@@ -8,7 +8,6 @@
 class MusicPlayer
 {
 private:
-
     QMediaPlayer mediaPlayer;
     QMediaPlaylist playlist;
 

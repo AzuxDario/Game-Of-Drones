@@ -6,14 +6,12 @@
 class Light
 {
 private:
-
     QVector3D position;
     QVector3D rotation;
 
 public:
-
     Light();
-    QMatrix4x4 GetMatrix();
+    QMatrix4x4 getMatrix();
 
     QVector3D getPosition() noexcept {return position;}
     QVector3D getRotation() noexcept {return rotation;}

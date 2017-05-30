@@ -13,8 +13,8 @@ private:
 public:
     Telemetry();
 
-    void Logic();
-    int GetFPS() noexcept {return lastFPS;}
+    void logic();
+    int getFPS() noexcept {return lastFPS;}
 };
 
 #endif // TELEMETRY_H

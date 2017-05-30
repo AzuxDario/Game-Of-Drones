@@ -2,30 +2,13 @@
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
-    timer.start();
+    menuIsActive = true;
 
     cssFpsAndTimer = "font-size:30px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
 
-    fpsCounterLabel = new QLabel("FPS: 00");
-    fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
-    //fpsCounterLabel->setMinimumWidth(200);
-    fpsCounterLabel->setAlignment(Qt::AlignLeft);
-    timerLabel = new QLabel("Czas: 00:00.00");
-    timerLabel->setStyleSheet(cssFpsAndTimer);
-    //timerLabel->setMinimumWidth(300);
-    timerLabel->setAlignment(Qt::AlignRight);
-    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: スーパー宇宙船<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
-    shipInfo->setAlignment(Qt::AlignCenter);;
-    shipInfo->setStyleSheet(cssFpsAndTimer);
-    shipInfo->setMinimumSize(800,300);
-    shipInfo->setMaximumSize(800,300);
-    gridLayout = new QGridLayout(this);
-    gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
-    gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
-    gridLayout->addWidget(shipInfo,2,1,Qt::AlignBottom);
-    gridLayout->setColumnStretch(0,0.1);
-    gridLayout->setColumnStretch(1,1.8);
-    gridLayout->setColumnStretch(2,0.1);
+    createLayout();
+
+    makeConnection();
 
     //musicPlayer.setSong("qrc:/Music/song");
     //musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
@@ -58,9 +41,6 @@ void Widget::initializeGL()
     loadShaders(); //Ładowanie shaderów
     game.initializeGame(&shaderProgram, &keyboardManager);
 
-    connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
-    paintTimer.setTimerType(Qt::PreciseTimer);
-    paintTimer.start(14);
 }
 
 void Widget::resizeGL(int width, int height)
@@ -89,8 +69,8 @@ void Widget::logic()
 {
     game.logic(camera);
 
-    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.GetFPS()));
-    telemetry.Logic();
+    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
+    telemetry.logic();
 }
 
 void Widget::mousePressEvent(QMouseEvent *event)
@@ -110,15 +90,17 @@ void Widget::wheelEvent(QWheelEvent *event)
 
 void Widget::keyPressEvent(QKeyEvent *event)
 {
-    Qt::Key key = (Qt::Key)event->key();
-
-    keyboardManager.KeyPressed(key);
-    game.KeyPressed(key);
-
     if(event->key() == Qt::Key_Escape)
     {
-        QApplication::quit();
-    } 
+        if(menuIsActive == true)
+        {
+            pauseGame();
+        }
+    }
+
+    Qt::Key key = (Qt::Key)event->key();
+
+    keyboardManager.keyPressed(key);
 
     event->accept();
 }
@@ -127,11 +109,45 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 {
     Qt::Key key = (Qt::Key)event->key();
 
-    keyboardManager.KeyReleased(key);
-    game.KeyReleased(key);
+    keyboardManager.keyReleased(key);
 
     event->accept();
 }
+
+void Widget::startGame()
+{
+    startGameButton->setVisible(false);
+    closeGameButton->setVisible(false);
+    timer.start();
+
+    paintTimer.setTimerType(Qt::PreciseTimer);
+    paintTimer.start(14);
+
+    fpsCounterLabel->setVisible(true);
+    timerLabel->setVisible(true);
+    shipInfo->setVisible(true);
+    setFocus();
+
+}
+void Widget::pauseGame()
+{
+    startGameButton->setVisible(true);
+    closeGameButton->setVisible(true);
+    timer.start();
+
+    paintTimer.stop();
+
+    fpsCounterLabel->setVisible(false);
+    timerLabel->setVisible(false);
+    shipInfo->setVisible(false);
+    setFocus();
+}
+
+void Widget::closeGame()
+{
+    qApp->quit();
+}
+
 
 void Widget::updateTime()
 {
@@ -171,4 +187,50 @@ void Widget::updateTime()
     }
 
     timerLabel->setText("Czas: "+min+":"+sec+"."+mSec);
+}
+
+void Widget::makeConnection()
+{
+    connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
+    connect(closeGameButton,SIGNAL(pressed()),this,SLOT(closeGame()));
+}
+
+void Widget::createLayout()
+{
+    fpsCounterLabel = new QLabel("FPS: 00");
+    fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
+    //fpsCounterLabel->setMinimumWidth(200);
+    fpsCounterLabel->setAlignment(Qt::AlignLeft);
+    fpsCounterLabel->setVisible(false);
+    timerLabel = new QLabel("Czas: 00:00.00");
+    timerLabel->setStyleSheet(cssFpsAndTimer);
+    //timerLabel->setMinimumWidth(300);
+    timerLabel->setAlignment(Qt::AlignRight);
+    timerLabel->setVisible(false);
+    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: スーパー宇宙船<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
+    shipInfo->setAlignment(Qt::AlignCenter);;
+    shipInfo->setStyleSheet(cssFpsAndTimer);
+    shipInfo->setMinimumSize(800,300);
+    shipInfo->setMaximumSize(800,300);
+    shipInfo->setVisible(false);
+    startGameButton = new QPushButton("Start!",this);
+    startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    startGameButton->setMaximumWidth(400);
+    startGameButton->setMinimumWidth(400);
+    closeGameButton = new QPushButton("Wyjście",this);
+    closeGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    closeGameButton->setMaximumWidth(400);
+    closeGameButton->setMinimumWidth(400);
+    gridMenuLayout = new QGridLayout();
+    gridLayout = new QGridLayout(this);
+    gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
+    gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
+    gridLayout->addLayout(gridMenuLayout,1,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(startGameButton,1,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(closeGameButton,2,1, Qt::AlignCenter);
+    gridLayout->addWidget(shipInfo,3,1,Qt::AlignBottom);
+    gridLayout->setColumnStretch(0,0.1);
+    gridLayout->setColumnStretch(1,1.8);
+    gridLayout->setColumnStretch(2,0.1);
 }

@@ -6,12 +6,12 @@ OBJModel::OBJModel(QString name, OBJLoader data)
     this->data = data;
 }
 
-QString OBJModel::GetName()
+QString OBJModel::getName()
 {
     return name;
 }
 
-OBJLoader OBJModel::GetData()
+OBJLoader OBJModel::getData()
 {
     return data;
 }

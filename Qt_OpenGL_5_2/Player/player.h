@@ -7,7 +7,7 @@
 #include "TexturesManager/texturesmanager.h"
 #include <cmath>
 
-class Player
+class Player : public DrawableObject
 {
 private:
     DrawableObject drone;
@@ -28,6 +28,7 @@ public:
     float maxspeed = 0.4;
     QVector2D direction = QVector2D(M_PI/2,0);
     QVector2D rotation = QVector2D(0,0);
+
 };
 
 #endif

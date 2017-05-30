@@ -6,12 +6,12 @@ TextureData::TextureData(QString name, QOpenGLTexture* texture)
     this->texture = texture;
 }
 
-QString TextureData::GetName()
+QString TextureData::getName()
 {
     return name;
 }
 
-QOpenGLTexture* TextureData::GetTexture()
+QOpenGLTexture* TextureData::getTexture()
 {
     return texture;
 }

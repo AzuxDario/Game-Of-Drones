@@ -13,8 +13,8 @@ private:
 public:
     TextureData(QString name, QOpenGLTexture* texture);
 
-    QString GetName();
-    QOpenGLTexture* GetTexture();
+    QString getName();
+    QOpenGLTexture* getTexture();
 };
 
 #endif // TEXTUREDATA_H

@@ -12,10 +12,10 @@ private:
 public:
     KeyboardManager();
 
-    void KeyPressed(Qt::Key key);
-    void KeyReleased(Qt::Key key);
+    void keyPressed(Qt::Key key);
+    void keyReleased(Qt::Key key);
 
-    bool IsKeyPressed(Qt::Key key);
+    bool isKeyPressed(Qt::Key key);
 };
 
 #endif

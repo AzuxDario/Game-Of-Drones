@@ -7,10 +7,12 @@
 
 class Physics
 {
+private:
+
 public:
     Physics();
 
-    QVector<DrawableObject*> CheckCollisions(DrawableObject* base, QVector<DrawableObject*> objects);
+    QVector<DrawableObject*> checkCollisions(DrawableObject* base, QVector<DrawableObject*> objects);
 };
 
 #endif

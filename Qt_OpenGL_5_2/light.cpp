@@ -5,7 +5,7 @@ Light::Light()
 
 }
 
-QMatrix4x4 Light::GetMatrix()
+QMatrix4x4 Light::getMatrix()
 {
     QMatrix4x4 mMatrix;
     mMatrix.setToIdentity();

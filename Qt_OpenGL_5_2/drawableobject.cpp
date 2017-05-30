@@ -2,6 +2,10 @@
 
 DrawableObject::DrawableObject() : texture(0)
 {
+    position = QVector3D(0.0,0.0,0.0);
+    rotation = QVector3D(0.0,0.0,0.0);
+    moveSpeed = QVector3D(0.0,0.0,0.0);
+    rotationSpeed = QVector3D(0.0,0.0,0.0);
     texture = nullptr;
     numberOfVerticles = 0;
 }
@@ -13,23 +17,23 @@ DrawableObject::~DrawableObject()
 
 void DrawableObject::getVerticlesData(OBJLoader data)
 {
-    int facesCount = data.GetFacesData().size();
+    int facesCount = data.getFacesData().size();
 
     for(int i=0; i<facesCount; i++)
     {
-        FaceData face = data.GetFacesData().at(i);
+        FaceData face = data.getFacesData().at(i);
 
-        verticesData << data.GetVerticesData().at(face.Vertices.x() - 1)
-                     << data.GetVerticesData().at(face.Vertices.y() - 1)
-                     << data.GetVerticesData().at(face.Vertices.z() - 1);
+        verticesData << data.getVerticesData().at(face.vertices.x() - 1)
+                     << data.getVerticesData().at(face.vertices.y() - 1)
+                     << data.getVerticesData().at(face.vertices.z() - 1);
 
-        normalsData << data.GetNormalsData().at(face.Normals.x() - 1)
-                    << data.GetNormalsData().at(face.Normals.y() - 1)
-                    << data.GetNormalsData().at(face.Normals.z() - 1);
+        normalsData << data.getNormalsData().at(face.normals.x() - 1)
+                    << data.getNormalsData().at(face.normals.y() - 1)
+                    << data.getNormalsData().at(face.normals.z() - 1);
 
-        textureCoordsData << data.GetTextureCoordsData().at(face.Textures.x() - 1)
-                          << data.GetTextureCoordsData().at(face.Textures.y() - 1)
-                          << data.GetTextureCoordsData().at(face.Textures.z() - 1);
+        textureCoordsData << data.getTextureCoordsData().at(face.textures.x() - 1)
+                          << data.getTextureCoordsData().at(face.textures.y() - 1)
+                          << data.getTextureCoordsData().at(face.textures.z() - 1);
     }
 }
 
@@ -70,12 +74,12 @@ void DrawableObject::assignTexture(QOpenGLTexture* texture)
     this->texture->setMagnificationFilter(QOpenGLTexture::Linear);
 }
 
-void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture)
+void DrawableObject::init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGLTexture* texture)
 {
     initializeOpenGLFunctions();
 
     cubeShaderProgram = shader;
-    OBJLoader data = model->GetData();
+    OBJLoader data = model->getData();
     getVerticlesData(data);
     calculateRadius();
     numberOfVerticles = verticesData.count(); //Ilość werteksów, ilość normalnych i punktów tekstury jest taka sama
@@ -83,13 +87,13 @@ void DrawableObject::Init(QOpenGLShaderProgram* shader, OBJModel* model, QOpenGL
     assignTexture(texture);
 }
 
-void DrawableObject::Logic(int deltaTime)
+void DrawableObject::logic(int deltaTime)
 {
     position += (moveSpeed * ((float)deltaTime / 16.0));
     rotation += (rotationSpeed * ((float)deltaTime / 16.0));
 }
 
-void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
+void DrawableObject::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 {
     QMatrix4x4 vMatrix = camera.GetMatrix();
     QMatrix4x4 mvMatrix = vMatrix;
@@ -140,9 +144,3 @@ void DrawableObject::Draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     cubeShaderProgram->release();
     texture->release();
 }
-
-void DrawableObject::Draw(QOpenGLShaderProgram &shader)
-{
-
-}
-
