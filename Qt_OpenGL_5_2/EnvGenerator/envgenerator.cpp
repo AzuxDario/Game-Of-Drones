@@ -36,8 +36,9 @@ void EnvGenerator::logic(QVector3D playerPosition, int deltaTime)
         float distance = objects[i]->getPosition().distanceToPoint(playerPosition);
         if(distance >= destroyDistance)
         {
-            delete objects[i];
-            objects.remove(i);
+            objects[i]->getPosition().setX(playerPosition.x() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
+            objects[i]->getPosition().setY(playerPosition.y() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
+            objects[i]->getPosition().setZ(playerPosition.z() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
 
             continue;
         }

@@ -2,13 +2,15 @@
 #define CAMERA_H
 
 #include <QMatrix4x4.h>
+#include <cmath>
 
 class Camera
 {
 private:
     QVector3D position;
     QVector3D rotation;
-    float distance;
+    QVector3D cameraPosition;
+    float distance = 10;
 
 public:
     Camera();

@@ -8,7 +8,7 @@ Player::Player()
     acceleration = 0.015;
     friction = 1.1;
     direction = QVector2D(0,0);
-    agility = 0.4;
+    agility = 0.2;
     maxturn = 10;
     rotation = QVector2D(0,0);
 }
@@ -21,7 +21,7 @@ void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpe
 void Player::logic(int deltaTime)
 {
     direction += rotation;
-    rotation /= 1.5;
+    rotation /= 1.2;
     if (direction.x() > 360) direction.setX(direction.x() - 360);
     else if (direction.x() < -360) direction.setX(direction.x() + 360);
     if (direction.y() > 360) direction.setX(direction.y() - 360);
