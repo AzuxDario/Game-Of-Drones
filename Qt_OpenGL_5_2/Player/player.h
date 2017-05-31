@@ -21,10 +21,11 @@ public:
     void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
     void input(Qt::Key key);
 
-    GLfloat speed;
+    float accelerate;
+    float friction;
     float maxspeed;
+    float acceleration;
     QVector2D direction;
-    QVector2D rotation;
 
 };
 

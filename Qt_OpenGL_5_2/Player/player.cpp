@@ -3,10 +3,11 @@
 
 Player::Player()
 {
-    speed = 0;
-    maxspeed = 0.4;
-    direction = QVector2D(M_PI/2,0);
-    rotation = QVector2D(0,0);
+    accelerate = 0;
+    maxspeed = 0.2;
+    acceleration = 0.02;
+    friction = 1.4;
+    direction = QVector2D(0,0);
 }
 
 void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
@@ -16,14 +17,17 @@ void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpe
 
 void Player::logic(int deltaTime)
 {
-    speed = max(speed / 1.01 - 0.01, 0.0);
+    accelerate = max(accelerate / 1.01 - 0.005, 0.0);
 
-    moveSpeed.setZ(-speed * cos(direction.x()));//lewo-prawo
-    moveSpeed.setY(speed * sin(direction.x()));//przód-tył
-    moveSpeed.setX(-speed * sin(direction.y()));
+    QMatrix4x4 rm = QMatrix4x4();
+    rm.rotate(direction.x(), 1, 0, 0);
+    rm.rotate(direction.y(), 0, 1, 0);
+    QVector3D movement = rm.mapVector(QVector3D(0,0,accelerate));
 
-    getRotation().setX(direction.x() * 180 / M_PI);
-    getRotation().setY(direction.y() * 180 / M_PI);
+    moveSpeed = (moveSpeed / friction) + movement;
+
+    getRotation().setX(direction.x());
+    getRotation().setY(direction.y());
 
     DrawableObject::logic(deltaTime);
 }

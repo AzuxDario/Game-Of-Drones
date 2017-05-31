@@ -8,6 +8,10 @@ KeyboardManager::KeyboardManager()
     keyMap.insert(Qt::Key_D, false);
     keyMap.insert(Qt::Key_Q, false);
     keyMap.insert(Qt::Key_E, false);
+    keyMap.insert(Qt::Key_Up, false);
+    keyMap.insert(Qt::Key_Down, false);
+    keyMap.insert(Qt::Key_Left, false);
+    keyMap.insert(Qt::Key_Right, false);
     keyMap.insert(Qt::Key_Space, false);
 }
 

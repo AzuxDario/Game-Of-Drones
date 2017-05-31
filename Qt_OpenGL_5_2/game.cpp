@@ -116,36 +116,36 @@ void Game::updateCamera(Camera& camera)
 
 void Game::input()
 {
-    if(keyboardManager->isKeyPressed(Qt::Key::Key_W))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_W) || keyboardManager->isKeyPressed(Qt::Key::Key_Up))
     {
-        float dir = player.direction.y() + 0.02;
-        if (dir >M_PI * 2) dir -= M_PI * 2;
-        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        float dir = player.direction.y() + 1;
+        if (dir >360) dir -= 360;
+        else if (dir < -360) dir += 360;
         player.direction.setY(dir);
     }
 
-    if(keyboardManager->isKeyPressed(Qt::Key::Key_S))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_S) || keyboardManager->isKeyPressed(Qt::Key::Key_Down))
     {
-        float dir = player.direction.y() - 0.02;
-        if (dir > M_PI * 2) dir -= M_PI * 2;
-        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        float dir = player.direction.y() - 1;
+        if (dir > 360) dir -= 360;
+        else if (dir < -360) dir += 360;
         player.direction.setY(dir);
     }
 
 
-    if(keyboardManager->isKeyPressed(Qt::Key::Key_A))
+    if(keyboardManager->isKeyPressed(Qt::Key::Key_A) || keyboardManager->isKeyPressed(Qt::Key::Key_Left))
     {
-        float dir = player.direction.x() + 0.05;
-        if (dir >M_PI * 2) dir -= M_PI * 2;
-        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        float dir = player.direction.x() + 1;
+        if (dir >360) dir -= 360;
+        else if (dir < -360) dir += 360;
         player.direction.setX(dir);
     }
 
-    if (keyboardManager->isKeyPressed(Qt::Key::Key_D))
+    if (keyboardManager->isKeyPressed(Qt::Key::Key_D) || keyboardManager->isKeyPressed(Qt::Key::Key_Right))
     {
-        float dir = player.direction.x() - 0.05;
-        if (dir > M_PI * 2) dir -= M_PI * 2;
-        else if (dir < -M_PI * 2) dir += M_PI * 2;
+        float dir = player.direction.x() - 1;
+        if (dir > 360) dir -= 360;
+        else if (dir < -360) dir += 360;
         player.direction.setX(dir);
     }
 
@@ -162,7 +162,7 @@ void Game::input()
 
     if(keyboardManager->isKeyPressed(Qt::Key::Key_Space))
     {
-        player.speed = player.maxspeed;
+        player.accelerate = min(player.accelerate + player.acceleration, player.maxspeed);
     }
 }
 
