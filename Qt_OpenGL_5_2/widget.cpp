@@ -221,7 +221,7 @@ void Widget::createLayout()
     //timerLabel->setMinimumWidth(300);
     timerLabel->setAlignment(Qt::AlignRight);
     timerLabel->setVisible(false);
-    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: スーパー宇宙船<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
+    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssFpsAndTimer);
     shipInfo->setMinimumSize(800,300);
