@@ -118,35 +118,22 @@ void Game::input()
 {
     if(keyboardManager->isKeyPressed(Qt::Key::Key_W) || keyboardManager->isKeyPressed(Qt::Key::Key_Up))
     {
-        float dir = player.direction.y() + 1;
-        if (dir >360) dir -= 360;
-        else if (dir < -360) dir += 360;
-        player.direction.setY(dir);
+        player.rotation.setY(min(player.rotation.y() + player.agility, player.maxturn));
     }
-
     if(keyboardManager->isKeyPressed(Qt::Key::Key_S) || keyboardManager->isKeyPressed(Qt::Key::Key_Down))
     {
-        float dir = player.direction.y() - 1;
-        if (dir > 360) dir -= 360;
-        else if (dir < -360) dir += 360;
-        player.direction.setY(dir);
+        player.rotation.setY(max(player.rotation.y() - player.agility, -player.maxturn));
     }
 
 
     if(keyboardManager->isKeyPressed(Qt::Key::Key_A) || keyboardManager->isKeyPressed(Qt::Key::Key_Left))
     {
-        float dir = player.direction.x() + 1;
-        if (dir >360) dir -= 360;
-        else if (dir < -360) dir += 360;
-        player.direction.setX(dir);
+        player.rotation.setX(min(player.rotation.x() + player.agility, player.maxturn));
     }
 
     if (keyboardManager->isKeyPressed(Qt::Key::Key_D) || keyboardManager->isKeyPressed(Qt::Key::Key_Right))
     {
-        float dir = player.direction.x() - 1;
-        if (dir > 360) dir -= 360;
-        else if (dir < -360) dir += 360;
-        player.direction.setX(dir);
+        player.rotation.setX(max(player.rotation.x() - player.agility, -player.maxturn));
     }
 
 

@@ -25,8 +25,10 @@ public:
     float friction;
     float maxspeed;
     float acceleration;
+    float agility;
+    float maxturn;
     QVector2D direction;
-
+    QVector2D rotation;
 };
 
 #endif

@@ -4,10 +4,13 @@
 Player::Player()
 {
     accelerate = 0;
-    maxspeed = 0.2;
-    acceleration = 0.02;
-    friction = 1.4;
+    maxspeed = 0.15;
+    acceleration = 0.015;
+    friction = 1.1;
     direction = QVector2D(0,0);
+    agility = 0.4;
+    maxturn = 10;
+    rotation = QVector2D(0,0);
 }
 
 void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
@@ -17,6 +20,12 @@ void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpe
 
 void Player::logic(int deltaTime)
 {
+    direction += rotation;
+    rotation /= 1.5;
+    if (direction.x() > 360) direction.setX(direction.x() - 360);
+    else if (direction.x() < -360) direction.setX(direction.x() + 360);
+    if (direction.y() > 360) direction.setX(direction.y() - 360);
+    else if (direction.y() < -360) direction.setX(direction.y() + 360);
     accelerate = max(accelerate / 1.01 - 0.005, 0.0);
 
     QMatrix4x4 rm = QMatrix4x4();
