@@ -64,7 +64,7 @@ void Game::logic(Camera& camera)
     envGenerator.logic(player.getPosition(), deltaTime);
     star.logic(deltaTime);
     player.logic(deltaTime);
-    updateCamera(camera);
+    camera.update(player.getPosition(), player.getRotation());
 }
 
 void Game::loadModels()
@@ -108,21 +108,15 @@ void Game::createPlayer(QOpenGLShaderProgram* shader)
     player.init(&objManager, &texturesManager, shader);
 }
 
-void Game::updateCamera(Camera& camera)
-{
-    camera.setPosition(player.getPosition());
-    camera.setRotation(player.getRotation());
-}
-
 void Game::input()
 {
     if(keyboardManager->isKeyPressed(Qt::Key::Key_W) || keyboardManager->isKeyPressed(Qt::Key::Key_Up))
     {
-        player.rotation.setY(min(player.rotation.y() + player.agility, player.maxturn));
+        player.rotation.setY(max(player.rotation.y() - player.agility, -player.maxturn));
     }
     if(keyboardManager->isKeyPressed(Qt::Key::Key_S) || keyboardManager->isKeyPressed(Qt::Key::Key_Down))
     {
-        player.rotation.setY(max(player.rotation.y() - player.agility, -player.maxturn));
+        player.rotation.setY(min(player.rotation.y() + player.agility, player.maxturn));
     }
 
 

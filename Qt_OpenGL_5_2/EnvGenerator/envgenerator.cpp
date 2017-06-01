@@ -27,24 +27,6 @@ void EnvGenerator::init(OBJManager* objManager, TexturesManager* texturesManager
     this->objManager = objManager;
     this->texturesManager = texturesManager;
     this->shader = shader;
-}
-
-void EnvGenerator::logic(QVector3D playerPosition, int deltaTime)
-{
-    for(int i=objects.size() - 1; i >= 0; i--)
-    {
-        float distance = objects[i]->getPosition().distanceToPoint(playerPosition);
-        if(distance >= destroyDistance)
-        {
-            objects[i]->getPosition().setX(playerPosition.x() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
-            objects[i]->getPosition().setY(playerPosition.y() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
-            objects[i]->getPosition().setZ(playerPosition.z() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
-
-            continue;
-        }
-
-        objects[i]->logic(deltaTime);
-    }
 
     while(objects.size() < maxPlanetoidsCount)
     {
@@ -64,18 +46,29 @@ void EnvGenerator::logic(QVector3D playerPosition, int deltaTime)
         planetoid->getMoveSpeed().setY(getRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
         planetoid->getMoveSpeed().setZ(getRandomNumberWithNegatives(maxPlanetoidsMoveSpeed));
 
-        bool posSet = false;
-        while(!posSet || planetoid->getPosition().distanceToPoint(QVector3D(0, 0, 0)) >= generatorDistance)
-        {
-            planetoid->getPosition().setX(getRandomNumberWithNegatives(destroyDistance));
-            planetoid->getPosition().setY(getRandomNumberWithNegatives(destroyDistance));
-            planetoid->getPosition().setZ(getRandomNumberWithNegatives(destroyDistance));
+        planetoid->getPosition().setX((rand() % (int)(destroyDistance * 2)) - destroyDistance);
+        planetoid->getPosition().setY((rand() % (int)(destroyDistance * 2)) - destroyDistance);
+        planetoid->getPosition().setZ((rand() % (int)(destroyDistance * 2)) - destroyDistance);
 
-            posSet = true;
+        objects.push_back(planetoid);
+    }
+}
+
+void EnvGenerator::logic(QVector3D playerPosition, int deltaTime)
+{
+    for(int i=objects.size() - 1; i >= 0; i--)
+    {
+        float distance = objects[i]->getPosition().distanceToPoint(playerPosition);
+        if(distance >= destroyDistance)
+        {
+            objects[i]->getPosition().setX(playerPosition.x() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
+            objects[i]->getPosition().setY(playerPosition.y() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
+            objects[i]->getPosition().setZ(playerPosition.z() + (rand() % (int)(destroyDistance * 2)) - destroyDistance);
+
+            continue;
         }
 
-        planetoid->getPosition() += QVector3D(playerPosition);
-        objects.push_back(planetoid);
+        objects[i]->logic(deltaTime);
     }
 }
 
