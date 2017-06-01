@@ -16,6 +16,7 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <QApplication>
+#include <QDesktopWidget>
 
 #include "camera.h"
 #include "light.h"
