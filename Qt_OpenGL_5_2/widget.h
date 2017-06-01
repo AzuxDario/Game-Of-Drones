@@ -90,6 +90,7 @@ private:
     void updateTime();
     void makeConnection();
     void createLayout();
+    void initializeSoundtrack();
 };
 
 #endif // WIDGET_H

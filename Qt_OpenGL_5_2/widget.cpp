@@ -6,14 +6,11 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     isGamePaused = false;
     miliSeconds = 0;
 
-    cssFpsAndTimer = "font-size:30px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
-
     createLayout();
 
     makeConnection();
 
-    //musicPlayer.setSong("qrc:/Music/song");
-    //musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
+    //initializeSoundtrack();
 }
 
 Widget::~Widget()
@@ -213,6 +210,8 @@ void Widget::makeConnection()
 
 void Widget::createLayout()
 {
+    cssFpsAndTimer = "font-size:30px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
+
     fpsCounterLabel = new QLabel("FPS: 00");
     fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
     //fpsCounterLabel->setMinimumWidth(200);
@@ -248,4 +247,10 @@ void Widget::createLayout()
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
+}
+
+void Widget::initializeSoundtrack()
+{
+    musicPlayer.setSong("qrc:/Music/song");
+    musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
 }
