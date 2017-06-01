@@ -211,8 +211,8 @@ void Widget::makeConnection()
 void Widget::createLayout()
 {
     QRect rect = QApplication::desktop()->screen()->rect();
-    int width = rect.width();
-    int height = rect.height();
+    double width = rect.width();
+    double height = rect.height();
 
     cssFpsAndTimer = "font-size:"+QString::number(static_cast<int>(width/1920 * 30))+"px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
 
@@ -229,8 +229,6 @@ void Widget::createLayout()
     shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssFpsAndTimer);
-    int w = width/1920 * 800;
-    int h = height/1080 * 300;
     shipInfo->setMinimumSize(width/1920 * 800,height/1080 * 300);
     shipInfo->setMaximumSize(width/1920 * 800,height/1080 * 300);
     shipInfo->setVisible(false);
