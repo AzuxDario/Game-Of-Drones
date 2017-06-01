@@ -31,7 +31,7 @@ private:
     TexturesManager texturesManager;
     EnvGenerator envGenerator;
     Physics physics;
-    Player player;
+
     KeyboardManager* keyboardManager;
 
     DrawableObject skybox;
@@ -41,7 +41,7 @@ private:
 
 public:
     Game();
-
+Player player;
     QVector<DrawableObject> DrawableObjects;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
