@@ -214,7 +214,7 @@ void Widget::createLayout()
     double width = rect.width();
     double height = rect.height();
 
-    cssFpsAndTimer = "font-size:"+QString::number(static_cast<int>(width/1920 * 30))+"px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
+    cssFpsAndTimer = "font-size:"+QString::number(static_cast<int>(30.0/1920.0 * width))+"px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
 
     fpsCounterLabel = new QLabel("FPS: 00");
     fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
@@ -229,17 +229,17 @@ void Widget::createLayout()
     shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssFpsAndTimer);
-    shipInfo->setMinimumSize(width/1920 * 800,height/1080 * 300);
-    shipInfo->setMaximumSize(width/1920 * 800,height/1080 * 300);
+    shipInfo->setMinimumSize(800.0/1920.0 * width,300.0/1080.0 * height);
+    shipInfo->setMaximumSize(800.0/1920.0 * width,300.0/1080.0 * height);
     shipInfo->setVisible(false);
     startGameButton = new QPushButton("Start!",this);
     startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
-    startGameButton->setMaximumWidth(width/1920 * 400);
-    startGameButton->setMinimumWidth(width/1920 * 400);
+    startGameButton->setMaximumWidth(400.0/1920.0 * width);
+    startGameButton->setMinimumWidth(400.0/1920.0 * width);
     closeGameButton = new QPushButton("Wyjście",this);
     closeGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
-    closeGameButton->setMaximumWidth(width/1920 * 400);
-    closeGameButton->setMinimumWidth(width/1920 * 400);
+    closeGameButton->setMaximumWidth(400.0/1920.0 * width);
+    closeGameButton->setMinimumWidth(400.0/1920.0 * width);
     gridMenuLayout = new QGridLayout();
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
