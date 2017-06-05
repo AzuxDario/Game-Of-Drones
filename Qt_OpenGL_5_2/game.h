@@ -54,6 +54,7 @@ Player player;
 
     void pause();
     void resume();
+    float getPlayerAccelerate() noexcept {player.getAccelerate();}
 
 private:
 

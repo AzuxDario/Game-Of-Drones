@@ -29,6 +29,9 @@ public:
     float maxturn;
     QVector2D direction;
     QVector2D rotation;
+
+public:
+    float getAccelerate() noexcept {return accelerate;}
 };
 
 #endif
