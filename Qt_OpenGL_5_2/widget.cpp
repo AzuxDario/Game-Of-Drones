@@ -128,7 +128,7 @@ void Widget::startGame()
     }
 
     paintTimer.setTimerType(Qt::PreciseTimer);
-    paintTimer.start(14);
+    paintTimer.start(16);
 
     fpsCounterLabel->setVisible(true);
     timerLabel->setVisible(true);
