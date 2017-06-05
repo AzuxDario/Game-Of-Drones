@@ -68,7 +68,7 @@ void Widget::logic()
 {
     game.logic(camera);
 
-    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
+    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()) + " " + QString::number(game.getPlayerAccelerate()));
     //+ ", X: " + QString::number(game.player.rotation.x()) + ", Y: " + QString::number(game.player.rotation.y())
     //    + "\nX:" + QString::number(game.player.getPosition().x()) + ", Y:"+ QString::number(game.player.getPosition().y()) + ", Y:"+ QString::number(game.player.getPosition().z()));
     telemetry.logic();
