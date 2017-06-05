@@ -67,8 +67,8 @@ void Widget::paintGL()
 void Widget::logic()
 {
     game.logic(camera);
-
-    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()) + " " + QString::number(game.getPlayerAccelerate()));
+    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
+    shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(static_cast<int>(69680 * game.getPlayerAccelerate()))+ "<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
     //+ ", X: " + QString::number(game.player.rotation.x()) + ", Y: " + QString::number(game.player.rotation.y())
     //    + "\nX:" + QString::number(game.player.getPosition().x()) + ", Y:"+ QString::number(game.player.getPosition().y()) + ", Y:"+ QString::number(game.player.getPosition().z()));
     telemetry.logic();
