@@ -23,13 +23,21 @@ void DrawableObject::getVerticlesData(OBJLoader data)
     {
         FaceData face = data.getFacesData().at(i);
 
-        verticesData << data.getVerticesData().at(face.vertices.x() - 1)
-                     << data.getVerticesData().at(face.vertices.y() - 1)
-                     << data.getVerticesData().at(face.vertices.z() - 1);
+        QVector3D v1 = data.getVerticesData().at(face.vertices.x() - 1);
+        QVector3D v2 = data.getVerticesData().at(face.vertices.y() - 1);
+        QVector3D v3 = data.getVerticesData().at(face.vertices.z() - 1);
 
-        normalsData << data.getNormalsData().at(face.normals.x() - 1)
-                    << data.getNormalsData().at(face.normals.y() - 1)
-                    << data.getNormalsData().at(face.normals.z() - 1);
+        verticesData << v1 << v2 << v3 ;
+
+        QVector3D normal = QVector3D::normal(v1, v2, v3);
+
+        normalsData << normal << normal << normal;
+
+        //normalsData << data.getNormalsData().at(face.normals.x() - 1)
+        //            << data.getNormalsData().at(face.normals.y() - 1)
+        //            << data.getNormalsData().at(face.normals.z() - 1);
+
+        //normalsData =
 
         textureCoordsData << data.getTextureCoordsData().at(face.textures.x() - 1)
                           << data.getTextureCoordsData().at(face.textures.y() - 1)

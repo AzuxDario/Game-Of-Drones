@@ -3,7 +3,7 @@
 EnvGenerator::EnvGenerator()
 {
     generatorDistance = 100;
-    destroyDistance = 100;
+    destroyDistance = 500;
     fixPositionMultiplier = 2.0f;
 
     maxPlanetoidsCount = 200;
