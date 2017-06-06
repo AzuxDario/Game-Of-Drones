@@ -3,7 +3,7 @@
 Camera::Camera()
 {
     cameraPosition = QVector3D(10,10,10);
-    distance = QVector3D(20,0,-50);
+    distance = QVector3D(10,0,-50);
     upVector = QVector3D(1,0,0);
 }
 

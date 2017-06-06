@@ -55,6 +55,7 @@ Player player;
     void pause();
     void resume();
     float getPlayerAccelerate() noexcept {return player.getAccelerate();}
+    float getPlayerSpeed() noexcept { return player.moveSpeed.length();}
 
 private:
 

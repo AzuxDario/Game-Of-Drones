@@ -5,8 +5,8 @@ Player::Player()
 {
     accelerate = 0;
     maxspeed = 0.15;
-    acceleration = 0.015;
-    friction = 1.05;
+    acceleration = 0.01;
+    friction = 1.01;
     direction = QVector2D(0,0);
     agility = 0.2;
     maxturn = 10;
@@ -30,9 +30,13 @@ void Player::logic(int deltaTime)
     else if (direction.y() < 0) direction.setY(direction.y() + 360);
     accelerate = max(accelerate / 1.01 - 0.005, 0.0);
 
-    QMatrix4x4 rm = QMatrix4x4();
-    rm.rotate(direction.x(), 1, 0, 0);
-    rm.rotate(direction.y(), 0, 1, 0);
+    QMatrix4x4 roll = QMatrix4x4();
+    QMatrix4x4 pitch = QMatrix4x4();
+    QMatrix4x4 yaw = QMatrix4x4();
+    roll.rotate(direction.x(), 1, 0, 0);
+    pitch.rotate(direction.y(), 0, 1, 0);
+    QMatrix4x4 rm = roll * pitch * yaw;
+
     QVector3D movement = rm.mapVector(QVector3D(0,0,accelerate));
 
     moveSpeed = (moveSpeed / friction) + movement;
