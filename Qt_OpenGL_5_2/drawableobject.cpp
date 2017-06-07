@@ -19,18 +19,24 @@ void DrawableObject::getVerticlesData(OBJLoader data)
 {
     int facesCount = data.getFacesData().size();
 
+    FaceData face;
+    QVector3D v1;
+    QVector3D v2;
+    QVector3D v3;
+    QVector3D normal;
+
     for(int i=0; i<facesCount; i++)
     {
-        FaceData face = data.getFacesData().at(i);
+        face = data.getFacesData().at(i);
 
-        QVector3D v1 = data.getVerticesData().at(face.vertices.x() - 1);
-        QVector3D v2 = data.getVerticesData().at(face.vertices.y() - 1);
-        QVector3D v3 = data.getVerticesData().at(face.vertices.z() - 1);
+        v1 = data.getVerticesData().at(face.vertices.x() - 1);
+        v2 = data.getVerticesData().at(face.vertices.y() - 1);
+        v3 = data.getVerticesData().at(face.vertices.z() - 1);
         verticesData << v1 << v2 << v3 ;
 
         if(data.isNormalsLoaded() == false)
         {
-            QVector3D normal = QVector3D::normal(v1, v2, v3);
+            normal = QVector3D::normal(v1, v2, v3);
 
             normalsData << normal << normal << normal;
         }
