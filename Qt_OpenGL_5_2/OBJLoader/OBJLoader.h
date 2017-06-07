@@ -31,6 +31,8 @@ public:
     QVector<QVector2D> getTextureCoordsData() noexcept {return textureCoordsData;}
     QVector<FaceData> getFacesData() noexcept {return facesData;}
 
+    bool isNormalsLoaded() noexcept {return normalsData.size() == 0 ? false : true;}
+
 private:
     bool parse(QString content);
     bool parseVertices(QString line);
