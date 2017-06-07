@@ -68,7 +68,7 @@ void Widget::logic()
 {
     game.logic(camera);
     fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
-    shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(static_cast<int>(2444 * game.getPlayerSpeed())) + " m/s<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
+    shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(static_cast<int>(2444 * game.getPlayerSpeed())) + " m/s<br/>Moc silników: " +QString::number(static_cast<int>(696.8 * game.getPlayerAccelerate())) + "%");
     //+ ", X: " + QString::number(game.player.rotation.x()) + ", Y: " + QString::number(game.player.rotation.y())
     //    + "\nX:" + QString::number(game.player.getPosition().x()) + ", Y:"+ QString::number(game.player.getPosition().y()) + ", Y:"+ QString::number(game.player.getPosition().z()));
     telemetry.logic();
@@ -226,11 +226,11 @@ void Widget::createLayout()
     //timerLabel->setMinimumWidth(300);
     timerLabel->setAlignment(Qt::AlignRight);
     timerLabel->setVisible(false);
-    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Pancerz: infinity/NaN<br/>Dopalacz: NaN/NaN");
+    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Moc silników: 0%");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssFpsAndTimer);
-    shipInfo->setMinimumSize(800.0/1920.0 * width,300.0/1080.0 * height);
-    shipInfo->setMaximumSize(800.0/1920.0 * width,300.0/1080.0 * height);
+    shipInfo->setMinimumSize(800.0/1920.0 * width,250.0/1080.0 * height);
+    shipInfo->setMaximumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setVisible(false);
     startGameButton = new QPushButton("Start!",this);
     startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
