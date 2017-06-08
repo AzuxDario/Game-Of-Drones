@@ -63,7 +63,13 @@ void Game::logic(Camera& camera)
 
     if(physics.checkCollisions(&star, &player))
     {
-        deltaTime = deltaTime;
+        //TODO collision player-star
+    }
+
+    QVector<DrawableObject*> planetoids = physics.checkCollisions(&player, envGenerator.GetObjects());
+    if(planetoids.count() > 0)
+    {
+        //TODO collision player-planetoide
     }
 
     envGenerator.logic(player.getPosition(), deltaTime);
