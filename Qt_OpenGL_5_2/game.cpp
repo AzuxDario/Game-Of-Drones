@@ -3,6 +3,8 @@
 Game::Game()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+    checkCollisionsDefaultTime = 10;
+    checkCollisionsTime = checkCollisionsDefaultTime;
 }
 
 void Game::draw(QOpenGLShaderProgram &shader)
@@ -61,6 +63,20 @@ void Game::logic(Camera& camera)
     envGenerator.removeObjects(physics.checkCollisions(&star, envGenerator.GetObjects()));
     skybox.setPosition(player.getPosition());
 
+    checkCollisions();
+
+    envGenerator.logic(player.getPosition(), deltaTime);
+    star.logic(deltaTime);
+    player.logic(deltaTime);
+    camera.update(player.getPosition(), player.getRotation());
+}
+
+void Game::checkCollisions()
+{
+    checkCollisionsTime--;
+    if(checkCollisionsTime > 0)
+        return;
+
     if(physics.checkCollisions(&star, &player))
     {
         //TODO collision player-star
@@ -72,10 +88,7 @@ void Game::logic(Camera& camera)
         //TODO collision player-planetoide
     }
 
-    envGenerator.logic(player.getPosition(), deltaTime);
-    star.logic(deltaTime);
-    player.logic(deltaTime);
-    camera.update(player.getPosition(), player.getRotation());
+    checkCollisionsTime = checkCollisionsDefaultTime;
 }
 
 void Game::loadModels()

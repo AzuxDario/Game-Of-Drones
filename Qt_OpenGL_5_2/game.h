@@ -38,6 +38,8 @@ private:
     DrawableObject star;
 
     long int lastFrameTime;
+    int checkCollisionsDefaultTime;
+    int checkCollisionsTime;
 
 public:
     Game();
@@ -46,6 +48,7 @@ Player player;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
     void logic(Camera& camera);
+    void checkCollisions();
     void draw(QOpenGLShaderProgram & shader);
     //Zmiana pozycji
     void move();
