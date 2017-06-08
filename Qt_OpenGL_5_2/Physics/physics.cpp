@@ -5,6 +5,14 @@ Physics::Physics()
 
 }
 
+bool Physics::checkCollisions(DrawableObject* base, DrawableObject* object)
+{
+    QVector<DrawableObject*> listOfObjects;
+    listOfObjects.push_back(object);
+
+    return checkCollisions(base, listOfObjects).count() > 0;
+}
+
 QVector<DrawableObject*> Physics::checkCollisions(DrawableObject* base, QVector<DrawableObject*> objects)
 {
     QVector<DrawableObject*> detectedCollisions;
@@ -21,13 +29,6 @@ QVector<DrawableObject*> Physics::checkCollisions(DrawableObject* base, QVector<
         if(distance <= baseRadius + objectRadius)
             detectedCollisions.push_back(objects[i]);
     }
-
-    return detectedCollisions;
-}
-
-QVector<DrawableObject*> Physics::checkCollisionsMultiple(QVector<DrawableObject*> objects)
-{
-    QVector<DrawableObject*> detectedCollisions;
 
     return detectedCollisions;
 }

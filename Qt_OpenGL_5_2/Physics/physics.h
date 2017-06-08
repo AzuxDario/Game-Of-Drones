@@ -12,8 +12,8 @@ private:
 public:
     Physics();
 
+    bool checkCollisions(DrawableObject* base, DrawableObject* object);
     QVector<DrawableObject*> checkCollisions(DrawableObject* base, QVector<DrawableObject*> objects);
-    QVector<DrawableObject*> checkCollisionsMultiple(QVector<DrawableObject*> objects);
 };
 
 #endif

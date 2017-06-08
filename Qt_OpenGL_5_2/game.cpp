@@ -36,7 +36,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createPlayer(shader);
 
     //TEST
-    player.getPosition().setX(20);
+    player.getPosition().setZ(-20);
 }
 
 void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
@@ -60,6 +60,11 @@ void Game::logic(Camera& camera)
 
     envGenerator.removeObjects(physics.checkCollisions(&star, envGenerator.GetObjects()));
     skybox.setPosition(player.getPosition());
+
+    if(physics.checkCollisions(&star, &player))
+    {
+        deltaTime = deltaTime;
+    }
 
     envGenerator.logic(player.getPosition(), deltaTime);
     star.logic(deltaTime);
