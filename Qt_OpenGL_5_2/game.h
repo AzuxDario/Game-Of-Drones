@@ -57,6 +57,7 @@ Player player;
     float getPlayerAccelerate() noexcept {return player.getAccelerate();}
     float getPlayerSpeed() noexcept { return player.moveSpeed.length();}
 
+
 private:
 
     void loadModels();

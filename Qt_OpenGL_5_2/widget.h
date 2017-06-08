@@ -60,6 +60,8 @@ private:
     QString cssFpsAndTimer;
     bool menuIsActive;
     bool isGamePaused;
+    QTimer mouseTimer;
+    QPoint mousePos;
 
 public:
     Widget(QWidget *parent = 0);
@@ -83,6 +85,7 @@ protected:
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
 
 private:
@@ -92,6 +95,8 @@ private:
     void makeConnection();
     void createLayout();
     void initializeSoundtrack();
+private slots:
+    void mouseTimerTimeout();
 };
 
 #endif // WIDGET_H

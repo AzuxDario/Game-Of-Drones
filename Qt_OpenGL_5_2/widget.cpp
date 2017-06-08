@@ -10,6 +10,8 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 
     makeConnection();
 
+    mouseTimer.setSingleShot(true);
+
     //initializeSoundtrack();
 }
 
@@ -76,11 +78,24 @@ void Widget::logic()
 
 void Widget::mousePressEvent(QMouseEvent *event)
 {
+    mousePos = event->pos();
     event->accept();
 }
 
 void Widget::mouseMoveEvent(QMouseEvent *event)
 {
+    mouseTimer.stop();
+
+
+    camera.setDirection(QVector3D(camera.getDirection().x() + (event->pos().x() - mousePos.x())/2,camera.getDirection().y() + (event->pos().y() - mousePos.y())/2,0));
+
+    mousePos = event->pos();
+    event->accept();
+}
+
+void Widget::mouseReleaseEvent(QMouseEvent *event)
+{
+    mouseTimer.start(1000);
     event->accept();
 }
 
@@ -206,6 +221,7 @@ void Widget::makeConnection()
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
     connect(closeGameButton,SIGNAL(pressed()),this,SLOT(closeGame()));
+    connect(&mouseTimer, SIGNAL(timeout()), this, SLOT(mouseTimerTimeout()));
 }
 
 void Widget::createLayout()
@@ -257,4 +273,9 @@ void Widget::initializeSoundtrack()
 {
     musicPlayer.setSong("qrc:/Music/song");
     musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
+}
+
+void Widget::mouseTimerTimeout()
+{
+    camera.resetCamera();
 }

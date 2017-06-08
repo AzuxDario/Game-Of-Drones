@@ -11,6 +11,8 @@ private:
     QVector3D cameraPosition;
     QVector3D upVector;
     QVector3D distance;
+    QVector3D cameraDirection;
+    bool reset = false;
 
 public:
     Camera();
@@ -19,6 +21,9 @@ public:
 
     QVector3D getDistance() noexcept {return distance;}
     void setDistance(QVector3D value) noexcept {distance = value;}
+    QVector3D getDirection() noexcept {return cameraDirection;}
+    void setDirection(QVector3D value) noexcept {cameraDirection = value; reset = false;}
+    void resetCamera()noexcept{ reset = true;}
 };
 
 #endif // CAMERA_H

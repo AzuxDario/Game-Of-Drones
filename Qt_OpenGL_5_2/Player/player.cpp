@@ -33,16 +33,19 @@ void Player::logic(int deltaTime)
     QMatrix4x4 roll = QMatrix4x4();
     QMatrix4x4 pitch = QMatrix4x4();
     QMatrix4x4 yaw = QMatrix4x4();
-    roll.rotate(direction.x(), 1, 0, 0);
     pitch.rotate(direction.y(), 0, 1, 0);
+    roll.rotate(direction.x(), QVector3D(1, 0, 0) * pitch);
+
     QMatrix4x4 rm = roll * pitch * yaw;
 
     QVector3D movement = rm.mapVector(QVector3D(0,0,accelerate));
 
     moveSpeed = (moveSpeed / friction) + movement;
 
-    getRotation().setX(direction.x());
-    getRotation().setY(direction.y());
+    QVector3D dv = rm.mapVector(QVector3D(0,1,0));
+
+    getRotation().setX(atan2(dv.z(), dv.y()) * 180 / M_PI);
+    getRotation().setY(atan2(dv.x(), sqrt(dv.z()*dv.z() + dv.y()*dv.y())) * 180 / M_PI);
 
     DrawableObject::logic(deltaTime);
 }
