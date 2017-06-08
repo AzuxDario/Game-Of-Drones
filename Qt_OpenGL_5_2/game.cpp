@@ -73,8 +73,7 @@ void Game::logic(Camera& camera)
 
 void Game::checkCollisions()
 {
-    checkCollisionsTime--;
-    if(checkCollisionsTime > 0)
+    if(--checkCollisionsTime > 0)
         return;
 
     if(physics.checkCollisions(&star, &player))
