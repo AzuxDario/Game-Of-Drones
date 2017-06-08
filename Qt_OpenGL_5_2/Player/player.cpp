@@ -11,6 +11,8 @@ Player::Player()
     agility = 0.2;
     maxturn = 10;
     rotation = QVector2D(0,0);
+
+    getScale() = QVector3D(0.2f, 0.2f, 0.2f);
 }
 
 void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)

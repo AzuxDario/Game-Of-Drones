@@ -22,6 +22,7 @@ class DrawableObject : protected QOpenGLFunctions
 private:
     QVector3D position;
     QVector3D rotation;
+    QVector3D scale;
 
     QMatrix4x4 pMatrix;
     QOpenGLShaderProgram* cubeShaderProgram;
@@ -47,6 +48,7 @@ public:
     LightProperties& getLightProperties() noexcept {return lightProperties;}
     QVector3D& getPosition() noexcept {return position;}
     QVector3D& getRotation() noexcept {return rotation;}
+    QVector3D& getScale() noexcept {return scale;}
     QVector3D& getMoveSpeed() noexcept {return moveSpeed;}
     QVector3D& getRotationSpeed() noexcept {return rotationSpeed;}
     float getRadius() noexcept {return radius;}

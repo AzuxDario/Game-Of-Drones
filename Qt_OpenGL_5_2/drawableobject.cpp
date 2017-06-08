@@ -4,6 +4,8 @@ DrawableObject::DrawableObject() : texture(0)
 {
     position = QVector3D(0.0,0.0,0.0);
     rotation = QVector3D(0.0,0.0,0.0);
+    scale = QVector3D(1, 1, 1);
+
     moveSpeed = QVector3D(0.0,0.0,0.0);
     rotationSpeed = QVector3D(0.0,0.0,0.0);
     texture = nullptr;
@@ -57,6 +59,7 @@ void DrawableObject::calculateRadius()
 {
     float max = 0;
     float min = 0;
+    float maxScale = qMax(qMax(scale.x(), scale.y()), scale.z());
 
     for(int i=0; i<verticesData.size(); i++)
     {
@@ -64,7 +67,7 @@ void DrawableObject::calculateRadius()
         min = qMin(min, qMin(qMin(verticesData[i].x(), verticesData[i].y()), verticesData[i].z()));
     }
 
-    radius = qMax(abs(max), abs(min));
+    radius = qMax(abs(max), abs(min)) * maxScale;
 }
 
 void DrawableObject::initializeGraphicBuffer()
@@ -118,6 +121,7 @@ void DrawableObject::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     mvMatrix.rotate(rotation.x(), 1, 0, 0);
     mvMatrix.rotate(rotation.y(), 0, 1, 0);
     mvMatrix.rotate(rotation.z(), 0, 0, 1);
+    mvMatrix.scale(scale.x(), scale.y(), scale.z());
 
     QMatrix3x3 normalMatrix;
     normalMatrix = mvMatrix.normalMatrix();
