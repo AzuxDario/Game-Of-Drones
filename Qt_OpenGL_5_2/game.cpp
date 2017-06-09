@@ -96,7 +96,7 @@ void Game::loadModels()
     modelsToLoad.push_back(":/Objects/planetoid");
     modelsToLoad.push_back(":/Objects/star");
     modelsToLoad.push_back(":/Objects/drone");
-    modelsToLoad.push_back(":/Objects/Content/spaceship.obj");
+    //modelsToLoad.push_back(":/Objects/Content/spaceship.obj");
     objManager.loadAll(modelsToLoad);
 }
 

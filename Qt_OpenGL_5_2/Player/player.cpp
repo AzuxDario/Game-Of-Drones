@@ -17,7 +17,7 @@ Player::Player()
 
 void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
 {
-    DrawableObject::init(shader, objManager->getModel(":/Objects/Content/spaceship.obj"), texturesManager->getTexture(":/Textures/drone"));
+    DrawableObject::init(shader, objManager->getModel(":/Objects/drone"), texturesManager->getTexture(":/Textures/drone"));
 }
 
 void Player::logic(int deltaTime)
