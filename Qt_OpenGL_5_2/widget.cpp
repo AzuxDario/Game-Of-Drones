@@ -136,11 +136,10 @@ void Widget::startGame()
     game.resume();
 
     startGameButton->setVisible(false);
+    restartGameButton->setVisible(false);
     closeGameButton->setVisible(false);
-    //if(isGamePaused == false)
-    {
+
     timer.start();
-    }
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
@@ -159,6 +158,7 @@ void Widget::pauseGame()
 
     startGameButton->setVisible(true);
     startGameButton->setText("Wznów");
+    restartGameButton->setVisible(true);
     closeGameButton->setVisible(true);
 
     paintTimer.stop();
@@ -167,6 +167,27 @@ void Widget::pauseGame()
     fpsCounterLabel->setVisible(false);
     timerLabel->setVisible(false);
     shipInfo->setVisible(false);
+    setFocus();
+}
+
+void Widget::restartGame()
+{
+    menuIsActive = false;
+    game.resume();
+
+    startGameButton->setVisible(false);
+    restartGameButton->setVisible(false);
+    closeGameButton->setVisible(false);
+
+    timer.start();
+    miliSeconds = 0;
+
+    paintTimer.setTimerType(Qt::PreciseTimer);
+    paintTimer.start(16);
+
+    fpsCounterLabel->setVisible(true);
+    timerLabel->setVisible(true);
+    shipInfo->setVisible(true);
     setFocus();
 }
 
@@ -220,6 +241,7 @@ void Widget::makeConnection()
 {
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
+    connect(restartGameButton,SIGNAL(pressed()),this,SLOT(restartGame()));
     connect(closeGameButton,SIGNAL(pressed()),this,SLOT(closeGame()));
     connect(&mouseTimer, SIGNAL(timeout()), this, SLOT(mouseTimerTimeout()));
 }
@@ -252,6 +274,11 @@ void Widget::createLayout()
     startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     startGameButton->setMaximumWidth(400.0/1920.0 * width);
     startGameButton->setMinimumWidth(400.0/1920.0 * width);
+    restartGameButton = new QPushButton("Zacznij od nowa",this);
+    restartGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    restartGameButton->setMaximumWidth(400.0/1920.0 * width);
+    restartGameButton->setMinimumWidth(400.0/1920.0 * width);
+    restartGameButton->setVisible(false);
     closeGameButton = new QPushButton("Wyjście",this);
     closeGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     closeGameButton->setMaximumWidth(400.0/1920.0 * width);
@@ -262,8 +289,9 @@ void Widget::createLayout()
     gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
     gridLayout->addLayout(gridMenuLayout,1,1, Qt::AlignCenter);
     gridMenuLayout->addWidget(startGameButton,1,1, Qt::AlignCenter);
-    gridMenuLayout->addWidget(closeGameButton,2,1, Qt::AlignCenter);
-    gridLayout->addWidget(shipInfo,3,1,Qt::AlignBottom);
+    gridMenuLayout->addWidget(restartGameButton,2,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(closeGameButton,3,1, Qt::AlignCenter);
+    gridLayout->addWidget(shipInfo,4,1,Qt::AlignBottom);
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
@@ -271,7 +299,7 @@ void Widget::createLayout()
 
 void Widget::initializeSoundtrack()
 {
-    musicPlayer.setSong("qrc:/Music/song");
+    musicPlayer.setSong("Dave Rodgers - Deja Vu.wma");
     musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
 }
 

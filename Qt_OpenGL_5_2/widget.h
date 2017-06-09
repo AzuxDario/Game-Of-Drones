@@ -53,6 +53,7 @@ private:
     QLabel *timerLabel;
     QLabel *shipInfo;
     QPushButton *startGameButton;
+    QPushButton *restartGameButton;
     QPushButton *closeGameButton;
 
     QTime timer;
@@ -74,6 +75,7 @@ public slots:
     void keyReleaseEvent(QKeyEvent *event);
     void startGame();
     void pauseGame();
+    void restartGame();
     void closeGame();
 
 protected:
