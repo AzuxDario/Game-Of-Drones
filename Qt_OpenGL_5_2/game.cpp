@@ -36,7 +36,6 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     loadTextures();
     createEnviroment(shader);
     createPlayer(shader);
-
     //TEST
     player.getPosition().setZ(-20);
 }
