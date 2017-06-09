@@ -32,6 +32,7 @@ public:
 
 public:
     float getAccelerate() noexcept {return accelerate;}
+    void restoreStartPosition();
 };
 
 #endif

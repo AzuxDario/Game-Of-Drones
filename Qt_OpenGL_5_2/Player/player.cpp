@@ -61,3 +61,18 @@ void Player::input(Qt::Key key)
 {
 
 }
+
+void Player::restoreStartPosition()
+{
+    //Restore start position and rotation
+    setPosition(QVector3D(0.0,0.0,-20.0));
+    setRotation(QVector3D(0.0,0.0,0.0));
+
+    //Restore start speed
+    //I don't know what I reset. I try to stop it.
+    accelerate = 0.0;
+    direction = QVector2D(0,0);
+    rotation = QVector2D(0,0);
+    moveSpeed = QVector3D(0,0,0);
+    rotationSpeed = QVector3D(0,0,0);
+}

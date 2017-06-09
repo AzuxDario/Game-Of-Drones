@@ -55,6 +55,7 @@ public:
 
     void setRadius(float value) noexcept {radius = value;}
     void setPosition(QVector3D value) noexcept {position = value;}
+    void setRotation(QVector3D value) noexcept {rotation = value;}
 
     QVector3D moveSpeed;
     QVector3D rotationSpeed;

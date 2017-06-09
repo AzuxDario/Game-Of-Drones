@@ -179,3 +179,9 @@ void Game::resume()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 }
+
+void Game::restart()
+{
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+    player.restoreStartPosition();
+}

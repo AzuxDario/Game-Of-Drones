@@ -173,7 +173,7 @@ void Widget::pauseGame()
 void Widget::restartGame()
 {
     menuIsActive = false;
-    game.resume();
+    game.restart();
 
     startGameButton->setVisible(false);
     restartGameButton->setVisible(false);
