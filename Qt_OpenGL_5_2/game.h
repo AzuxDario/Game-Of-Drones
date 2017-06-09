@@ -17,7 +17,6 @@
 #include "EnvGenerator/EnvGenerator.h"
 #include "Physics/physics.h"
 #include "drawableobject.h"
-#include "movableobject.h"
 #include "camera.h"
 #include "light.h"
 #include "Player/player.h"
@@ -49,11 +48,6 @@ Player player;
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
     void logic(Camera& camera);
     void checkCollisions();
-    void draw(QOpenGLShaderProgram & shader);
-    //Zmiana pozycji
-    void move();
-    //AI, sterowanie itp.
-    void step();
 
     void pause();
     void resume();

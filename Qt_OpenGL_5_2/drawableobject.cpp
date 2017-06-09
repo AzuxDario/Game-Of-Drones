@@ -37,7 +37,7 @@ void DrawableObject::getVerticlesData(OBJLoader data)
         v1 = data.getVerticesData().at(face.vertices.x() - 1);
         v2 = data.getVerticesData().at(face.vertices.y() - 1);
         v3 = data.getVerticesData().at(face.vertices.z() - 1);
-        //verticesData << v1 << v2 << v3 ;
+
         verticesData.push_back(v1);
         verticesData.push_back(v2);
         verticesData.push_back(v3);
@@ -46,24 +46,17 @@ void DrawableObject::getVerticlesData(OBJLoader data)
         {
             normal = QVector3D::normal(v1, v2, v3);
 
-            //normalsData << normal << normal << normal;
             normalsData.push_back(normal);
             normalsData.push_back(normal);
             normalsData.push_back(normal);
         }
         else
         {
-            //normalsData << data.getNormalsData().at(face.normals.x() - 1)
-            //            << data.getNormalsData().at(face.normals.y() - 1)
-            //            << data.getNormalsData().at(face.normals.z() - 1);
             normalsData.push_back(data.getNormalsData().at(face.normals.x() - 1));
             normalsData.push_back(data.getNormalsData().at(face.normals.y() - 1));
             normalsData.push_back(data.getNormalsData().at(face.normals.z() - 1));
         }
 
-        //textureCoordsData << data.getTextureCoordsData().at(face.textures.x() - 1)
-        //                  << data.getTextureCoordsData().at(face.textures.y() - 1)
-        //                  << data.getTextureCoordsData().at(face.textures.z() - 1);
         textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.x() - 1));
         textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.y() - 1));
         textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.z() - 1));

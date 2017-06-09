@@ -7,27 +7,6 @@ Game::Game()
     checkCollisionsTime = checkCollisionsDefaultTime;
 }
 
-void Game::draw(QOpenGLShaderProgram &shader)
-{
-    for (int i = 0; i < DrawableObjects.size();i++)
-    {
-        //ImmovableObjects[i].Draw();
-    }
-}
-
-void Game::step()
-{
-
-}
-
-void Game::move()
-{
-    for (int i = 0; i < DrawableObjects.size();i++)
-    {
-        //MovableObjects[i].Position += MovableObjects[i].Motion;
-    }
-}
-
 void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager)
 {
     this->keyboardManager = keyboardManager;
@@ -36,7 +15,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     loadTextures();
     createEnviroment(shader);
     createPlayer(shader);
-    //TEST
+
     player.getPosition().setZ(-20);
 }
 
