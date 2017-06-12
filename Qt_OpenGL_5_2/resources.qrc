@@ -11,8 +11,8 @@
         <file alias="skybox">Content/skybox.obj</file>
         <file alias="planetoid">Content/planetoid.obj</file>
         <file alias="star">Content/star.obj</file>
-        <file alias="drone">Content/drone.obj</file>
-        <file>Content/spaceship.obj</file>
+        <file>Content/arrow.obj</file>
+        <file alias="drone">Content/spaceship.obj</file>
     </qresource>
     <qresource prefix="/Textures">
         <file alias="skybox">Content/skybox.png</file>

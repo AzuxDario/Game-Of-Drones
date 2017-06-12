@@ -10,6 +10,9 @@ DrawableObject::DrawableObject() : texture(0)
     rotationSpeed = QVector3D(0.0,0.0,0.0);
     texture = nullptr;
     numberOfVerticles = 0;
+    verticesData.reserve(5100);
+    normalsData.reserve(5120);
+    textureCoordsData.reserve(11900);
 }
 
 DrawableObject::~DrawableObject()
@@ -34,24 +37,39 @@ void DrawableObject::getVerticlesData(OBJLoader data)
         v1 = data.getVerticesData().at(face.vertices.x() - 1);
         v2 = data.getVerticesData().at(face.vertices.y() - 1);
         v3 = data.getVerticesData().at(face.vertices.z() - 1);
-        verticesData << v1 << v2 << v3 ;
+
+        verticesData.push_back(v1);
+        verticesData.push_back(v2);
+        verticesData.push_back(v3);
 
         if(data.isNormalsLoaded() == false)
         {
             normal = QVector3D::normal(v1, v2, v3);
 
-            normalsData << normal << normal << normal;
+            normalsData.push_back(normal);
+            normalsData.push_back(normal);
+            normalsData.push_back(normal);
         }
         else
         {
-            normalsData << data.getNormalsData().at(face.normals.x() - 1)
-                        << data.getNormalsData().at(face.normals.y() - 1)
-                        << data.getNormalsData().at(face.normals.z() - 1);
+            normalsData.push_back(data.getNormalsData().at(face.normals.x() - 1));
+            normalsData.push_back(data.getNormalsData().at(face.normals.y() - 1));
+            normalsData.push_back(data.getNormalsData().at(face.normals.z() - 1));
         }
 
-        textureCoordsData << data.getTextureCoordsData().at(face.textures.x() - 1)
-                          << data.getTextureCoordsData().at(face.textures.y() - 1)
-                          << data.getTextureCoordsData().at(face.textures.z() - 1);
+        if(data.isTexCoordsLoaded() == false)
+        {
+            textureCoordsData.push_back(QVector2D(0.0,1.0));
+            textureCoordsData.push_back(QVector2D(1.0,1.0));
+            textureCoordsData.push_back(QVector2D(1.0,0.0));
+        }
+        else
+        {
+            textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.x() - 1));
+            textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.y() - 1));
+            textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.z() - 1));
+        }
+
     }
 }
 
@@ -115,13 +133,15 @@ void DrawableObject::logic(int deltaTime)
 void DrawableObject::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 {
     QMatrix4x4 vMatrix = camera.GetMatrix();
-    QMatrix4x4 mvMatrix = vMatrix;
 
-    mvMatrix.translate(position.x(), position.y(), position.z());
-    mvMatrix.rotate(rotation.x(), 1, 0, 0);
-    mvMatrix.rotate(rotation.y(), 0, 1, 0);
-    mvMatrix.rotate(rotation.z(), 0, 0, 1);
-    mvMatrix.scale(scale.x(), scale.y(), scale.z());
+    transform = QMatrix4x4();
+    transform.translate(position.x(), position.y(), position.z());
+    transform.rotate(rotation.x(), 1, 0, 0);
+    transform.rotate(rotation.y(), QVector3D(0, 1, 0));
+    transform.rotate(rotation.z(), QVector3D(0, 0, 1));
+    transform.scale(scale.x(), scale.y(), scale.z());
+
+    QMatrix4x4 mvMatrix = vMatrix * transform;
 
     QMatrix3x3 normalMatrix;
     normalMatrix = mvMatrix.normalMatrix();

@@ -7,38 +7,15 @@ Game::Game()
     checkCollisionsTime = checkCollisionsDefaultTime;
 }
 
-void Game::draw(QOpenGLShaderProgram &shader)
-{
-    for (int i = 0; i < DrawableObjects.size();i++)
-    {
-        //ImmovableObjects[i].Draw();
-    }
-}
-
-void Game::step()
-{
-
-}
-
-void Game::move()
-{
-    for (int i = 0; i < DrawableObjects.size();i++)
-    {
-        //MovableObjects[i].Position += MovableObjects[i].Motion;
-    }
-}
-
 void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager)
 {
     this->keyboardManager = keyboardManager;
 
     loadModels();
     loadTextures();
+    createArrow(shader);
     createEnviroment(shader);
     createPlayer(shader);
-
-    //TEST
-    player.getPosition().setZ(-20);
 }
 
 void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
@@ -50,6 +27,7 @@ void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
 
     envGenerator.draw(camera, light, pMatrix);
     star.draw(camera, light, pMatrix);
+    arrow.draw(camera, light, pMatrix);
     player.draw(camera, light, pMatrix);
 }
 
@@ -68,6 +46,10 @@ void Game::logic(Camera& camera)
     envGenerator.logic(player.getPosition(), deltaTime);
     star.logic(deltaTime);
     player.logic(deltaTime);
+
+    arrow.getPosition() = (player.getPosition() + QVector3D(10,0,0));
+
+
     camera.update(player.getPosition(), player.getRotation());
 }
 
@@ -97,7 +79,7 @@ void Game::loadModels()
     modelsToLoad.push_back(":/Objects/planetoid");
     modelsToLoad.push_back(":/Objects/star");
     modelsToLoad.push_back(":/Objects/drone");
-    modelsToLoad.push_back(":/Objects/Content/spaceship.obj");
+    modelsToLoad.push_back(":/Objects/Content/arrow.obj");
     objManager.loadAll(modelsToLoad);
 }
 
@@ -130,6 +112,13 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
 void Game::createPlayer(QOpenGLShaderProgram* shader)
 {
     player.init(&objManager, &texturesManager, shader);
+}
+
+void Game::createArrow(QOpenGLShaderProgram* shader)
+{
+    arrow.init(shader, objManager.getModel(":/Objects/Content/arrow.obj"), texturesManager.getTexture(":/Textures/drone"));
+    arrow.getScale() = QVector3D(0.1,0.1,0.1);
+    arrow.getRotation() = QVector3D(0,90,90);
 }
 
 void Game::input()
@@ -179,4 +168,10 @@ void Game::pause()
 void Game::resume()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+}
+
+void Game::restart()
+{
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+    player.restoreStartPosition();
 }
