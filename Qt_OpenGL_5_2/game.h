@@ -17,7 +17,6 @@
 #include "EnvGenerator/EnvGenerator.h"
 #include "Physics/physics.h"
 #include "drawableobject.h"
-#include "movableobject.h"
 #include "camera.h"
 #include "light.h"
 #include "Player/player.h"
@@ -36,6 +35,7 @@ private:
 
     DrawableObject skybox;
     DrawableObject star;
+    DrawableObject arrow;
 
     long int lastFrameTime;
     int checkCollisionsDefaultTime;
@@ -49,14 +49,10 @@ Player player;
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
     void logic(Camera& camera);
     void checkCollisions();
-    void draw(QOpenGLShaderProgram & shader);
-    //Zmiana pozycji
-    void move();
-    //AI, sterowanie itp.
-    void step();
 
     void pause();
     void resume();
+    void restart();
     float getPlayerAccelerate() noexcept {return player.getAccelerate();}
     float getPlayerSpeed() noexcept { return player.moveSpeed.length();}
 
@@ -67,6 +63,7 @@ private:
     void loadTextures();
     void createEnviroment(QOpenGLShaderProgram* shader);
     void createPlayer(QOpenGLShaderProgram* shader);
+    void createArrow(QOpenGLShaderProgram* shader);
     void updateCamera(Camera& camera);
     void input();
 };

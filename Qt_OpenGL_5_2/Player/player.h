@@ -27,11 +27,11 @@ public:
     float acceleration;
     float agility;
     float maxturn;
-    QVector2D direction;
+    QVector3D direction;
     QVector2D rotation;
-
 public:
     float getAccelerate() noexcept {return accelerate;}
+    void restoreStartPosition();
 };
 
 #endif

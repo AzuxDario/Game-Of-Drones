@@ -117,19 +117,19 @@ bool OBJLoader::parseFaces(QString line)
 
     QVector<QString> subTokens = std::move(tokens[1].split('/').toVector());
     fData.vertices.setX(subTokens[0].toFloat());
-    fData.textures.setX(subTokens[1].toFloat());
+    if (subTokens.size() > 1)fData.textures.setX(subTokens[1].toFloat());
     if (subTokens.size() > 2)fData.normals.setX(subTokens[2].toFloat());
 
 
     subTokens = std::move(tokens[2].split('/').toVector());
     fData.vertices.setY(subTokens[0].toFloat());
-    fData.textures.setY(subTokens[1].toFloat());
+    if (subTokens.size() > 1)fData.textures.setY(subTokens[1].toFloat());
     if (subTokens.size() > 2)fData.normals.setY(subTokens[2].toFloat());
 
 
     subTokens = std::move(tokens[3].split('/').toVector());
     fData.vertices.setZ(subTokens[0].toFloat());
-    fData.textures.setZ(subTokens[1].toFloat());
+    if (subTokens.size() > 1)fData.textures.setZ(subTokens[1].toFloat());
     if (subTokens.size() > 2)fData.normals.setZ(subTokens[2].toFloat());
 
 

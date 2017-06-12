@@ -71,8 +71,6 @@ void Widget::logic()
     game.logic(camera);
     fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
     shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(static_cast<int>(2444 * game.getPlayerSpeed())) + " m/s<br/>Moc silników: " +QString::number(static_cast<int>(696.8 * game.getPlayerAccelerate())) + "%");
-    //+ ", X: " + QString::number(game.player.rotation.x()) + ", Y: " + QString::number(game.player.rotation.y())
-    //    + "\nX:" + QString::number(game.player.getPosition().x()) + ", Y:"+ QString::number(game.player.getPosition().y()) + ", Y:"+ QString::number(game.player.getPosition().z()));
     telemetry.logic();
 }
 
@@ -136,11 +134,10 @@ void Widget::startGame()
     game.resume();
 
     startGameButton->setVisible(false);
+    restartGameButton->setVisible(false);
     closeGameButton->setVisible(false);
-    //if(isGamePaused == false)
-    {
+
     timer.start();
-    }
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
@@ -159,6 +156,7 @@ void Widget::pauseGame()
 
     startGameButton->setVisible(true);
     startGameButton->setText("Wznów");
+    restartGameButton->setVisible(true);
     closeGameButton->setVisible(true);
 
     paintTimer.stop();
@@ -167,6 +165,27 @@ void Widget::pauseGame()
     fpsCounterLabel->setVisible(false);
     timerLabel->setVisible(false);
     shipInfo->setVisible(false);
+    setFocus();
+}
+
+void Widget::restartGame()
+{
+    menuIsActive = false;
+    game.restart();
+
+    startGameButton->setVisible(false);
+    restartGameButton->setVisible(false);
+    closeGameButton->setVisible(false);
+
+    timer.start();
+    miliSeconds = 0;
+
+    paintTimer.setTimerType(Qt::PreciseTimer);
+    paintTimer.start(16);
+
+    fpsCounterLabel->setVisible(true);
+    timerLabel->setVisible(true);
+    shipInfo->setVisible(true);
     setFocus();
 }
 
@@ -220,6 +239,7 @@ void Widget::makeConnection()
 {
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
+    connect(restartGameButton,SIGNAL(pressed()),this,SLOT(restartGame()));
     connect(closeGameButton,SIGNAL(pressed()),this,SLOT(closeGame()));
     connect(&mouseTimer, SIGNAL(timeout()), this, SLOT(mouseTimerTimeout()));
 }
@@ -234,36 +254,49 @@ void Widget::createLayout()
 
     fpsCounterLabel = new QLabel("FPS: 00");
     fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
-    //fpsCounterLabel->setMinimumWidth(200);
     fpsCounterLabel->setAlignment(Qt::AlignLeft);
     fpsCounterLabel->setVisible(false);
+
     timerLabel = new QLabel("Czas: 00:00.00");
     timerLabel->setStyleSheet(cssFpsAndTimer);
-    //timerLabel->setMinimumWidth(300);
     timerLabel->setAlignment(Qt::AlignRight);
     timerLabel->setVisible(false);
+
     shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Moc silników: 0%");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssFpsAndTimer);
     shipInfo->setMinimumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setMaximumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setVisible(false);
+
     startGameButton = new QPushButton("Start!",this);
     startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     startGameButton->setMaximumWidth(400.0/1920.0 * width);
     startGameButton->setMinimumWidth(400.0/1920.0 * width);
+
+    restartGameButton = new QPushButton("Zacznij od nowa",this);
+    restartGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    restartGameButton->setMaximumWidth(400.0/1920.0 * width);
+    restartGameButton->setMinimumWidth(400.0/1920.0 * width);
+    restartGameButton->setVisible(false);
+
     closeGameButton = new QPushButton("Wyjście",this);
     closeGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     closeGameButton->setMaximumWidth(400.0/1920.0 * width);
     closeGameButton->setMinimumWidth(400.0/1920.0 * width);
+
     gridMenuLayout = new QGridLayout();
+
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
     gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
     gridLayout->addLayout(gridMenuLayout,1,1, Qt::AlignCenter);
+
     gridMenuLayout->addWidget(startGameButton,1,1, Qt::AlignCenter);
-    gridMenuLayout->addWidget(closeGameButton,2,1, Qt::AlignCenter);
-    gridLayout->addWidget(shipInfo,3,1,Qt::AlignBottom);
+    gridMenuLayout->addWidget(restartGameButton,2,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(closeGameButton,3,1, Qt::AlignCenter);
+
+    gridLayout->addWidget(shipInfo,4,1,Qt::AlignBottom);
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
@@ -271,7 +304,7 @@ void Widget::createLayout()
 
 void Widget::initializeSoundtrack()
 {
-    musicPlayer.setSong("qrc:/Music/song");
+    musicPlayer.setSong("Dave Rodgers - Deja Vu.wma");
     musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
 }
 

@@ -25,6 +25,7 @@ private:
     QVector3D scale;
 
     QMatrix4x4 pMatrix;
+    QMatrix4x4 transform;
     QOpenGLShaderProgram* cubeShaderProgram;
     QOpenGLTexture *texture;
     QVector<QVector3D> verticesData;
@@ -51,10 +52,12 @@ public:
     QVector3D& getScale() noexcept {return scale;}
     QVector3D& getMoveSpeed() noexcept {return moveSpeed;}
     QVector3D& getRotationSpeed() noexcept {return rotationSpeed;}
+    QMatrix4x4& getTransform() noexcept { return transform; }
     float getRadius() noexcept {return radius;}
 
     void setRadius(float value) noexcept {radius = value;}
     void setPosition(QVector3D value) noexcept {position = value;}
+    void setRotation(QVector3D value) noexcept {rotation = value;}
 
     QVector3D moveSpeed;
     QVector3D rotationSpeed;

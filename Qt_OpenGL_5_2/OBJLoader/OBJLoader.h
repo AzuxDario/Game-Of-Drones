@@ -32,6 +32,7 @@ public:
     QVector<FaceData> getFacesData() noexcept {return facesData;}
 
     bool isNormalsLoaded() noexcept {return normalsData.size() == 0 ? false : true;}
+    bool isTexCoordsLoaded() noexcept {return textureCoordsData.size() == 0 ? false : true;}
 
 private:
     bool parse(QString content);
