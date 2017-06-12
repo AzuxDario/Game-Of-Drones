@@ -1,4 +1,4 @@
-#include "drawableobject.h"
+﻿#include "drawableobject.h"
 
 DrawableObject::DrawableObject() : texture(0)
 {
@@ -69,7 +69,6 @@ void DrawableObject::getVerticlesData(OBJLoader data)
             textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.y() - 1));
             textureCoordsData.push_back(data.getTextureCoordsData().at(face.textures.z() - 1));
         }
-
     }
 }
 

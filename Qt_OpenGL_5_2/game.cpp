@@ -16,6 +16,8 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createArrow(shader);
     createEnviroment(shader);
     createPlayer(shader);
+
+    player.getPosition().setZ(-20);
 }
 
 void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
