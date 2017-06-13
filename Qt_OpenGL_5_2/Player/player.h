@@ -16,7 +16,7 @@ private:
 public:
     Player();
 
-    void init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader);
+    void init(OBJModel* model, QOpenGLTexture* texture, QOpenGLShaderProgram* shader);
     void logic(int deltaTime);
     void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
     void input(Qt::Key key);

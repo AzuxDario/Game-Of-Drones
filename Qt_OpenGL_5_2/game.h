@@ -13,6 +13,7 @@
 #include <cmath>
 
 #include "OBJManager/objmanager.h"
+#include "computerplayer.h"
 #include "TexturesManager/texturesmanager.h"
 #include "EnvGenerator/EnvGenerator.h"
 #include "Physics/physics.h"
@@ -43,7 +44,8 @@ private:
 
 public:
     Game();
-Player player;
+    Player player;
+    ComputerPlayer enemy;
     QVector<DrawableObject> DrawableObjects;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
     void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
@@ -64,6 +66,7 @@ private:
     void createEnviroment(QOpenGLShaderProgram* shader);
     void createPlayer(QOpenGLShaderProgram* shader);
     void createArrow(QOpenGLShaderProgram* shader);
+    void createOpponents(QOpenGLShaderProgram* shader);
     void updateCamera(Camera& camera);
     void input();
 };

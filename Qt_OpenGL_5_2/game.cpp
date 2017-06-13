@@ -16,6 +16,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createArrow(shader);
     createEnviroment(shader);
     createPlayer(shader);
+    createOpponents(shader);
 
     player.getPosition().setZ(-20);
 }
@@ -31,6 +32,7 @@ void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
     star.draw(camera, light, pMatrix);
     arrow.draw(camera, light, pMatrix);
     player.draw(camera, light, pMatrix);
+    enemy.draw(camera, light, pMatrix);
 }
 
 void Game::logic(Camera& camera)
@@ -48,6 +50,7 @@ void Game::logic(Camera& camera)
     envGenerator.logic(player.getPosition(), deltaTime);
     star.logic(deltaTime);
     player.logic(deltaTime);
+    enemy.logic(deltaTime);
 
     arrow.getPosition() = (player.getPosition() + QVector3D(10,0,0));
 
@@ -82,6 +85,7 @@ void Game::loadModels()
     modelsToLoad.push_back(":/Objects/star");
     modelsToLoad.push_back(":/Objects/drone");
     modelsToLoad.push_back(":/Objects/Content/arrow.obj");
+    modelsToLoad.push_back(":/Objects/Content/spodek.obj");
     objManager.loadAll(modelsToLoad);
 }
 
@@ -113,7 +117,14 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
 {
-    player.init(&objManager, &texturesManager, shader);
+    player.init(objManager.getModel(":/Objects/drone"), texturesManager.getTexture(":/Textures/drone"), shader);
+}
+
+void Game::createOpponents(QOpenGLShaderProgram* shader)
+{
+    enemy.init(objManager.getModel(":/Objects/Content/spodek.obj"), texturesManager.getTexture(":/Textures/drone"), shader);
+    arrow.getScale() = QVector3D(0.1,0.1,0.1);
+    enemy.getPosition().setX(30);
 }
 
 void Game::createArrow(QOpenGLShaderProgram* shader)
@@ -122,6 +133,7 @@ void Game::createArrow(QOpenGLShaderProgram* shader)
     arrow.getScale() = QVector3D(0.1,0.1,0.1);
     arrow.getRotation() = QVector3D(0,90,90);
 }
+
 
 void Game::input()
 {

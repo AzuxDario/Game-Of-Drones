@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     telemetry.cpp \
     Player/player.cpp \
     KeyboardManager/keyboardmanager.cpp \
-    musicplayer.cpp
+    musicplayer.cpp \
+    computerplayer.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -49,7 +50,8 @@ HEADERS  += widget.h \
     telemetry.h \
     Player/player.h \
     KeyboardManager/keyboardmanager.h \
-    musicplayer.h
+    musicplayer.h \
+    computerplayer.h
 
 RESOURCES += \
     resources.qrc

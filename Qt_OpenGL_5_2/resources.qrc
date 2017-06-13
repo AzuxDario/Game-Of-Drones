@@ -13,6 +13,7 @@
         <file alias="star">Content/star.obj</file>
         <file>Content/arrow.obj</file>
         <file alias="drone">Content/spaceship.obj</file>
+        <file>Content/spodek.obj</file>
     </qresource>
     <qresource prefix="/Textures">
         <file alias="skybox">Content/skybox.png</file>
@@ -21,4 +22,7 @@
         <file alias="star">Content/star.png</file>
     </qresource>
     <qresource prefix="/Music"/>
+    <qresource prefix="/">
+        <file>Content/spodek.obj</file>
+    </qresource>
 </RCC>

@@ -15,9 +15,9 @@ Player::Player()
     getScale() = QVector3D(0.3f, 0.3f, 0.3f);
 }
 
-void Player::init(OBJManager* objManager, TexturesManager* texturesManager, QOpenGLShaderProgram* shader)
+void Player::init(OBJModel* model, QOpenGLTexture* texture, QOpenGLShaderProgram* shader)
 {
-    DrawableObject::init(shader, objManager->getModel(":/Objects/drone"), texturesManager->getTexture(":/Textures/drone"));
+    DrawableObject::init(shader, model, texture);
 }
 
 void Player::logic(int deltaTime)
@@ -28,7 +28,11 @@ void Player::logic(int deltaTime)
 
     QMatrix4x4 mm = QMatrix4x4();
 
-    direction += mm.mapVector(rotation.toVector3D());
+    //mm.rotate(direction.x(), 1, 0, 0);
+    //mm.rotate(direction.y(), 0, 1, 0);
+    mm.rotate(direction.z(), 0, 0, 1);
+
+    direction += QVector3D(mm.mapVector(rotation.toVector3D()));
 
     rotation /= 1.2;
     if (abs(rotation.x()) < 0.01) rotation.setX(0);
