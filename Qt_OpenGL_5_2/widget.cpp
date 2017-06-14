@@ -3,7 +3,6 @@
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
     menuIsActive = true;
-    isGamePaused = false;
     miliSeconds = 0;
 
     createLayout();
@@ -131,7 +130,8 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 void Widget::startGame()
 {
     menuIsActive = false;
-    game.resume();
+    game.start();
+    game.setIsGamePaused(false);
 
     startGameButton->setVisible(false);
     restartGameButton->setVisible(false);
@@ -150,9 +150,9 @@ void Widget::startGame()
 }
 void Widget::pauseGame()
 {
-    game.pause();
     menuIsActive = true;
-    isGamePaused = true;
+    game.pause();
+    game.setIsGamePaused(true);
 
     startGameButton->setVisible(true);
     startGameButton->setText("Wznów");
@@ -172,6 +172,7 @@ void Widget::restartGame()
 {
     menuIsActive = false;
     game.restart();
+    game.setIsGamePaused(false);
 
     startGameButton->setVisible(false);
     restartGameButton->setVisible(false);

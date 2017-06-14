@@ -60,7 +60,6 @@ private:
     int miliSeconds;
     QString cssFpsAndTimer;
     bool menuIsActive;
-    bool isGamePaused;
     QTimer mouseTimer;
     QPoint mousePos;
 

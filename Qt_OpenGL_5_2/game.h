@@ -41,6 +41,7 @@ private:
     long int lastFrameTime;
     int checkCollisionsDefaultTime;
     int checkCollisionsTime;
+    bool isGamePaused;
 
 public:
     Game();
@@ -53,8 +54,11 @@ public:
     void checkCollisions();
 
     void pause();
-    void resume();
+    void start();
     void restart();
+
+    void setIsGamePaused(bool value) noexcept {isGamePaused = value;}
+    bool getIsGamePaused() noexcept {return isGamePaused;}
     float getPlayerAccelerate() noexcept {return player.getAccelerate();}
     float getPlayerSpeed() noexcept { return player.moveSpeed.length();}
 

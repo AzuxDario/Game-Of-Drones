@@ -5,6 +5,7 @@ Game::Game()
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
     checkCollisionsDefaultTime = 10;
     checkCollisionsTime = checkCollisionsDefaultTime;
+    isGamePaused = false;
 }
 
 void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager)
@@ -179,7 +180,7 @@ void Game::pause()
 
 }
 
-void Game::resume()
+void Game::start()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
 }
