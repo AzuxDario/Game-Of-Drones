@@ -208,7 +208,7 @@ void Widget::createLayout()
 
     cssLabels = "font-size:"+QString::number(static_cast<int>(30.0/1920.0 * width))+"px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
     cssButtons = "QPushButton {"+cssLabels+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}";
-    cssProgressBars = "QProgressBar {" + cssLabels + " text-align: center; } QProgressBar::chunk {background-color: rgba(0,211,28,0.6);border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}";
+    cssProgressBars = "QProgressBar {" + cssLabels + " text-align: center; } QProgressBar::chunk {background-color: qlineargradient(x1: 0.5, y1: 0, x2: 0.5, y2: 1,stop: 0 rgba(0,211,28,0.8), stop: 1 rgba(255,0,0,0.8));border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}";
 
     fpsCounterLabel = new QLabel("FPS: 00");
     fpsCounterLabel->setStyleSheet(cssLabels);
