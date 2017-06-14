@@ -133,6 +133,11 @@ void Game::createArrow(QOpenGLShaderProgram* shader)
     arrow.init(shader, objManager.getModel(":/Objects/arrow"), texturesManager.getTexture(":/Textures/drone"));
     arrow.getScale() = QVector3D(0.1,0.1,0.1);
     arrow.getRotation() = QVector3D(0,90,90);
+    //Sprawia, że strzałka nie ma cieni i nie odbija światła
+    arrow.getLightProperties().setSpecularReflection(0);
+    arrow.getLightProperties().setAmbientReflection(1);
+    arrow.getLightProperties().setDiffuseReflection(0);
+    arrow.getLightProperties().setAmbientColor(128,128,128); //Ustawia jasność strzałki
 }
 
 

@@ -6,12 +6,10 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     miliSecondsFromStart = 0;
 
     createLayout();
-
     makeConnection();
-
-    mouseTimer.setSingleShot(true);
-
     //initializeSoundtrack();
+
+    mouseTimer.setSingleShot(true);  
 }
 
 Widget::~Widget()
@@ -79,7 +77,6 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
 {
     mouseTimer.stop();
 
-
     camera.setDirection(QVector3D(camera.getDirection().x() + (event->pos().x() - mousePos.x())/2,camera.getDirection().y() + (event->pos().y() - mousePos.y())/2,0));
 
     mousePos = event->pos();
@@ -132,7 +129,6 @@ void Widget::startGame()
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
-
     layoutTimer.setTimerType(Qt::PreciseTimer);
     layoutTimer.start(16);
 
@@ -149,7 +145,6 @@ void Widget::pauseGame()
     miliSecondsFromStart += playGameTimer.elapsed();
 
     paintTimer.stop();
-
     layoutTimer.stop();
 
     toggleMenuVisibility(true);
@@ -167,7 +162,6 @@ void Widget::restartGame()
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
-
     layoutTimer.setTimerType(Qt::PreciseTimer);
     layoutTimer.start(16);
 
@@ -191,10 +185,11 @@ void Widget::makeConnection()
 {
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
     connect(&layoutTimer,SIGNAL(timeout()),this,SLOT(updateLayout()));
+    connect(&mouseTimer, SIGNAL(timeout()), this, SLOT(mouseTimerTimeout()));
+
     connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
     connect(restartGameButton,SIGNAL(pressed()),this,SLOT(restartGame()));
     connect(closeGameButton,SIGNAL(pressed()),this,SLOT(closeGame()));
-    connect(&mouseTimer, SIGNAL(timeout()), this, SLOT(mouseTimerTimeout()));
 
     connect(this,SIGNAL(updateSpeedProgressBar(int)),speedProgressBar,SLOT(setValue(int)));
     connect(this,SIGNAL(updateEnginePowerProgressBar(int)),enginePowerProgressBar,SLOT(setValue(int)));
