@@ -85,8 +85,8 @@ void Game::loadModels()
     modelsToLoad.push_back(":/Objects/planetoid");
     modelsToLoad.push_back(":/Objects/star");
     modelsToLoad.push_back(":/Objects/drone");
-    modelsToLoad.push_back(":/Objects/Content/arrow.obj");
-    modelsToLoad.push_back(":/Objects/Content/spodek.obj");
+    modelsToLoad.push_back(":/Objects/arrow");
+    modelsToLoad.push_back(":/Objects/spodek");
     objManager.loadAll(modelsToLoad);
 }
 
@@ -123,14 +123,14 @@ void Game::createPlayer(QOpenGLShaderProgram* shader)
 
 void Game::createOpponents(QOpenGLShaderProgram* shader)
 {
-    enemy.init(objManager.getModel(":/Objects/Content/spodek.obj"), texturesManager.getTexture(":/Textures/drone"), shader);
-    arrow.getScale() = QVector3D(0.1,0.1,0.1);
+    enemy.init(objManager.getModel(":/Objects/spodek"), texturesManager.getTexture(":/Textures/drone"), shader);
+    arrow.getScale() = QVector3D(0.1,0.1,0.1); //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
     enemy.getPosition().setX(30);
 }
 
 void Game::createArrow(QOpenGLShaderProgram* shader)
 {
-    arrow.init(shader, objManager.getModel(":/Objects/Content/arrow.obj"), texturesManager.getTexture(":/Textures/drone"));
+    arrow.init(shader, objManager.getModel(":/Objects/arrow"), texturesManager.getTexture(":/Textures/drone"));
     arrow.getScale() = QVector3D(0.1,0.1,0.1);
     arrow.getRotation() = QVector3D(0,90,90);
 }
