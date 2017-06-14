@@ -5,7 +5,7 @@ MusicPlayer::MusicPlayer()
 
 }
 
-void MusicPlayer::setSong(QString value)
+void MusicPlayer::addSong(QString value)
 {
     playlist.addMedia(QUrl(value));
     mediaPlayer.setPlaylist(&playlist);

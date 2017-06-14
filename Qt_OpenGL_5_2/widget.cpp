@@ -292,7 +292,7 @@ void Widget::createLayout()
 
 void Widget::initializeSoundtrack()
 {
-    musicPlayer.setSong("Dave Rodgers - Deja Vu.wma");
+    musicPlayer.addSong("Dave Rodgers - Deja Vu.wma");
     musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
 }
 

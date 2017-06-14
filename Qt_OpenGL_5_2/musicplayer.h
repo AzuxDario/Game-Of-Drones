@@ -15,7 +15,7 @@ public:
     MusicPlayer();
 
 public slots:
-    void setSong(QString value);
+    void addSong(QString value);
     void play(QMediaPlaylist::PlaybackMode mode);
     void play();
     void stop();
