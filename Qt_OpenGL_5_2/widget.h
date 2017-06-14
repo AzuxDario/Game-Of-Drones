@@ -41,6 +41,7 @@ private:
 
     QOpenGLShaderProgram shaderProgram;
     QTimer paintTimer;
+    QTimer layoutTimer;
 
     Camera camera;
     Light light;
@@ -66,6 +67,11 @@ private:
     bool menuIsActive;
     QTimer mouseTimer;
     QPoint mousePos;
+
+signals:
+    void updateSpeedProgressBar(int value);
+    void updateEnginePowerProgressBar(int value);
+
 
 public:
     Widget(QWidget *parent = 0);
@@ -104,6 +110,7 @@ private:
     void toggleInGameLayoutVisibility(bool value);
 private slots:
     void mouseTimerTimeout();
+    void updateLayout();
 };
 
 #endif // WIDGET_H

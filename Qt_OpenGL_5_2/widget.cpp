@@ -61,15 +61,11 @@ void Widget::paintGL()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     game.render(camera, light, projectionMatrix);
-
-    updateTimeLabel();
 }
 
 void Widget::logic()
 {
     game.logic(camera);
-    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
-    shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(static_cast<int>(2444 * game.getPlayerSpeed())) + " m/s<br/>Moc silników: " +QString::number(static_cast<int>(696.8 * game.getPlayerAccelerate())) + "%");
     telemetry.logic();
 }
 
@@ -137,6 +133,9 @@ void Widget::startGame()
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
 
+    layoutTimer.setTimerType(Qt::PreciseTimer);
+    layoutTimer.start(16);
+
     toggleMenuVisibility(false);
     toggleInGameLayoutVisibility(true);
     setFocus();
@@ -150,6 +149,8 @@ void Widget::pauseGame()
     miliSecondsFromStart += playGameTimer.elapsed();
 
     paintTimer.stop();
+
+    layoutTimer.stop();
 
     toggleMenuVisibility(true);
     toggleInGameLayoutVisibility(false);
@@ -166,6 +167,9 @@ void Widget::restartGame()
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
+
+    layoutTimer.setTimerType(Qt::PreciseTimer);
+    layoutTimer.start(16);
 
     toggleMenuVisibility(false);
     toggleInGameLayoutVisibility(true);
@@ -186,10 +190,14 @@ void Widget::updateTimeLabel()
 void Widget::makeConnection()
 {
     connect(&paintTimer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(&layoutTimer,SIGNAL(timeout()),this,SLOT(updateLayout()));
     connect(startGameButton,SIGNAL(pressed()),this,SLOT(startGame()));
     connect(restartGameButton,SIGNAL(pressed()),this,SLOT(restartGame()));
     connect(closeGameButton,SIGNAL(pressed()),this,SLOT(closeGame()));
     connect(&mouseTimer, SIGNAL(timeout()), this, SLOT(mouseTimerTimeout()));
+
+    connect(this,SIGNAL(updateSpeedProgressBar(int)),speedProgressBar,SLOT(setValue(int)));
+    connect(this,SIGNAL(updateEnginePowerProgressBar(int)),enginePowerProgressBar,SLOT(setValue(int)));
 }
 
 void Widget::createLayout()
@@ -234,15 +242,23 @@ void Widget::createLayout()
     closeGameButton->setMinimumWidth(400.0/1920.0 * width);
 
     speedProgressBar = new QProgressBar();
-    speedProgressBar->setStyleSheet(cssFpsAndTimer);
+    speedProgressBar->setStyleSheet("QProgressBar {" + cssFpsAndTimer + " text-align: center; } QProgressBar::chunk {background-color: rgba(0,211,28,0.6);border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}");
     speedProgressBar->setMaximumSize(100.0/1920.0 * width,400.0/1080.0 * height);
     speedProgressBar->setMinimumSize(100.0/1920.0 * width,400.0/1080.0 * height);
+    //speedProgressBar->setTextVisible(false);
+    speedProgressBar->setOrientation(Qt::Vertical);
+    speedProgressBar->setMinimum(0);
+    speedProgressBar->setMaximum(38000);
     speedProgressBar->setVisible(false);
 
     enginePowerProgressBar = new QProgressBar();
-    enginePowerProgressBar->setStyleSheet(cssFpsAndTimer);
+    enginePowerProgressBar->setStyleSheet("QProgressBar {" + cssFpsAndTimer + " text-align: center; } QProgressBar::chunk {background-color: rgba(0,211,28,0.6);border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}");
     enginePowerProgressBar->setMaximumSize(100.0/1920.0 * width,400.0/1080.0 * height);
     enginePowerProgressBar->setMinimumSize(100.0/1920.0 * width,400.0/1080.0 * height);
+    //enginePowerProgressBar->setTextVisible(false);
+    enginePowerProgressBar->setOrientation(Qt::Vertical);
+    enginePowerProgressBar->setMinimum(0);
+    enginePowerProgressBar->setMaximum(100);
     enginePowerProgressBar->setVisible(false);
 
     gridMenuLayout = new QGridLayout();
@@ -294,4 +310,15 @@ void Widget::toggleInGameLayoutVisibility(bool value)
 void Widget::mouseTimerTimeout()
 {
     camera.resetCamera();
+}
+
+void Widget::updateLayout()
+{
+    int speed = static_cast<int>(2444 * game.getPlayerSpeed());
+    int enginePower = static_cast<int>(696.8 * game.getPlayerAccelerate());
+    updateTimeLabel();
+    fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
+    shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(speed) + " m/s<br/>Moc silników: " +QString::number(enginePower) + "%");
+    updateSpeedProgressBar(speed);
+    updateEnginePowerProgressBar(enginePower);
 }
