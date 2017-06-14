@@ -29,6 +29,7 @@
 #include "telemetry.h"
 #include "KeyboardManager/keyboardmanager.h"
 #include "musicplayer.h"
+#include "timeconverter.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -56,8 +57,8 @@ private:
     QPushButton *restartGameButton;
     QPushButton *closeGameButton;
 
-    QTime timer;
-    int miliSeconds;
+    QTime playGameTimer;
+    int miliSecondsFromStart;
     QString cssFpsAndTimer;
     bool menuIsActive;
     QTimer mouseTimer;
@@ -92,7 +93,7 @@ protected:
 private:
 
     void loadShaders();
-    void updateTime();
+    void updateTimeLabel();
     void makeConnection();
     void createLayout();
     void initializeSoundtrack();

@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     Player/player.cpp \
     KeyboardManager/keyboardmanager.cpp \
     musicplayer.cpp \
-    computerplayer.cpp
+    computerplayer.cpp \
+    timeconverter.cpp
 
 HEADERS  += widget.h \
     camera.h \
@@ -51,7 +52,8 @@ HEADERS  += widget.h \
     Player/player.h \
     KeyboardManager/keyboardmanager.h \
     musicplayer.h \
-    computerplayer.h
+    computerplayer.h \
+    timeconverter.h
 
 RESOURCES += \
     resources.qrc

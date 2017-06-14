@@ -3,7 +3,7 @@
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 {
     menuIsActive = true;
-    miliSeconds = 0;
+    miliSecondsFromStart = 0;
 
     createLayout();
 
@@ -62,7 +62,7 @@ void Widget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     game.render(camera, light, projectionMatrix);
 
-    updateTime();
+    updateTimeLabel();
 }
 
 void Widget::logic()
@@ -137,7 +137,7 @@ void Widget::startGame()
     restartGameButton->setVisible(false);
     closeGameButton->setVisible(false);
 
-    timer.start();
+    playGameTimer.start();
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
@@ -160,7 +160,7 @@ void Widget::pauseGame()
     closeGameButton->setVisible(true);
 
     paintTimer.stop();
-    miliSeconds += timer.elapsed();
+    miliSecondsFromStart += playGameTimer.elapsed();
 
     fpsCounterLabel->setVisible(false);
     timerLabel->setVisible(false);
@@ -178,8 +178,8 @@ void Widget::restartGame()
     restartGameButton->setVisible(false);
     closeGameButton->setVisible(false);
 
-    timer.start();
-    miliSeconds = 0;
+    playGameTimer.start();
+    miliSecondsFromStart = 0;
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
@@ -196,44 +196,9 @@ void Widget::closeGame()
 }
 
 
-void Widget::updateTime()
+void Widget::updateTimeLabel()
 {
-    QString min, sec, mSec;
-    int timeElapsed = timer.elapsed() + miliSeconds;//timeElapsed is milisecond
-    int minutes = timeElapsed / 60000;
-    timeElapsed -= minutes * 60000;
-    int seconds = timeElapsed / 1000;
-    timeElapsed -=seconds * 1000;
-    if(minutes<10)
-    {
-        min = "0" + QString::number(minutes);
-    }
-    else
-    {
-        min = QString::number(minutes);
-    }
-    if(seconds<10)
-    {
-        sec = "0" + QString::number(seconds);
-    }
-    else
-    {
-        sec = QString::number(seconds);
-    }
-    if(timeElapsed<10)
-    {
-        mSec = "00" + QString::number(timeElapsed);
-    }
-    else if(timeElapsed<100)
-    {
-        mSec = "0" + QString::number(timeElapsed);
-    }
-    else
-    {
-        mSec = QString::number(timeElapsed);
-    }
-
-    timerLabel->setText("Czas: "+min+":"+sec+"."+mSec);
+    timerLabel->setText("Czas: "+TimeConverter::toQStringFromMsec(playGameTimer.elapsed() + miliSecondsFromStart));
 }
 
 void Widget::makeConnection()
