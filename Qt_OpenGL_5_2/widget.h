@@ -100,6 +100,8 @@ private:
     void makeConnection();
     void createLayout();
     void initializeSoundtrack();
+    void toggleMenuVisibility(bool value);
+    void toggleInGameLayoutVisibility(bool value);
 private slots:
     void mouseTimerTimeout();
 };

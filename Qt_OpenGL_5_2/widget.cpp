@@ -132,20 +132,13 @@ void Widget::startGame()
     menuIsActive = false;
     game.start();
 
-    startGameButton->setVisible(false);
-    restartGameButton->setVisible(false);
-    closeGameButton->setVisible(false);
-
     playGameTimer.start();
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
 
-    fpsCounterLabel->setVisible(true);
-    timerLabel->setVisible(true);
-    shipInfo->setVisible(true);
-    speedProgressBar->setVisible(true);
-    enginePowerProgressBar->setVisible(true);
+    toggleMenuVisibility(false);
+    toggleInGameLayoutVisibility(true);
     setFocus();
 
 }
@@ -154,19 +147,12 @@ void Widget::pauseGame()
     menuIsActive = true;
     game.pause();
 
-    startGameButton->setVisible(true);
-    startGameButton->setText("Wznów");
-    restartGameButton->setVisible(true);
-    closeGameButton->setVisible(true);
-
-    paintTimer.stop();
     miliSecondsFromStart += playGameTimer.elapsed();
 
-    fpsCounterLabel->setVisible(false);
-    timerLabel->setVisible(false);
-    shipInfo->setVisible(false);
-    speedProgressBar->setVisible(false);
-    enginePowerProgressBar->setVisible(false);
+    paintTimer.stop();
+
+    toggleMenuVisibility(true);
+    toggleInGameLayoutVisibility(false);
     setFocus();
 }
 
@@ -175,21 +161,14 @@ void Widget::restartGame()
     menuIsActive = false;
     game.restart();
 
-    startGameButton->setVisible(false);
-    restartGameButton->setVisible(false);
-    closeGameButton->setVisible(false);
-
     playGameTimer.start();
     miliSecondsFromStart = 0;
 
     paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
 
-    fpsCounterLabel->setVisible(true);
-    timerLabel->setVisible(true);
-    shipInfo->setVisible(true);
-    speedProgressBar->setVisible(true);
-    enginePowerProgressBar->setVisible(true);
+    toggleMenuVisibility(false);
+    toggleInGameLayoutVisibility(true);
     setFocus();
 }
 
@@ -290,6 +269,26 @@ void Widget::initializeSoundtrack()
 {
     musicPlayer.setSong("Dave Rodgers - Deja Vu.wma");
     musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
+}
+
+void Widget::toggleMenuVisibility(bool value)
+{
+    startGameButton->setVisible(value);
+    restartGameButton->setVisible(value);
+    closeGameButton->setVisible(value);
+    if(game.getIsGamePaused() == true)
+    {
+        startGameButton->setText("Wznów");
+    }
+}
+
+void Widget::toggleInGameLayoutVisibility(bool value)
+{
+    fpsCounterLabel->setVisible(value);
+    timerLabel->setVisible(value);
+    shipInfo->setVisible(value);
+    speedProgressBar->setVisible(value);
+    enginePowerProgressBar->setVisible(value);
 }
 
 void Widget::mouseTimerTimeout()
