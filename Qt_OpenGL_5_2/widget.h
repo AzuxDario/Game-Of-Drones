@@ -15,6 +15,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QProgressBar>
 #include <QApplication>
 #include <QDesktopWidget>
 
@@ -56,6 +57,8 @@ private:
     QPushButton *startGameButton;
     QPushButton *restartGameButton;
     QPushButton *closeGameButton;
+    QProgressBar *speedProgressBar;
+    QProgressBar *enginePowerProgressBar;
 
     QTime playGameTimer;
     int miliSecondsFromStart;

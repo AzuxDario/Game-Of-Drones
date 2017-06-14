@@ -144,6 +144,8 @@ void Widget::startGame()
     fpsCounterLabel->setVisible(true);
     timerLabel->setVisible(true);
     shipInfo->setVisible(true);
+    speedProgressBar->setVisible(true);
+    enginePowerProgressBar->setVisible(true);
     setFocus();
 
 }
@@ -163,6 +165,8 @@ void Widget::pauseGame()
     fpsCounterLabel->setVisible(false);
     timerLabel->setVisible(false);
     shipInfo->setVisible(false);
+    speedProgressBar->setVisible(false);
+    enginePowerProgressBar->setVisible(false);
     setFocus();
 }
 
@@ -184,6 +188,8 @@ void Widget::restartGame()
     fpsCounterLabel->setVisible(true);
     timerLabel->setVisible(true);
     shipInfo->setVisible(true);
+    speedProgressBar->setVisible(true);
+    enginePowerProgressBar->setVisible(true);
     setFocus();
 }
 
@@ -232,21 +238,33 @@ void Widget::createLayout()
     shipInfo->setMaximumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setVisible(false);
 
-    startGameButton = new QPushButton("Start!",this);
+    startGameButton = new QPushButton("Start!");
     startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     startGameButton->setMaximumWidth(400.0/1920.0 * width);
     startGameButton->setMinimumWidth(400.0/1920.0 * width);
 
-    restartGameButton = new QPushButton("Zacznij od nowa",this);
+    restartGameButton = new QPushButton("Zacznij od nowa");
     restartGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     restartGameButton->setMaximumWidth(400.0/1920.0 * width);
     restartGameButton->setMinimumWidth(400.0/1920.0 * width);
     restartGameButton->setVisible(false);
 
-    closeGameButton = new QPushButton("Wyjście",this);
+    closeGameButton = new QPushButton("Wyjście");
     closeGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
     closeGameButton->setMaximumWidth(400.0/1920.0 * width);
     closeGameButton->setMinimumWidth(400.0/1920.0 * width);
+
+    speedProgressBar = new QProgressBar();
+    speedProgressBar->setStyleSheet(cssFpsAndTimer);
+    speedProgressBar->setMaximumSize(100.0/1920.0 * width,400.0/1080.0 * height);
+    speedProgressBar->setMinimumSize(100.0/1920.0 * width,400.0/1080.0 * height);
+    speedProgressBar->setVisible(false);
+
+    enginePowerProgressBar = new QProgressBar();
+    enginePowerProgressBar->setStyleSheet(cssFpsAndTimer);
+    enginePowerProgressBar->setMaximumSize(100.0/1920.0 * width,400.0/1080.0 * height);
+    enginePowerProgressBar->setMinimumSize(100.0/1920.0 * width,400.0/1080.0 * height);
+    enginePowerProgressBar->setVisible(false);
 
     gridMenuLayout = new QGridLayout();
 
@@ -259,7 +277,10 @@ void Widget::createLayout()
     gridMenuLayout->addWidget(restartGameButton,2,1, Qt::AlignCenter);
     gridMenuLayout->addWidget(closeGameButton,3,1, Qt::AlignCenter);
 
-    gridLayout->addWidget(shipInfo,4,1,Qt::AlignBottom);
+    gridLayout->addWidget(speedProgressBar,2,0,Qt::AlignBottom | Qt::AlignLeft);
+    gridLayout->addWidget(enginePowerProgressBar,2,2,Qt::AlignBottom | Qt::AlignRight);
+
+    gridLayout->addWidget(shipInfo,2,1,Qt::AlignBottom);
     gridLayout->setColumnStretch(0,0.1);
     gridLayout->setColumnStretch(1,1.8);
     gridLayout->setColumnStretch(2,0.1);
