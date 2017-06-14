@@ -177,16 +177,18 @@ void Game::input()
 
 void Game::pause()
 {
-
+    isGamePaused = true;
 }
 
 void Game::start()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+    isGamePaused = false;
 }
 
 void Game::restart()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
     player.restoreStartPosition();
+    isGamePaused = false;
 }

@@ -131,7 +131,6 @@ void Widget::startGame()
 {
     menuIsActive = false;
     game.start();
-    game.setIsGamePaused(false);
 
     startGameButton->setVisible(false);
     restartGameButton->setVisible(false);
@@ -152,7 +151,6 @@ void Widget::pauseGame()
 {
     menuIsActive = true;
     game.pause();
-    game.setIsGamePaused(true);
 
     startGameButton->setVisible(true);
     startGameButton->setText("Wznów");
@@ -172,7 +170,6 @@ void Widget::restartGame()
 {
     menuIsActive = false;
     game.restart();
-    game.setIsGamePaused(false);
 
     startGameButton->setVisible(false);
     restartGameButton->setVisible(false);
