@@ -206,56 +206,56 @@ void Widget::createLayout()
     double width = rect.width();
     double height = rect.height();
 
-    cssFpsAndTimer = "font-size:"+QString::number(static_cast<int>(30.0/1920.0 * width))+"px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
+    cssLabels = "font-size:"+QString::number(static_cast<int>(30.0/1920.0 * width))+"px;color:white;padding:8px;margin:10px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
+    cssButtons = "QPushButton {"+cssLabels+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}";
+    cssProgressBars = "QProgressBar {" + cssLabels + " text-align: center; } QProgressBar::chunk {background-color: rgba(0,211,28,0.6);border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}";
 
     fpsCounterLabel = new QLabel("FPS: 00");
-    fpsCounterLabel->setStyleSheet(cssFpsAndTimer);
+    fpsCounterLabel->setStyleSheet(cssLabels);
     fpsCounterLabel->setAlignment(Qt::AlignLeft);
     fpsCounterLabel->setVisible(false);
 
     timerLabel = new QLabel("Czas: 00:00.00");
-    timerLabel->setStyleSheet(cssFpsAndTimer);
+    timerLabel->setStyleSheet(cssLabels);
     timerLabel->setAlignment(Qt::AlignRight);
     timerLabel->setVisible(false);
 
     shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Moc silników: 0%");
     shipInfo->setAlignment(Qt::AlignCenter);;
-    shipInfo->setStyleSheet(cssFpsAndTimer);
+    shipInfo->setStyleSheet(cssLabels);
     shipInfo->setMinimumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setMaximumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setVisible(false);
 
     startGameButton = new QPushButton("Start!");
-    startGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    startGameButton->setStyleSheet(cssButtons);
     startGameButton->setMaximumWidth(400.0/1920.0 * width);
     startGameButton->setMinimumWidth(400.0/1920.0 * width);
 
     restartGameButton = new QPushButton("Zacznij od nowa");
-    restartGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    restartGameButton->setStyleSheet(cssButtons);
     restartGameButton->setMaximumWidth(400.0/1920.0 * width);
     restartGameButton->setMinimumWidth(400.0/1920.0 * width);
     restartGameButton->setVisible(false);
 
     closeGameButton = new QPushButton("Wyjście");
-    closeGameButton->setStyleSheet("QPushButton {"+cssFpsAndTimer+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}");
+    closeGameButton->setStyleSheet(cssButtons);
     closeGameButton->setMaximumWidth(400.0/1920.0 * width);
     closeGameButton->setMinimumWidth(400.0/1920.0 * width);
 
     speedProgressBar = new QProgressBar();
-    speedProgressBar->setStyleSheet("QProgressBar {" + cssFpsAndTimer + " text-align: center; } QProgressBar::chunk {background-color: rgba(0,211,28,0.6);border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}");
-    speedProgressBar->setMaximumSize(100.0/1920.0 * width,400.0/1080.0 * height);
-    speedProgressBar->setMinimumSize(100.0/1920.0 * width,400.0/1080.0 * height);
-    //speedProgressBar->setTextVisible(false);
+    speedProgressBar->setStyleSheet(cssProgressBars);
+    speedProgressBar->setMaximumSize(150.0/1920.0 * width,400.0/1080.0 * height);
+    speedProgressBar->setMinimumSize(150.0/1920.0 * width,400.0/1080.0 * height);
     speedProgressBar->setOrientation(Qt::Vertical);
     speedProgressBar->setMinimum(0);
     speedProgressBar->setMaximum(38000);
     speedProgressBar->setVisible(false);
 
     enginePowerProgressBar = new QProgressBar();
-    enginePowerProgressBar->setStyleSheet("QProgressBar {" + cssFpsAndTimer + " text-align: center; } QProgressBar::chunk {background-color: rgba(0,211,28,0.6);border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}");
-    enginePowerProgressBar->setMaximumSize(100.0/1920.0 * width,400.0/1080.0 * height);
-    enginePowerProgressBar->setMinimumSize(100.0/1920.0 * width,400.0/1080.0 * height);
-    //enginePowerProgressBar->setTextVisible(false);
+    enginePowerProgressBar->setStyleSheet(cssProgressBars);
+    enginePowerProgressBar->setMaximumSize(150.0/1920.0 * width,400.0/1080.0 * height);
+    enginePowerProgressBar->setMinimumSize(150.0/1920.0 * width,400.0/1080.0 * height);
     enginePowerProgressBar->setOrientation(Qt::Vertical);
     enginePowerProgressBar->setMinimum(0);
     enginePowerProgressBar->setMaximum(100);

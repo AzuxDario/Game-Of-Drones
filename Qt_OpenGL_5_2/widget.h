@@ -63,7 +63,9 @@ private:
 
     QTime playGameTimer;
     int miliSecondsFromStart;
-    QString cssFpsAndTimer;
+    QString cssLabels;
+    QString cssButtons;
+    QString cssProgressBars;
     bool menuIsActive;
     QTimer mouseTimer;
     QPoint mousePos;
