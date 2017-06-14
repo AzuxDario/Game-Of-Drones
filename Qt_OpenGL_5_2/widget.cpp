@@ -254,7 +254,7 @@ void Widget::createLayout()
     speedProgressBar->setMinimumSize(150.0/1920.0 * width,400.0/1080.0 * height);
     speedProgressBar->setOrientation(Qt::Vertical);
     speedProgressBar->setMinimum(0);
-    speedProgressBar->setMaximum(38000);
+    speedProgressBar->setMaximum(35425);
     speedProgressBar->setVisible(false);
 
     enginePowerProgressBar = new QProgressBar();
