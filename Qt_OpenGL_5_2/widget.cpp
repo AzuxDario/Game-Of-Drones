@@ -220,6 +220,16 @@ void Widget::createLayout()
     timerLabel->setAlignment(Qt::AlignRight);
     timerLabel->setVisible(false);
 
+    speedLabel = new QLabel("Prędkość");
+    speedLabel->setStyleSheet(cssLabels);
+    speedLabel->setAlignment(Qt::AlignLeft);
+    speedLabel->setVisible(false);
+
+    enginePowerLabel = new QLabel("Moc silników");
+    enginePowerLabel->setStyleSheet(cssLabels);
+    enginePowerLabel->setAlignment(Qt::AlignRight);
+    enginePowerLabel->setVisible(false);
+
     shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Moc silników: 0%");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssLabels);
@@ -266,6 +276,10 @@ void Widget::createLayout()
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
     gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
+
+    gridLayout->addWidget(speedLabel,1,0,Qt::AlignBottom | Qt::AlignLeft);
+    gridLayout->addWidget(enginePowerLabel,1,2,Qt::AlignBottom | Qt::AlignRight);
+
     gridLayout->addLayout(gridMenuLayout,1,1, Qt::AlignCenter);
 
     gridMenuLayout->addWidget(startGameButton,1,1, Qt::AlignCenter);
@@ -302,6 +316,8 @@ void Widget::toggleInGameLayoutVisibility(bool value)
 {
     fpsCounterLabel->setVisible(value);
     timerLabel->setVisible(value);
+    speedLabel->setVisible(value);
+    enginePowerLabel->setVisible(value);
     shipInfo->setVisible(value);
     speedProgressBar->setVisible(value);
     enginePowerProgressBar->setVisible(value);

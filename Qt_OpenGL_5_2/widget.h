@@ -54,6 +54,8 @@ private:
     QGridLayout* gridMenuLayout;
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
+    QLabel *speedLabel;
+    QLabel *enginePowerLabel;
     QLabel *shipInfo;
     QPushButton *startGameButton;
     QPushButton *restartGameButton;
