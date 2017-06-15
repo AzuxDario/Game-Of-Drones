@@ -55,16 +55,9 @@ void Widget::resizeGL(int width, int height)
 
 void Widget::paintGL()
 {
-    logic();
-
+    game.logic();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     game.render();
-}
-
-void Widget::logic()
-{
-    game.logic();
-    telemetry.logic();
 }
 
 void Widget::mousePressEvent(QMouseEvent *event)
@@ -87,11 +80,6 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
 void Widget::mouseReleaseEvent(QMouseEvent *event)
 {
     mouseTimer.start(1000);
-    event->accept();
-}
-
-void Widget::wheelEvent(QWheelEvent *event)
-{
     event->accept();
 }
 
@@ -174,12 +162,6 @@ void Widget::restartGame()
 void Widget::closeGame()
 {
     qApp->quit();
-}
-
-
-void Widget::updateTimeLabel()
-{
-    timerLabel->setText("Czas: "+TimeConverter::toQStringFromMsec(playGameTimer.elapsed() + miliSecondsFromStart));
 }
 
 void Widget::makeConnection()
@@ -326,9 +308,10 @@ void Widget::mouseTimerTimeout()
 
 void Widget::updateLayout()
 {
+    telemetry.logic();
     int speed = static_cast<int>(2444 * game.getPlayerSpeed());
     int enginePower = static_cast<int>(6968 * game.getPlayerAccelerate());
-    updateTimeLabel();
+    timerLabel->setText("Czas: "+TimeConverter::toQStringFromMsec(playGameTimer.elapsed() + miliSecondsFromStart));
     fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
     shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(speed) + " m/s<br/>Moc silników: " +QString::number(enginePower/10) + "%");
     updateSpeedProgressBar(speed);

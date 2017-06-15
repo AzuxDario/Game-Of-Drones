@@ -6,12 +6,10 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions>
 #include <QOpenGLBuffer>
-#include <QMatrix4x4>
 #include <QMouseEvent>
 #include <QOpenGLTexture>
 #include <QTimer>
 #include <QTime>
-#include <QDateTime>
 #include <QLabel>
 #include <QPushButton>
 #include <QGridLayout>
@@ -31,15 +29,20 @@ class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 
 private:
 
+    //Shader progrem
     QOpenGLShaderProgram shaderProgram;
+
+    //Game timers to render game and update layout
     QTimer paintTimer;
     QTimer layoutTimer;
 
+    //Game specific objects
     Telemetry telemetry;
     Game game;
     KeyboardManager keyboardManager;
     MusicPlayer musicPlayer;
 
+    //Layout elements
     QGridLayout* gridLayout;
     QGridLayout* gridMenuLayout;
     QLabel *fpsCounterLabel;
@@ -53,21 +56,27 @@ private:
     QProgressBar *speedProgressBar;
     QProgressBar *enginePowerProgressBar;
 
-    QTime playGameTimer;
-    int miliSecondsFromStart;
+    //Layout css
     QString cssLabels;
     QString cssButtons;
     QString cssProgressBars;
+
+    //Objects to calculate ingame time
+    QTime playGameTimer;
+    int miliSecondsFromStart;
+
     bool menuIsActive;
+
     QTimer mouseTimer;
     QPoint mousePos;
 
 signals:
+
     void updateSpeedProgressBar(int value);
     void updateEnginePowerProgressBar(int value);
 
-
 public:
+
     Widget(QWidget *parent = 0);
     ~Widget();
     QSize sizeHint() const;
@@ -86,23 +95,22 @@ protected:
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
-    void logic();
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
-    void wheelEvent(QWheelEvent *event);
 
 private:
 
     void loadShaders();
-    void updateTimeLabel();
     void makeConnection();
     void createLayout();
     void initializeSoundtrack();
     void toggleMenuVisibility(bool value);
     void toggleInGameLayoutVisibility(bool value);
+
 private slots:
+
     void mouseTimerTimeout();
     void updateLayout();
 };
