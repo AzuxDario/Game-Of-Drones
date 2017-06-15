@@ -138,7 +138,7 @@ void DrawableObject::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     transform.rotate(rotation.x(), 1, 0, 0);
     transform.rotate(rotation.y(), 0, 1, 0);
     transform.rotate(rotation.z(), 0, 0, 1);
-    transform.scale(scale.x(), scale.y(), scale.z());
+    transform.scale(scale);
 
     QMatrix4x4 mvMatrix = vMatrix * transform;
 
