@@ -114,7 +114,7 @@ void Widget::startGame()
     playGameTimer.start();
 
     paintTimer.start(16);
-    layoutTimer.start(16);
+    layoutTimer.start(10);
 
     toggleMenuVisibility(false);
     toggleInGameLayoutVisibility(true);
