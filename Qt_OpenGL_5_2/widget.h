@@ -108,6 +108,7 @@ private:
     void initializeSoundtrack();
     void toggleMenuVisibility(bool value);
     void toggleInGameLayoutVisibility(bool value);
+    void initializeTimers();
 
 private slots:
 

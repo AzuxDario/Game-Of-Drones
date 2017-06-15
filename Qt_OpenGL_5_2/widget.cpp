@@ -8,8 +8,7 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
     createLayout();
     makeConnection();
     //initializeSoundtrack();
-
-    mouseTimer.setSingleShot(true);  
+    initializeTimers();
 }
 
 Widget::~Widget()
@@ -114,9 +113,7 @@ void Widget::startGame()
 
     playGameTimer.start();
 
-    paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
-    layoutTimer.setTimerType(Qt::PreciseTimer);
     layoutTimer.start(16);
 
     toggleMenuVisibility(false);
@@ -147,10 +144,8 @@ void Widget::restartGame()
     playGameTimer.start();
     miliSecondsFromStart = 0;
 
-    paintTimer.setTimerType(Qt::PreciseTimer);
     paintTimer.start(16);
-    layoutTimer.setTimerType(Qt::PreciseTimer);
-    layoutTimer.start(16);
+    layoutTimer.start(10);
 
     toggleMenuVisibility(false);
     toggleInGameLayoutVisibility(true);
@@ -297,6 +292,13 @@ void Widget::toggleInGameLayoutVisibility(bool value)
     shipInfo->setVisible(value);
     speedProgressBar->setVisible(value);
     enginePowerProgressBar->setVisible(value);
+}
+
+void Widget::initializeTimers()
+{
+    paintTimer.setTimerType(Qt::PreciseTimer);
+    layoutTimer.setTimerType(Qt::PreciseTimer);
+    mouseTimer.setSingleShot(true);
 }
 
 void Widget::mouseTimerTimeout()
