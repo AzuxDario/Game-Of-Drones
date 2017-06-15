@@ -31,6 +31,7 @@ private:
     TexturesManager texturesManager;
     EnvGenerator envGenerator;
     Physics physics;
+    Light light;
 
     KeyboardManager* keyboardManager;
 
@@ -49,7 +50,7 @@ public:
     ComputerPlayer enemy;
     QVector<DrawableObject> DrawableObjects;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
-    void render(Camera& camera, Light& light, QMatrix4x4 pMatrix);
+    void render(Camera& camera, QMatrix4x4 pMatrix);
     void logic(Camera& camera);
     void checkCollisions();
 

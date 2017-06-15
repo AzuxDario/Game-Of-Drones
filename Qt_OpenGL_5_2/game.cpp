@@ -22,7 +22,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     player.getPosition().setZ(-20);
 }
 
-void Game::render(Camera& camera, Light& light, QMatrix4x4 pMatrix)
+void Game::render(Camera& camera, QMatrix4x4 pMatrix)
 {
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
     f->glDisable(GL_CULL_FACE);

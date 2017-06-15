@@ -58,7 +58,7 @@ void Widget::paintGL()
     logic();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    game.render(camera, light, projectionMatrix);
+    game.render(camera, projectionMatrix);
 }
 
 void Widget::logic()
