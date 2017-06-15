@@ -19,7 +19,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createPlayer(shader);
     createOpponents(shader);
 
-    player.getPosition().setZ(-20);
+    player.getPosition().setZ(-200);
 }
 
 void Game::render()
@@ -111,8 +111,8 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     star.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
-    star.getRotationSpeed().setX(0.112f);
-    star.getScale() = QVector3D(3,3,3);
+    star.getRotationSpeed().setX(0.05f);
+    star.getScale() = QVector3D(14,14,14);
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
@@ -124,7 +124,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 {
     enemy.init(objManager.getModel(":/Objects/spodek"), texturesManager.getTexture(":/Textures/drone"), shader);
     //arrow.getScale() = QVector3D(0.1,0.1,0.1); //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
-    enemy.getPosition().setX(30);
+    enemy.getPosition().setX(130);
     enemy.getLightProperties().setSpecularReflection(0.4);
     enemy.getLightProperties().setAmbientReflection(0.5);
     enemy.getLightProperties().setAmbientColor(96,96,96);

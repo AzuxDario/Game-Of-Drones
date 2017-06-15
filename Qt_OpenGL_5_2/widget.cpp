@@ -48,7 +48,7 @@ void Widget::resizeGL(int width, int height)
     }
 
     game.getProjectionMatrixRef().setToIdentity();
-    game.getProjectionMatrixRef().perspective(60.0, (float) width / (float) height, 0.001, 20000.0f);
+    game.getProjectionMatrixRef().perspective(60.0, (float) width / (float) height, 0.001, 30000.0f);
     glViewport(0, 0, width, height);
 }
 

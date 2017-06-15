@@ -87,7 +87,7 @@ void Player::input(Qt::Key key)
 void Player::restoreStartPosition()
 {
     //Restore start position and rotation
-    setPosition(QVector3D(0.0,0.0,-20.0));
+    setPosition(QVector3D(0.0,0.0,-200.0));
     setRotation(QVector3D(0.0,0.0,0.0));
 
     //Restore start speed
