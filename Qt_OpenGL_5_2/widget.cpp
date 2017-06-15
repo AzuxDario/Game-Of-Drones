@@ -70,9 +70,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
 {
     mouseTimer.stop();
 
-    game.getCameraRef().setDirection(QVector3D(game.getCameraRef().getDirection().x() + (event->pos().x() - mousePos.x())/2,game.getCameraRef().getDirection().y() + (event->pos().y() - mousePos.y())/2,0));
-    //camera.setDirection(QVector3D(camera.getDirection().x() + (event->pos().x() - mousePos.x())/2,camera.getDirection().y() + (event->pos().y() - mousePos.y())/2,0));
-
+    game.getCameraRef().addToDirection((event->pos().x() - mousePos.x())/2, (event->pos().y() - mousePos.y())/2, 0);
     mousePos = event->pos();
     event->accept();
 }
