@@ -48,8 +48,10 @@ void Widget::resizeGL(int width, int height)
         height = 1; //Aby nie dzielić przez zero
     }
 
-    projectionMatrix.setToIdentity();
-    projectionMatrix.perspective(60.0, (float) width / (float) height, 0.001, 1000);
+    game.getProjectionMatrixRef().setToIdentity();
+    game.getProjectionMatrixRef().perspective(60.0, (float) width / (float) height, 0.001, 1000);
+    //projectionMatrix.setToIdentity();
+    //projectionMatrix.perspective(60.0, (float) width / (float) height, 0.001, 1000);
     glViewport(0, 0, width, height);
 }
 
@@ -58,7 +60,7 @@ void Widget::paintGL()
     logic();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    game.render(camera, projectionMatrix);
+    game.render(camera);
 }
 
 void Widget::logic()

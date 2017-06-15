@@ -27,6 +27,8 @@ class Game
 {
 private:
 
+    QMatrix4x4 projectionMatrix;
+
     OBJManager objManager;
     TexturesManager texturesManager;
     EnvGenerator envGenerator;
@@ -50,7 +52,7 @@ public:
     ComputerPlayer enemy;
     QVector<DrawableObject> DrawableObjects;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
-    void render(Camera& camera, QMatrix4x4 pMatrix);
+    void render(Camera& camera);
     void logic(Camera& camera);
     void checkCollisions();
 
@@ -60,6 +62,7 @@ public:
 
     void setIsGamePaused(bool value) noexcept {isGamePaused = value;}
     bool getIsGamePaused() noexcept {return isGamePaused;}
+    QMatrix4x4& getProjectionMatrixRef() noexcept {return projectionMatrix;}
     float getPlayerAccelerate() noexcept {return player.getAccelerate();}
     float getPlayerSpeed() noexcept { return player.moveSpeed.length();}
 

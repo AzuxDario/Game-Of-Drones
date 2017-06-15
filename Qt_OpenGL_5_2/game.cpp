@@ -22,18 +22,18 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     player.getPosition().setZ(-20);
 }
 
-void Game::render(Camera& camera, QMatrix4x4 pMatrix)
+void Game::render(Camera& camera)
 {
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
     f->glDisable(GL_CULL_FACE);
-    skybox.draw(camera, light, pMatrix);
+    skybox.draw(camera, light, projectionMatrix);
     f->glEnable(GL_CULL_FACE);
 
-    envGenerator.draw(camera, light, pMatrix);
-    star.draw(camera, light, pMatrix);
-    arrow.draw(camera, light, pMatrix);
-    player.draw(camera, light, pMatrix);
-    enemy.draw(camera, light, pMatrix);
+    envGenerator.draw(camera, light, projectionMatrix);
+    star.draw(camera, light, projectionMatrix);
+    arrow.draw(camera, light, projectionMatrix);
+    player.draw(camera, light, projectionMatrix);
+    enemy.draw(camera, light, projectionMatrix);
 }
 
 void Game::logic(Camera& camera)
