@@ -114,7 +114,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
                       texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
-    star.getRotationSpeed().setY(0.007f);
+    star.getRotationSpeed().setX(0.112f);
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
