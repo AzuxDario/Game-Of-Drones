@@ -20,6 +20,7 @@
         <file alias="drone">Content/drone.png</file>
         <file alias="planetoid">Content/planetoid.png</file>
         <file alias="star">Content/star.png</file>
+        <file alias="arrow">Content/arrow.png</file>
     </qresource>
     <qresource prefix="/Music"/>
 </RCC>

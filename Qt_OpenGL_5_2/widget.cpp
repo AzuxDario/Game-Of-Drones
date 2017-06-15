@@ -225,7 +225,7 @@ void Widget::createLayout()
     enginePowerLabel->setAlignment(Qt::AlignRight);
     enginePowerLabel->setVisible(false);
 
-    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: infinity<br/>Moc silników: 0%");
+    shipInfo = new QLabel("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: 0 m/s<br/>Moc silników: 0%");
     shipInfo->setAlignment(Qt::AlignCenter);;
     shipInfo->setStyleSheet(cssLabels);
     shipInfo->setMinimumSize(800.0/1920.0 * width,250.0/1080.0 * height);

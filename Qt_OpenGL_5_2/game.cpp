@@ -97,6 +97,7 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/planetoid");
     texturesToLoad.push_back(":/Textures/star");
     texturesToLoad.push_back(":/Textures/drone");
+    texturesToLoad.push_back(":/Textures/arrow");
     texturesManager.loadAll(texturesToLoad);
 }
 
@@ -130,7 +131,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 
 void Game::createArrow(QOpenGLShaderProgram* shader)
 {
-    arrow.init(shader, objManager.getModel(":/Objects/arrow"), texturesManager.getTexture(":/Textures/drone"));
+    arrow.init(shader, objManager.getModel(":/Objects/arrow"), texturesManager.getTexture(":/Textures/arrow"));
     arrow.getScale() = QVector3D(0.1,0.1,0.1);
     arrow.getRotation() = QVector3D(0,90,90);
     //Sprawia, że strzałka nie ma cieni i nie odbija światła
