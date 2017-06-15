@@ -104,13 +104,11 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
 {
     envGenerator.init(&objManager, &texturesManager, shader);
 
-    skybox.init(shader, objManager.getModel(":/Objects/skybox"),
-                        texturesManager.getTexture(":/Textures/skybox"));
+    skybox.init(shader, objManager.getModel(":/Objects/skybox"), texturesManager.getTexture(":/Textures/skybox"));
     skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
 
-    star.init(shader, objManager.getModel(":/Objects/star"),
-                      texturesManager.getTexture(":/Textures/star"));
+    star.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
     star.getRotationSpeed().setX(0.112f);
@@ -126,6 +124,11 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
     enemy.init(objManager.getModel(":/Objects/spodek"), texturesManager.getTexture(":/Textures/drone"), shader);
     arrow.getScale() = QVector3D(0.1,0.1,0.1); //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
     enemy.getPosition().setX(30);
+    enemy.getLightProperties().setSpecularReflection(0.4);
+    enemy.getLightProperties().setAmbientReflection(0.5);
+    enemy.getLightProperties().setAmbientColor(96,96,96);
+    enemy.getLightProperties().setDiffuseReflection(1);
+    enemy.getLightProperties().setDiffuseColor(164,164,164);
 }
 
 void Game::createArrow(QOpenGLShaderProgram* shader)

@@ -13,6 +13,13 @@ Player::Player()
     rotation = QVector2D(0,0);
 
     getScale() = QVector3D(0.3f, 0.3f, 0.3f);
+
+    getLightProperties().setSpecularReflection(0.4);
+    getLightProperties().setAmbientReflection(0.5);
+    getLightProperties().setAmbientColor(96,96,96);
+    getLightProperties().setDiffuseReflection(1);
+    getLightProperties().setDiffuseColor(164,164,164);
+
 }
 
 void Player::init(OBJModel* model, QOpenGLTexture* texture, QOpenGLShaderProgram* shader)
