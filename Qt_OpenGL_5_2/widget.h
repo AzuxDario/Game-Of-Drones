@@ -19,13 +19,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include "camera.h"
-#include "OBJManager/objmanager.h"
-#include "drawableobject.h"
 #include "game.h"
-#include "EnvGenerator/EnvGenerator.h"
-#include "TexturesManager/texturesmanager.h"
-#include "Physics/physics.h"
 #include "telemetry.h"
 #include "KeyboardManager/keyboardmanager.h"
 #include "musicplayer.h"
@@ -36,13 +30,11 @@ class Widget : public QOpenGLWidget, protected QOpenGLFunctions
     Q_OBJECT
 
 private:
-    QMatrix4x4 projectionMatrix;
 
     QOpenGLShaderProgram shaderProgram;
     QTimer paintTimer;
     QTimer layoutTimer;
 
-    Camera camera;
     Telemetry telemetry;
     Game game;
     KeyboardManager keyboardManager;

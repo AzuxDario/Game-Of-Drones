@@ -22,7 +22,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     player.getPosition().setZ(-20);
 }
 
-void Game::render(Camera& camera)
+void Game::render()
 {
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
     f->glDisable(GL_CULL_FACE);
@@ -36,7 +36,7 @@ void Game::render(Camera& camera)
     enemy.draw(camera, light, projectionMatrix);
 }
 
-void Game::logic(Camera& camera)
+void Game::logic()
 {
     input();
 
@@ -54,7 +54,6 @@ void Game::logic(Camera& camera)
     enemy.logic(deltaTime);
 
     arrow.getPosition() = (player.getPosition() + QVector3D(10,0,0));
-
 
     camera.update(player.getPosition(), player.getRotation());
 }

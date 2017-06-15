@@ -33,6 +33,7 @@ private:
     TexturesManager texturesManager;
     EnvGenerator envGenerator;
     Physics physics;
+    Camera camera;
     Light light;
 
     KeyboardManager* keyboardManager;
@@ -52,8 +53,8 @@ public:
     ComputerPlayer enemy;
     QVector<DrawableObject> DrawableObjects;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
-    void render(Camera& camera);
-    void logic(Camera& camera);
+    void render();
+    void logic();
     void checkCollisions();
 
     void pause();
@@ -63,6 +64,7 @@ public:
     void setIsGamePaused(bool value) noexcept {isGamePaused = value;}
     bool getIsGamePaused() noexcept {return isGamePaused;}
     QMatrix4x4& getProjectionMatrixRef() noexcept {return projectionMatrix;}
+    Camera& getCameraRef() noexcept {return camera;}
     float getPlayerAccelerate() noexcept {return player.getAccelerate();}
     float getPlayerSpeed() noexcept { return player.moveSpeed.length();}
 

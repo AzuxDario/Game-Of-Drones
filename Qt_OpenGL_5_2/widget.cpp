@@ -50,8 +50,6 @@ void Widget::resizeGL(int width, int height)
 
     game.getProjectionMatrixRef().setToIdentity();
     game.getProjectionMatrixRef().perspective(60.0, (float) width / (float) height, 0.001, 1000);
-    //projectionMatrix.setToIdentity();
-    //projectionMatrix.perspective(60.0, (float) width / (float) height, 0.001, 1000);
     glViewport(0, 0, width, height);
 }
 
@@ -60,12 +58,12 @@ void Widget::paintGL()
     logic();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    game.render(camera);
+    game.render();
 }
 
 void Widget::logic()
 {
-    game.logic(camera);
+    game.logic();
     telemetry.logic();
 }
 
@@ -79,7 +77,8 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
 {
     mouseTimer.stop();
 
-    camera.setDirection(QVector3D(camera.getDirection().x() + (event->pos().x() - mousePos.x())/2,camera.getDirection().y() + (event->pos().y() - mousePos.y())/2,0));
+    game.getCameraRef().setDirection(QVector3D(game.getCameraRef().getDirection().x() + (event->pos().x() - mousePos.x())/2,game.getCameraRef().getDirection().y() + (event->pos().y() - mousePos.y())/2,0));
+    //camera.setDirection(QVector3D(camera.getDirection().x() + (event->pos().x() - mousePos.x())/2,camera.getDirection().y() + (event->pos().y() - mousePos.y())/2,0));
 
     mousePos = event->pos();
     event->accept();
@@ -322,7 +321,7 @@ void Widget::toggleInGameLayoutVisibility(bool value)
 
 void Widget::mouseTimerTimeout()
 {
-    camera.resetCamera();
+    game.getCameraRef().resetCamera();
 }
 
 void Widget::updateLayout()
