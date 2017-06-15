@@ -263,7 +263,7 @@ void Widget::createLayout()
     enginePowerProgressBar->setMinimumSize(150.0/1920.0 * width,400.0/1080.0 * height);
     enginePowerProgressBar->setOrientation(Qt::Vertical);
     enginePowerProgressBar->setMinimum(0);
-    enginePowerProgressBar->setMaximum(100);
+    enginePowerProgressBar->setMaximum(1000);
     enginePowerProgressBar->setVisible(false);
 
     gridMenuLayout = new QGridLayout();
@@ -326,10 +326,10 @@ void Widget::mouseTimerTimeout()
 void Widget::updateLayout()
 {
     int speed = static_cast<int>(2444 * game.getPlayerSpeed());
-    int enginePower = static_cast<int>(696.8 * game.getPlayerAccelerate());
+    int enginePower = static_cast<int>(6968 * game.getPlayerAccelerate());
     updateTimeLabel();
     fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
-    shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(speed) + " m/s<br/>Moc silników: " +QString::number(enginePower) + "%");
+    shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(speed) + " m/s<br/>Moc silników: " +QString::number(enginePower/10) + "%");
     updateSpeedProgressBar(speed);
     updateEnginePowerProgressBar(enginePower);
 }
