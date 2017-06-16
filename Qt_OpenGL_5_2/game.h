@@ -25,6 +25,10 @@
 
 class Game
 {
+public:
+    Player player;
+    ComputerPlayer enemy;
+
 private:
 
     QMatrix4x4 projectionMatrix;
@@ -50,9 +54,6 @@ private:
 
 public:
     Game();
-    Player player;
-    ComputerPlayer enemy;
-    QVector<DrawableObject> DrawableObjects;
     void initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager);
     void render();
     void logic();
