@@ -30,7 +30,6 @@ public:
     ComputerPlayer enemy;
 
 private:
-
     QMatrix4x4 projectionMatrix;
 
     OBJManager objManager;
@@ -71,14 +70,12 @@ public:
 
 
 private:
-
     void loadModels();
     void loadTextures();
     void createEnviroment(QOpenGLShaderProgram* shader);
     void createPlayer(QOpenGLShaderProgram* shader);
     void createArrow(QOpenGLShaderProgram* shader);
     void createOpponents(QOpenGLShaderProgram* shader);
-    void updateCamera(Camera& camera);
     void input();
 };
 
