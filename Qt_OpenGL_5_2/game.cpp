@@ -29,11 +29,10 @@ void Game::render()
 
     envGenerator.draw(camera, light, projectionMatrix);
     star.draw(camera, light, projectionMatrix);
-    planet1.draw(camera, light, projectionMatrix);
-    planet2.draw(camera, light, projectionMatrix);
-    planet3.draw(camera, light, projectionMatrix);
-    planet4.draw(camera, light, projectionMatrix);
-    planet5.draw(camera, light, projectionMatrix);
+    for(auto planet : planets)
+    {
+        planet->draw(camera, light, projectionMatrix);
+    }
     arrow.draw(camera, light, projectionMatrix);
     player.draw(camera, light, projectionMatrix);
     enemy.draw(camera, light, projectionMatrix);
@@ -103,6 +102,10 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/planet3");
     texturesToLoad.push_back(":/Textures/planet4");
     texturesToLoad.push_back(":/Textures/planet5");
+    texturesToLoad.push_back(":/Textures/planet6");
+    texturesToLoad.push_back(":/Textures/planet7");
+    //texturesToLoad.push_back(":/Textures/planet8");
+    //texturesToLoad.push_back(":/Textures/planet9");
     texturesToLoad.push_back(":/Textures/drone");
     texturesToLoad.push_back(":/Textures/arrow");
     texturesManager.loadAll(texturesToLoad);
@@ -116,67 +119,39 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
 
-    star.setScale(40,40,40);
+    star.setScale(60,60,60);
     star.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
     star.getRotationSpeed().setX(0.05f);
     star.setRotation(0,15,55);
 
-    planet1.setScale(12,12,12);
-    planet1.setPosition(0,0,6000);
-    planet1.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet1"));
-    planet1.getLightProperties().setSpecularReflection(0);
-    planet1.getLightProperties().setAmbientReflection(0.5);
-    planet1.getLightProperties().setAmbientColor(128,128,128);
-    planet1.getLightProperties().setDiffuseReflection(0.8);
-    planet1.getLightProperties().setDiffuseColor(192,192,192);
-    planet1.getRotationSpeed().setX(0.05f);
-    planet1.setRotation(0,15,55);
-
-    planet2.setScale(16,16,16);
-    planet2.setPosition(0,1500,20000);
-    planet2.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet2"));
-    planet2.getLightProperties().setSpecularReflection(0);
-    planet2.getLightProperties().setAmbientReflection(0.5);
-    planet2.getLightProperties().setAmbientColor(128,128,128);
-    planet2.getLightProperties().setDiffuseReflection(0.8);
-    planet2.getLightProperties().setDiffuseColor(192,192,192);
-    planet2.getRotationSpeed().setX(0.05f);
-    planet2.setRotation(0,15,55);
-
-    planet3.setScale(20,20,20);
-    planet3.setPosition(0,-1000,32000);
-    planet3.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet3"));
-    planet3.getLightProperties().setSpecularReflection(0);
-    planet3.getLightProperties().setAmbientReflection(0.5);
-    planet3.getLightProperties().setAmbientColor(128,128,128);
-    planet3.getLightProperties().setDiffuseReflection(0.8);
-    planet3.getLightProperties().setDiffuseColor(192,192,192);
-    planet3.getRotationSpeed().setX(0.05f);
-    planet3.setRotation(0,15,55);
-
-    planet4.setScale(16,16,16);
-    planet4.setPosition(0,2000,44000);
-    planet4.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet4"));
-    planet4.getLightProperties().setSpecularReflection(0);
-    planet4.getLightProperties().setAmbientReflection(0.5);
-    planet4.getLightProperties().setAmbientColor(128,128,128);
-    planet4.getLightProperties().setDiffuseReflection(0.8);
-    planet4.getLightProperties().setDiffuseColor(192,192,192);
-    planet4.getRotationSpeed().setX(0.05f);
-    planet4.setRotation(0,15,55);
-
-    planet5.setScale(30,30,30);
-    planet5.setPosition(0,-1500,62000);
-    planet5.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet5"));
-    planet5.getLightProperties().setSpecularReflection(0);
-    planet5.getLightProperties().setAmbientReflection(0.5);
-    planet5.getLightProperties().setAmbientColor(128,128,128);
-    planet5.getLightProperties().setDiffuseReflection(0.8);
-    planet5.getLightProperties().setDiffuseColor(192,192,192);
-    planet5.getRotationSpeed().setX(0.05f);
-    planet5.setRotation(0,15,55);
+    for(int i = 0; i <= 6; i++)
+    {
+        planets.push_back(new DrawableObject);
+        planets[i]->init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet"+QString::number(i+1)));
+        planets[i]->getLightProperties().setSpecularReflection(0);
+        planets[i]->getLightProperties().setAmbientReflection(0.5);
+        planets[i]->getLightProperties().setAmbientColor(128,128,128);
+        planets[i]->getLightProperties().setDiffuseReflection(0.8);
+        planets[i]->getLightProperties().setDiffuseColor(192,192,192);
+        planets[i]->getRotationSpeed().setX(0.05f);
+        planets[i]->setRotation(0,15,55);
+    }
+    planets[0]->setScale(12,12,12);
+    planets[0]->setPosition(0,0,6000);
+    planets[1]->setScale(16,16,16);
+    planets[1]->setPosition(0,1500,20000);
+    planets[2]->setScale(28,28,28);
+    planets[2]->setPosition(0,-1000,32000);
+    planets[3]->setScale(24,24,24);
+    planets[3]->setPosition(0,2000,44000);
+    planets[4]->setScale(48,48,48);
+    planets[4]->setPosition(0,-1500,62000);
+    planets[5]->setScale(40,40,40);
+    planets[5]->setPosition(0,2000,90000);
+    planets[6]->setScale(36,36,36);
+    planets[6]->setPosition(0,-1000,120000);
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
@@ -188,7 +163,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 {
     enemy.init(objManager.getModel(":/Objects/spodek"), texturesManager.getTexture(":/Textures/drone"), shader);
     //arrow.getScale() = QVector3D(0.1,0.1,0.1); //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
-    enemy.setPosition(330,-15,0);
+    enemy.setPosition(490,-15,0);
     enemy.getLightProperties().setSpecularReflection(0.4);
     enemy.getLightProperties().setAmbientReflection(0.5);
     enemy.getLightProperties().setAmbientColor(96,96,96);

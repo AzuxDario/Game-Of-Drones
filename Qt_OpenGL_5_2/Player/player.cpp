@@ -20,7 +20,7 @@ Player::Player()
     getLightProperties().setDiffuseReflection(1);
     getLightProperties().setDiffuseColor(164,164,164);
 
-    setPosition(330,15,0);
+    setPosition(490,15,0);
 }
 
 void Player::init(OBJModel* model, QOpenGLTexture* texture, QOpenGLShaderProgram* shader)
@@ -83,7 +83,7 @@ void Player::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 void Player::restoreStartPosition()
 {
     //Restore start position and rotation
-    setPosition(330,15,0);
+    setPosition(490,15,0);
     setRotation(0.0,0.0,0.0);
 
     //Restore start speed

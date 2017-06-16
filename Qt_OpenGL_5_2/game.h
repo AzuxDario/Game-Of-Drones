@@ -40,11 +40,7 @@ private:
 
     DrawableObject skybox;
     DrawableObject star;
-    DrawableObject planet1;
-    DrawableObject planet2;
-    DrawableObject planet3;
-    DrawableObject planet4;
-    DrawableObject planet5;
+    QVector<DrawableObject*> planets;
     DrawableObject arrow;
 
     long int lastFrameTime;

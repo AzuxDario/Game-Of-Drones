@@ -26,6 +26,8 @@
         <file alias="planet3">Content/planet3.jpg</file>
         <file alias="planet4">Content/planet4.jpg</file>
         <file alias="planet5">Content/planet5.jpg</file>
+        <file alias="planet6">Content/planet6.jpg</file>
+        <file alias="planet7">Content/planet7.jpg</file>
     </qresource>
     <qresource prefix="/Music"/>
 </RCC>
