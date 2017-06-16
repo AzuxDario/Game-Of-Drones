@@ -82,7 +82,7 @@ void Player::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
 void Player::restoreStartPosition()
 {
     //Restore start position and rotation
-    setPosition(QVector3D(0.0,0.0,-200.0));
+    setPosition(QVector3D(0.0,0.0,-300.0));
     setRotation(QVector3D(0.0,0.0,0.0));
 
     //Restore start speed

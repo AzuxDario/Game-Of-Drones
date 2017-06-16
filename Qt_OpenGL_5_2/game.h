@@ -40,6 +40,8 @@ private:
 
     DrawableObject skybox;
     DrawableObject star;
+    DrawableObject planet1;
+    DrawableObject planet2;
     DrawableObject arrow;
 
     long int lastFrameTime;

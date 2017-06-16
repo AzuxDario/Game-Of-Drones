@@ -19,18 +19,20 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
     createPlayer(shader);
     createOpponents(shader);
 
-    player.getPosition().setZ(-200);
+    player.getPosition().setZ(-300);
 }
 
 void Game::render()
 {
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
     f->glDisable(GL_CULL_FACE);
-    skybox.draw(camera, light, projectionMatrix);
+    //skybox.draw(camera, light, projectionMatrix);
     f->glEnable(GL_CULL_FACE);
 
     envGenerator.draw(camera, light, projectionMatrix);
     star.draw(camera, light, projectionMatrix);
+    planet1.draw(camera, light, projectionMatrix);
+    planet2.draw(camera, light, projectionMatrix);
     arrow.draw(camera, light, projectionMatrix);
     player.draw(camera, light, projectionMatrix);
     enemy.draw(camera, light, projectionMatrix);
@@ -95,6 +97,7 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/skybox");
     texturesToLoad.push_back(":/Textures/planetoid");
     texturesToLoad.push_back(":/Textures/star");
+    texturesToLoad.push_back(":/Textures/planet1");
     texturesToLoad.push_back(":/Textures/drone");
     texturesToLoad.push_back(":/Textures/arrow");
     texturesManager.loadAll(texturesToLoad);
@@ -108,11 +111,30 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
 
-    star.setScale(14,14,14);
+    star.setScale(20,20,20);
     star.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
-    star.getRotationSpeed().setX(0.05f);   
+    star.getRotationSpeed().setX(0.05f);
+    star.setRotation(0,15,55);
+
+    planet1.setScale(8,8,8);
+    planet1.setPosition(0,1500,0);
+    planet1.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet1"));
+    planet1.getLightProperties().setSpecularReflection(0);
+    planet1.getLightProperties().setAmbientColor(255,255,255,0);
+    planet1.getLightProperties().setAmbientReflection(0.5);
+    planet1.getRotationSpeed().setX(0.05f);
+    planet1.setRotation(0,15,55);
+
+    planet2.setScale(12,12,12);
+    planet2.setPosition(0,3500,500);
+    planet2.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet1"));
+    planet2.getLightProperties().setSpecularReflection(0);
+    planet2.getLightProperties().setAmbientColor(255,255,255,0);
+    planet2.getLightProperties().setAmbientReflection(0.5);
+    planet2.getRotationSpeed().setX(0.05f);
+    planet2.setRotation(0,15,55);
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
@@ -124,7 +146,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 {
     enemy.init(objManager.getModel(":/Objects/spodek"), texturesManager.getTexture(":/Textures/drone"), shader);
     //arrow.getScale() = QVector3D(0.1,0.1,0.1); //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
-    enemy.getPosition().setX(130);
+    enemy.getPosition().setX(180);
     enemy.getLightProperties().setSpecularReflection(0.4);
     enemy.getLightProperties().setAmbientReflection(0.5);
     enemy.getLightProperties().setAmbientColor(96,96,96);

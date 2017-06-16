@@ -21,6 +21,7 @@
         <file alias="planetoid">Content/planetoid.png</file>
         <file alias="star">Content/star.png</file>
         <file alias="arrow">Content/arrow.png</file>
+        <file alias="planet1">Content/planet1.jpg</file>
     </qresource>
     <qresource prefix="/Music"/>
 </RCC>

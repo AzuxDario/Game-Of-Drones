@@ -20,12 +20,10 @@
 class DrawableObject : protected QOpenGLFunctions
 {
 public:
-
     QVector3D moveSpeed;
     QVector3D rotationSpeed;
 
 private:
-
     QVector3D position;
     QVector3D rotation;
     QVector3D scale;
@@ -45,7 +43,6 @@ private:
     float radius;
 
 public:
-
     DrawableObject();
     ~DrawableObject();
 
@@ -67,7 +64,9 @@ public:
     void setScale(QVector3D value) noexcept {scale = value; calculateRadius();}
     void setScale(float x, float y, float z) noexcept {scale.setX(x); scale.setY(y); scale.setZ(z); calculateRadius();}
     void setPosition(QVector3D value) noexcept {position = value;}
+    void setPosition(float x, float y, float z) noexcept {position.setX(x); position.setY(y); position.setZ(z);}
     void setRotation(QVector3D value) noexcept {rotation = value;}
+    void setRotation(float x, float y, float z) noexcept {rotation.setX(x); rotation.setY(y); rotation.setZ(z);}
 
 private:
     void getVerticlesData(OBJLoader data);
