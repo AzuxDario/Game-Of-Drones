@@ -44,6 +44,7 @@ private:
     DrawableObject planet2;
     DrawableObject planet3;
     DrawableObject planet4;
+    DrawableObject planet5;
     DrawableObject arrow;
 
     long int lastFrameTime;
