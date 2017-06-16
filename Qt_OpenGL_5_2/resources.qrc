@@ -19,7 +19,6 @@
         <file alias="skybox">Content/skybox.png</file>
         <file alias="drone">Content/drone.png</file>
         <file alias="planetoid">Content/planetoid.png</file>
-        <file alias="star">Content/star.png</file>
         <file alias="arrow">Content/arrow.png</file>
         <file alias="planet1">Content/planet1.jpg</file>
         <file alias="planet2">Content/planet2.jpg</file>
@@ -30,6 +29,7 @@
         <file alias="planet7">Content/planet7.jpg</file>
         <file alias="planet8">Content/planet8.jpg</file>
         <file alias="planet9">Content/planet9.jpg</file>
+        <file alias="star">Content/star.jpg</file>
     </qresource>
     <qresource prefix="/Music"/>
 </RCC>

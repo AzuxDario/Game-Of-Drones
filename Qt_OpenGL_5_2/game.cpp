@@ -29,9 +29,9 @@ void Game::render()
 
     envGenerator.draw(camera, light, projectionMatrix);
     star.draw(camera, light, projectionMatrix);
-    for(auto planet : planets)
+    for(int i = 0; i <= 8; i++)
     {
-        planet->draw(camera, light, projectionMatrix);
+        planets[i]->draw(camera, light, projectionMatrix);
     }
     arrow.draw(camera, light, projectionMatrix);
     player.draw(camera, light, projectionMatrix);
