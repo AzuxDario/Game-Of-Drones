@@ -52,6 +52,10 @@ void Game::logic()
 
     envGenerator.logic(player.getPosition(), deltaTime);
     star.logic(deltaTime);
+    for(int i = 0; i <= 8; i++)
+    {
+        planets[i]->logic(deltaTime);
+    }
     player.logic(deltaTime);
     enemy.logic(deltaTime);
 
