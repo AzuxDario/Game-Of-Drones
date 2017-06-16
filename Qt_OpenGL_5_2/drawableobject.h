@@ -49,13 +49,15 @@ public:
     LightProperties& getLightProperties() noexcept {return lightProperties;}
     QVector3D& getPosition() noexcept {return position;}
     QVector3D& getRotation() noexcept {return rotation;}
-    QVector3D& getScale() noexcept {return scale;}
     QVector3D& getMoveSpeed() noexcept {return moveSpeed;}
     QVector3D& getRotationSpeed() noexcept {return rotationSpeed;}
     QMatrix4x4& getTransform() noexcept { return transform; }
     float getRadius() noexcept {return radius;}
+    QVector3D getScale() noexcept {return scale;}
 
     void setRadius(float value) noexcept {radius = value;}
+    void setScale(QVector3D value) noexcept {scale = value; calculateRadius();}
+    void setScale(float x, float y, float z) noexcept {scale.setX(x); scale.setY(y); scale.setZ(z); calculateRadius();}
     void setPosition(QVector3D value) noexcept {position = value;}
     void setRotation(QVector3D value) noexcept {rotation = value;}
 

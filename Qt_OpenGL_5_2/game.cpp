@@ -108,11 +108,11 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
 
+    star.setScale(14,14,14);
     star.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
-    star.getRotationSpeed().setX(0.05f);
-    star.getScale() = QVector3D(14,14,14);
+    star.getRotationSpeed().setX(0.05f);   
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
@@ -135,7 +135,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 void Game::createArrow(QOpenGLShaderProgram* shader)
 {
     arrow.init(shader, objManager.getModel(":/Objects/arrow"), texturesManager.getTexture(":/Textures/arrow"));
-    arrow.getScale() = QVector3D(0.08,0.08,0.08);
+    arrow.setScale(0.08,0.08,0.08);
     arrow.getRotation() = QVector3D(0,90,90);
     //Sprawia, że strzałka nie ma cieni i nie odbija światła
     arrow.getLightProperties().setSpecularReflection(0);
