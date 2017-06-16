@@ -63,7 +63,6 @@ public:
     void start();
     void restart();
 
-    void setIsGamePaused(bool value) noexcept {isGamePaused = value;}
     bool getIsGamePaused() noexcept {return isGamePaused;}
     QMatrix4x4& getProjectionMatrixRef() noexcept {return projectionMatrix;}
     Camera& getCameraRef() noexcept {return camera;}
