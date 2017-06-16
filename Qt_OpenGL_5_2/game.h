@@ -25,10 +25,6 @@
 
 class Game
 {
-public:
-    Player player;
-    ComputerPlayer enemy;
-
 private:
     QMatrix4x4 projectionMatrix;
 
@@ -40,6 +36,9 @@ private:
     Light light;
 
     KeyboardManager* keyboardManager;
+
+    Player player;
+    ComputerPlayer enemy;
 
     DrawableObject skybox;
     DrawableObject star;
