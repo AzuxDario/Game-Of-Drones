@@ -104,8 +104,8 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/planet5");
     texturesToLoad.push_back(":/Textures/planet6");
     texturesToLoad.push_back(":/Textures/planet7");
-    //texturesToLoad.push_back(":/Textures/planet8");
-    //texturesToLoad.push_back(":/Textures/planet9");
+    texturesToLoad.push_back(":/Textures/planet8");
+    texturesToLoad.push_back(":/Textures/planet9");
     texturesToLoad.push_back(":/Textures/drone");
     texturesToLoad.push_back(":/Textures/arrow");
     texturesManager.loadAll(texturesToLoad);
@@ -126,7 +126,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     star.getRotationSpeed().setX(0.05f);
     star.setRotation(0,15,55);
 
-    for(int i = 0; i <= 6; i++)
+    for(int i = 0; i <= 8; i++)
     {
         planets.push_back(new DrawableObject);
         planets[i]->init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet"+QString::number(i+1)));
@@ -152,6 +152,10 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     planets[5]->setPosition(0,2000,90000);
     planets[6]->setScale(36,36,36);
     planets[6]->setPosition(0,-1000,120000);
+    planets[7]->setScale(32,32,32);
+    planets[7]->setPosition(0,1500,140000);
+    planets[8]->setScale(6,6,6);
+    planets[8]->setPosition(0,0,156000);
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)
