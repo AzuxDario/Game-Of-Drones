@@ -28,7 +28,6 @@ class Widget : public QOpenGLWidget, protected QOpenGLFunctions
     Q_OBJECT
 
 private:
-
     //Shader progrem
     QOpenGLShaderProgram shaderProgram;
 
@@ -71,18 +70,15 @@ private:
     QPoint mousePos;
 
 signals:
-
     void updateSpeedProgressBar(int value);
     void updateEnginePowerProgressBar(int value);
 
 public:
-
     Widget(QWidget *parent = 0);
     ~Widget();
     QSize sizeHint() const;
 
 public slots:
-
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
     void startGame();
@@ -91,7 +87,6 @@ public slots:
     void closeGame();
 
 protected:
-
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
@@ -101,7 +96,6 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
 
 private:
-
     void loadShaders();
     void makeConnection();
     void createLayout();
@@ -111,7 +105,6 @@ private:
     void initializeTimers();
 
 private slots:
-
     void mouseTimerTimeout();
     void updateLayout();
 };

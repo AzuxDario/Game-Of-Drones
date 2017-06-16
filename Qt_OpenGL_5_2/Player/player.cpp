@@ -79,11 +79,6 @@ void Player::draw(Camera camera, Light light, QMatrix4x4 pMatrix)
     DrawableObject::draw(camera, light, pMatrix);
 }
 
-void Player::input(Qt::Key key)
-{
-
-}
-
 void Player::restoreStartPosition()
 {
     //Restore start position and rotation

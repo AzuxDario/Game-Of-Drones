@@ -11,16 +11,7 @@
 
 class Player : public DrawableObject
 {
-private:
-
 public:
-    Player();
-
-    void init(OBJModel* model, QOpenGLTexture* texture, QOpenGLShaderProgram* shader);
-    void logic(int deltaTime);
-    void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
-    void input(Qt::Key key);
-
     float accelerate;
     float friction;
     float maxspeed;
@@ -29,6 +20,14 @@ public:
     float maxturn;
     QVector3D direction;
     QVector2D rotation;
+
+public:
+    Player();
+
+    void init(OBJModel* model, QOpenGLTexture* texture, QOpenGLShaderProgram* shader);
+    void logic(int deltaTime);
+    void draw(Camera camera, Light light, QMatrix4x4 pMatrix);
+
 public:
     float getAccelerate() noexcept {return accelerate;}
     void restoreStartPosition();
