@@ -41,8 +41,9 @@ void Camera::update(QVector3D target, QVector3D direction)
 
     QVector3D cameraEye = cameraTransformation * distance ;
     QVector3D cameraMove = cameraEye - cameraPosition;
-    float dist = cameraMove.length() + 20;
-    cameraMove *= std::min(dist / 100, (float)0.99);
+    //Powoduję chorobę kamery, nie mam litości jej tak mordować
+    //float dist = cameraMove.length() + 20;
+    //cameraMove *= std::min(dist / 100, (float)0.99);
 
     cameraPosition += cameraMove;
 }
