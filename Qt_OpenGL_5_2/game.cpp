@@ -24,7 +24,7 @@ void Game::render()
 {
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
     f->glDisable(GL_CULL_FACE);
-    //skybox.draw(camera, light, projectionMatrix);
+    skybox.draw(camera, light, projectionMatrix);
     f->glEnable(GL_CULL_FACE);
 
     envGenerator.draw(camera, light, projectionMatrix);
@@ -118,6 +118,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     skybox.init(shader, objManager.getModel(":/Objects/skybox"), texturesManager.getTexture(":/Textures/skybox"));
     skybox.getLightProperties().setAmbientColor(255,255,255,0);
     skybox.getLightProperties().setSpecularReflection(0);
+    skybox.setScale(500,500,500);
 
     star.setScale(60,60,60);
     star.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/star"));
