@@ -33,6 +33,8 @@ void Game::render()
     star.draw(camera, light, projectionMatrix);
     planet1.draw(camera, light, projectionMatrix);
     planet2.draw(camera, light, projectionMatrix);
+    planet3.draw(camera, light, projectionMatrix);
+    planet4.draw(camera, light, projectionMatrix);
     arrow.draw(camera, light, projectionMatrix);
     player.draw(camera, light, projectionMatrix);
     enemy.draw(camera, light, projectionMatrix);
@@ -98,6 +100,9 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/planetoid");
     texturesToLoad.push_back(":/Textures/star");
     texturesToLoad.push_back(":/Textures/planet1");
+    texturesToLoad.push_back(":/Textures/planet2");
+    texturesToLoad.push_back(":/Textures/planet3");
+    texturesToLoad.push_back(":/Textures/planet4");
     texturesToLoad.push_back(":/Textures/drone");
     texturesToLoad.push_back(":/Textures/arrow");
     texturesManager.loadAll(texturesToLoad);
@@ -122,19 +127,45 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     planet1.setPosition(0,1500,0);
     planet1.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet1"));
     planet1.getLightProperties().setSpecularReflection(0);
-    planet1.getLightProperties().setAmbientColor(255,255,255,0);
     planet1.getLightProperties().setAmbientReflection(0.5);
+    planet1.getLightProperties().setAmbientColor(128,128,128);
+    planet1.getLightProperties().setDiffuseReflection(0.8);
+    planet1.getLightProperties().setDiffuseColor(192,192,192);
     planet1.getRotationSpeed().setX(0.05f);
     planet1.setRotation(0,15,55);
 
     planet2.setScale(12,12,12);
-    planet2.setPosition(0,3500,500);
-    planet2.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet1"));
+    planet2.setPosition(0,5000,1000);
+    planet2.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet2"));
     planet2.getLightProperties().setSpecularReflection(0);
-    planet2.getLightProperties().setAmbientColor(255,255,255,0);
     planet2.getLightProperties().setAmbientReflection(0.5);
+    planet2.getLightProperties().setAmbientColor(128,128,128);
+    planet2.getLightProperties().setDiffuseReflection(0.8);
+    planet2.getLightProperties().setDiffuseColor(192,192,192);
     planet2.getRotationSpeed().setX(0.05f);
     planet2.setRotation(0,15,55);
+
+    planet3.setScale(15,15,15);
+    planet3.setPosition(0,8000,-500);
+    planet3.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet3"));
+    planet3.getLightProperties().setSpecularReflection(0);
+    planet3.getLightProperties().setAmbientReflection(0.5);
+    planet3.getLightProperties().setAmbientColor(128,128,128);
+    planet3.getLightProperties().setDiffuseReflection(0.8);
+    planet3.getLightProperties().setDiffuseColor(192,192,192);
+    planet3.getRotationSpeed().setX(0.05f);
+    planet3.setRotation(0,15,55);
+
+    planet4.setScale(12,12,12);
+    planet4.setPosition(0,11000,1000);
+    planet4.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet4"));
+    planet4.getLightProperties().setSpecularReflection(0);
+    planet4.getLightProperties().setAmbientReflection(0.5);
+    planet4.getLightProperties().setAmbientColor(128,128,128);
+    planet4.getLightProperties().setDiffuseReflection(0.8);
+    planet4.getLightProperties().setDiffuseColor(192,192,192);
+    planet4.getRotationSpeed().setX(0.05f);
+    planet4.setRotation(0,15,55);
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)

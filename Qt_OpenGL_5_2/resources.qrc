@@ -22,6 +22,9 @@
         <file alias="star">Content/star.png</file>
         <file alias="arrow">Content/arrow.png</file>
         <file alias="planet1">Content/planet1.jpg</file>
+        <file alias="planet2">Content/planet2.jpg</file>
+        <file alias="planet3">Content/planet3.jpg</file>
+        <file alias="planet4">Content/planet4.jpg</file>
     </qresource>
     <qresource prefix="/Music"/>
 </RCC>
