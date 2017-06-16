@@ -120,7 +120,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
     skybox.getLightProperties().setSpecularReflection(0);
     skybox.setScale(500,500,500);
 
-    star.setScale(60,60,60);
+    star.setScale(200,200,200);
     star.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/star"));
     star.getLightProperties().setAmbientColor(255,255,255,0);
     star.getLightProperties().setAmbientReflection(2);
@@ -139,23 +139,32 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
         planets[i]->getRotationSpeed().setX(0.05f);
         planets[i]->setRotation(0,15,55);
     }
-    planets[0]->setScale(12,12,12);
-    planets[0]->setPosition(0,0,6000);
-    planets[1]->setScale(16,16,16);
+    //Merkury
+    planets[0]->setScale(18,18,18);
+    planets[0]->setPosition(0,0,12000);
+    //Wenus
+    planets[1]->setScale(24,24,24);
     planets[1]->setPosition(0,1500,20000);
-    planets[2]->setScale(28,28,28);
+    //Ziemia
+    planets[2]->setScale(40,40,40);
     planets[2]->setPosition(0,-1000,32000);
-    planets[3]->setScale(24,24,24);
+    //Mars
+    planets[3]->setScale(36,36,36);
     planets[3]->setPosition(0,2000,44000);
-    planets[4]->setScale(48,48,48);
+    //Jowisz
+    planets[4]->setScale(80,80,80);
     planets[4]->setPosition(0,-1500,62000);
-    planets[5]->setScale(40,40,40);
+    //Saturn
+    planets[5]->setScale(56,56,56);
     planets[5]->setPosition(0,2000,90000);
-    planets[6]->setScale(36,36,36);
+    //Uran
+    planets[6]->setScale(46,46,46);
     planets[6]->setPosition(0,-1000,120000);
+    //Neptun
     planets[7]->setScale(32,32,32);
     planets[7]->setPosition(0,1500,140000);
-    planets[8]->setScale(6,6,6);
+    //Pluton
+    planets[8]->setScale(12,12,12);
     planets[8]->setPosition(0,0,156000);
 }
 
@@ -168,7 +177,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 {
     enemy.init(objManager.getModel(":/Objects/spodek"), texturesManager.getTexture(":/Textures/drone"), shader);
     //arrow.getScale() = QVector3D(0.1,0.1,0.1); //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
-    enemy.setPosition(490,-15,0);
+    enemy.setPosition(1600,-15,0);
     enemy.getLightProperties().setSpecularReflection(0.4);
     enemy.getLightProperties().setAmbientReflection(0.5);
     enemy.getLightProperties().setAmbientColor(96,96,96);
