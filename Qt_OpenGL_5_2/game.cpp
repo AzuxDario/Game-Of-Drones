@@ -36,7 +36,7 @@ void Game::render()
     arrow.draw(camera, light, projectionMatrix);
     player.draw(camera, light, projectionMatrix);
     enemy.draw(camera, light, projectionMatrix);
-    target.draw(camera, light, projectionMatrix);
+    if (player.currentTarget >= 0) target.draw(camera, light, projectionMatrix);
 }
 
 void Game::logic()
@@ -58,7 +58,17 @@ void Game::logic()
         planets[i]->logic(deltaTime);
     }
     player.logic(deltaTime);
-    enemy.logic(deltaTime);
+
+    if (enemy.currentTarget >= 0 && enemy.currentTarget < race.size())
+    {
+        enemy.logic(deltaTime, race[enemy.currentTarget]);
+    }
+    else
+    {
+        enemy.currentTarget = -1;
+        enemy.logic(deltaTime, enemy.getPosition());
+    }
+
 
     arrow.getPosition() = (player.getPosition() + QVector3D(10,0,0));
 
@@ -66,12 +76,29 @@ void Game::logic()
     if (player.currentTarget >= 0 && player.currentTarget < race.size())
     {
         QVector3D diff = player.getPosition() - race[player.currentTarget];
-        if (diff.length() < 50)
+        float len = diff.length();
+        if (len < 100)
         {
             player.currentTarget++;
+            if (player.currentTarget >= race.size()) player.currentTarget = -1;
             target.setPosition(race[player.currentTarget].x(), race[player.currentTarget].y(), race[player.currentTarget].z());
         }
-        arrow.setRotation(180 - std::atan2(diff.y(),diff.z()) * 180 / M_PI, 90, 90);
+        else
+        {
+            //float size = std::min(std::max(len / 100, (float)1.0),(float)100.0);
+            //target.setScale(QVector3D(size,size,size));
+            arrow.setRotation(180 - std::atan2(diff.y(),diff.z()) * 180 / M_PI, 90, 90);
+        }
+    }
+    if (enemy.currentTarget >= 0 && enemy.currentTarget < race.size())
+    {
+        QVector3D diff = enemy.getPosition() - race[enemy.currentTarget];
+        float len = diff.length();
+        if (len < 100)
+        {
+            enemy.currentTarget++;
+            if (enemy.currentTarget >= race.size()) enemy.currentTarget = -1;
+        }
     }
 
     camera.update(player.getPosition(), player.getRotation());
@@ -208,15 +235,20 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 void Game::createRace(QOpenGLShaderProgram* shader)
 {
     //create checkpoints
-    race.push_back(QVector3D(1600,0,100));
-    race.push_back(QVector3D(1600,50,300));
-    race.push_back(QVector3D(1600,150,500));
-    race.push_back(QVector3D(1600,100,1700));
-    race.push_back(QVector3D(1600,50,2500));
+    race.push_back(QVector3D(1600,0,500));
+    race.push_back(QVector3D(1600,50,1200));
+    race.push_back(QVector3D(1600,150,1500));
+    race.push_back(QVector3D(1600,150,2000));
+    race.push_back(QVector3D(1600,50,2800));
 
     //create_target
     target.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/Content/target.png"));
     target.setPosition(race[0]);
+    target.setScale(2,2,2);
+    target.getLightProperties().setSpecularReflection(0);
+    target.getLightProperties().setAmbientReflection(1);
+    target.getLightProperties().setDiffuseReflection(0);
+    target.getLightProperties().setAmbientColor(255,255,255); //Ustawia jasność strzałki
 
     //arrow
     arrow.init(shader, objManager.getModel(":/Objects/arrow"), texturesManager.getTexture(":/Textures/arrow"));
