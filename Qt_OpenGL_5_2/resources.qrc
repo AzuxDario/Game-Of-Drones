@@ -30,6 +30,8 @@
         <file alias="planet8">Content/planet8.jpg</file>
         <file alias="planet9">Content/planet9.jpg</file>
         <file alias="star">Content/star.jpg</file>
+        <file>Content/target.png</file>
     </qresource>
     <qresource prefix="/Music"/>
+    <qresource prefix="/"/>
 </RCC>

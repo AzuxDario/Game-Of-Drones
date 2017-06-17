@@ -14,7 +14,7 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
 
     loadModels();
     loadTextures();
-    createArrow(shader);
+    createRace(shader);
     createEnviroment(shader);
     createPlayer(shader);
     createOpponents(shader);
@@ -36,6 +36,7 @@ void Game::render()
     arrow.draw(camera, light, projectionMatrix);
     player.draw(camera, light, projectionMatrix);
     enemy.draw(camera, light, projectionMatrix);
+    target.draw(camera, light, projectionMatrix);
 }
 
 void Game::logic()
@@ -60,6 +61,18 @@ void Game::logic()
     enemy.logic(deltaTime);
 
     arrow.getPosition() = (player.getPosition() + QVector3D(10,0,0));
+
+
+    if (player.currentTarget >= 0 && player.currentTarget < race.size())
+    {
+        QVector3D diff = player.getPosition() - race[player.currentTarget];
+        if (diff.length() < 50)
+        {
+            player.currentTarget++;
+            target.setPosition(race[player.currentTarget].x(), race[player.currentTarget].y(), race[player.currentTarget].z());
+        }
+        arrow.setRotation(180 - std::atan2(diff.y(),diff.z()) * 180 / M_PI, 90, 90);
+    }
 
     camera.update(player.getPosition(), player.getRotation());
 }
@@ -112,6 +125,7 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/planet9");
     texturesToLoad.push_back(":/Textures/drone");
     texturesToLoad.push_back(":/Textures/arrow");
+    texturesToLoad.push_back(":/Textures/Content/target.png");
     texturesManager.loadAll(texturesToLoad);
 }
 
@@ -180,7 +194,9 @@ void Game::createPlayer(QOpenGLShaderProgram* shader)
 void Game::createOpponents(QOpenGLShaderProgram* shader)
 {
     enemy.init(objManager.getModel(":/Objects/spodek"), texturesManager.getTexture(":/Textures/drone"), shader);
-    //arrow.getScale() = QVector3D(0.1,0.1,0.1); //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
+    //arrow.getScale() = QVector3D(0.1,0.1,0.1);
+    //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
+    //bo kopiowałem :)
     enemy.setPosition(1600,-15,0);
     enemy.getLightProperties().setSpecularReflection(0.4);
     enemy.getLightProperties().setAmbientReflection(0.5);
@@ -189,8 +205,20 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
     enemy.getLightProperties().setDiffuseColor(164,164,164);
 }
 
-void Game::createArrow(QOpenGLShaderProgram* shader)
+void Game::createRace(QOpenGLShaderProgram* shader)
 {
+    //create checkpoints
+    race.push_back(QVector3D(1600,0,100));
+    race.push_back(QVector3D(1600,50,300));
+    race.push_back(QVector3D(1600,150,500));
+    race.push_back(QVector3D(1600,100,1700));
+    race.push_back(QVector3D(1600,50,2500));
+
+    //create_target
+    target.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/Content/target.png"));
+    target.setPosition(race[0]);
+
+    //arrow
     arrow.init(shader, objManager.getModel(":/Objects/arrow"), texturesManager.getTexture(":/Textures/arrow"));
     arrow.setScale(0.08,0.08,0.08);
     arrow.getRotation() = QVector3D(0,90,90);

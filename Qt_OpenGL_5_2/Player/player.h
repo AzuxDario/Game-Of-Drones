@@ -18,6 +18,7 @@ public:
     float acceleration;
     float agility;
     float maxturn;
+    int currentTarget = 0;
     QVector3D direction;
     QVector2D rotation;
 

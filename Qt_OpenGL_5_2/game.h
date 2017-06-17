@@ -45,6 +45,8 @@ private:
     DrawableObject star;
     QVector<DrawableObject*> planets;
     DrawableObject arrow;
+    DrawableObject target;
+    QVector<QVector3D> race;
 
     long int lastFrameTime;
     int checkCollisionsDefaultTime;
@@ -74,7 +76,7 @@ private:
     void loadTextures();
     void createEnviroment(QOpenGLShaderProgram* shader);
     void createPlayer(QOpenGLShaderProgram* shader);
-    void createArrow(QOpenGLShaderProgram* shader);
+    void createRace(QOpenGLShaderProgram* shader);
     void createOpponents(QOpenGLShaderProgram* shader);
     void input();
 };
