@@ -33,6 +33,10 @@ void Game::render()
     {
         planets[i]->draw(camera, light, projectionMatrix);
     }
+    for(int i = 0; i <= 6; i++)
+    {
+        otherPlanets[i]->draw(camera, light, projectionMatrix);
+    }
     arrow.draw(camera, light, projectionMatrix);
     player.draw(camera, light, projectionMatrix);
     enemy.draw(camera, light, projectionMatrix);
@@ -56,6 +60,10 @@ void Game::logic()
     for(int i = 0; i <= 8; i++)
     {
         planets[i]->logic(deltaTime);
+    }
+    for(int i = 0; i <= 6; i++)
+    {
+        otherPlanets[i]->logic(deltaTime);
     }
     player.logic(deltaTime);
 
@@ -150,6 +158,13 @@ void Game::loadTextures()
     texturesToLoad.push_back(":/Textures/planet7");
     texturesToLoad.push_back(":/Textures/planet8");
     texturesToLoad.push_back(":/Textures/planet9");
+    texturesToLoad.push_back(":/Textures/planet10");
+    texturesToLoad.push_back(":/Textures/planet11");
+    texturesToLoad.push_back(":/Textures/planet12");
+    texturesToLoad.push_back(":/Textures/planet13");
+    texturesToLoad.push_back(":/Textures/planet14");
+    texturesToLoad.push_back(":/Textures/planet15");
+    texturesToLoad.push_back(":/Textures/planet16");
     texturesToLoad.push_back(":/Textures/drone");
     texturesToLoad.push_back(":/Textures/arrow");
     texturesToLoad.push_back(":/Textures/Content/target.png");
@@ -185,32 +200,66 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
         planets[i]->setRotation(0,15,55);
     }
     //Merkury
-    planets[0]->setScale(18,18,18);
+    planets[0]->setScale(22,22,22);
     planets[0]->setPosition(0,0,12000);
     //Wenus
-    planets[1]->setScale(24,24,24);
+    planets[1]->setScale(28,28,28);
     planets[1]->setPosition(0,1500,20000);
     //Ziemia
-    planets[2]->setScale(40,40,40);
+    planets[2]->setScale(44,44,44);
     planets[2]->setPosition(0,-1000,32000);
     //Mars
-    planets[3]->setScale(36,36,36);
+    planets[3]->setScale(40,40,40);
     planets[3]->setPosition(0,2000,44000);
     //Jowisz
-    planets[4]->setScale(80,80,80);
+    planets[4]->setScale(84,84,84);
     planets[4]->setPosition(0,-1500,62000);
     //Saturn
-    planets[5]->setScale(56,56,56);
+    planets[5]->setScale(60,60,60);
     planets[5]->setPosition(0,2000,90000);
     //Uran
-    planets[6]->setScale(46,46,46);
+    planets[6]->setScale(50,50,50);
     planets[6]->setPosition(0,-1000,120000);
     //Neptun
-    planets[7]->setScale(32,32,32);
+    planets[7]->setScale(36,36,36);
     planets[7]->setPosition(0,1500,140000);
     //Pluton
-    planets[8]->setScale(12,12,12);
+    planets[8]->setScale(16,16,16);
     planets[8]->setPosition(0,0,156000);
+
+    for(int i = 0; i <= 6; i++)
+    {
+        otherPlanets.push_back(new DrawableObject);
+        otherPlanets[i]->init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/planet"+QString::number(i+10)));
+        otherPlanets[i]->getLightProperties().setSpecularReflection(0);
+        otherPlanets[i]->getLightProperties().setAmbientReflection(0.5);
+        otherPlanets[i]->getLightProperties().setAmbientColor(128,128,128);
+        otherPlanets[i]->getLightProperties().setDiffuseReflection(0.8);
+        otherPlanets[i]->getLightProperties().setDiffuseColor(192,192,192);
+        otherPlanets[i]->getRotationSpeed().setX(0.05f);
+        otherPlanets[i]->setRotation(0,15,55);
+    }
+
+    otherPlanets[0]->setScale(60,60,60);
+    otherPlanets[0]->setPosition(0,70000,-5000);
+
+    otherPlanets[1]->setScale(70,70,70);
+    otherPlanets[1]->setPosition(0,-65000,-15000);
+
+    otherPlanets[2]->setScale(50,50,50);
+    otherPlanets[2]->setPosition(0,-35000,-5000);
+
+    otherPlanets[3]->setScale(55,55,55);
+    otherPlanets[3]->setPosition(0,45000,-30000);
+
+    otherPlanets[4]->setScale(60,60,60);
+    otherPlanets[4]->setPosition(0,25000,-60000);
+
+    otherPlanets[5]->setScale(35,35,35);
+    otherPlanets[5]->setPosition(0,-15000,-35000);
+
+    otherPlanets[6]->setScale(30,30,30);
+    otherPlanets[6]->setPosition(0,-5000,-15000);
 }
 
 void Game::createPlayer(QOpenGLShaderProgram* shader)

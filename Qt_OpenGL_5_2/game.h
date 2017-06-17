@@ -43,6 +43,7 @@ private:
     DrawableObject skybox;
     DrawableObject star;
     QVector<DrawableObject*> planets;
+    QVector<DrawableObject*> otherPlanets;
     DrawableObject arrow;
     DrawableObject target;
     QVector<QVector3D> race;

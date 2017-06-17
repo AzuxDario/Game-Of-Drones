@@ -1,11 +1,7 @@
 <RCC>
     <qresource prefix="/Shaders">
-        <file alias="ColoringFragmentShader">Shaders/coloringfragmentshader.frag</file>
-        <file alias="ColoringVertexShader">Shaders/coloringvertexshader.vert</file>
-        <file alias="FragmentShader">Shaders/fragmentshader.frag</file>
         <file alias="LightningFragmentShader">Shaders/lightingfragmentshader.frag</file>
         <file alias="LightningVertexShader">Shaders/lightningvertexshader.vert</file>
-        <file alias="VertexShader">Shaders/vertexshader.vert</file>
     </qresource>
     <qresource prefix="/Objects">
         <file alias="skybox">Content/skybox.obj</file>
@@ -31,7 +27,13 @@
         <file alias="planet9">Content/planet9.jpg</file>
         <file alias="star">Content/star.jpg</file>
         <file>Content/target.png</file>
+        <file alias="planet10">Content/planet10.jpg</file>
+        <file alias="planet11">Content/planet11.jpg</file>
+        <file alias="planet12">Content/planet12.jpg</file>
+        <file alias="planet13">Content/planet13.jpg</file>
+        <file alias="planet14">Content/planet14.jpg</file>
+        <file alias="planet15">Content/planet15.jpg</file>
+        <file alias="planet16">Content/planet16.jpg</file>
     </qresource>
     <qresource prefix="/Music"/>
-    <qresource prefix="/"/>
 </RCC>
