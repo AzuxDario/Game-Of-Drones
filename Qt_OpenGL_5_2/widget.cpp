@@ -222,8 +222,6 @@ void Widget::createLayout()
     gameInfoLabel = new QLabel("Dummy");
     gameInfoLabel->setAlignment(Qt::AlignCenter);
     gameInfoLabel->setStyleSheet(cssLabels);
-    //gameInfoLabel->setMinimumSize(250.0/1920.0 * width,80.0/1080.0 * height);
-    //gameInfoLabel->setMaximumSize(250.0/1920.0 * width,80.0/1080.0 * height);
     gameInfoLabel->setVisible(false);
 
     startGameButton = new QPushButton("Start!");
