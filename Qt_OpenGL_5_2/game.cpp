@@ -81,15 +81,21 @@ void Game::logic()
     arrow.getPosition() = (player.getPosition() + QVector3D(10,0,0));
 
 
-    if (player.currentTarget >= 0 && player.currentTarget < race.size())
+    if (player.currentTarget >= 0 && player.currentTarget < race.length())
     {
         QVector3D diff = player.getPosition() - race[player.currentTarget];
         float len = diff.length();
         if (len < 100)
         {
             player.currentTarget++;
-            if (player.currentTarget >= race.size()) player.currentTarget = -1;
-            target.setPosition(race[player.currentTarget].x(), race[player.currentTarget].y(), race[player.currentTarget].z());
+            if (player.currentTarget >= race.size())
+            {
+                player.currentTarget = -1;
+                if (enemy.currentTarget >= 0) Win();
+                else Lose();
+
+            }
+            else target.setPosition(race[player.currentTarget].x(), race[player.currentTarget].y(), race[player.currentTarget].z());
         }
         else
         {
@@ -348,6 +354,16 @@ void Game::input()
     {
         player.accelerate = min(player.accelerate + player.acceleration, player.maxspeed);
     }
+}
+
+void Game::Win()
+{
+
+}
+
+void Game::Lose()
+{
+
 }
 
 void Game::pause()

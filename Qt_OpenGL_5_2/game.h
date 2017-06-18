@@ -79,6 +79,8 @@ private:
     void createRace(QOpenGLShaderProgram* shader);
     void createOpponents(QOpenGLShaderProgram* shader);
     void input();
+    void Win();
+    void Lose();
 };
 
 #endif // GAME_H
