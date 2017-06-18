@@ -130,13 +130,21 @@ void Game::checkCollisions()
 
     if(physics.checkCollisions(&star, &player))
     {
-        //TODO collision player-star
+        endGame(QString("Zderzyłeś się z gwiazdą"));
     }
 
-    QVector<DrawableObject*> planetoids = physics.checkCollisions(&player, envGenerator.GetObjects());
-    if(planetoids.count() > 0)
-    {
+    //QVector<DrawableObject*> planetoids = physics.checkCollisions(&player, envGenerator.GetObjects());
+    //if(planetoids.count() > 0)
+    //{
         //TODO collision player-planetoide
+    //}
+
+    for(int i=0; i<planets.size(); i++)
+    {
+        if(physics.checkCollisions(&player, planets[i]))
+        {
+            endGame(QString("Zderzyłeś się z planetą"));
+        }
     }
 
     checkCollisionsTime = checkCollisionsDefaultTime;
@@ -284,7 +292,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
     //arrow.getScale() = QVector3D(0.1,0.1,0.1);
     //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
     //bo kopiowałem :)
-    enemy.setPosition(1600,-15,0);
+    enemy.setPosition(1700,-15,0);
     enemy.getLightProperties().setSpecularReflection(0.4);
     enemy.getLightProperties().setAmbientReflection(0.5);
     enemy.getLightProperties().setAmbientColor(96,96,96);

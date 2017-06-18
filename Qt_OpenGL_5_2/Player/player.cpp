@@ -20,7 +20,7 @@ Player::Player()
     getLightProperties().setDiffuseReflection(1);
     getLightProperties().setDiffuseColor(164,164,164);
 
-    setPosition(1600,15,0);
+    setPosition(1700,15,0);
 }
 
 void Player::init(OBJModel* model, QOpenGLTexture* texture, QOpenGLShaderProgram* shader)
