@@ -363,12 +363,14 @@ void Game::input()
 
 void Game::Win()
 {
-
+    isGameEnded = true;
+    endGame(QString("Wygrałeś!"));
 }
 
 void Game::Lose()
 {
-
+    isGameEnded = true;
+    endGame(QString("Przegrałeś!"));
 }
 
 void Game::pause()
@@ -380,6 +382,13 @@ void Game::start()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
     isGamePaused = false;
+    isGameEnded = false;
+}
+
+void Game::resume()
+{
+    lastFrameTime = QDateTime::currentMSecsSinceEpoch();
+    isGamePaused = false;
 }
 
 void Game::restart()
@@ -387,4 +396,5 @@ void Game::restart()
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
     player.restoreStartPosition();
     isGamePaused = false;
+    isGameEnded = false;
 }

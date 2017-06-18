@@ -3,6 +3,7 @@
 
 #define _USE_MATH_DEFINES
 
+#include <QObject>
 #include <QWidget>
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
@@ -23,8 +24,10 @@
 #include "Player/player.h"
 #include "KeyboardManager/keyboardmanager.h"
 
-class Game
+class Game : public QObject
 {
+    Q_OBJECT
+
 private:
     QMatrix4x4 projectionMatrix;
 
@@ -53,6 +56,10 @@ private:
     int checkCollisionsDefaultTime;
     int checkCollisionsTime;
     bool isGamePaused;
+    bool isGameEnded;
+
+signals:
+    void endGame(QString message);
 
 public:
     Game();
@@ -63,9 +70,11 @@ public:
 
     void pause();
     void start();
+    void resume();
     void restart();
 
     bool getIsGamePaused() noexcept {return isGamePaused;}
+    bool getIsGameEnded() noexcept {return isGameEnded;}
     QMatrix4x4& getProjectionMatrixRef() noexcept {return projectionMatrix;}
     Camera& getCameraRef() noexcept {return camera;}
     float getPlayerAccelerate() noexcept {return player.getAccelerate();}

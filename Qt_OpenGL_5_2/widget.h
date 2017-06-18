@@ -49,6 +49,7 @@ private:
     QLabel *speedLabel;
     QLabel *enginePowerLabel;
     QLabel *shipInfo;
+    QLabel *gameInfoLabel;
     QPushButton *startGameButton;
     QPushButton *restartGameButton;
     QPushButton *closeGameButton;
@@ -107,6 +108,7 @@ private:
 private slots:
     void mouseTimerTimeout();
     void updateLayout();
+    void showEndGameInfo(QString message);
 };
 
 #endif // WIDGET_H

@@ -109,9 +109,15 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 void Widget::startGame()
 {
     menuIsActive = false;
-    game.start();
-
-    playGameTimer.start();
+    if(game.getIsGameEnded() == true)
+    {
+        game.resume();
+    }
+    else
+    {
+        game.start();
+        playGameTimer.start();
+    }
 
     paintTimer.start(16);
     layoutTimer.start(10);
@@ -126,7 +132,10 @@ void Widget::pauseGame()
     menuIsActive = true;
     game.pause();
 
-    miliSecondsFromStart += playGameTimer.elapsed();
+    if(game.getIsGamePaused() == false)
+    {
+        miliSecondsFromStart += playGameTimer.elapsed();
+    }
 
     paintTimer.stop();
     layoutTimer.stop();
@@ -169,6 +178,8 @@ void Widget::makeConnection()
 
     connect(this,SIGNAL(updateSpeedProgressBar(int)),speedProgressBar,SLOT(setValue(int)));
     connect(this,SIGNAL(updateEnginePowerProgressBar(int)),enginePowerProgressBar,SLOT(setValue(int)));
+
+    connect(&game,SIGNAL(endGame(QString)),this,SLOT(showEndGameInfo(QString)));
 }
 
 void Widget::createLayout()
@@ -207,6 +218,13 @@ void Widget::createLayout()
     shipInfo->setMinimumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setMaximumSize(800.0/1920.0 * width,250.0/1080.0 * height);
     shipInfo->setVisible(false);
+
+    gameInfoLabel = new QLabel("Dummy");
+    gameInfoLabel->setAlignment(Qt::AlignCenter);
+    gameInfoLabel->setStyleSheet(cssLabels);
+    //gameInfoLabel->setMinimumSize(250.0/1920.0 * width,80.0/1080.0 * height);
+    //gameInfoLabel->setMaximumSize(250.0/1920.0 * width,80.0/1080.0 * height);
+    gameInfoLabel->setVisible(false);
 
     startGameButton = new QPushButton("Start!");
     startGameButton->setStyleSheet(cssButtons);
@@ -247,6 +265,8 @@ void Widget::createLayout()
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(fpsCounterLabel,0,0,Qt::AlignTop | Qt::AlignLeft);
     gridLayout->addWidget(timerLabel,0,2,Qt::AlignTop | Qt::AlignRight);
+
+    gridLayout->addWidget(gameInfoLabel,0,1,Qt::AlignTop | Qt::AlignCenter);
 
     gridLayout->addWidget(speedLabel,1,0,Qt::AlignBottom | Qt::AlignLeft);
     gridLayout->addWidget(enginePowerLabel,1,2,Qt::AlignBottom | Qt::AlignRight);
@@ -292,6 +312,10 @@ void Widget::toggleInGameLayoutVisibility(bool value)
     shipInfo->setVisible(value);
     speedProgressBar->setVisible(value);
     enginePowerProgressBar->setVisible(value);
+    if(game.getIsGameEnded() == true)
+    {
+        gameInfoLabel->setVisible(value);
+    }
 }
 
 void Widget::initializeTimers()
@@ -311,9 +335,23 @@ void Widget::updateLayout()
     telemetry.logic();
     int speed = static_cast<int>(2444 * game.getPlayerSpeed());
     int enginePower = static_cast<int>(6968 * game.getPlayerAccelerate());
-    timerLabel->setText("Czas: "+TimeConverter::toQStringFromMsec(playGameTimer.elapsed() + miliSecondsFromStart));
+    if(game.getIsGameEnded() == true)
+    {
+        timerLabel->setText("Czas: "+TimeConverter::toQStringFromMsec(miliSecondsFromStart));
+    }
+    else
+    {
+        timerLabel->setText("Czas: "+TimeConverter::toQStringFromMsec(playGameTimer.elapsed() + miliSecondsFromStart));
+    }
     fpsCounterLabel->setText("FPS: " + QString::number(telemetry.getFPS()));
     shipInfo->setText("Informacje o statku<br/>Nazwa statku: Orzeł 1<br/>Prędkość: " +QString::number(speed) + " m/s<br/>Moc silników: " +QString::number(enginePower/10) + "%");
     updateSpeedProgressBar(speed);
     updateEnginePowerProgressBar(enginePower);
+}
+
+void Widget::showEndGameInfo(QString message)
+{
+    gameInfoLabel->setVisible(true);
+    gameInfoLabel->setText(message);
+    miliSecondsFromStart += playGameTimer.elapsed();
 }
