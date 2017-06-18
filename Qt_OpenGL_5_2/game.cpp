@@ -14,8 +14,8 @@ void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboar
 
     loadModels();
     loadTextures();
-    createRace(shader);
     createEnviroment(shader);
+    createRace(shader);
     createPlayer(shader);
     createOpponents(shader);
 }
@@ -300,6 +300,16 @@ void Game::createRace(QOpenGLShaderProgram* shader)
     race.push_back(QVector3D(1600,150,1500));
     race.push_back(QVector3D(1600,150,2000));
     race.push_back(QVector3D(1600,50,2800));
+
+    race.push_back(QVector3D(0,0-100-planets[0]->getRadius(),12000));
+    race.push_back(QVector3D(0,1500+100+planets[1]->getRadius(),20000));
+    race.push_back(QVector3D(0,-1000-100-planets[2]->getRadius(),32000));
+    race.push_back(QVector3D(0,2000+100+planets[3]->getRadius(),44000));
+    race.push_back(QVector3D(0,-1500-100-planets[4]->getRadius(),62000));
+    race.push_back(QVector3D(0,2000+100+planets[5]->getRadius(),90000));
+    race.push_back(QVector3D(0,-1000-100-planets[6]->getRadius(),120000));
+    race.push_back(QVector3D(0,1500+100+planets[7]->getRadius(),140000));
+    race.push_back(QVector3D(0,0-100-planets[8]->getRadius(),156000));
 
     //create_target
     target.init(shader, objManager.getModel(":/Objects/star"), texturesManager.getTexture(":/Textures/Content/target.png"));
