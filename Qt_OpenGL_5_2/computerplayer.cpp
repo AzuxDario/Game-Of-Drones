@@ -2,8 +2,8 @@
 
 ComputerPlayer::ComputerPlayer()
 {
-    acceleration = 0.005;
-    maxspeed = 0.03;
+    acceleration = 0.01;
+    maxspeed = 0.04;
 
 }
 
@@ -20,7 +20,7 @@ void ComputerPlayer::logic(int deltaTime, QVector3D target)
 
         float dir = atan2(diff.z(),diff.y()) + M_PI/2;
         direction.setX(dir * 180 / M_PI );
-        accelerate = min(accelerate + acceleration, maxspeed);
+        //accelerate = min(accelerate + acceleration, maxspeed);
         dir -=direction.x() * M_PI / 180;
         if (dir > 0)
         {
