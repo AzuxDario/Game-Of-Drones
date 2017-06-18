@@ -2,8 +2,8 @@
 
 ComputerPlayer::ComputerPlayer()
 {
-    acceleration = 0.001;
-    maxspeed = 0.1;
+    acceleration = 0.005;
+    maxspeed = 0.03;
 
 }
 
@@ -18,14 +18,16 @@ void ComputerPlayer::logic(int deltaTime, QVector3D target)
             currentTarget++;
         }
 
-        float dir = (atan2(diff.z(),diff.y()) + M_PI - direction.x() * M_PI / 180);
-
+        float dir = atan2(diff.z(),diff.y()) + M_PI/2;
+        direction.setX(dir * 180 / M_PI );
+        accelerate = min(accelerate + acceleration, maxspeed);
+        dir -=direction.x() * M_PI / 180;
         if (dir > 0)
         {
-            rotation.setX(max(maxturn, dir));
+            //rotation.setX(max(maxturn, dir));
             if (dir < M_PI / 2)
             {
-               accelerate = min(accelerate + acceleration, maxspeed);
+                accelerate = min(accelerate + acceleration, maxspeed);
             }
             else
             {
@@ -34,7 +36,7 @@ void ComputerPlayer::logic(int deltaTime, QVector3D target)
         }
         else
         {
-            rotation.setX(min(-maxturn, dir));
+            //rotation.setX(min(-maxturn, dir));
             if (dir > -M_PI / 2)
             {
                 accelerate = min(accelerate + acceleration, maxspeed);
