@@ -33,6 +33,7 @@ private:
     EnvGenerator envGenerator;
     Physics physics;
     Camera camera;
+    Camera hudCamera;
     Light light;
 
     KeyboardManager* keyboardManager;

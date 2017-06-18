@@ -2,7 +2,7 @@
 
 Camera::Camera()
 {
-    cameraPosition = QVector3D(10,10,10);
+    cameraPosition = QVector3D(0,0,-10);
     distance = QVector3D(5,0,-20);
     upVector = QVector3D(1,0,0);
     cameraDirection = QVector3D(0,0,0);
@@ -19,7 +19,9 @@ QMatrix4x4 Camera::GetMatrix()
 void Camera::update(QVector3D target, QVector3D direction)
 {
     targetPosition = target;
-    QMatrix4x4 cameraTransformation, upTrans;
+    QMatrix4x4 trans, upTrans;
+    transM = QMatrix4x4();
+
 
     if (reset)
     {
@@ -28,10 +30,12 @@ void Camera::update(QVector3D target, QVector3D direction)
         cameraDirection.setZ(std::min(std::max(cameraDirection.y() / 25, (float)-180.0),(float)180.0));
     }
 
-    cameraTransformation.translate(target.x(), target.y(), target.z());
-    cameraTransformation.rotate(direction.x() + cameraDirection.x(), 1, 0, 0);
-    cameraTransformation.rotate(direction.y() + cameraDirection.y(), 0, 1, 0);
-    cameraTransformation.rotate(direction.z() + cameraDirection.z(), 0, 0, 1);
+    trans.translate(target.x(), target.y(), target.z());
+    transM.rotate(direction.x() + cameraDirection.x(), 1, 0, 0);
+    transM.rotate(direction.y() + cameraDirection.y(), 0, 1, 0);
+    transM.rotate(direction.z() + cameraDirection.z(), 0, 0, 1);
+
+    trans *= transM;
 
     upTrans.rotate(direction.x(), 1, 0, 0);
     upTrans.rotate(direction.y(), 0, 1, 0);
@@ -39,7 +43,7 @@ void Camera::update(QVector3D target, QVector3D direction)
 
     upVector = upTrans * QVector3D(1,0,0);
 
-    QVector3D cameraEye = cameraTransformation * distance ;
+    QVector3D cameraEye = trans * distance;
     QVector3D cameraMove = cameraEye - cameraPosition;
     //Powoduję chorobę kamery, nie mam litości jej tak mordować
     //qDebug() << "----------------------------";
@@ -50,5 +54,5 @@ void Camera::update(QVector3D target, QVector3D direction)
     //qDebug() << "Dist: " << dist;
 
 
-    cameraPosition += cameraMove;
+    cameraPosition = cameraEye;
 }

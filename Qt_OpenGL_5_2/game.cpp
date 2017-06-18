@@ -37,10 +37,14 @@ void Game::render()
     {
         otherPlanets[i]->draw(camera, light, projectionMatrix);
     }
-    arrow.draw(camera, light, projectionMatrix);
+
     player.draw(camera, light, projectionMatrix);
     enemy.draw(camera, light, projectionMatrix);
-    if (player.currentTarget >= 0) target.draw(camera, light, projectionMatrix);
+    if (player.currentTarget >= 0)
+    {
+        target.draw(camera, light, projectionMatrix);
+        arrow.draw(hudCamera, light, projectionMatrix);
+    }
 }
 
 void Game::logic()
@@ -78,9 +82,6 @@ void Game::logic()
     }
 
 
-    arrow.getPosition() = (player.getPosition() + QVector3D(10,0,0));
-
-
     if (player.currentTarget >= 0 && player.currentTarget < race.length())
     {
         QVector3D diff = player.getPosition() - race[player.currentTarget];
@@ -101,8 +102,12 @@ void Game::logic()
         {
             //float size = std::min(std::max(len / 100, (float)1.0),(float)100.0);
             //target.setScale(QVector3D(size,size,size));
-            arrow.setRotation(180 - std::atan2(diff.y(),diff.z()) * 180 / M_PI, 90, 90);
+
+            QVector3D dixx = camera.getTransMatrix().mapVector(QVector3D(0,0,10));
+
+            arrow.setRotation(180 + (std::atan2(diff.z(),diff.y())-std::atan2(dixx.z(),dixx.y())) * 180 / M_PI, 90, 90);
         }
+        arrow.getPosition() = QVector3D(8,0,10);//camera.getPosition() + camera.getTransMatrix().mapVector(QVector3D(2,0,10));
     }
     if (enemy.currentTarget >= 0 && enemy.currentTarget < race.size())
     {
@@ -312,8 +317,8 @@ void Game::createRace(QOpenGLShaderProgram* shader)
     //Sprawia, że strzałka nie ma cieni i nie odbija światła
     arrow.getLightProperties().setSpecularReflection(0);
     arrow.getLightProperties().setAmbientReflection(1);
-    arrow.getLightProperties().setDiffuseReflection(0);
-    arrow.getLightProperties().setAmbientColor(128,128,128); //Ustawia jasność strzałki
+    arrow.getLightProperties().setDiffuseReflection(1);
+    arrow.getLightProperties().setAmbientColor(160,160,160); //Ustawia jasność strzałki
 }
 
 
