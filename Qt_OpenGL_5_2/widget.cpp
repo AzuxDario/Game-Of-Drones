@@ -191,7 +191,7 @@ void Widget::createLayout()
     double height = rect.height();
 
     cssLabels = "font-size:"+QString::number(static_cast<int>(30.0/1920.0 * width))+"px;color:white;padding:" + QString::number(static_cast<int>(8.0/1920.0 * width)) +"px;margin:" + QString::number(static_cast<int>(10.0/1920.0 * width)) +"px;background-color: rgba(0,84,210,0.5);border: 1px solid rgba(0,94,220,0.6); border-radius: 10px;";
-    cssButtons = "QPushButton {"+cssLabels+"} QPushButton:hover {background-color: rgba(0,74,200,0.5);} QPushButton:pressed {background-color: rgba(0,54,180,0.4);}";
+    cssButtons = "QPushButton {"+cssLabels+"} QPushButton:hover {background-color: rgba(0,54,180,0.5);} QPushButton:pressed {background-color: rgba(0,44,170,0.4);}";
     cssProgressBars = "QProgressBar {" + cssLabels + " text-align: center; } QProgressBar::chunk {background-color: qlineargradient(x1: 0.5, y1: 0, x2: 0.5, y2: 1,stop: 0 rgba(0,211,28,0.8), stop: 1 rgba(255,0,0,0.8));border: 1px solid rgba(0,94,220,0.8); border-radius: 10px;}";
 
     fpsCounterLabel = new QLabel("FPS: 00");
@@ -225,6 +225,13 @@ void Widget::createLayout()
     gameInfoLabel->setAlignment(Qt::AlignCenter);
     gameInfoLabel->setStyleSheet(cssLabels);
     gameInfoLabel->setVisible(false);
+
+    gameTitleLabel = new QLabel("Game of Drones");
+    gameTitleLabel->setAlignment(Qt::AlignCenter);
+    gameTitleLabel->setStyleSheet(cssLabels);
+    gameTitleLabel->setMaximumWidth(400.0/1920.0 * width);
+    gameTitleLabel->setMinimumWidth(400.0/1920.0 * width);
+    gameTitleLabel->setVisible(true);
 
     startGameButton = new QPushButton("Start!");
     startGameButton->setStyleSheet(cssButtons);
@@ -273,9 +280,10 @@ void Widget::createLayout()
 
     gridLayout->addLayout(gridMenuLayout,1,1, Qt::AlignCenter);
 
-    gridMenuLayout->addWidget(startGameButton,1,1, Qt::AlignCenter);
-    gridMenuLayout->addWidget(restartGameButton,2,1, Qt::AlignCenter);
-    gridMenuLayout->addWidget(closeGameButton,3,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(gameTitleLabel,1,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(startGameButton,2,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(restartGameButton,3,1, Qt::AlignCenter);
+    gridMenuLayout->addWidget(closeGameButton,4,1, Qt::AlignCenter);
 
     gridLayout->addWidget(speedProgressBar,2,0,Qt::AlignBottom | Qt::AlignLeft);
     gridLayout->addWidget(enginePowerProgressBar,2,2,Qt::AlignBottom | Qt::AlignRight);
@@ -297,6 +305,7 @@ void Widget::toggleMenuVisibility(bool value)
     startGameButton->setVisible(value);
     restartGameButton->setVisible(value);
     closeGameButton->setVisible(value);
+    gameTitleLabel->setVisible(value);
     if(game.getIsGamePaused() == true)
     {
         startGameButton->setText("Wznów");

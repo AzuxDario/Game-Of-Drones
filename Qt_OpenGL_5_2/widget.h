@@ -44,6 +44,7 @@ private:
     //Layout elements
     QGridLayout* gridLayout;
     QGridLayout* gridMenuLayout;
+    QLabel *gameTitleLabel;
     QLabel *fpsCounterLabel;
     QLabel *timerLabel;
     QLabel *speedLabel;

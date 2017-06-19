@@ -93,6 +93,8 @@ void Player::restoreStartPosition()
     rotation = QVector2D(0,0);
     moveSpeed = QVector3D(0,0,0);
     rotationSpeed = QVector3D(0,0,0);
+
+    currentTarget = 0;
 }
 
 void Player::Accelerate()

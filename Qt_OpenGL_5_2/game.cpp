@@ -417,4 +417,7 @@ void Game::restart()
     player.restoreStartPosition();
     isGamePaused = false;
     isGameEnded = false;
+    enemy.restoreStartPosition();
+    enemy.setPosition(1700,-15,0);
+    target.setPosition(race[0]);
 }
