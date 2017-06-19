@@ -109,6 +109,7 @@ void Widget::keyReleaseEvent(QKeyEvent *event)
 void Widget::startGame()
 {
     menuIsActive = false;
+    addFromTimer = true;
     if(game.getIsGameEnded() == true)
     {
         game.resume();
@@ -148,6 +149,7 @@ void Widget::pauseGame()
 void Widget::restartGame()
 {
     menuIsActive = false;
+    addFromTimer = true;
     game.restart();
 
     playGameTimer.start();
@@ -351,5 +353,9 @@ void Widget::showEndGameInfo(QString message)
 {
     gameInfoLabel->setVisible(true);
     gameInfoLabel->setText(message);
-    miliSecondsFromStart += playGameTimer.elapsed();
+    if(addFromTimer == true)
+    {
+        miliSecondsFromStart += playGameTimer.elapsed();
+        addFromTimer = false;
+    }
 }

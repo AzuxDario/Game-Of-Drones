@@ -64,6 +64,7 @@ private:
     //Objects to calculate ingame time
     QTime playGameTimer;
     int miliSecondsFromStart;
+    bool addFromTimer;
 
     bool menuIsActive;
 

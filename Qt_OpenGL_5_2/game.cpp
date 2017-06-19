@@ -131,6 +131,7 @@ void Game::checkCollisions()
     if(physics.checkCollisions(&star, &player))
     {
         endGame(QString("Zderzyłeś się z gwiazdą"));
+        isGameEnded = true;
     }
 
     //QVector<DrawableObject*> planetoids = physics.checkCollisions(&player, envGenerator.GetObjects());
@@ -144,6 +145,7 @@ void Game::checkCollisions()
         if(physics.checkCollisions(&player, planets[i]))
         {
             endGame(QString("Zderzyłeś się z planetą"));
+            isGameEnded = true;
         }
     }
 
