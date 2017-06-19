@@ -294,7 +294,7 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
     //arrow.getScale() = QVector3D(0.1,0.1,0.1);
     //WTF: czemu ustawiasz skalę strzale jak tu jest funkcja opponents?
     //bo kopiowałem :)
-    enemy.setPosition(1700,-15,0);
+    enemy.setPosition(0,-15,1700);
     enemy.getLightProperties().setSpecularReflection(0.4);
     enemy.getLightProperties().setAmbientReflection(0.5);
     enemy.getLightProperties().setAmbientColor(96,96,96);
@@ -305,12 +305,6 @@ void Game::createOpponents(QOpenGLShaderProgram* shader)
 void Game::createRace(QOpenGLShaderProgram* shader)
 {
     //create checkpoints
-    race.push_back(QVector3D(1600,0,500));
-    race.push_back(QVector3D(1600,50,1200));
-    race.push_back(QVector3D(1600,150,1500));
-    race.push_back(QVector3D(1600,150,2000));
-    race.push_back(QVector3D(1600,50,2800));
-
     race.push_back(QVector3D(0,0-100-planets[0]->getRadius(),12000));
     race.push_back(QVector3D(0,1500+100+planets[1]->getRadius(),20000));
     race.push_back(QVector3D(0,-1000-100-planets[2]->getRadius(),32000));
@@ -418,6 +412,6 @@ void Game::restart()
     isGamePaused = false;
     isGameEnded = false;
     enemy.restoreStartPosition();
-    enemy.setPosition(1700,-15,0);
+    enemy.setPosition(0,-15,1700);
     target.setPosition(race[0]);
 }
