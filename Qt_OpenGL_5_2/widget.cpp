@@ -133,7 +133,7 @@ void Widget::pauseGame()
     menuIsActive = true;
     game.pause();
 
-    if(game.getIsGamePaused() == false)
+    if(game.getIsGameEnded() == false)
     {
         miliSecondsFromStart += playGameTimer.elapsed();
     }
