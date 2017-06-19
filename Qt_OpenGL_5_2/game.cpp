@@ -3,7 +3,7 @@
 Game::Game()
 {
     lastFrameTime = QDateTime::currentMSecsSinceEpoch();
-    checkCollisionsDefaultTime = 10;
+    checkCollisionsDefaultTime = 3;
     checkCollisionsTime = checkCollisionsDefaultTime;
     isGamePaused = false;
 }
@@ -144,8 +144,9 @@ void Game::checkCollisions()
     {
         if(physics.checkCollisions(&player, planets[i]))
         {
-            endGame(QString("Zderzyłeś się z planetą"));
-            isGameEnded = true;
+            QVector3D dir = (player.getPosition() - planets[i]->getPosition());
+            dir.normalize();
+            player.moveSpeed = (dir * player.moveSpeed.length()) / 1.5;
         }
     }
 

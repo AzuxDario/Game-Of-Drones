@@ -3,7 +3,7 @@
 ComputerPlayer::ComputerPlayer()
 {
     acceleration = 0.01;
-    maxspeed = 0.04;
+    maxspeed = 0.05;
 
 }
 
