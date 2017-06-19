@@ -146,7 +146,7 @@ void Game::checkCollisions()
         {
             QVector3D dir = (player.getPosition() - planets[i]->getPosition());
             dir.normalize();
-            player.moveSpeed = (dir * player.moveSpeed.length()) / 1.5;
+            player.moveSpeed = player.moveSpeed / 2 +(dir * player.moveSpeed.length()) / 2;
         }
     }
 
