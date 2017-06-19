@@ -14,6 +14,7 @@ private:
     QVector3D cameraDirection;
     bool reset = false;
     QMatrix4x4 transM;
+    QVector3D cameraMove;
 
 public:
     Camera();

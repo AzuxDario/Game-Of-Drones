@@ -120,7 +120,7 @@ void Game::logic()
         }
     }
 
-    camera.update(player.getPosition(), player.getRotation());
+    camera.update(player.getPosition() - player.moveSpeed.normalized() * player.accelerate * 10, player.direction - player.rotation * 2);
 }
 
 void Game::checkCollisions()

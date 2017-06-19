@@ -44,7 +44,8 @@ void Camera::update(QVector3D target, QVector3D direction)
     upVector = upTrans * QVector3D(1,0,0);
 
     QVector3D cameraEye = trans * distance;
-    QVector3D cameraMove = cameraEye - cameraPosition;
+    cameraMove += cameraEye - cameraPosition;
+    cameraMove /= 2;
     //Powoduję chorobę kamery, nie mam litości jej tak mordować
     //qDebug() << "----------------------------";
     //qDebug() << "Before: " << cameraMove.x() << " " << cameraMove.y() << " " << cameraMove.z();
@@ -54,5 +55,6 @@ void Camera::update(QVector3D target, QVector3D direction)
     //qDebug() << "Dist: " << dist;
 
 
-    cameraPosition = cameraEye;
+    //cameraPosition += cameraMove / 5;//wersja z podążaniem (zepsutta)
+    cameraPosition = cameraEye; //bez podązania
 }
