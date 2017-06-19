@@ -7,7 +7,7 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 
     createLayout();
     makeConnection();
-    //initializeSoundtrack();
+    initializeSoundtrack();
     initializeTimers();
 }
 
