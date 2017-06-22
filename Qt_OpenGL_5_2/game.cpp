@@ -130,8 +130,9 @@ void Game::checkCollisions()
 
     if(physics.checkCollisions(&star, &player))
     {
-        endGame(QString("Zderzyłeś się z gwiazdą"));
-        isGameEnded = true;
+        QVector3D dir = (player.getPosition() - star.getPosition());
+        dir.normalize();
+        player.moveSpeed = player.moveSpeed / 2 +(dir * player.moveSpeed.length()) / 2;
     }
 
     //QVector<DrawableObject*> planetoids = physics.checkCollisions(&player, envGenerator.GetObjects());
