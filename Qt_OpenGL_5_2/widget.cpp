@@ -7,7 +7,7 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent)
 
     createLayout();
     makeConnection();
-    initializeSoundtrack();
+    //initializeSoundtrack();
     initializeTimers();
 }
 
@@ -296,7 +296,7 @@ void Widget::createLayout()
 
 void Widget::initializeSoundtrack()
 {
-    musicPlayer.addSong("Dave Rodgers - Deja Vu.wma");
+    musicPlayer.addSong("Artist - Song.wma");
     musicPlayer.play(QMediaPlaylist::CurrentItemInLoop);
 }
 
