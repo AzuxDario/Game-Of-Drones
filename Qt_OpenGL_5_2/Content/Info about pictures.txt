@@ -1,0 +1,32 @@
+Textures:
+planet1.jpg
+planet2.jpg
+planet3.jpg
+planet4.jpg
+planet5.jpg
+planet6.jpg
+planet7.jpg
+planet8.jpg
+planet10.jpg
+planet12.jpg
+planet13.jpg
+planet14.jpg
+planet15.jpg
+planet16.jpg
+star.jpg
+planetoid.png
+Are from site:
+
+https://www.solarsystemscope.com/textures/
+Distributed under Attribution 4.0 International license
+
+Textures:
+planet9.jpg
+planet11.jpg
+skybox.png
+Are based on textures from site:
+
+https://www.solarsystemscope.com/textures/
+Distributed under Attribution 4.0 International license
+
+Rest of textures are made by us.

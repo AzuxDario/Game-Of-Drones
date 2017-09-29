@@ -139,6 +139,7 @@ void Game::checkCollisions()
     //if(planetoids.count() > 0)
     //{
         //TODO collision player-planetoide
+        //They are so small. Hit them is really difficult.
     //}
 
     for(int i=0; i<planets.size(); i++)
@@ -220,7 +221,7 @@ void Game::createEnviroment(QOpenGLShaderProgram* shader)
         planets[i]->getLightProperties().setDiffuseReflection(0.8);
         planets[i]->getLightProperties().setDiffuseColor(192,192,192);
         planets[i]->getRotationSpeed().setX(0.05f);
-        planets[i]->setRotation(0,15,55);
+        planets[i]->setRotation(0,-5,-110);
     }
     //Merkury
     planets[0]->setScale(22,22,22);
