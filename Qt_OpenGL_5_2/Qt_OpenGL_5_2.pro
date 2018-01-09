@@ -13,6 +13,8 @@ TEMPLATE = app
 
 win32:RC_ICONS += Ikona.ico
 
+include(Engine/Engine.pri)
+
 SOURCES += main.cpp\
         widget.cpp \
     camera.cpp \
