@@ -1,4 +1,6 @@
 INCLUDEPATH += Engine
 DEPENDPATH += Engine
-SOURCES += 
-HEADERS += 
+SOURCES += \
+        $$PWD/physics.cpp
+HEADERS += \
+        $$PWD/physics.h

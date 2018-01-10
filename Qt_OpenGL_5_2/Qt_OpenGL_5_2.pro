@@ -28,7 +28,6 @@ SOURCES += main.cpp\
     OBJLoader/objloader.cpp \
     TexturesManager/texturedata.cpp \
     TexturesManager/texturesmanager.cpp \
-    Physics/physics.cpp \
     telemetry.cpp \
     Player/player.cpp \
     KeyboardManager/keyboardmanager.cpp \
@@ -49,7 +48,6 @@ HEADERS  += widget.h \
     OBJLoader/objloader.h \
     TexturesManager/texturedata.h \
     TexturesManager/texturesmanager.h \
-    Physics/physics.h \
     telemetry.h \
     Player/player.h \
     KeyboardManager/keyboardmanager.h \
