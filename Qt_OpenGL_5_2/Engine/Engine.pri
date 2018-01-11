@@ -1,6 +1,6 @@
 INCLUDEPATH += Engine
 DEPENDPATH += Engine
 SOURCES += \
-        $$PWD/physics.cpp
+        $$PWD/Physics/physics.cpp
 HEADERS += \
-        $$PWD/physics.h
+        $$PWD/Physics/physics.h

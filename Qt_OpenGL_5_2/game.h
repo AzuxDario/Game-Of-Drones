@@ -17,7 +17,7 @@
 #include "computerplayer.h"
 #include "TexturesManager/texturesmanager.h"
 #include "EnvGenerator/EnvGenerator.h"
-#include "Engine/physics.h"
+#include "Engine/Physics/physics.h"
 #include "drawableobject.h"
 #include "camera.h"
 #include "light.h"
