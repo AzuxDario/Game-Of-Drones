@@ -20,7 +20,6 @@ SOURCES += main.cpp\
     camera.cpp \
     light.cpp \
     drawableobject.cpp \
-    game.cpp \
     lightproperties.cpp \
     EnvGenerator/envgenerator.cpp \
     OBJManager/objmanager.cpp \
@@ -39,7 +38,6 @@ HEADERS  += widget.h \
     camera.h \
     light.h \
     drawableobject.h \
-    game.h \
     lightproperties.h \
     EnvGenerator/envgenerator.h \
     OBJManager/objmanager.h \
