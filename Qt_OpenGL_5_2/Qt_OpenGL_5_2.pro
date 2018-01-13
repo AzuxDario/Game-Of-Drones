@@ -17,7 +17,6 @@ include(Engine/Engine.pri)
 
 SOURCES += main.cpp\
         widget.cpp \
-    camera.cpp \
     light.cpp \
     drawableobject.cpp \
     lightproperties.cpp \
@@ -35,7 +34,6 @@ SOURCES += main.cpp\
     timeconverter.cpp
 
 HEADERS  += widget.h \
-    camera.h \
     light.h \
     drawableobject.h \
     lightproperties.h \
