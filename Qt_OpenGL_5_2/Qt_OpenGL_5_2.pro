@@ -17,7 +17,6 @@ include(Engine/Engine.pri)
 
 SOURCES += main.cpp\
         widget.cpp \
-    light.cpp \
     drawableobject.cpp \
     lightproperties.cpp \
     EnvGenerator/envgenerator.cpp \
@@ -34,7 +33,6 @@ SOURCES += main.cpp\
     timeconverter.cpp
 
 HEADERS  += widget.h \
-    light.h \
     drawableobject.h \
     lightproperties.h \
     EnvGenerator/envgenerator.h \
