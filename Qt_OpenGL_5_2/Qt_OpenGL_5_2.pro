@@ -18,7 +18,6 @@ include(Engine/Engine.pri)
 SOURCES += main.cpp\
         widget.cpp \
     drawableobject.cpp \
-    lightproperties.cpp \
     EnvGenerator/envgenerator.cpp \
     OBJManager/objmanager.cpp \
     OBJManager/objmodel.cpp \
@@ -34,7 +33,6 @@ SOURCES += main.cpp\
 
 HEADERS  += widget.h \
     drawableobject.h \
-    lightproperties.h \
     EnvGenerator/envgenerator.h \
     OBJManager/objmanager.h \
     OBJManager/objmodel.h \
