@@ -14,6 +14,7 @@ TEMPLATE = app
 win32:RC_ICONS += Ikona.ico
 
 include(Engine/Engine.pri)
+include(Sound/Sound.pri)
 
 SOURCES += main.cpp\
         widget.cpp \
@@ -27,7 +28,6 @@ SOURCES += main.cpp\
     telemetry.cpp \
     Player/player.cpp \
     KeyboardManager/keyboardmanager.cpp \
-    musicplayer.cpp \
     computerplayer.cpp \
     timeconverter.cpp
 
@@ -43,7 +43,6 @@ HEADERS  += widget.h \
     telemetry.h \
     Player/player.h \
     KeyboardManager/keyboardmanager.h \
-    musicplayer.h \
     computerplayer.h \
     timeconverter.h
 
