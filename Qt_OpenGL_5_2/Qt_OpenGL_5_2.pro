@@ -15,6 +15,7 @@ win32:RC_ICONS += Ikona.ico
 
 include(Engine/Engine.pri)
 include(Sound/Sound.pri)
+include(Input/Input.pri)
 
 SOURCES += main.cpp\
         widget.cpp \
@@ -27,7 +28,6 @@ SOURCES += main.cpp\
     TexturesManager/texturesmanager.cpp \
     telemetry.cpp \
     Player/player.cpp \
-    KeyboardManager/keyboardmanager.cpp \
     computerplayer.cpp \
     timeconverter.cpp
 
@@ -42,7 +42,6 @@ HEADERS  += widget.h \
     TexturesManager/texturesmanager.h \
     telemetry.h \
     Player/player.h \
-    KeyboardManager/keyboardmanager.h \
     computerplayer.h \
     timeconverter.h
 
