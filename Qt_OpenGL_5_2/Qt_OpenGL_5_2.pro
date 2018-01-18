@@ -24,8 +24,6 @@ SOURCES += main.cpp\
     OBJManager/objmanager.cpp \
     OBJManager/objmodel.cpp \
     OBJLoader/objloader.cpp \
-    TexturesManager/texturedata.cpp \
-    TexturesManager/texturesmanager.cpp \
     telemetry.cpp \
     Player/player.cpp \
     computerplayer.cpp \
@@ -38,8 +36,6 @@ HEADERS  += widget.h \
     OBJManager/objmodel.h \
     OBJLoader/facedata.h \
     OBJLoader/objloader.h \
-    TexturesManager/texturedata.h \
-    TexturesManager/texturesmanager.h \
     telemetry.h \
     Player/player.h \
     computerplayer.h \
