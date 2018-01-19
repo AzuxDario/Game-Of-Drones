@@ -7,7 +7,8 @@ SOURCES += \
 		$$PWD/Light/light.cpp \
 		$$PWD/Light/lightproperties.cpp \
 		$$PWD/Textures/texturedata.cpp \
-		$$PWD/Textures/texturesmanager.cpp
+		$$PWD/Textures/texturesmanager.cpp \
+		$$PWD/Objects/drawableobject.cpp
 HEADERS += \
         $$PWD/game.h \
         $$PWD/Physics/physics.h \
@@ -15,5 +16,6 @@ HEADERS += \
 		$$PWD/Light/light.h \
 		$$PWD/Light/lightproperties.h\
 		$$PWD/Textures/texturedata.h \
-		$$PWD/Textures/texturesmanager.h
+		$$PWD/Textures/texturesmanager.h \
+		$$PWD/Objects/drawableobject.h
 

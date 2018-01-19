@@ -19,7 +19,6 @@ include(Input/Input.pri)
 
 SOURCES += main.cpp\
         widget.cpp \
-    drawableobject.cpp \
     EnvGenerator/envgenerator.cpp \
     OBJManager/objmanager.cpp \
     OBJManager/objmodel.cpp \
@@ -30,7 +29,6 @@ SOURCES += main.cpp\
     timeconverter.cpp
 
 HEADERS  += widget.h \
-    drawableobject.h \
     EnvGenerator/envgenerator.h \
     OBJManager/objmanager.h \
     OBJManager/objmodel.h \
