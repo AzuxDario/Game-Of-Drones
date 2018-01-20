@@ -16,6 +16,7 @@ win32:RC_ICONS += Ikona.ico
 include(Engine/Engine.pri)
 include(Sound/Sound.pri)
 include(Input/Input.pri)
+include(Entity/Entity.pri)
 
 SOURCES += main.cpp\
         widget.cpp \
@@ -25,7 +26,6 @@ SOURCES += main.cpp\
     OBJLoader/objloader.cpp \
     telemetry.cpp \
     Player/player.cpp \
-    computerplayer.cpp \
     timeconverter.cpp
 
 HEADERS  += widget.h \
@@ -36,7 +36,6 @@ HEADERS  += widget.h \
     OBJLoader/objloader.h \
     telemetry.h \
     Player/player.h \
-    computerplayer.h \
     timeconverter.h
 
 RESOURCES += \
