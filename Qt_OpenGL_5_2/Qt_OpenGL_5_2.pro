@@ -23,7 +23,6 @@ SOURCES += main.cpp\
     EnvGenerator/envgenerator.cpp \
     OBJManager/objmanager.cpp \
     OBJManager/objmodel.cpp \
-    OBJLoader/objloader.cpp \
     telemetry.cpp \
     Player/player.cpp \
     timeconverter.cpp
@@ -32,8 +31,6 @@ HEADERS  += widget.h \
     EnvGenerator/envgenerator.h \
     OBJManager/objmanager.h \
     OBJManager/objmodel.h \
-    OBJLoader/facedata.h \
-    OBJLoader/objloader.h \
     telemetry.h \
     Player/player.h \
     timeconverter.h
