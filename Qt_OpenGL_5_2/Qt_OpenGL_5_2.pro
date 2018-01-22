@@ -21,16 +21,12 @@ include(Entity/Entity.pri)
 SOURCES += main.cpp\
         widget.cpp \
     EnvGenerator/envgenerator.cpp \
-    OBJManager/objmanager.cpp \
-    OBJManager/objmodel.cpp \
     telemetry.cpp \
     Player/player.cpp \
     timeconverter.cpp
 
 HEADERS  += widget.h \
     EnvGenerator/envgenerator.h \
-    OBJManager/objmanager.h \
-    OBJManager/objmodel.h \
     telemetry.h \
     Player/player.h \
     timeconverter.h
