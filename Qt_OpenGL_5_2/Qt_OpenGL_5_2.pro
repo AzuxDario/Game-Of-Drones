@@ -22,13 +22,11 @@ SOURCES += main.cpp\
         widget.cpp \
     EnvGenerator/envgenerator.cpp \
     telemetry.cpp \
-    Player/player.cpp \
     timeconverter.cpp
 
 HEADERS  += widget.h \
     EnvGenerator/envgenerator.h \
     telemetry.h \
-    Player/player.h \
     timeconverter.h
 
 RESOURCES += \
