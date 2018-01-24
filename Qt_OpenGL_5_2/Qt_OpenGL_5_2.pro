@@ -20,12 +20,10 @@ include(Entity/Entity.pri)
 
 SOURCES += main.cpp\
         widget.cpp \
-    EnvGenerator/envgenerator.cpp \
     telemetry.cpp \
     timeconverter.cpp
 
 HEADERS  += widget.h \
-    EnvGenerator/envgenerator.h \
     telemetry.h \
     timeconverter.h
 
