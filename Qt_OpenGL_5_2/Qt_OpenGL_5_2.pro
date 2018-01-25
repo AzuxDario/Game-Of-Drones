@@ -17,14 +17,13 @@ include(Engine/Engine.pri)
 include(Sound/Sound.pri)
 include(Input/Input.pri)
 include(Entity/Entity.pri)
+include(Widgets/Widgets.pri)
 
 SOURCES += main.cpp\
-        widget.cpp \
     telemetry.cpp \
     timeconverter.cpp
 
-HEADERS  += widget.h \
-    telemetry.h \
+HEADERS  +=  telemetry.h \
     timeconverter.h
 
 RESOURCES += \
