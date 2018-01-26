@@ -18,13 +18,11 @@ include(Sound/Sound.pri)
 include(Input/Input.pri)
 include(Entity/Entity.pri)
 include(Widgets/Widgets.pri)
+include(Addons/Addons.pri)
 
-SOURCES += main.cpp\
-    telemetry.cpp \
-    timeconverter.cpp
+SOURCES += main.cpp
 
-HEADERS  +=  telemetry.h \
-    timeconverter.h
+HEADERS  +=  
 
 RESOURCES += \
     resources.qrc
