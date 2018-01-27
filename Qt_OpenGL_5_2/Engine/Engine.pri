@@ -3,7 +3,6 @@ DEPENDPATH += Engine
 SOURCES += \
         $$PWD/game.cpp \
         $$PWD/Physics/physics.cpp \
-		$$PWD/Camera/camera.cpp \
 		$$PWD/Light/light.cpp \
 		$$PWD/Light/lightproperties.cpp \
 		$$PWD/Textures/texturedata.cpp \
@@ -15,7 +14,6 @@ SOURCES += \
 HEADERS += \
         $$PWD/game.h \
         $$PWD/Physics/physics.h \
-		$$PWD/Camera/camera.h \
 		$$PWD/Light/light.h \
 		$$PWD/Light/lightproperties.h\
 		$$PWD/Textures/texturedata.h \
@@ -26,3 +24,4 @@ HEADERS += \
 		$$PWD/Objects/ObjectsManager/objmanager.h \
 		$$PWD/Objects/ObjectsManager/objmodel.h
 
+include(Camera/Camera.pri)
