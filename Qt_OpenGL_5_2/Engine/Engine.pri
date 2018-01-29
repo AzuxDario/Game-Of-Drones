@@ -2,7 +2,6 @@ INCLUDEPATH += Engine
 DEPENDPATH += Engine
 SOURCES += \
         $$PWD/game.cpp \
-        $$PWD/Physics/physics.cpp \
 		$$PWD/Textures/texturedata.cpp \
 		$$PWD/Textures/texturesmanager.cpp \
 		$$PWD/Objects/drawableobject.cpp \
@@ -11,7 +10,6 @@ SOURCES += \
 		$$PWD/Objects/ObjectsManager/objmodel.cpp
 HEADERS += \
         $$PWD/game.h \
-        $$PWD/Physics/physics.h \
 		$$PWD/Textures/texturedata.h \
 		$$PWD/Textures/texturesmanager.h \
 		$$PWD/Objects/drawableobject.h \
@@ -22,3 +20,4 @@ HEADERS += \
 
 include(Camera/Camera.pri)
 include(Light/Light.pri)
+include(Physics/Physics.pri)
