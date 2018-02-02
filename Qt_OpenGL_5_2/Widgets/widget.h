@@ -19,7 +19,7 @@
 
 #include "game.h"
 #include "telemetry.h"
-#include "KeyboardManager/keyboardmanager.h"
+#include "keyboardmanager.h"
 #include "musicplayer.h"
 #include "timeconverter.h"
 
