@@ -4,9 +4,9 @@
 #define _USE_MATH_DEFINES
 
 #include <QVector>
-#include "DrawableObject.h"
-#include "OBJManager/objmanager.h"
-#include "TexturesManager/texturesmanager.h"
+#include "Engine/Objects/drawableobject.h"
+#include "Engine/Objects/ObjectsManager/objmanager.h"
+#include "Engine/Textures/texturesmanager.h"
 #include <cmath>
 
 class Player : public DrawableObject
