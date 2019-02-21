@@ -1,7 +1,7 @@
 #ifndef TIMECONVERTER_H
 #define TIMECONVERTER_H
 
-#include "QString"
+#include <QString>
 
 class TimeConverter
 {

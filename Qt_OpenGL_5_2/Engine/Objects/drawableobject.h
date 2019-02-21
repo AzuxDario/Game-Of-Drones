@@ -11,11 +11,11 @@
 #include <QOpenGLTexture>
 #include <QTimer>
 
-#include "camera.h"
-#include "light.h"
-#include "OBJLoader/objloader.h"
-#include "lightproperties.h"
-#include "OBJManager/objmodel.h"
+#include "Engine/Camera/camera.h"
+#include "Engine/Light/light.h"
+#include "Engine/Objects/ObjectsLoader/OBJLoader.h"
+#include "Engine/Light/lightproperties.h"
+#include "Engine/Objects/ObjectsManager/objmodel.h"
 
 class DrawableObject : protected QOpenGLFunctions
 {

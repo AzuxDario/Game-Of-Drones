@@ -13,47 +13,16 @@ TEMPLATE = app
 
 win32:RC_ICONS += Ikona.ico
 
-SOURCES += main.cpp\
-        widget.cpp \
-    camera.cpp \
-    light.cpp \
-    drawableobject.cpp \
-    game.cpp \
-    lightproperties.cpp \
-    EnvGenerator/envgenerator.cpp \
-    OBJManager/objmanager.cpp \
-    OBJManager/objmodel.cpp \
-    OBJLoader/objloader.cpp \
-    TexturesManager/texturedata.cpp \
-    TexturesManager/texturesmanager.cpp \
-    Physics/physics.cpp \
-    telemetry.cpp \
-    Player/player.cpp \
-    KeyboardManager/keyboardmanager.cpp \
-    musicplayer.cpp \
-    computerplayer.cpp \
-    timeconverter.cpp
+include(Engine/Engine.pri)
+include(Sound/Sound.pri)
+include(Input/Input.pri)
+include(Entity/Entity.pri)
+include(Widgets/Widgets.pri)
+include(Addons/Addons.pri)
 
-HEADERS  += widget.h \
-    camera.h \
-    light.h \
-    drawableobject.h \
-    game.h \
-    lightproperties.h \
-    EnvGenerator/envgenerator.h \
-    OBJManager/objmanager.h \
-    OBJManager/objmodel.h \
-    OBJLoader/facedata.h \
-    OBJLoader/objloader.h \
-    TexturesManager/texturedata.h \
-    TexturesManager/texturesmanager.h \
-    Physics/physics.h \
-    telemetry.h \
-    Player/player.h \
-    KeyboardManager/keyboardmanager.h \
-    musicplayer.h \
-    computerplayer.h \
-    timeconverter.h
+SOURCES += main.cpp
+
+HEADERS  +=  
 
 RESOURCES += \
     resources.qrc

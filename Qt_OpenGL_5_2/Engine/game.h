@@ -13,16 +13,16 @@
 #include <QDateTime>
 #include <cmath>
 
-#include "OBJManager/objmanager.h"
-#include "computerplayer.h"
-#include "TexturesManager/texturesmanager.h"
-#include "EnvGenerator/EnvGenerator.h"
-#include "Physics/physics.h"
-#include "drawableobject.h"
-#include "camera.h"
-#include "light.h"
-#include "Player/player.h"
-#include "KeyboardManager/keyboardmanager.h"
+#include "Engine/Objects/ObjectsManager/objmanager.h"
+#include "Entity/computerplayer.h"
+#include "Engine/Textures/texturesmanager.h"
+#include "Entity/EnvGenerator/envgenerator.h"
+#include "Engine/Physics/physics.h"
+#include "Engine/Objects/drawableobject.h"
+#include "Engine/Camera/camera.h"
+#include "Engine/Light/light.h"
+#include "Entity/player.h"
+#include "Input/keyboardmanager.h"
 
 class Game : public QObject
 {

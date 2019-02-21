@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QTextStream>
 
-#include "facedata.h"
+#include "Engine/Objects/ObjectsLoader/FaceData.h"
 
 using namespace std;
 

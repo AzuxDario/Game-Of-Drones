@@ -1,4 +1,4 @@
-#include "KeyboardManager/keyboardmanager.h"
+#include "keyboardmanager.h"
 
 KeyboardManager::KeyboardManager()
 {

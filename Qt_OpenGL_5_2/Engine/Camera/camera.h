@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <QMatrix4x4.h>
+#include <QMatrix4x4>
 #include <cmath>
 
 class Camera
