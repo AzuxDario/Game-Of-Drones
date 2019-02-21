@@ -2,7 +2,8 @@
 #define OBJMANAGER_H
 
 #include <QVector>
-#include "objmodel.h"
+
+#include "Engine/Objects/ObjectsManager/objmodel.h"
 
 class OBJManager
 {

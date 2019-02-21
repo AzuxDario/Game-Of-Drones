@@ -17,11 +17,11 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include "game.h"
-#include "telemetry.h"
-#include "keyboardmanager.h"
-#include "musicplayer.h"
-#include "timeconverter.h"
+#include "Engine/game.h"
+#include "Addons/telemetry.h"
+#include "Input/keyboardmanager.h"
+#include "Sound/musicplayer.h"
+#include "Addons/timeconverter.h"
 
 class Widget : public QOpenGLWidget, protected QOpenGLFunctions
 {

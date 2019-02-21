@@ -2,11 +2,12 @@
 #define ENVGENERATOR_H
 
 #include <QOpenGLShaderProgram>
-#include "OBJManager/objmanager.h"
-#include "camera.h"
-#include "light.h"
-#include "DrawableObject.h"
-#include "TexturesManager/texturesmanager.h"
+
+#include "Engine/Objects/ObjectsManager/objmanager.h"
+#include "Engine/Camera/camera.h"
+#include "Engine/Light/light.h"
+#include "Engine/Objects/drawableobject.h"
+#include "Engine/Textures/texturesmanager.h"
 
 class EnvGenerator
 {

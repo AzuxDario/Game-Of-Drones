@@ -4,7 +4,8 @@
 #include <QVector>
 #include <QImage>
 #include <QOpenGLTexture>
-#include "texturedata.h"
+
+#include "Engine/Textures/texturedata.h"
 
 class TexturesManager
 {

@@ -1,7 +1,7 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include <QMatrix4x4.h>
+#include <QMatrix4x4>
 
 class Light
 {

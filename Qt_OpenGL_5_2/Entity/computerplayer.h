@@ -1,8 +1,9 @@
 #ifndef COMPUTERPLAYER_H
 #define COMPUTERPLAYER_H
 
-#include "Player/player.h"
 #include <cmath>
+
+#include "Entity/player.h"
 
 using namespace std;
 
