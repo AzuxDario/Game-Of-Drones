@@ -11,6 +11,7 @@ We're learning OpenGL API during laboratory classes by creating project. Project
 Since we wanted to learn something newer, we switched to OpenGL 3.3. It's not the newest version, but it has shaders, buffers and other useful stuff. To made window and UI elements we used Qt 5.11.
 
 All models was made all by us. Textures belongs to Solar System Scope. Some textures are remixes of SSS textures.
+Game has also simple collision system.
 
 # Gameplay
 ![Game window](./Pictures/ScreenShot%202%2017-06-16%20003.png)
