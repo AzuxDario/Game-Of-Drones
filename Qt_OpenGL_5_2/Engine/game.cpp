@@ -6,6 +6,7 @@ Game::Game()
     checkCollisionsDefaultTime = 3;
     checkCollisionsTime = checkCollisionsDefaultTime;
     isGamePaused = false;
+    isGameEnded = false;
 }
 
 void Game::initializeGame(QOpenGLShaderProgram* shader, KeyboardManager* keyboardManager)
