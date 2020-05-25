@@ -1,5 +1,6 @@
 # Game of Drones
 <p align="center">
+<a href="https://github.com/AzuxDario/Game-Of-Drones/pulls?q=is%3Apr+is%3Aclosed"><img src="https://img.shields.io/github/issues-pr-closed-raw/AzuxDario/Game-Of-Drones" alt="Closed pull requests"></img></a>	
 <a href="https://github.com/AzuxDario/Game-Of-Drones/blob/master/LICENSE"><img src="https://img.shields.io/github/license/AzuxDario/Game-Of-Drones" alt="License"></img></a>
 </p>
 Simple drone racing game in space.
@@ -12,7 +13,7 @@ Since we wanted to learn something newer, we switched to OpenGL 3.3. It's not th
 All models was made all by us. Textures belongs to Solar System Scope. Some textures are remixes of SSS textures.
 
 # Gameplay
-![Game window](./Pictures/ScreenShot 2 17-06-16 003.png)
+![Game window](./Pictures/ScreenShot%202%2017-06-16%20003.png)
 
 Racing takes place in space. Player races against NPC with simple AI (go to next checkpoint). The goal is to fly through all checkpoints and finish is near to Pluto.
 
